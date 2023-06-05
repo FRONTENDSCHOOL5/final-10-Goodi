@@ -18,7 +18,7 @@
   
 |노태희|최나경|오가은|
 | :---: | :---: | :---: |
-| <img width="180" alt="taehee_profile_img" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/4d471a45-8f6e-47f8-a3b5-4c11be1ce14b"> | <img width="180"  alt="nkEllaaa_profile_img" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/725266ae-3c44-4086-a53d-6176e21d31d2"> | <img width="180" alt="oxxun21_profile_img" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/961eeff8-86df-4c7c-aba5-20fb9c33c140"> |
+| <img width="180" alt="taehee_profile_img" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/4d471a45-8f6e-47f8-a3b5-4c11be1ce14b"> | <img width="180"  alt="nkEllaaa_profile_img" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/97887376/6d878e7b-091a-4ac6-a8a6-6bf71dcc2b20"> | <img width="180" alt="oxxun21_profile_img" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/961eeff8-86df-4c7c-aba5-20fb9c33c140"> |
 | [taehee.rho](https://github.com/dananote) | [nkEllaaa](https://github.com/nkEllaaa) | [oxxun21](https://github.com/oxxun21) |
 | 팀장 | 팀원 | 팀원 |
   
