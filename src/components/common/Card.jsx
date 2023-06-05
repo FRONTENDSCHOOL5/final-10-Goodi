@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import '../../assets/font.css'
 
 export default function Card({ id, profile, name, email, img, title, description, price }) {
   return (
@@ -82,6 +83,7 @@ const CardContent = styled.div`
 
   strong {
     font-size: 24px;
+    font-family: "Montserrat";
   }
 
   span {
