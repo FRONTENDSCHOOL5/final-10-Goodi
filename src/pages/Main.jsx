@@ -1,7 +1,11 @@
-import React from 'react'
+import React from "react";
+import styled from "styled-components";
+import Layout from "../layout/Layout";
 
 export default function Main() {
   return (
-    <div>Main</div>
-  )
+    <Layout>
+      <div>Main 입니다.</div>
+    </Layout>
+  );
 }
