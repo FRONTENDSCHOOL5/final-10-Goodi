@@ -9,4 +9,7 @@ export default function Footer() {
   );
 }
 
-const FooterLayout = styled.footer``;
+const FooterLayout = styled.footer`
+  background-color: yellow;
+  height: 9rem;
+`;
