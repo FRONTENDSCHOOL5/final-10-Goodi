@@ -21,39 +21,40 @@ export default function Header() {
   );
 }
 
-const StyledLink = styled(Link)`
-  display: block;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  img {
-    width: 9rem;
-    vertical-align: middle;
-  }
-`;
+const StyledLink = styled(Link)``;
 
 const HeaderLayout = styled.header`
-  background-color: white;
-  width: 100%;
-  height: 5rem;
-  padding: 0.6rem 5rem 0.6rem 3.75rem;
+  position: fixed;
+  width: calc(100% - 80px);
+  padding: 16px 60px 16px 80px;
   box-sizing: border-box;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   .following_wrap {
     display: flex;
-    gap: 0.75rem;
+    gap: 12px;
   }
 `;
 
-const LogoLink = styled(StyledLink)``;
+const LogoLink = styled(StyledLink)`
+  display: block;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 160px;
+    vertical-align: middle;
+  }
+`;
 
 const FollowingIcon = styled(StyledLink)`
   display: block;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 40px;
+  height: 40px;
   background-color: #cccccc;
   border-radius: 50%;
 `;

@@ -44,34 +44,38 @@ const StyledLink = styled(Link)`
 
 const NavList = styled(StyledLink)`
   width: 100%;
-  height: 4.5rem;
+  padding: 10px 0;
+  box-sizing: border-box;
   text-align: center;
   color: var(--gray400-color);
-  font-size: 0.8rem;
+  font-size: 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.2rem;
+  gap: 4px;
 
   img {
-    width: 2rem;
+    width: 32px;
     display: block;
   }
 `;
 
 const NavigationLayout = styled.article`
   background-color: #ffffff;
-  width: 5.6rem;
+  width: 80px;
   height: 100vh;
   border-left: 1px solid var(--gray200-color);
-
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 1.25rem 0;
-  gap: 1rem;
+  padding-top: 20px;
+  gap: 16px;
+  box-sizing: border-box;
+  position: fixed;
+  right: 0;
 
   .search {
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
   }
 `;
