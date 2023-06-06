@@ -33,11 +33,11 @@ const StyledLink = styled(Link)`
 `;
 
 const HeaderLayout = styled.header`
-  background-color: white;
-  width: 100%;
-  height: 5rem;
+  position: fixed;
+  width: calc(100% - 5rem);
   padding: 0.6rem 5rem 0.6rem 3.75rem;
   box-sizing: border-box;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,6 +47,24 @@ const HeaderLayout = styled.header`
     gap: 0.75rem;
   }
 `;
+
+// const HeaderLayout = styled.header`
+//   background-color: white;
+//   width: 100%;
+//   height: 5rem;
+//   padding: 0.6rem 5rem 0.6rem 9.5rem;
+//   box-sizing: border-box;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   background-color: #e7e7ff;
+//   position: fixed;
+
+//   .following_wrap {
+//     display: flex;
+//     gap: 0.75rem;
+//   }
+// `;
 
 const LogoLink = styled(StyledLink)``;
 

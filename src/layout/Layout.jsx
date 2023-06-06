@@ -7,10 +7,8 @@ import Navigation from "../components/Navigation";
 export default function Layout({ children }) {
   return (
     <>
-      <LayoutWrapper>
-        <Header />
-        <Navigation />
-      </LayoutWrapper>
+      <Header />
+      <Navigation />
       <Wrapper>{children}</Wrapper>
       <Footer />
     </>
@@ -20,11 +18,4 @@ export default function Layout({ children }) {
 const Wrapper = styled.div`
   padding-top: 5rem;
   height: 1000px;
-  background-color: #ededed;
-`;
-
-const LayoutWrapper = styled.div`
-  display: flex;
-  position: fixed;
-  width: 100%;
 `;
