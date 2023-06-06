@@ -62,14 +62,17 @@ const NavList = styled(StyledLink)`
 
 const NavigationLayout = styled.article`
   background-color: #ffffff;
-  width: 5.6rem;
+  width: 5rem;
   height: 100vh;
   border-left: 1px solid var(--gray200-color);
-
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   padding: 1.25rem 0;
   gap: 1rem;
+  box-sizing: border-box;
+  position: fixed;
+  right: 0;
 
   .search {
     margin-bottom: 1rem;
