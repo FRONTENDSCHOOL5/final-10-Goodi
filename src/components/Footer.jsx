@@ -23,28 +23,27 @@ export default function Footer() {
 }
 const FooterLayout = styled.footer`
   background-color: var(--gray100-color);
-  width: calc(100% - 5rem);
-  padding: 1.8rem 5rem 1.8rem 3.75rem;
+  width: calc(100% - 80px);
+  padding: 30px 60px 30px 80px;
   box-sizing: border-box;
-  font-size: 0.8rem;
+  font-size: 14px;
   display: flex;
   justify-content: space-between;
   color: var(--gray400-color);
-  font-size: 1rem;
-  line-height: 1.8rem;
+  line-height: 1.5;
 
   .footer_text {
     width: 100%;
-    margin-left: 5rem;
+    margin-left: 80px;
   }
 
   .footer_text strong {
-    font-size: 1.25rem;
+    font-size: 18px;
     font-weight: 600;
   }
 
   img {
-    width: 10rem;
+    width: 165px;
   }
 
   .github_button {
@@ -52,6 +51,6 @@ const FooterLayout = styled.footer`
   }
 
   .github_button img {
-    width: 7rem;
+    width: 112px;
   }
 `;
