@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
 import '../../assets/font.css'
+import LikeBtn from './LikeBtn';
 
-export default function Card({ id, profile, name, email, img, title, description, price }) {
+export default function Card({ profile, name, email, img, title, description, price }) {
   return (
     <CardUI>
       <CardHeader>
@@ -11,6 +12,7 @@ export default function Card({ id, profile, name, email, img, title, description
         <p>{email}</p>
       </CardHeader>
       <CardContent>
+        <LikeBtn />
         <img alt="card" src={img} />
         <h2>{title}</h2>
         <p>{description}</p>
@@ -22,43 +24,49 @@ export default function Card({ id, profile, name, email, img, title, description
 
 const CardUI = styled.article`
   width: 380px;
-  border: 2px solid gray;
 `
 
 const CardHeader = styled.div`
   width: 100%;
   height: 56px;
-  box-sizing: border-box;
   margin-bottom: 16px;
 
   img {
     width: 56px;
     height: 56px;
     float: left;
-    vertical-align: top;
     border-radius: 50%;
     margin-right: 16px;
   }
 
   h3 {
     width: 70%;
+    float: left;
     font-size: 18px;
     font-weight: 600;
-    float: left;
     margin-top: 8px;
   }
 
   p {
-    font-size: 14px;
     float: left;
+    font-size: 14px;
     margin-top: 10px;
   }
 `
 
 const CardContent = styled.div`
+  font-size: 16px;
+  position: relative;
+
   img {
     width: 100%;
     height: 380px;
+  }
+
+  button {
+    position: absolute;
+    right: 16px;
+    bottom: 174px;
   }
 
   h2 {
@@ -69,7 +77,6 @@ const CardContent = styled.div`
   }
 
   p {
-    font-size: 16px;
     padding: 16px 0;
     line-height: 1.5;
     color: #626262;
@@ -79,14 +86,12 @@ const CardContent = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical; */
+    /* 말줄임은 되는데 3번째 줄이 보이는 이슈 존재 */
   }
 
   strong {
     font-size: 24px;
     font-family: "Montserrat";
-  }
-
-  span {
-    font-size: 16px;
+    margin-right: 8px;
   }
 `
