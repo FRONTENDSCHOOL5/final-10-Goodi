@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     --gray200-color: #E2E2E2;
     --gray300-color: #D3D3D3;
     --gray400-color: #9C9C9C;
-    --gray400-color: #626262;
+    --gray500-color: #626262;
     --black-color: #000000;
 
     --font-reqular: 1rem;
@@ -33,6 +33,6 @@ const GlobalStyle = createGlobalStyle`
   img {
     vertical-align: top;
   }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
