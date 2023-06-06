@@ -8,13 +8,13 @@ export default function Button() {
 }
 
 export const ButtonDef = styled.button`
-  background-color: black;
+  background-color: ${ props => props.bg};
   width: ${ props => props.width};
   height: ${ props => props.height};
   padding: ${ props => props.padding};
   border-radius: ${ props => props.br};
+  color: ${props => props.gb == 'white' ? 'black' : 'white'};
   font-size: 1.13rem;
-  color: white;
   box-sizing: border-box;
   text-align: center;
 `
