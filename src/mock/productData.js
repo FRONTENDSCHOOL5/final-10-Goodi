@@ -7,7 +7,7 @@ const ProductData = [
         "user_email": "dksljdf@gmail.com",
         "propduct_img": ["https://image1.marpple.co/files/u_1470231/2023/5/original/07fd94acc9b63dec50682e3a8220c6171c44707b1.png?q=92&w=432&f=jpeg&bg=f6f6f6", "https://image1.marpple.co/files/u_1470231/2023/5/original/c5259af124c93e5d763739f130a4ddd03747c1061.png?q=92&w=432&f=jpeg&bg=f6f6f6", "https://image1.marpple.co/files/u_1470231/2023/5/original/e62c081ab5f1d632d56958ac82b91b737887bf701.png?q=92&w=432&f=jpeg&bg=f6f6f6", "https://image1.marpple.co/files/u_1470231/2023/5/original/173cb3d6e5bfba450e0502905a6a5c61e7ec48251.png?q=92&w=432&f=jpeg&bg=f6f6f6"],
         "product_title": "무쿠무쿠 투명 핸드폰케이스",
-        "product_description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis,",
+        "product_description": "작가가 해당상품에 대한 설명을 적고 그게 여기에 2줄까지만 노출이 된다. 이상 넘어가는건 말줄임 작가가 해당상품에 대한 설명을 적고 그게 여기에 2줄까지만 노출이 된다. 이상 넘어가는건 말줄임",
         "price": "20000"
     },
 ];

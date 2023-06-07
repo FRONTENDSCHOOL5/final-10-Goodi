@@ -11,19 +11,19 @@ const ButtonLineIconUI = styled.button`
   background-color: white;
   border-radius: 30px;
   border: 1px solid var(--gray200-color);
-  font-size: 18px;
-  font-weight: 900;
+  font-size: 16px;
+  font-family: var(--font--semibold);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   box-sizing: border-box;
   white-space: nowrap;
 
   &::after {
     content: "";
     display: block;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     background: url(${PlusIcon}) no-repeat center/cover;
   }
 `;
