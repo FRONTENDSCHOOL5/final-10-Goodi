@@ -13,17 +13,16 @@ const GlobalStyle = createGlobalStyle`
     --gray400-color: #9C9C9C;
     --gray500-color: #626262;
     --black-color: #000000;
-
   }
 
   :root {
-        --font--Bold: 'Pretendard-Bold';
-        --font--semibold: 'Pretendard-semiBold';
-        --font--Medium: 'Pretendard-Medium';
-        --font--Regular: 'Pretendard-Regular';
-        // 사용시 fontweight : 900 으로 꼭 줘야함
-        --font--en: "Montserrat";
-    }
+    --font--Bold: 'Pretendard-Bold';
+    --font--semibold: 'Pretendard-semiBold';
+    --font--Medium: 'Pretendard-Medium';
+    --font--Regular: 'Pretendard-Regular';
+    // 사용시 fontweight : 900 으로 꼭 줘야함
+    --font--en: "Montserrat";
+  }
 
   ${reset}
 

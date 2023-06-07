@@ -2,7 +2,6 @@ import React from 'react';
 import GlobalStyle from "./style/GlobalStyle";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Main from './pages/Main';
-import CardProduct from './components/common/CardProduct';
 import Login from './pages/Login';
 import Join from './pages/Join';
 import Detail from './pages/Detail';

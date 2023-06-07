@@ -15,6 +15,7 @@ const ButtonLineIconUI = styled.button`
   font-family: var(--font--semibold);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 6px;
   box-sizing: border-box;
   white-space: nowrap;
