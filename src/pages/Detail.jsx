@@ -1,22 +1,33 @@
 import React from "react";
 import styled from "styled-components";
-import { LInk } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
-import Sample1 from "../mock/sample_1.jpg";
-import Sample2 from "../mock/sample_2.jpg";
-import Sample3 from "../mock/sample_3.jpg";
+import ProductData from "../mock/productData";
 
 export default function Detail() {
+  const data = ProductData[0];
+
   return (
     <Layout>
       <DetailWrap>
         <ProductDetailImg>
-          <img className="top_detail_img" src={Sample1} alt="상세 이미지" />
+          <img
+            className="top_detail_img"
+            src={data.propduct_img[1]}
+            alt="상세 이미지"
+          />
 
           <div className="bottom_img_wrap">
-            <img className="detail_img" src={Sample1} alt="상세 이미지" />
-            <img className="detail_img" src={Sample2} alt="상세 이미지" />
-            <img className="detail_img" src={Sample3} alt="상세 이미지" />
+            {data.propduct_img.map((el, index) => {
+              return (
+                <img
+                  key={index}
+                  className="detail_img"
+                  src={el}
+                  alt="상세 이미지"
+                />
+              );
+            })}
           </div>
         </ProductDetailImg>
 
