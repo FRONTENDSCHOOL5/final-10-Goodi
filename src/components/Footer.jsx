@@ -31,6 +31,7 @@ const FooterLayout = styled.footer`
   justify-content: space-between;
   color: var(--gray400-color);
   line-height: 1.5;
+  margin-top: 120px;
 
   .footer_text {
     width: 100%;

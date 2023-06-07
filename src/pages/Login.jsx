@@ -9,36 +9,42 @@ export default function Login() {
     <LayoutDiv>
       <H1>로그인 페이지</H1>
       <div>
-      <H2>Welcome to<img src={SymbolImage} alt="Symbol"/></H2>
+        <H2>
+          Welcome to
+          <img src={SymbolImage} alt="Symbol" />
+        </H2>
       </div>
       <InputDiv>
         <Label>이메일</Label>
-        <InputBox 
-          width="432px" 
-          height="48px" 
+        <InputBox
+          width="432px"
+          height="48px"
           padding="15px"
           onChange={() => {}}
           placeholder="이메일을 입력해주세요"
         />
-        </InputDiv>
-        <InputDiv>
+      </InputDiv>
+      <InputDiv>
         <Label>비밀번호</Label>
-        <InputBox 
-          width="432px" 
-          height="48px" 
+        <InputBox
+          width="432px"
+          height="48px"
           onChange={() => {}}
           type="password"
           placeholder="비밀번호를 입력하세요"
         />
       </InputDiv>
       <ButtonDiv>
-        <ButtonDef 
-          type="button" 
+        <ButtonDef
+          type="button"
           bg="black"
-          width="432px" 
-          height="56px" 
-          br="4px">로그인</ButtonDef>
-        <span>SNS 로그인</span>  
+          width="432px"
+          height="56px"
+          br="4px"
+        >
+          로그인
+        </ButtonDef>
+        <span>SNS 로그인</span>
       </ButtonDiv>
       <SnsDiv>
         <SnsBg bg="#FAE64D">
@@ -52,8 +58,10 @@ export default function Login() {
         </SnsBg>
       </SnsDiv>
       <div>
-      <p>아직 구디 회원이 아니세요?</p>
-      <button type="button" className="join_button">회원가입 하기</button>
+        <p>아직 구디 회원이 아니세요?</p>
+        <button type="button" className="join_button">
+          회원가입 하기
+        </button>
       </div>
     </LayoutDiv>
   );
@@ -64,7 +72,7 @@ export const LayoutDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin:0 auto;
+  margin: 0 auto;
   padding: 81px 0;
 
   p {
@@ -87,7 +95,7 @@ export const LayoutDiv = styled.div`
 export const InputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top:24px;
+  margin-top: 24px;
 `;
 
 export const H1 = styled.h1`
@@ -99,21 +107,22 @@ export const H1 = styled.h1`
   overflow: hidden;
   padding: 0;
   position: absolute;
-`
+`;
 export const H2 = styled.div`
   font-size: 2.5rem;
-  font-weight: 700;
+  font-family: "Montserrat";
+  font-weight: 900;
   margin-bottom: 16px;
   display: inline;
 
   img {
     vertical-align: text-bottom;
   }
-` 
+`;
 export const Label = styled.label`
   margin-bottom: 8px;
   font-weight: 700;
-`
+`;
 export const ButtonDiv = styled.div`
   padding: 55px 0;
   border-bottom: 1px solid var(--gray200-color);
@@ -122,20 +131,20 @@ export const ButtonDiv = styled.div`
     background-color: white;
     padding: 10px;
     color: var(--gray200-color);
-    position:absolute;
+    position: absolute;
     top: 91%;
     left: 50%;
     transform: translate(-50%);
   }
-`
+`;
 export const SnsDiv = styled.div`
   display: flex;
   gap: 24px;
   padding: 44px 0px 81px;
-`
+`;
 export const SnsBg = styled.div`
-  background-color: ${ props => props.bg };
+  background-color: ${(props) => props.bg};
   width: 56px;
   height: 56px;
   border-radius: 50%;
-`
+`;
