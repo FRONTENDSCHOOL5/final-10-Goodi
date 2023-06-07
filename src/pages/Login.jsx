@@ -79,44 +79,6 @@ export default function Login() {
   );
 }
 
-export function Join() {
-  return(
-  <OuterDiv>
-    <LeftDiv>
-    <div>
-      <img className="login-img" src={LoginImage1}></img>
-      <img className="login-ment" src={LoginMent}></img>
-    </div>
-    </LeftDiv>
-    <RightDiv>
-      <H2>
-        Join to
-        <img src={SymbolImage} alt="Symbol" />
-      </H2>
-      <InputDiv>
-        <Label>이메일</Label>
-        <InputBox
-          width="432px"
-          height="48px"
-          padding="15px"
-          onChange={() => {}}
-          placeholder="이메일을 입력해주세요"
-        />
-      </InputDiv>
-      <InputDiv>
-        <Label>비밀번호</Label>
-        <InputBox
-          width="432px"
-          height="48px"
-          onChange={() => {}}
-          type="password"
-          placeholder="비밀번호를 입력하세요"
-        />
-      </InputDiv>
-    </RightDiv>
-  </OuterDiv>
-  );
-}
 
 export function Setprofile() {
   return(
@@ -138,7 +100,6 @@ export const OuterDiv = styled.div`
 export const LeftDiv = styled.div`
   max-width: 43%;
   height: 100vh;
-  border-color: red;
   box-sizing: border-box;
   position: relative;
   display: flex;
