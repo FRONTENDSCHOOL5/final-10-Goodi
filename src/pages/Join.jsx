@@ -102,7 +102,7 @@ export const RightDiv = styled.div`
     margin-right: 17px;
   }
   button {
-    font-weight: 600;
+    font-family: var(--font--Bold);
     display: inline;
     padding: 6px 0px;
   }
@@ -114,7 +114,7 @@ export const RightDiv = styled.div`
 export const InputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
+  margin-top: 28px;
 `;
 
 export const H1 = styled.h1`
@@ -130,8 +130,8 @@ export const H1 = styled.h1`
 
 export const H2 = styled.div`
   font-size: 2.5rem;
-  margin-bottom: 8%;
-  font-family: "Montserrat";
+  margin-bottom:10%;
+  font-family: var(--font--en);
   font-weight: 900;
   display: inline;
 
@@ -140,20 +140,11 @@ export const H2 = styled.div`
   }
 `;
 export const Label = styled.label`
-  margin-bottom: 8px;
+  font-family: var(--font--Bold);
+  margin-bottom: 9px;
   font-weight: 700;
 `;
 export const ButtonDiv = styled.div`
   margin-top: 16%;
-  position: relative;
-  span {
-    background-color: white;
-    padding: 10px;
-    color: var(--gray200-color);
-    position: absolute;
-    top: 91%;
-    left: 50%;
-    transform: translate(-50%);
-  }
 `;
 
