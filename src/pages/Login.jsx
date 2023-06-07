@@ -7,7 +7,7 @@ import SymbolImage from "../assets/symbol.svg";
 export default function Login() {
   return (
     <LayoutDiv>
-      <H1>로그인 페이지</H1>
+      <H1>로그인 페이지 ..</H1>
       <div>
         <H2>
           Welcome to
