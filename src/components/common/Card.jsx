@@ -23,7 +23,7 @@ export default function Card({ profile, name, email, img, title, description, pr
 };
 
 const CardUI = styled.article`
-  width: 380px;
+  width: 309px;
 `
 
 const CardHeader = styled.div`
@@ -60,13 +60,13 @@ const CardContent = styled.div`
 
   img {
     width: 100%;
-    height: 380px;
+    height: 309px;
   }
 
   button {
     position: absolute;
     right: 16px;
-    bottom: 174px;
+    bottom: 172px;
   }
 
   h2 {
