@@ -79,19 +79,18 @@ export default function Login() {
   );
 }
 
-
 export function Setprofile() {
-  return(
-  <InputDiv>
-    <Label>닉네임</Label>
-    <InputBox
-      width="432px"
-      height="48px"
-      padding="15px"
-      onChange={() => {}}
-      placeholder="이메일을 입력해주세요"
-    />
-  </InputDiv>
+  return (
+    <InputDiv>
+      <Label>닉네임</Label>
+      <InputBox
+        width="432px"
+        height="48px"
+        padding="15px"
+        onChange={() => {}}
+        placeholder="이메일을 입력해주세요"
+      />
+    </InputDiv>
   );
 }
 export const OuterDiv = styled.div`
@@ -136,13 +135,14 @@ export const RightDiv = styled.div`
     margin-right: 17px;
   }
   button {
-    font-weight: 600;
+    font-family: var(--font--Bold);
     display: inline;
     border-bottom: 2px solid black;
     padding: 6px 0px;
   }
   .join_button {
     font-size: 1.25rem;
+    font-family: var(--font--Bold);
   }
 `;
 
@@ -175,8 +175,8 @@ export const H2 = styled.div`
   }
 `;
 export const Label = styled.label`
+  font-family: var(--font--Bold);
   margin-bottom: 8px;
-  font-weight: 700;
 `;
 export const ButtonDiv = styled.div`
   padding: 55px 0;
