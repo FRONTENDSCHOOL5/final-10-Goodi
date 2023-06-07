@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
-import reset from 'styled-reset'
-import '../assets/font.css'
+import reset from "styled-reset";
+import "../assets/font.css";
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -13,13 +13,21 @@ const GlobalStyle = createGlobalStyle`
     --gray500-color: #626262;
     --black-color: #000000;
 
-    --font-reqular: 1rem;
   }
+
+  :root {
+        --font--Bold: 'Pretendard-Bold';
+        --font--semibold: 'Pretendard-semiBold';
+        --font--Medium: 'Pretendard-Medium';
+        --font--Regular: 'Pretendard-Regular';
+        // 사용시 fontweight : 900 으로 꼭 줘야함
+        --font--en: "Montserrat";
+    }
 
   ${reset}
 
   body {
-    font-family: 'Pretendard-Regular';
+    font-family: var(--font--Regular);
   }
 
   input {
