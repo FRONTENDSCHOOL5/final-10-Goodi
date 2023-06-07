@@ -16,9 +16,6 @@ export default function Layout({ children }) {
 }
 
 const Wrapper = styled.div`
-width: calc(100% - 80px);
+  width: calc(100% - 80px);
   padding-top: 5rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
 `;

@@ -91,7 +91,7 @@ const CardContent = styled.div`
 
   strong {
     font-size: 24px;
-    font-family: "Montserrat";
+    font-weight: 900;
     margin-right: 8px;
   }
 `
