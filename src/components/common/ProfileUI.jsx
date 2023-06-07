@@ -6,7 +6,7 @@ export default function ProfileUI({ user_profile, user_name, user_email }) {
   return (
     <UserProfile>
       <img className="user_img" src={user_profile} alt="유저 프로필 이미지" />
-      <div class="profile_text_wrap">
+      <div className="profile_text_wrap">
         <h3>{user_name}</h3>
         <p>{user_email}</p>
       </div>
@@ -39,7 +39,7 @@ const UserProfile = styled(StyledLink)`
   }
 
   .profile_text_wrap h3 {
-    font-weight: 800;
+    font-family: var(--font--semibold);
     font-size: 18px;
   }
 
