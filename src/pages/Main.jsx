@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import commonBanner from "../assets/common-banner.svg";
 import arrowPrimaryIcon from "../assets/icon_arrow_primary.svg";
+import pointEdge from "../assets/point-edge.svg";
 
 import sampleImg1 from "../assets/sample-img/sample-image-1.png"
 import sampleImg2 from "../assets/sample-img/sample-image-2.png"
@@ -213,6 +214,18 @@ const Title = styled.h2`
   font-family: var(--font--en);
   font-weight: 900;
   font-size: 48px;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    width: 80px;
+    height: 40px;
+    background: url(${pointEdge}) no-repeat center/contain;
+  }
 `
 
 const ProductLink = styled(Link)`
