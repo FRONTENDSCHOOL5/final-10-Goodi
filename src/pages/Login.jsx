@@ -5,6 +5,9 @@ import { ButtonDef } from "../components/common/Button";
 import SymbolImage from "../assets/symbol.svg";
 import LoginImage1 from "../assets/login_1.svg";
 import LoginMent from "../assets/login_ment.svg";
+import GoogleIcon from "../assets/google.svg";
+import FacebookIcon from "../assets/facebook.svg";
+import KakaoIcon from "../assets/kakao.svg";
 
 export default function Login() {
   return (
@@ -58,13 +61,13 @@ export default function Login() {
           </ButtonDiv>
           <SnsDiv>
             <SnsBg bg="#FAE64D">
-              <img src="" alt="" />
+              <img src={KakaoIcon} alt="카카오로 로그인하기" />
             </SnsBg>
             <SnsBg bg="var(--gray100-color)">
-              <img src="" alt="" />
+              <img src={GoogleIcon} alt="구글로 로그인하기" />
             </SnsBg>
             <SnsBg bg="#5693FF">
-              <img src="" alt="" />
+              <img src={FacebookIcon} alt="페이스북으로 로그인하기" />
             </SnsBg>
           </SnsDiv>
           <div>
@@ -188,4 +191,12 @@ export const SnsBg = styled.div`
   width: 56px;
   height: 56px;
   border-radius: 50%;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
