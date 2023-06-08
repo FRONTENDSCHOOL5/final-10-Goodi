@@ -5,7 +5,7 @@ import Main from './pages/Main';
 import Login from './pages/Login';
 import Join from './pages/Join'
 import Detail from './pages/Detail';
-import Setprofile  from './pages/Setprofile';
+import Setprofile from './pages/Setprofile';
 
 function App() {
   return (
