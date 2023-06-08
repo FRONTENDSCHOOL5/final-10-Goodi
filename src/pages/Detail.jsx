@@ -20,7 +20,6 @@ import DeliveryIcon from "../assets/icon_delivery_dark.svg";
 
 export default function Detail() {
   const data = ProductData[0];
-  console.log(data);
 
   return (
     <Layout>
@@ -160,7 +159,6 @@ const DeliveryDescription = styled.section`
     font-family: var(--font--Bold);
     flex-shrink: 0;
     margin-right: 8px;
-    /* background-color: red; */
   }
 
   & div p {
