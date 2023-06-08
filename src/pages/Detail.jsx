@@ -1,16 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
+//component
 import Layout from "../layout/Layout";
-import ProductData from "../mock/productData";
-import commonBanner from "../assets/common-banner.svg";
+import DetailImage from "../components/common/DetailImage";
 import ProfileUI from "../components/common/ProfileUI";
-import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import Count from "../components/common/Count";
+import ButtonLineIcon from "../components/common/ButtonLineIcon";
+import { ButtonDef } from "../components/common/Button";
+import LikeBtn from "../components/common/LikeBtn";
+
+//data
+import ProductData from "../mock/productData";
+
+//image
 import MoneyIcon from "../assets/icon_money_black.svg";
 import DeliveryIcon from "../assets/icon_delivery_dark.svg";
-import { ButtonDef } from "../components/common/Button";
-import LikeBtnNon from "../assets/non-like-btn.svg";
 
 export default function Detail() {
   const data = ProductData[0];
@@ -19,31 +25,7 @@ export default function Detail() {
   return (
     <Layout>
       <DetailWrap>
-        <ProductDetailImg>
-          <img
-            className="common_banner"
-            src={commonBanner}
-            alt="공통 배너"
-          ></img>
-          <img
-            className="top_detail_img"
-            src={data.propduct_img[1]}
-            alt="상세 이미지"
-          />
-
-          <div className="bottom_img_wrap">
-            {data.propduct_img.map((el, index) => {
-              return (
-                <img
-                  key={index}
-                  className="detail_img"
-                  src={el}
-                  alt="상세 이미지"
-                />
-              );
-            })}
-          </div>
-        </ProductDetailImg>
+        <DetailImage />
 
         <ProductDetail>
           <div className="product_detail_top">
@@ -88,9 +70,7 @@ export default function Detail() {
           </ProductPrice>
 
           <ButtonWrap>
-            <button className="like_btn">
-              <img src={LikeBtnNon} alt="좋아요 아이콘 " />
-            </button>
+            <LikeBtn />
 
             <ButtonDef
               className="cart_button"
@@ -124,36 +104,6 @@ const DetailWrap = styled.div`
   margin: 40px 60px 120px 80px;
   display: flex;
   gap: 5%;
-`;
-
-const ProductDetailImg = styled.section`
-  width: 50%;
-
-  .common_banner {
-    width: 100%;
-  }
-
-  .top_detail_img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-  }
-
-  .bottom_img_wrap {
-    margin-top: 16px;
-    display: flex;
-    gap: 3%;
-  }
-
-  .detail_img {
-    width: 20%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-  }
-
-  .active {
-    border: 1px solid var(--main-color);
-  }
 `;
 
 const ProductDetail = styled.section`
@@ -258,7 +208,8 @@ const ProductPrice = styled.section`
 const ButtonWrap = styled.div`
   display: flex;
   margin-top: 40px;
-  gap: 16px;
+  align-items: center;
+  gap: 2%;
 
   & button {
     cursor: pointer;
@@ -272,10 +223,6 @@ const ButtonWrap = styled.div`
 
   .purchase_button,
   .cart_button {
-    flex-grow: 2;
-  }
-
-  .like_btn {
-    flex-grow: 1;
+    width: 44%;
   }
 `;
