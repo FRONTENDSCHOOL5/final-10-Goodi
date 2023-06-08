@@ -167,7 +167,6 @@ const ProductDetail = styled.section`
   .product_title {
     font-family: var(--font--Bold);
     font-size: 34px;
-    margin-top: 32px;
   }
 
   .product_description {

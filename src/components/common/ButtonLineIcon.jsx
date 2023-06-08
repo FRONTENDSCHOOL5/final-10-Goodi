@@ -7,6 +7,7 @@ export default function ButtonLineIcon() {
 }
 
 const ButtonLineIconUI = styled.button`
+  height: 56px;
   padding: 12px 24px;
   background-color: white;
   border-radius: 30px;
