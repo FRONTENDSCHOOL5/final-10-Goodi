@@ -74,31 +74,76 @@ export default function Main() {
             </ProfileUI>
             <ul>
               <li>
-                <Link to="/"><img src={sampleImg5} alt="" /></Link>
+                <img src={sampleImg5} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg6} alt="" /></Link>
+                <img src={sampleImg6} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg7} alt="" /></Link>
+                <img src={sampleImg7} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg8} alt="" /></Link>
+                <img src={sampleImg8} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg9} alt="" /></Link>
+                <img src={sampleImg9} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg10} alt="" /></Link>
+                <img src={sampleImg10} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg11} alt="" /></Link>
+                <img src={sampleImg11} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg12} alt="" /></Link>
+                <img src={sampleImg12} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg8} alt="" /></Link>
+                <img src={sampleImg7} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
             </ul>
             {/* ul 컴포넌트 분리 필요 */}
@@ -115,31 +160,76 @@ export default function Main() {
             </ProfileUI>
             <ul>
               <li>
-                <Link to="/"><img src={sampleImg13} alt="" /></Link>
+                <img src={sampleImg13} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg14} alt="" /></Link>
+                <img src={sampleImg14} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg15} alt="" /></Link>
+                <img src={sampleImg15} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg16} alt="" /></Link>
+                <img src={sampleImg16} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg17} alt="" /></Link>
+                <img src={sampleImg17} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg18} alt="" /></Link>
+                <img src={sampleImg18} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg19} alt="" /></Link>
+                <img src={sampleImg19} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg20} alt="" /></Link>
+                <img src={sampleImg20} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
               <li>
-                <Link to="/"><img src={sampleImg21} alt="" /></Link>
+                <img src={sampleImg21} alt="" />
+                <ProductHover>
+                  <strong>상품명</strong>
+                  <p>29000원</p>
+                  <Link to="/">상품 상세보기</Link>
+                </ProductHover>
               </li>
             </ul>
             {/* ul 컴포넌트 분리 필요 */}
@@ -199,7 +289,22 @@ const MainBottom = styled.section`
 
     & img {
       width: 100%;
-      height: 100%; 
+      height: 100%;
+    }
+
+    li {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      &:hover div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        flex-direction: column;
+        animation: setMotion 0.2s;
+      }
     }
   }
 
@@ -207,7 +312,45 @@ const MainBottom = styled.section`
     grid-row: 1 / span 2;
     grid-column: 1 / 2;
   }
-  /* 이미지 hover 효과 추가 필요 */
+
+  @keyframes setMotion{
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`
+
+const ProductHover = styled.div`
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+
+  strong, p {
+    font-size: 20px;
+    font-family: var(--font--semibold);
+  }
+
+  a {
+    width: 70%;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+      color: var(--main-color);
+    }
+  }
 `
 
 const Title = styled.h2`
@@ -220,11 +363,12 @@ const Title = styled.h2`
     content: '';
     display: inline-block;
     position: absolute;
-    top: -25px;
+    top: -26px;
     left: -25px;
-    width: 80px;
+    width: 130px;
     height: 40px;
     background: url(${pointEdge}) no-repeat center/contain;
+    vertical-align: bottom;
   }
 `
 
