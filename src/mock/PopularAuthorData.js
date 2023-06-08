@@ -1,0 +1,25 @@
+const PopularAuthorData = [
+  { "dummyImg": "../assets/sample-img/sample-image-1.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-2.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-3.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-4.jpg" },
+  { "dummyImg": "../assets/sample-img/sample-image-5.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-6.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-7.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-8.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-9.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-10.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-11.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-12.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-13.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-14.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-15.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-16.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-17.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-18.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-19.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-20.png" },
+  { "dummyImg": "../assets/sample-img/sample-image-21.png" },
+]
+
+export default PopularAuthorData;
