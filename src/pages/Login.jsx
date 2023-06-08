@@ -79,20 +79,6 @@ export default function Login() {
   );
 }
 
-export function Setprofile() {
-  return (
-    <InputDiv>
-      <Label>닉네임</Label>
-      <InputBox
-        width="432px"
-        height="48px"
-        padding="15px"
-        onChange={() => {}}
-        placeholder="이메일을 입력해주세요"
-      />
-    </InputDiv>
-  );
-}
 export const OuterDiv = styled.div`
   display: flex;
 `;
