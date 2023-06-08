@@ -8,6 +8,7 @@ export default function Button() {
 }
 
 export const ButtonDef = styled.button`
+  background-color: black;
   background-color: ${ props => props.bg};
   width: ${ props => props.width};
   height: ${ props => props.height};
@@ -15,6 +16,7 @@ export const ButtonDef = styled.button`
   border-radius: ${ props => props.br};
   color: ${props => props.gb == 'white' ? 'black' : 'white'};
   font-size: 1.13rem;
+  font-family: var(--font--Bold);
   box-sizing: border-box;
   text-align: center;
 `
