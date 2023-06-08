@@ -212,6 +212,10 @@ const MainBottom = styled.section`
   /* 이미지 hover 효과 추가 필요 */
 `
 
+const BottomSection = styled.section`
+  display: flex;
+`
+
 const Title = styled.h2`
     font-family: var(--font--en);
     font-weight: 900;

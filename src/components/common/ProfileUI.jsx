@@ -25,6 +25,7 @@ const StyledLink = styled(Link)`
 const UserProfile = styled(StyledLink)`
   width: 100%;
   display: flex;
+  align-items: center;
   background-color: white;
   color: var(--black-color);
   text-decoration: none;
