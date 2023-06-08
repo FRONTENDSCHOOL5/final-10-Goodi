@@ -4,8 +4,9 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Main from './pages/Main';
 import CardProduct from './components/common/CardProduct';
 import Login from './pages/Login';
-import Join from './pages/Join';
+import Join from './pages/Join'
 import Detail from './pages/Detail';
+import Setprofile  from './pages/Setprofile';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/setprofile" element={<Setprofile />} />
       </Routes>
     </BrowserRouter>
   );
