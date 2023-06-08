@@ -11,12 +11,12 @@ import ProfileUI from "../components/common/ProfileUI";
 import Count from "../components/common/Count";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import { ButtonDef } from "../components/common/Button";
+import LikeBtn from "../components/common/LikeBtn";
 
 //image
 import commonBanner from "../assets/common-banner.svg";
 import MoneyIcon from "../assets/icon_money_black.svg";
 import DeliveryIcon from "../assets/icon_delivery_dark.svg";
-import LikeBtnNon from "../assets/non-like-btn.svg";
 
 export default function Detail() {
   const data = ProductData[0];
@@ -93,9 +93,7 @@ export default function Detail() {
           </ProductPrice>
 
           <ButtonWrap>
-            <button className="like_btn">
-              <img src={LikeBtnNon} alt="좋아요 아이콘 " />
-            </button>
+            <LikeBtn className="like" />
 
             <ButtonDef
               className="cart_button"
@@ -264,8 +262,11 @@ const ButtonWrap = styled.div`
   display: flex;
   margin-top: 40px;
   gap: 16px;
+  align-items: center;
+  background-color: red;
 
   & button {
+    display: block;
     cursor: pointer;
     font-family: var(--font--Medium);
   }
@@ -275,12 +276,9 @@ const ButtonWrap = styled.div`
     border: 1px solid var(--gray300-color);
   }
 
-  .purchase_button,
-  .cart_button {
-    flex-grow: 2;
-  }
-
-  .like_btn {
-    flex-grow: 1;
+  .like {
+    width: 48px;
+    height: 48px;
+    background-color: blueviolet;
   }
 `;
