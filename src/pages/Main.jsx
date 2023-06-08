@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 import commonBanner from "../assets/common-banner.svg";
 import arrowPrimaryIcon from "../assets/icon_arrow_primary.svg";
-import plusPrimaryIcon from "../assets/icon_plus_primary.svg";
 
 import sampleImg1 from "../assets/sample-img/sample-image-1.png"
 import sampleImg2 from "../assets/sample-img/sample-image-2.png"
@@ -72,7 +71,7 @@ export default function Main() {
             >
               <ButtonLineIcon />
             </ProfileUI>
-            <UL>
+            <ul>
               <li>
                 <Link to="/"><img src={sampleImg5} alt="" /></Link>
               </li>
@@ -100,7 +99,7 @@ export default function Main() {
               <li>
                 <Link to="/"><img src={sampleImg8} alt="" /></Link>
               </li>
-            </UL>
+            </ul>
           </section>
 
           <section>
@@ -112,7 +111,7 @@ export default function Main() {
             >
               <ButtonLineIcon />
             </ProfileUI>
-            <UL>
+            <ul>
               <li>
                 <Link to="/"><img src={sampleImg13} alt="" /></Link>
               </li>
@@ -140,7 +139,7 @@ export default function Main() {
               <li>
                 <Link to="/"><img src={sampleImg21} alt="" /></Link>
               </li>
-            </UL>
+            </ul>
           </section>
         </MainBottom>
       </LayoutWrap>
@@ -212,10 +211,6 @@ const MainBottom = styled.section`
   /* 이미지 hover 효과 추가 필요 */
 `
 
-const BottomSection = styled.section`
-  display: flex;
-`
-
 const Title = styled.h2`
     font-family: var(--font--en);
     font-weight: 900;
@@ -225,7 +220,6 @@ const Title = styled.h2`
 const ProductBtn = styled.button`
   position: relative;
   width: 217px;
-  height: 56px;
   display: block;
   padding: 17px 24px;
   box-sizing: border-box;
@@ -246,8 +240,4 @@ const ProductBtn = styled.button`
     top: 12px;
     right: 21px
   }
-`
-
-const UL = styled.ul`
-  margin-top: 32px;
 `

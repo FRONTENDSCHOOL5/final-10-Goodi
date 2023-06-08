@@ -29,6 +29,7 @@ const UserProfile = styled(StyledLink)`
   background-color: white;
   color: var(--black-color);
   text-decoration: none;
+  margin-bottom: 32px;
 
   & > img {
     width: ${(props) => (props.mainprofile ? "80px" : "56px")};
