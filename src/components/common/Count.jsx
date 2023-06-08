@@ -1,16 +1,27 @@
 import React from "react";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 import PlusIcon from "../../assets/icon_plus_black.svg";
 import MinusIcon from "../../assets/icon_minus_black.svg";
 
 export default function Count() {
+  const [count, setCount] = useState(1);
+
+  const handlerPlus = () => {
+    setCount((prevCount) => prevCount + 1);
+  };
+
+  const handlerMinus = () => {
+    setCount((prevCount) => (prevCount === 1 ? 1 : prevCount - 1));
+  };
+
   return (
     <Countwrap>
-      <PluseButton>
+      <PluseButton onClick={handlerPlus}>
         <img src={PlusIcon} alt="더하기 아이콘" />
       </PluseButton>
-      <p className="count_text">1</p>
-      <MinusButton>
+      <p className="count_text">{count}</p>
+      <MinusButton onClick={handlerMinus}>
         <img src={MinusIcon} alt="더하기 아이콘" />
       </MinusButton>
     </Countwrap>
