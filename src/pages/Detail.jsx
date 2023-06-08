@@ -1,25 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
-//data
-import ProductData from "../mock/productData";
-
-// component
 import Layout from "../layout/Layout";
-import ProfileUI from "../components/common/ProfileUI";
-import Count from "../components/common/Count";
-import ButtonLineIcon from "../components/common/ButtonLineIcon";
-import { ButtonDef } from "../components/common/Button";
-
-//image
+import ProductData from "../mock/productData";
 import commonBanner from "../assets/common-banner.svg";
+import ProfileUI from "../components/common/ProfileUI";
+import ButtonLineIcon from "../components/common/ButtonLineIcon";
+import Count from "../components/common/Count";
 import MoneyIcon from "../assets/icon_money_black.svg";
 import DeliveryIcon from "../assets/icon_delivery_dark.svg";
+import { ButtonDef } from "../components/common/Button";
 import LikeBtnNon from "../assets/non-like-btn.svg";
 
 export default function Detail() {
   const data = ProductData[0];
+  console.log(data);
 
   return (
     <Layout>
@@ -58,7 +53,7 @@ export default function Detail() {
               user_name={data.user_name}
               user_email={data.user_email}
             />
-            <ButtonLineIcon button_content="작가 팔로우" />
+            <ButtonLineIcon>작가 팔로우</ButtonLineIcon>
           </div>
 
           <h2 className="product_title">{data.product_title}</h2>

@@ -24,7 +24,6 @@ export default function Card({ profile, name, email, img, title, description, pr
 };
 
 const CardContent = styled.div`
-  /* font-size: 16px; */
   position: relative;
 
   img {
@@ -45,7 +44,8 @@ const CardContent = styled.div`
   }
 
   p {
-    padding: 16px 0;
+    margin: 16px 0px;
+    height: 3em;
     line-height: 1.5;
     color: var(--gray500-color);;
 
@@ -54,7 +54,6 @@ const CardContent = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    /* 말줄임은 되는데 3번째 줄이 보이는 이슈 존재 */
   }
 
   strong {

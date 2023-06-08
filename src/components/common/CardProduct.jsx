@@ -12,7 +12,7 @@ const cardInfoList = [
     "email": "dksljdf@gmail.com",
     "img": `${productThumbnail}`,
     "title": "상품 1",
-    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis,",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis",
     "price": "29900"
   },
   {
@@ -32,7 +32,7 @@ const cardInfoList = [
     "email": "dksljdf@gmail.com",
     "img": `${productThumbnail}`,
     "title": "상품 3",
-    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis,",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis",
     "price": "29900"
   },
   {
