@@ -2,14 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { InputBox } from "../components/common/Input";
 import { ButtonDef } from "../components/common/Button";
-import SymbolImage from "../assets/symbol.svg";
+import ProfileImgDef from "../assets/profile_img_def.svg";
+import PlusBtnImg from "../assets/add_button.svg";
 import LoginImage1 from "../assets/login_1.svg";
 import LoginMent from "../assets/login_ment.svg";
-import GoogleIcon from "../assets/google.svg";
-import FacebookIcon from "../assets/facebook.svg";
-import KakaoIcon from "../assets/kakao.svg";
 
-export default function Login() {
+export default function Setprofile() {
   return (
     <OuterDiv>
       <LeftDiv>
@@ -20,13 +18,16 @@ export default function Login() {
       </LeftDiv>
       <RightDiv>
         <div className="right-inner">
-          <H1 className="a11y-hidden">로그인 페이지</H1>
-          <div>
-            <H2>
-              Welcome to
-              <img src={SymbolImage} alt="Symbol" />
-            </H2>
-          </div>
+          <H1 className="a11y-hidden">
+            초기 프로필 설정 페이지
+          </H1>
+          <ProfileDiv>
+            <button><img className="profile_def_img" src={ProfileImgDef}></img>
+            </button>
+            <button>
+              <img className="add_button_img" src={PlusBtnImg}></img>
+            </button>
+          </ProfileDiv>
           <InputDiv>
             <Label>이메일</Label>
             <InputBox
@@ -47,6 +48,10 @@ export default function Login() {
               placeholder="비밀번호를 입력하세요"
             />
           </InputDiv>
+          <InputDiv>
+            <Label>소개 메세지</Label>
+            <textarea placeholder="나를 소개해보세요"></textarea>
+          </InputDiv>
           <ButtonDiv>
             <ButtonDef
               type="button"
@@ -55,33 +60,14 @@ export default function Login() {
               height="56px"
               br="4px"
             >
-              로그인
+              Goodi 시작하기
             </ButtonDef>
-            <span>SNS 로그인</span>
           </ButtonDiv>
-          <SnsDiv>
-            <SnsBg bg="#FAE64D">
-              <img src={KakaoIcon} alt="카카오로 로그인하기" />
-            </SnsBg>
-            <SnsBg bg="var(--gray100-color)">
-              <img src={GoogleIcon} alt="구글로 로그인하기" />
-            </SnsBg>
-            <SnsBg bg="#5693FF">
-              <img src={FacebookIcon} alt="페이스북으로 로그인하기" />
-            </SnsBg>
-          </SnsDiv>
-          <div>
-            <p>아직 구디 회원이 아니세요?</p>
-            <button type="button" className="join_button">
-              회원가입 하기
-            </button>
-          </div>
         </div>
       </RightDiv>
     </OuterDiv>
   );
 }
-
 export const OuterDiv = styled.div`
   display: flex;
 `;
@@ -126,19 +112,39 @@ export const RightDiv = styled.div`
   button {
     font-family: var(--font--Bold);
     display: inline;
-    border-bottom: 2px solid black;
     padding: 6px 0px;
   }
   .join_button {
     font-size: 1.25rem;
-    font-family: var(--font--Bold);
   }
 `;
+export const ProfileDiv = styled.div`
+  position: relative;
+  .add_button_img  {
+    position: absolute;
+    top: 67px;
+    left: 67px;
+  }
 
+`;
 export const InputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
+  margin-top: 28px;
+
+  textarea {
+    resize: none;
+    border: 1px solid var(--gray300-color);
+    width: 432px;
+    height: 96px;
+    border-radius: 4px;
+    padding: 15px;
+    box-sizing: border-box;
+    outline-color: black;
+    &::placeholder {
+    color: var(--gray300-color);
+    }
+  }
 `;
 
 export const H1 = styled.h1`
@@ -154,9 +160,9 @@ export const H1 = styled.h1`
 
 export const H2 = styled.div`
   font-size: 2.5rem;
-  font-family: "Montserrat";
+  margin-bottom:10%;
+  font-family: var(--font--en);
   font-weight: 900;
-  margin-bottom: 16px;
   display: inline;
 
   img {
@@ -165,38 +171,12 @@ export const H2 = styled.div`
 `;
 export const Label = styled.label`
   font-family: var(--font--Bold);
-  margin-bottom: 8px;
+  margin-bottom: 9px;
+  font-weight: 700;
 `;
 export const ButtonDiv = styled.div`
-  padding: 55px 0;
-  border-bottom: 1px solid var(--gray200-color);
-  position: relative;
-  span {
-    background-color: white;
-    padding: 10px;
-    color: var(--gray200-color);
-    position: absolute;
-    top: 91%;
-    left: 50%;
-    transform: translate(-50%);
-  }
+  margin-top: 16%;
 `;
-export const SnsDiv = styled.div`
-  display: flex;
-  gap: 24px;
-  padding: 44px 0px 81px;
-`;
-export const SnsBg = styled.div`
-  background-color: ${(props) => props.bg};
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  position: relative;
 
-  img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-`;
+
+
