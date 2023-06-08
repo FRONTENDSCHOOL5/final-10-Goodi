@@ -1,12 +1,12 @@
-import React, { Children } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 function ProfileUI(props) {
-  const { user_profile, user_name, user_email, mainprofile, children } = props;
+  const { user_profile, user_name, user_email, mainprofile, card, children } = props;
 
   return (
-    <UserProfile mainprofile={mainprofile}>
+    <UserProfile mainprofile={mainprofile} card={card}>
       <img src={user_profile} alt="유저 프로필 이미지" />
       <div>
         <h3>{user_name}</h3>
@@ -29,7 +29,7 @@ const UserProfile = styled(StyledLink)`
   background-color: white;
   color: var(--black-color);
   text-decoration: none;
-  margin-bottom: 32px;
+  margin-bottom: ${(props) => (props.card ? "16px" : "32px")};
 
   & > img {
     width: ${(props) => (props.mainprofile ? "80px" : "56px")};

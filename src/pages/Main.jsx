@@ -57,7 +57,7 @@ export default function Main() {
         <MainRight>
           <Title>Follower Products</Title>
           <CardProduct />
-          <ProductBtn>나도 굿즈 판매하기<img src={arrowPrimaryIcon} alt="" /></ProductBtn>
+          <ProductLink to="/">나도 굿즈 판매하기</ProductLink>
         </MainRight>
 
         <MainBottom>
@@ -67,7 +67,7 @@ export default function Main() {
               user_profile={sampleImg7}
               user_name="이름 1"
               user_email="dlskjdf@gmail.com"
-              mainprofile={true}
+              mainprofile
             >
               <ButtonLineIcon />
             </ProfileUI>
@@ -100,6 +100,7 @@ export default function Main() {
                 <Link to="/"><img src={sampleImg8} alt="" /></Link>
               </li>
             </ul>
+            {/* ul 컴포넌트 분리 필요 */}
           </section>
 
           <section>
@@ -107,7 +108,7 @@ export default function Main() {
               user_profile={sampleImg16}
               user_name="이름 2"
               user_email="dlskjdf@gmail.com"
-              mainprofile="true"
+              mainprofile
             >
               <ButtonLineIcon />
             </ProfileUI>
@@ -140,6 +141,7 @@ export default function Main() {
                 <Link to="/"><img src={sampleImg21} alt="" /></Link>
               </li>
             </ul>
+            {/* ul 컴포넌트 분리 필요 */}
           </section>
         </MainBottom>
       </LayoutWrap>
@@ -149,8 +151,8 @@ export default function Main() {
 
 const LayoutWrap = styled.div`
   display: grid;
-  grid-template-columns: 1fr 121px 1fr;
-  grid-template-rows: 1fr auto;
+  grid-template-columns: 0.8fr 0.1fr 1fr;
+  grid-template-rows: auto auto;
 `
 
 const MainLeft = styled.section`
@@ -167,7 +169,7 @@ const Line = styled.span`
   width: 1px;
   height: 100%;
   display: inline-block;
-  background-color: #E2E2E2;
+  background-color: var(--gray200-color);
   margin: 0 60px;
 `
 
@@ -185,10 +187,6 @@ const MainBottom = styled.section`
 
     &:last-child {
       margin-bottom: 0;
-    }
-
-    & button {
-      height: 56px;
     }
   }
 
@@ -212,32 +210,38 @@ const MainBottom = styled.section`
 `
 
 const Title = styled.h2`
-    font-family: var(--font--en);
-    font-weight: 900;
-    font-size: 48px;
+  font-family: var(--font--en);
+  font-weight: 900;
+  font-size: 48px;
 `
 
-const ProductBtn = styled.button`
-  position: relative;
+const ProductLink = styled(Link)`
   width: 217px;
-  display: block;
-  padding: 17px 24px;
-  box-sizing: border-box;
+  height: 56px;
+  padding: 12px 24px;
   margin: 0 auto;
+  box-sizing: border-box;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
 
-  background-color: #000;
+  background-color: black;
   color: white;
-  border-radius: 28px;
+  border-radius: 30px;
 
-  font-family: var(--font--semibold);
   font-size: 18px;
-  cursor: pointer;
+  font-family: var(--font--semibold);
+  text-decoration: none;
+  white-space: nowrap;
 
-  img {
-    width: 32px;
-    height: 32px;
-    position: absolute;
-    top: 12px;
-    right: 21px
+  &::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url(${arrowPrimaryIcon}) no-repeat center/cover;
   }
+  /* ButtonLineIconUI 랑 중복 줄일 수 있을 것 같은데 */
 `
