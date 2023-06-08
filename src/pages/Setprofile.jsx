@@ -141,8 +141,12 @@ export const InputDiv = styled.div`
     padding: 15px;
     box-sizing: border-box;
     outline-color: black;
+    font-family: var(--font--Regular);
+
     &::placeholder {
     color: var(--gray300-color);
+    font-family: var(--font--Regular);
+    font-size: 1rem;
     }
   }
 `;
