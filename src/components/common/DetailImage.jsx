@@ -12,6 +12,7 @@ import ProductData from "../../mock/productData";
 
 export default function DetailImage() {
   const data = ProductData[0];
+  console.log(data);
 
   //이미지 index 관리
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,14 +20,14 @@ export default function DetailImage() {
   //다음 버튼을 index + 1
   const handlerNext = () => {
     setCurrentIndex((nextIndex) =>
-      nextIndex === data.propduct_img.length - 1 ? 0 : nextIndex + 1
+      nextIndex === data.img.length - 1 ? 0 : nextIndex + 1
     );
   };
 
   //이전 버튼을 index - 1
   const handlerRight = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? data.propduct_img.length - 1 : prevIndex - 1
+      prevIndex === 0 ? data.img.length - 1 : prevIndex - 1
     );
   };
 
@@ -41,7 +42,7 @@ export default function DetailImage() {
         <img className="common_banner" src={commonBanner} alt="공통 배너"></img>
         <img
           className="top_detail_img"
-          src={data.propduct_img[currentIndex]}
+          src={data.img[currentIndex]}
           alt="상세 이미지"
         />
 
@@ -50,7 +51,7 @@ export default function DetailImage() {
       </div>
 
       <div className="bottom_img_wrap">
-        {data.propduct_img.map((el, index) => {
+        {data.img.map((el, index) => {
           return (
             <img
               key={index}
