@@ -2,14 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function ProfileUI({ user_profile, user_name, user_email }) {
+function ProfileUI(props) {
+  const { user_profile, user_name, user_email, mainprofile, card, children } = props;
+
   return (
-    <UserProfile>
-      <img className="user_img" src={user_profile} alt="유저 프로필 이미지" />
-      <div className="profile_text_wrap">
+    <UserProfile mainprofile={mainprofile} card={card}>
+      <img src={user_profile} alt="유저 프로필 이미지" />
+      <div>
         <h3>{user_name}</h3>
         <p>{user_email}</p>
       </div>
+      {children}
     </UserProfile>
   );
 }
@@ -18,33 +21,41 @@ const StyledLink = styled(Link)`
   color: var(--black-color);
   text-decoration: none;
 `;
-const UserProfile = styled(StyledLink)`
-  display: flex;
-  background-color: white;
-  width: 100%;
 
-  .user_img {
-    width: 56px;
+const UserProfile = styled(StyledLink)`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: var(--black-color);
+  text-decoration: none;
+  margin-bottom: ${(props) => (props.card ? "16px" : "32px")};
+
+  & > img {
+    width: ${(props) => (props.mainprofile ? "80px" : "56px")};
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 50%;
   }
-
-  .profile_text_wrap {
-    margin-left: 16px;
+  
+  div {
     display: flex;
     flex-direction: column;
-    gap: 6px;
     justify-content: center;
-  }
+    gap: 6px;
+    margin-left: 16px;
 
-  .profile_text_wrap h3 {
-    font-family: var(--font--semibold);
-    font-size: 18px;
-  }
-
-  .profile_text_wrap p {
-    color: var(--gray400-color);
-    font-size: 14px;
+    & > h3 {
+      font-family: var(--font--semibold);
+      font-size: ${(props) => (props.mainprofile ? "24px" : "18px")};
+    }
+    
+    & > p {
+      color: var(--gray400-color);
+      font-size: ${(props) => (props.mainprofile ? "20px" : "14px")};
+    }
   }
 `;
+
+
+export default ProfileUI;
