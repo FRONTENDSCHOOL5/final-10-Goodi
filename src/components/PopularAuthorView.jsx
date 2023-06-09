@@ -8,10 +8,9 @@ import sampleImg7 from "../assets/sample-img/sample-image-7.png"
 import ProfileUI from './common/ProfileUI'
 import ButtonLineIcon from './common/ButtonLineIcon'
 import PopularAuthorData from '../mock/PopularAuthorData'
-import top from '../mock/top'
 
 export default function PopularAuthorView() {
-  const data = top;
+  const data = PopularAuthorData[1];
   console.log(data);
 
   return (
