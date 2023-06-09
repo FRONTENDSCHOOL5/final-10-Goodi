@@ -21,7 +21,7 @@ export default function PopularAuthorView() {
         user_email="dlskjdf@gmail.com"
         mainprofile
       >
-        <ButtonLineIcon />
+        <ButtonLineIcon button_content="작가 팔로우" />
       </ProfileUI>
 
       <UL>

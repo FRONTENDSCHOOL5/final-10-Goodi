@@ -14,8 +14,11 @@ import sampleImg3 from "../assets/sample-img/sample-image-3.png";
 import sampleImg4 from "../assets/sample-img/sample-image-4.jpg";
 
 import PopularAuthorView from "../components/PopularAuthorView";
+import PopularAuthorData from "../mock/PopularAuthorData";
 
 export default function Main() {
+  const data = PopularAuthorData[0];
+
   return (
     <Layout>
       <LayoutWrap>
@@ -29,18 +32,13 @@ export default function Main() {
           <section>
             <h2 className="a11y-hidden">팔로워 인기 TOP 3 작가 작품</h2>
             <ul>
-              <li>
-                <img src={sampleImg1} alt="" />
-              </li>
-              <li>
-                <img src={sampleImg2} alt="" />
-              </li>
-              <li>
-                <img src={sampleImg3} alt="" />
-              </li>
-              <li>
-                <img src={sampleImg4} alt="" />
-              </li>
+              {data.map((item) => {
+                return (
+                  <li key={item.id}>
+                    <img src={item.dummyImg} alt="" />
+                  </li>
+                )
+              })}
             </ul>
           </section>
         </MainLeft>
