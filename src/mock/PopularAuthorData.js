@@ -1,25 +1,33 @@
+import sampleImg1 from "../assets/sample-img/sample-image-1.png"
+import sampleImg2 from "../assets/sample-img/sample-image-2.png"
+import sampleImg3 from "../assets/sample-img/sample-image-3.png"
+import sampleImg4 from "../assets/sample-img/sample-image-4.jpg"
+
 const PopularAuthorData = [
-  { "dummyImg": "../assets/sample-img/sample-image-1.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-2.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-3.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-4.jpg" },
-  { "dummyImg": "../assets/sample-img/sample-image-5.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-6.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-7.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-8.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-9.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-10.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-11.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-12.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-13.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-14.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-15.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-16.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-17.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-18.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-19.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-20.png" },
-  { "dummyImg": "../assets/sample-img/sample-image-21.png" },
+  {
+    id: 1,
+    productName: "상품명1",
+    productPrice: "20000원",
+    dummyImg: sampleImg1
+  },
+  {
+    id: 2,
+    productName: "상품명2",
+    productPrice: "20000원",
+    dummyImg: sampleImg2
+  },
+  {
+    id: 3,
+    productName: "상품명3",
+    productPrice: "20000원",
+    dummyImg: sampleImg3
+  },
+  {
+    id: 4,
+    productName: "상품명4",
+    productPrice: "20000원",
+    dummyImg: sampleImg4
+  },
 ]
 
 export default PopularAuthorData;
