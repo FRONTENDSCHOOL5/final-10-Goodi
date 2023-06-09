@@ -72,11 +72,10 @@ export default function Setprofile() {
       </LeftDiv>
       <RightDiv>
         <div className="right-inner">
-          <H1 className="a11y-hidden">
-            초기 프로필 설정 페이지
-          </H1>
+          <H1 className="a11y-hidden">초기 프로필 설정 페이지</H1>
           <ProfileDiv>
-            <button><img className="profile_def_img" src={ProfileImgDef}></img>
+            <button>
+              <img className="profile_def_img" src={ProfileImgDef}></img>
             </button>
             <button>
               <img className="add_button_img" src={PlusBtnImg}></img>
@@ -147,11 +146,7 @@ const ImageContainer = styled.div`
     imageLoaded ? (fadeIn ? 1 : fadeOut ? 0 : 1) : 0};
   transition: opacity
     ${({ imageLoaded, fadeIn, fadeOut, fadeInDuration, fadeOutDuration }) =>
-      imageLoaded
-        ? fadeIn || fadeOut
-          ? "1s"
-          : "0s"
-        : "0s"}
+      imageLoaded ? (fadeIn || fadeOut ? "1s" : "0s") : "0s"}
     ease-in-out;
 `;
 export const RightDiv = styled.div`
@@ -187,12 +182,11 @@ export const RightDiv = styled.div`
 `;
 export const ProfileDiv = styled.div`
   position: relative;
-  .add_button_img  {
+  .add_button_img {
     position: absolute;
     top: 67px;
     left: 67px;
   }
-
 `;
 export const InputDiv = styled.div`
   display: flex;
@@ -211,9 +205,9 @@ export const InputDiv = styled.div`
     font-family: var(--font--Regular);
 
     &::placeholder {
-    color: var(--gray300-color);
-    font-family: var(--font--Regular);
-    font-size: 1rem;
+      color: var(--gray300-color);
+      font-family: var(--font--Regular);
+      font-size: 1rem;
     }
   }
 `;
@@ -231,7 +225,7 @@ export const H1 = styled.h1`
 
 export const H2 = styled.div`
   font-size: 2.5rem;
-  margin-bottom:10%;
+  margin-bottom: 10%;
   font-family: var(--font--en);
   font-weight: 900;
   display: inline;
@@ -248,6 +242,3 @@ export const Label = styled.label`
 export const ButtonDiv = styled.div`
   margin-top: 16%;
 `;
-
-
-
