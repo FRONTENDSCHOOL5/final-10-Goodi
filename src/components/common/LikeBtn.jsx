@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import nonLikeIcon from "../../assets/non-like-btn.svg"
-import likeIcon from "../../assets/like-btn.svg"
+import nonLikeIcon from "../../assets/non-like-btn.svg";
+import likeIcon from "../../assets/like-btn.svg";
 
 // 기능 구현된거 없어요!!
 function LikeBtn() {
@@ -12,9 +12,7 @@ function LikeBtn() {
     setLiked(!liked);
   };
 
-  return (
-    <Button liked={liked} onClick={handleLike} />
-  );
+  return <Button liked={liked} onClick={handleLike} />;
 }
 
 export default LikeBtn;

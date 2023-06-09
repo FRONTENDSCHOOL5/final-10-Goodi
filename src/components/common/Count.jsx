@@ -1,16 +1,49 @@
 import React from "react";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+
+//data
+import ProductData from "../../mock/productData";
+
+//image
 import PlusIcon from "../../assets/icon_plus_black.svg";
 import MinusIcon from "../../assets/icon_minus_black.svg";
 
-export default function Count() {
+export default function Count({ getPrice, price, productPrice }) {
+  // const data = ProductData[0];
+
+  const [count, setCount] = useState(1);
+  console.log(productPrice);
+
+  const productNumHandler = (type) => {
+    if (type === "add") {
+      setCount((prevCount) => prevCount + 1);
+      getPrice(parseInt(price) + parseInt(productPrice));
+    } else {
+      if (count > 1) {
+        setCount((prevCount) => prevCount - 1);
+        getPrice(parseInt(price) - parseInt(productPrice));
+      } else {
+        setCount(1);
+      }
+    }
+  };
+
   return (
     <Countwrap>
-      <PluseButton>
+      <PluseButton
+        onClick={() => {
+          productNumHandler("add");
+        }}
+      >
         <img src={PlusIcon} alt="더하기 아이콘" />
       </PluseButton>
-      <p className="count_text">1</p>
-      <MinusButton>
+      <p className="count_text">{count}</p>
+      <MinusButton
+        onClick={() => {
+          productNumHandler("minus");
+        }}
+      >
         <img src={MinusIcon} alt="더하기 아이콘" />
       </MinusButton>
     </Countwrap>
