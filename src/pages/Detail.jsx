@@ -21,6 +21,7 @@ import DeliveryIcon from "../assets/icon_delivery_dark.svg";
 
 export default function Detail() {
   const data = ProductData[0];
+  // console.log(data);
   const [price, setPrice] = useState(data.price);
 
   const getPrice = (price) => {
@@ -36,15 +37,15 @@ export default function Detail() {
           <div className="product_detail_top">
             <ProfileUI
               key={data.id}
-              user_profile={data.user_profile}
-              user_name={data.user_name}
-              user_email={data.user_email}
+              user_profile={data.profile}
+              user_name={data.name}
+              user_email={data.email}
             />
             <ButtonLineIcon button_content="작가 팔로우" />
           </div>
 
-          <h2 className="product_title">{data.product_title}</h2>
-          <p className="product_description">{data.product_description}</p>
+          <h2 className="product_title">{data.title}</h2>
+          <p className="product_description">{data.description}</p>
           <DeliveryDescription>
             <div className="delivery_date">
               <img src={DeliveryIcon} alt="박스 아이콘" />
