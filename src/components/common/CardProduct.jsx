@@ -96,5 +96,5 @@ const CardList = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  gap: 60px;
+  gap: 3.75rem;
 `
