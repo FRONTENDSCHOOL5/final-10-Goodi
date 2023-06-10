@@ -17,5 +17,5 @@ export default function Layout({ children }) {
 
 const Wrapper = styled.div`
   width: calc(100% - 80px);
-  padding-top: 6.7rem;
+  padding-top: 7.5rem;
 `;
