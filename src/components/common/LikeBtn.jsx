@@ -12,7 +12,11 @@ function LikeBtn() {
     setLiked(!liked);
   };
 
-  return <Button liked={liked} onClick={handleLike} />;
+  return (
+    <>
+      <Button liked={liked} onClick={handleLike} />
+    </>
+  );
 }
 
 export default LikeBtn;

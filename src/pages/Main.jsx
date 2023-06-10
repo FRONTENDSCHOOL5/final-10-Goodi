@@ -7,17 +7,16 @@ import { Link } from "react-router-dom";
 import commonBanner from "../assets/common-banner.svg";
 import arrowPrimaryIcon from "../assets/icon_arrow_primary.svg";
 import pointEdge from "../assets/point-edge.svg";
-
-import sampleImg1 from "../assets/sample-img/sample-image-1.png";
-import sampleImg2 from "../assets/sample-img/sample-image-2.png";
-import sampleImg3 from "../assets/sample-img/sample-image-3.png";
-import sampleImg4 from "../assets/sample-img/sample-image-4.jpg";
+import followerProducts from "../assets/follower-products.svg";
+import popularAuthor from "../assets/popular-author.svg";
 
 import PopularAuthorView from "../components/PopularAuthorView";
 import PopularAuthorData from "../mock/PopularAuthorData";
 
 export default function Main() {
   const data = PopularAuthorData[0];
+  const data1 = PopularAuthorData[1];
+  const data2 = PopularAuthorData[2];
 
   return (
     <Layout>
@@ -46,15 +45,15 @@ export default function Main() {
         <Line />
 
         <MainRight>
-          <Title>Follower Products</Title>
+          <Title><img src={followerProducts} alt="Follower Products" /></Title>
           <CardProduct />
           <ProductLink to="/">나도 굿즈 판매하기</ProductLink>
         </MainRight>
 
         <MainBottom>
-          <Title>Popular Author</Title>
-          <PopularAuthorView />
-          <PopularAuthorView />
+          <Title><img src={popularAuthor} alt="Popular Author" /></Title>
+          <PopularAuthorView data1={data1} />
+          <PopularAuthorView data2={data2} />
         </MainBottom >
       </LayoutWrap >
     </Layout >
@@ -90,7 +89,7 @@ const MainRight = styled.section`
 `;
 
 const MainBottom = styled.section`
-  padding: 110px 80px 150px;
+  padding: 110px 60px 150px 80px;
   grid-row: 2 / 3;
   grid-column: 1 / 4;
 
@@ -144,48 +143,14 @@ const MainBottom = styled.section`
   }
 `;
 
-const ProductHover = styled.div`
-  display: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-
-  strong,
-  p {
-    font-size: 20px;
-    font-family: var(--font--semibold);
-  }
-
-  a {
-    width: 70%;
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.3s;
-
-    &:hover {
-      transform: scale(1.1);
-      color: var(--main-color);
-    }
-  }
-`;
-
 const Title = styled.h2`
-  font-family: var(--font--en);
-  font-weight: 900;
-  font-size: 48px;
   position: relative;
 
   &::before {
     content: "";
     display: inline-block;
     position: absolute;
-    top: -26px;
+    top: -35px;
     left: -25px;
     width: 130px;
     height: 40px;
