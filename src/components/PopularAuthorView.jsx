@@ -4,29 +4,23 @@ import styled from 'styled-components'
 
 import sampleImg7 from "../assets/sample-img/sample-image-7.png"
 
-
 import ProfileUI from './common/ProfileUI'
 import ButtonLineIcon from './common/ButtonLineIcon'
-import PopularAuthorData from '../mock/PopularAuthorData'
 
-export default function PopularAuthorView() {
-  const data = PopularAuthorData[1];
-  console.log(data);
-
+export default function PopularAuthorView({ data }) {
   return (
     <Section>
       <ProfileUI
         user_profile={sampleImg7}
         user_name="이름 1"
         user_email="dlskjdf@gmail.com"
-        mainprofile
+        mainprofile="true"
       >
         <ButtonLineIcon button_content="작가 팔로우" />
       </ProfileUI>
 
       <UL>
         {data.map((item) => {
-          console.log(item.dummyImg);
           return (
             <li key={item.id}>
               <img src={item.dummyImg} alt="" />
