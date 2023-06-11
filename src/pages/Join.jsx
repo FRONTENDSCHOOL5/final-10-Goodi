@@ -10,9 +10,9 @@ import LoginMent from "../assets/login_ment.svg";
 import { useEffect, useState } from "react";
 
 const imageUrls = [LoginImage1, LoginImage2, LoginImage3];
-const transitionDuration = 7000;
-const fadeInDuration = 3000;
-const fadeOutDuration = 2000;
+const transitionDuration = 5000;
+const fadeInDuration = 1000;
+const fadeOutDuration = 1000;
 
 export default function Join() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -131,18 +131,13 @@ export const LeftDiv = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
 `;
 const ImageContainer = styled.div`
   opacity: ${({ imageLoaded, fadeIn, fadeOut }) =>
     imageLoaded ? (fadeIn ? 1 : fadeOut ? 0 : 1) : 0};
   transition: opacity
     ${({ imageLoaded, fadeIn, fadeOut, fadeInDuration, fadeOutDuration }) =>
-      imageLoaded
-        ? fadeIn || fadeOut
-          ? "1s"
-          : "0s"
-        : "0s"}
+      imageLoaded ? (fadeIn || fadeOut ? "1s" : "1s") : "1s"}
     ease-in-out;
 `;
 export const RightDiv = styled.div`
