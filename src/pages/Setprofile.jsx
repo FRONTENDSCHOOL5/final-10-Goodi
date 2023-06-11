@@ -74,12 +74,26 @@ export default function Setprofile() {
         <div className="right-inner">
           <H1 className="a11y-hidden">초기 프로필 설정 페이지</H1>
           <ProfileDiv>
-            <button>
-              <img className="profile_def_img" src={ProfileImgDef}></img>
-            </button>
-            <button>
-              <img className="add_button_img" src={PlusBtnImg}></img>
-            </button>
+              <input
+                id="fileInput"
+                type="file"
+                style={{ display: "none" }}
+                // onChange={}
+              />
+              <label htmlFor="fileInput">
+                <img
+                  src={ProfileImgDef}
+                  alt="Upload"
+                  // onClick={handleImageClick}
+                  style={{ cursor: "pointer" }}
+                />
+                <img className="add_button_img"
+                  src={PlusBtnImg}
+                  alt="Upload"
+                  // onClick={handleImageClick}
+                  style={{ cursor: "pointer" }}
+                />
+              </label>
           </ProfileDiv>
           <InputDiv>
             <Label>이메일</Label>
