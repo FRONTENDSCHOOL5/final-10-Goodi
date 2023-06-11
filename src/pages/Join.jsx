@@ -155,6 +155,7 @@ export const RightDiv = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: -50px;
   }
   p {
     font-size: 1rem;

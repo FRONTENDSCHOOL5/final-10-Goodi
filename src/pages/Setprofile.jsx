@@ -164,6 +164,7 @@ export const RightDiv = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: -50px;
   }
   p {
     font-size: 1rem;
@@ -187,6 +188,7 @@ export const ProfileDiv = styled.div`
     top: 67px;
     left: 67px;
   }
+  cursor: pointer;
 `;
 export const InputDiv = styled.div`
   display: flex;
@@ -202,6 +204,8 @@ export const InputDiv = styled.div`
     padding: 15px;
     box-sizing: border-box;
     outline-color: black;
+    font-family: var(--font--Regular);
+    font-size: 1rem;
     &::placeholder {
       color: var(--gray300-color);
       font-family: var(--font--Regular);
@@ -221,22 +225,11 @@ export const H1 = styled.h1`
   position: absolute;
 `;
 
-export const H2 = styled.div`
-  font-size: 2.5rem;
-  margin-bottom: 10%;
-  font-family: var(--font--en);
-  font-weight: 900;
-  display: inline;
-
-  img {
-    vertical-align: text-bottom;
-  }
-`;
 export const Label = styled.label`
   font-family: var(--font--Bold);
   margin-bottom: 9px;
   font-weight: 700;
 `;
 export const ButtonDiv = styled.div`
-  margin-top: 16%;
+  margin-top: 10%;
 `;

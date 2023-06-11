@@ -84,12 +84,10 @@ export default function Login() {
       <RightDiv>
         <div className="right-inner">
           <H1 className="a11y-hidden">로그인 페이지</H1>
-          <div>
             <H2>
               Welcome to
               <img src={SymbolImage} alt="Symbol" />
             </H2>
-          </div>
           <InputDiv>
             <Label>이메일</Label>
             <InputBox
@@ -204,6 +202,7 @@ export const RightDiv = styled.div`
   .join_button {
     font-size: 1.25rem;
     font-family: var(--font--Bold);
+    cursor: pointer;
   }
 `;
 
@@ -228,9 +227,8 @@ export const H2 = styled.div`
   font-size: 2.5rem;
   font-family: "Montserrat";
   font-weight: 900;
-  margin-bottom: 16px;
   display: inline;
-
+  margin-bottom: 30px;
   img {
     vertical-align: text-bottom;
   }
@@ -264,7 +262,7 @@ export const SnsBg = styled.div`
   height: 56px;
   border-radius: 50%;
   position: relative;
-
+  cursor: pointer;
   img {
     position: absolute;
     top: 50%;
