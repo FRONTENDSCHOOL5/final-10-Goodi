@@ -4,12 +4,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 
-export default function Layout({ children }) {
+export default function Layout({ reduceTop, children }) {
   return (
     <>
       <Header />
       <Navigation />
-      <Wrapper>{children}</Wrapper>
+      <Wrapper reduceTop={reduceTop}>{children}</Wrapper>
       <Footer />
     </>
   );
@@ -17,5 +17,5 @@ export default function Layout({ children }) {
 
 const Wrapper = styled.div`
   width: calc(100% - 80px);
-  padding-top: 6.7rem;
+  padding-top: ${({ reduceTop }) => (reduceTop ? "5rem" : "7.5rem")};
 `;

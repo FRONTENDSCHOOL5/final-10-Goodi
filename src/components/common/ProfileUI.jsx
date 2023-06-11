@@ -32,7 +32,7 @@ const UserProfile = styled(StyledLink)`
   margin-bottom: ${(props) => (props.card ? "16px" : "32px")};
 
   & > img {
-    width: ${(props) => (props.mainprofile ? "80px" : "56px")};
+    width: ${(props) => (props.mainprofile ? "70px" : "56px")};
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 50%;
@@ -47,12 +47,12 @@ const UserProfile = styled(StyledLink)`
 
     & > h3 {
       font-family: var(--font--semibold);
-      font-size: ${(props) => (props.mainprofile ? "24px" : "18px")};
+      font-size: ${(props) => (props.mainprofile ? "22px" : "18px")};
     }
     
     & > p {
       color: var(--gray400-color);
-      font-size: ${(props) => (props.mainprofile ? "20px" : "14px")};
+      font-size: ${(props) => (props.mainprofile ? "18px" : "14px")};
     }
   }
 `;
