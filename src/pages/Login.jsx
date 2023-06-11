@@ -16,7 +16,7 @@ import SymbolImage from "../assets/symbol.svg";
 import LoginImage1 from "../assets/login_1.svg";
 import LoginImage2 from "../assets/login_image2.svg";
 import LoginImage3 from "../assets/login_image3.svg";
-import LoginMent from "../assets/login_ment.svg";
+import LoginMent from "../assets/login_logo.svg";
 import GoogleIcon from "../assets/google.svg";
 import FacebookIcon from "../assets/facebook.svg";
 import KakaoIcon from "../assets/kakao.svg";
