@@ -11,7 +11,7 @@ export default function Card({ profile, name, email, img, title, description, pr
         user_profile={profile}
         user_name={name}
         user_email={email}
-        card
+        card="true"
       />
       <CardLink to="/">
         <CardContent>

@@ -52,8 +52,8 @@ export default function Main() {
 
         <MainBottom>
           <Title><img src={popularAuthor} alt="Popular Author" /></Title>
-          <PopularAuthorView data1={data1} />
-          <PopularAuthorView data2={data2} />
+          <PopularAuthorView data={data1} />
+          <PopularAuthorView data={data2} />
         </MainBottom >
       </LayoutWrap >
     </Layout >
