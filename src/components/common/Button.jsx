@@ -19,4 +19,7 @@ export const ButtonDef = styled.button`
   font-family: var(--font--Bold);
   box-sizing: border-box;
   text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
 `
