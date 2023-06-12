@@ -19,6 +19,9 @@ export default function Join() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [email, setEmail] = useState();
+
+  console.log(email);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -81,7 +84,7 @@ export default function Join() {
               width="432px"
               height="48px"
               padding="15px"
-              onChange={() => {}}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="이메일을 입력해주세요"
             />
           </InputDiv>
