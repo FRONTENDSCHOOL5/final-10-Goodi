@@ -21,10 +21,12 @@ import DeliveryIcon from "../assets/icon_delivery_dark.svg";
 
 export default function Detail() {
   const { id } = useParams();
-  const [price, setPrice] = useState(data.price);
 
   // 추후에 api 받아온것으로 수정
   const data = ProductData[id - 1];
+
+  // 동기비동기로 useState 위로 올리면 에러남
+  const [price, setPrice] = useState(data.price);
 
   // 카운트 마다 변하는 가격 함수
   const getPrice = (price) => {
