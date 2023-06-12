@@ -18,7 +18,8 @@ export default function Card({ profile, name, email, img, title, description, pr
           <img alt="card" src={img} />
           <h2>{title}</h2>
           <p>{description}</p>
-          <strong>{price}</strong><span>원</span>
+          <strong>{price.toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</strong><span>원</span>
         </CardContent>
       </CardLink>
       <LikeBtn />

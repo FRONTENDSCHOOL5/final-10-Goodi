@@ -26,7 +26,8 @@ export default function PopularAuthorView({ data }) {
               <img src={item.dummyImg} alt="" />
               <ProductHover>
                 <strong>{item.productName}</strong>
-                <p>{item.productPrice}</p>
+                <p>{item.productPrice.toString()
+                  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</p>
                 <Link to="/">상품 상세보기</Link>
               </ProductHover>
             </li>

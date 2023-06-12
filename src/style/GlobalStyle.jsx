@@ -52,6 +52,14 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     position: absolute;
   }
+
+  .Line {
+    width: 1px;
+    height: 100%;
+    display: inline-block;
+    background-color: var(--gray200-color);
+    margin: 0 60px;
+  }
 `;
 
 export default GlobalStyle;
