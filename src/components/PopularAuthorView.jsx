@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import sampleImg7 from "../assets/sample-img/sample-image-7.png"
-
 import ProfileUI from './common/ProfileUI'
 import ButtonLineIcon from './common/ButtonLineIcon'
 
@@ -11,16 +9,16 @@ export default function PopularAuthorView({ data }) {
   return (
     <Section>
       <ProfileUI
-        user_profile={sampleImg7}
-        user_name="이름 1"
-        user_email="dlskjdf@gmail.com"
+        user_profile={data.profile}
+        user_name={data.name}
+        user_email={data.email}
         mainprofile="true"
       >
         <ButtonLineIcon button_content="작가 팔로우" />
       </ProfileUI>
 
       <UL>
-        {data.map((item) => {
+        {data.img.map((item) => {
           return (
             <li key={item.id}>
               <img src={item.dummyImg} alt="" />
