@@ -12,6 +12,7 @@ import popularAuthor from "../assets/popular-author.svg";
 
 import PopularAuthorView from "../components/PopularAuthorView";
 import PopularAuthorData from "../mock/PopularAuthorData";
+import MainLayout from "../layout/MainLayout";
 
 export default function Main() {
   const data = PopularAuthorData[0];
@@ -19,52 +20,44 @@ export default function Main() {
   const data2 = PopularAuthorData[2];
 
   return (
-    <Layout>
-      <LayoutWrap>
-        <MainLeft>
-          <article>
-            <img
-              src={commonBanner}
-              alt="팔로워 인기 TOP 3위 작가님들 지금 바로 상품구경"
-            />
-          </article>
-          <section>
-            <h2 className="a11y-hidden">팔로워 인기 TOP 3 작가 작품</h2>
-            <ul>
-              {data.map((item) => {
-                return (
-                  <li key={item.id}>
-                    <img src={item.dummyImg} alt="" />
-                  </li>
-                )
-              })}
-            </ul>
-          </section>
-        </MainLeft>
+    <MainLayout>
+      <MainLeft>
+        <article>
+          <img
+            src={commonBanner}
+            alt="팔로워 인기 TOP 3위 작가님들 지금 바로 상품구경"
+          />
+        </article>
+        <section>
+          <h2 className="a11y-hidden">팔로워 인기 TOP 3 작가 작품</h2>
+          <ul>
+            {data.map((item) => {
+              return (
+                <li key={item.id}>
+                  <img src={item.dummyImg} alt="" />
+                </li>
+              )
+            })}
+          </ul>
+        </section>
+      </MainLeft>
 
-        <Line />
+      <span className="Line" />
 
-        <MainRight>
-          <Title><img src={followerProducts} alt="Follower Products" /></Title>
-          <CardProduct />
-          <ProductLink to="/">나도 굿즈 판매하기</ProductLink>
-        </MainRight>
+      <MainRight>
+        <Title><img src={followerProducts} alt="Follower Products" /></Title>
+        <CardProduct />
+        <ProductLink to="/">나도 굿즈 판매하기</ProductLink>
+      </MainRight>
 
-        <MainBottom>
-          <Title><img src={popularAuthor} alt="Popular Author" /></Title>
-          <PopularAuthorView data={data1} />
-          <PopularAuthorView data={data2} />
-        </MainBottom >
-      </LayoutWrap >
-    </Layout >
+      <MainBottom>
+        <Title><img src={popularAuthor} alt="Popular Author" /></Title>
+        <PopularAuthorView data={data1} />
+        <PopularAuthorView data={data2} />
+      </MainBottom >
+    </MainLayout>
   );
 }
-
-const LayoutWrap = styled.div`
-  display: grid;
-  grid-template-columns: 0.8fr 0.1fr 1fr;
-  grid-template-rows: auto auto;
-`;
 
 const MainLeft = styled.section`
   article {
@@ -76,16 +69,8 @@ const MainLeft = styled.section`
   }
 `;
 
-const Line = styled.span`
-  width: 1px;
-  height: 100%;
-  display: inline-block;
-  background-color: var(--gray200-color);
-  margin: 0 60px;
-`;
-
 const MainRight = styled.section`
-  margin-right: 60px;
+  padding-right: 60px;
 `;
 
 const MainBottom = styled.section`

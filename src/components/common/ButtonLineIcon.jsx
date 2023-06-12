@@ -26,22 +26,34 @@ const ButtonLineIconUI = styled.button`
   box-sizing: border-box;
   white-space: nowrap;
 
-  ${({ basic }) => (basic ||
+  ${({ basic }) => (basic &&
     css`
-    &::after {
-      content: "";
-      display: block;
-      width: 24px;
-      height: 24px;
-      background: url(${PlusIcon}) no-repeat center/cover;
-    }
-
-    &:hover {
-      color: white;
-      background-color: var(--black-color);
-      border: none;
-      transition: all 0.5s;
-    }
+      &:hover {
+        background-color: var(--sub-color);
+        border: none;
+        transition: all 0.3s;
+      }
     `
   )}
+
+  ${({ basic }) => (basic ||
+    css`
+      &::after {
+        content: "";
+        display: block;
+        width: 24px;
+        height: 24px;
+        background: url(${PlusIcon}) no-repeat center/cover;
+      }
+
+      &:hover {
+        color: white;
+        background-color: var(--black-color);
+        border: none;
+        transition: all 0.5s;
+      }
+    `
+  )}
+
+
 `;
