@@ -14,7 +14,7 @@ export default function Navigation() {
         <img src={SearchIcon} alt="검색 돋보기 아이콘"></img>
       </NavList>
 
-      <NavList to="/">
+      <NavList to="/profile">
         <img src={MypageIcon} alt="사람 아이콘"></img>
         <p>My page</p>
       </NavList>
