@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import { InputBox } from "../components/common/Input";
 import { ButtonDef } from "../components/common/Button";
-import { LeftDiv } from "../components/Carousel";
 
 import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
