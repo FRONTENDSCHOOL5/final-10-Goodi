@@ -10,9 +10,9 @@ import RightArrow from "../../assets/icon_arrow_right.svg";
 //data
 import ProductData from "../../mock/productData";
 
-export default function DetailImage() {
+export default function DetailImage({ img }) {
   const data = ProductData[0];
-  console.log(data);
+  console.log(img);
 
   //이미지 index 관리
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,7 +42,7 @@ export default function DetailImage() {
         <img className="common_banner" src={commonBanner} alt="공통 배너"></img>
         <img
           className="top_detail_img"
-          src={data.img[currentIndex]}
+          src={img[currentIndex]}
           alt="상세 이미지"
         />
 
@@ -51,7 +51,7 @@ export default function DetailImage() {
       </div>
 
       <div className="bottom_img_wrap">
-        {data.img.map((el, index) => {
+        {img.map((el, index) => {
           return (
             <img
               key={index}
@@ -63,9 +63,6 @@ export default function DetailImage() {
           );
         })}
       </div>
-
-      {/* <button className="left-btn" type="button" onClick={handlerNext}></button>
-      <button className="right-btn" type="button" onClick={handlerPrevious}></button> */}
     </ProductDetailImg>
   );
 }
