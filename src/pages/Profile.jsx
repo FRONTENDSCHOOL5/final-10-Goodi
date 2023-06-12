@@ -10,6 +10,7 @@ import CardProduct from '../components/common/CardProduct';
 import ButtonLineIcon from '../components/common/ButtonLineIcon';
 import userDummy from '../mock/userDummy';
 import MainLayout from '../layout/MainLayout';
+import Post from "../components/common/Post"
 
 export default function Profile() {
   const data = userDummy[0];
@@ -45,7 +46,7 @@ export default function Profile() {
         </ProfileUser>
 
         <div style={{ marginTop: "60px" }}>
-          Component
+          <Post />
         </div>
       </ProfileLeft>
 

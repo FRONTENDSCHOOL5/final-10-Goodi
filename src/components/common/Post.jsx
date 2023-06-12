@@ -57,8 +57,7 @@ const StyledLink = styled(Link)`
 `;
 
 const PostOuter = styled.div`
-  margin-top: 15px;
-  width: 40%;
+  width: 100%;
 `;
 const PostTop = styled.div`
   display: flex;
