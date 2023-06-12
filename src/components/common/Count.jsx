@@ -9,43 +9,48 @@ import ProductData from "../../mock/productData";
 import PlusIcon from "../../assets/icon_plus_black.svg";
 import MinusIcon from "../../assets/icon_minus_black.svg";
 
-export default function Count({ getPrice, price, productPrice }) {
-  // const data = ProductData[0];
-
+export default function Count({ getPrice, price, productPrice, stock }) {
+  // 카운트 수량 관리
   const [count, setCount] = useState(1);
-  console.log(productPrice);
 
-  const productNumHandler = (type) => {
-    if (type === "add") {
-      setCount((prevCount) => prevCount + 1);
-      getPrice(parseInt(price) + parseInt(productPrice));
-    } else {
-      if (count > 1) {
-        setCount((prevCount) => prevCount - 1);
-        getPrice(parseInt(price) - parseInt(productPrice));
-      } else {
-        setCount(1);
-      }
+  // 카운트 증가 함수
+  const increaseHandler = () => {
+    if (count < stock) {
+      setCount(count + 1);
+      getPrice(price + productPrice);
+    }
+
+    if (stock === 0) {
+      alert("현재 재고가 없는 상품입니다.");
+      return;
+    }
+  };
+
+  // 카운트 감소 함수
+  const decreaseHandler = () => {
+    if (count > 1) {
+      setCount(count - 1);
+      getPrice(price - productPrice);
     }
   };
 
   return (
     <Countwrap>
+      <MinusButton
+        onClick={() => {
+          decreaseHandler();
+        }}
+      >
+        <img src={MinusIcon} alt="빼기 아이콘" />
+      </MinusButton>
+      <p className="count_text">{count}</p>
       <PluseButton
         onClick={() => {
-          productNumHandler("add");
+          increaseHandler();
         }}
       >
         <img src={PlusIcon} alt="더하기 아이콘" />
       </PluseButton>
-      <p className="count_text">{count}</p>
-      <MinusButton
-        onClick={() => {
-          productNumHandler("minus");
-        }}
-      >
-        <img src={MinusIcon} alt="더하기 아이콘" />
-      </MinusButton>
     </Countwrap>
   );
 }
@@ -72,6 +77,11 @@ const Countwrap = styled.section`
 
   & button img {
     width: 24px;
+  }
+
+  & button:active {
+    background-color: var(--gray200-color);
+    transform: scale(0.9);
   }
 `;
 const PluseButton = styled.button``;
