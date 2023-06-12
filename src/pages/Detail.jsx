@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 //component
@@ -20,10 +20,13 @@ import MoneyIcon from "../assets/icon_money_black.svg";
 import DeliveryIcon from "../assets/icon_delivery_dark.svg";
 
 export default function Detail() {
-  const data = ProductData[0];
-  console.log(data.stock);
+  const { id } = useParams();
   const [price, setPrice] = useState(data.price);
 
+  // 추후에 api 받아온것으로 수정
+  const data = ProductData[id - 1];
+
+  // 카운트 마다 변하는 가격 함수
   const getPrice = (price) => {
     setPrice(price);
   };
@@ -36,7 +39,7 @@ export default function Detail() {
   return (
     <Layout>
       <DetailWrap>
-        <DetailImage />
+        <DetailImage img={data.img} />
 
         <ProductDetail>
           <div className="product_detail_top">
