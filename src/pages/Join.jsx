@@ -1,17 +1,43 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
 
 import { InputBox } from "../components/common/Input";
 import { ButtonDef } from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
+import Button from "../components/common/Button";
 import SymbolImage from "../assets/symbol.svg";
+import LoginImage1 from "../assets/login_1.svg";
+import LoginImage2 from "../assets/login_image5.svg";
+import LoginImage3 from "../assets/login_image2.svg";
+import LoginMent from "../assets/login_logo.svg";
+
+const imageUrls = [LoginImage1, LoginImage2, LoginImage3];
+const transitionDuration = 5000;
+const fadeInDuration = 1000;
+const fadeOutDuration = 1000;
 
 export default function Join() {
   return (
     <OuterDiv>
-      <LeftDiv />
+      <LeftDiv>
+        <div>
+          <ImageContainer
+            imageLoaded={imageLoaded}
+            fadeIn={fadeIn}
+            fadeOut={fadeOut}
+            fadeInDuration={fadeInDuration}
+            fadeOutDuration={fadeOutDuration}
+          >
+            <img
+              src={getCurrentImageUrl()}
+              alt="carousel"
+              onLoad={handleImageLoad}
+            />
+          </ImageContainer>
+          <img className="login-ment" src={LoginMent} alt="Login Ment" />
+        </div>
+      </LeftDiv>
       <RightDiv>
         <div className="right-inner">
           <H1 className="a11y-hidden">회원가입 페이지</H1>
@@ -58,7 +84,32 @@ export default function Join() {
 export const OuterDiv = styled.div`
   display: flex;
 `;
+export const LeftDiv = styled.div`
+  background-color: black;
+  max-width: 43%;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 
+  .login-ment {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
+const ImageContainer = styled.div`
+  opacity: ${({ imageLoaded, fadeIn, fadeOut }) =>
+    imageLoaded ? (fadeIn ? 1 : fadeOut ? 0 : 1) : 0};
+  transition: opacity
+    ${({ imageLoaded, fadeIn, fadeOut, fadeInDuration, fadeOutDuration }) =>
+      imageLoaded ? (fadeIn || fadeOut ? "1s" : "1s") : "1s"}
+    ease-in-out;
+`;
 export const RightDiv = styled.div`
   width: 57%;
   height: 100vh;
