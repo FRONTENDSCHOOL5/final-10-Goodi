@@ -1,58 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import { useEffect, useState } from "react";
 
 import { InputBox } from "../components/common/Input";
-
 import { ButtonDef } from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
-import Button from "../components/common/Button";
-import SymbolImage from "../assets/symbol.svg";
-import LoginImage1 from "../assets/login_1.svg";
-import LoginImage2 from "../assets/login_image5.svg";
-import LoginImage3 from "../assets/login_image2.svg";
-import LoginMent from "../assets/login_logo.svg";
 import SymbolImage from "../assets/symbol.svg";
 
 export default function Join() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [fadeIn, setFadeIn] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false);
-  const [email, setEmail] = useState();
-
-  console.log(email);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFadeOut(true);
-      setTimeout(() => {
-        setCurrentImageIndex((prevIndex) =>
-          prevIndex === imageUrls.length - 1 ? 0 : prevIndex + 1
-        );
-        setFadeOut(false);
-        setFadeIn(true);
-        setTimeout(() => {
-          setFadeIn(false);
-        }, fadeInDuration);
-      }, fadeOutDuration);
-    }, transitionDuration);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
-
-  const getCurrentImageUrl = () => {
-    return imageUrls[currentImageIndex];
-  };
-
   return (
     <OuterDiv>
       <LeftDiv />
@@ -69,7 +25,7 @@ export default function Join() {
               width="432px"
               height="48px"
               padding="15px"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={() => {}}
               placeholder="이메일을 입력해주세요"
             />
           </InputDiv>
@@ -84,13 +40,15 @@ export default function Join() {
             />
           </InputDiv>
           <ButtonDiv>
-            <Button
-              text="다음"
+            <ButtonDef
               type="button"
               bg="black"
               width="432px"
-              br="none"
-            />
+              height="56px"
+              br="4px"
+            >
+              다음
+            </ButtonDef>
           </ButtonDiv>
         </div>
       </RightDiv>
@@ -124,7 +82,11 @@ export const RightDiv = styled.div`
     display: inline;
     margin-right: 17px;
   }
-
+  button {
+    font-family: var(--font--Bold);
+    display: inline;
+    padding: 6px 0px;
+  }
   .join_button {
     font-size: 1.25rem;
   }

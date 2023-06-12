@@ -10,8 +10,8 @@ export default function ButtonLineIcon(props) {
 const ButtonLineIconUI = styled.button`
   height: 56px;
   padding: 16px 24px;
-  background-color: ${({ basic }) => (basic ? "black" : "white")};
-  color: ${({ basic }) => basic && "white"};
+  background-color:  ${({ basic }) => (basic ? "black" : "white")};
+  color: ${({ basic }) => (basic && "white")};
   border-radius: 30px;
   border: 1px solid var(--gray200-color);
   font-size: 15px;
@@ -26,18 +26,17 @@ const ButtonLineIconUI = styled.button`
   box-sizing: border-box;
   white-space: nowrap;
 
-  ${({ basic }) =>
-    basic &&
+  ${({ basic }) => (basic &&
     css`
       &:hover {
         background-color: var(--sub-color);
         border: none;
         transition: all 0.3s;
       }
-    `}
+    `
+  )}
 
-  ${({ basic }) =>
-    basic ||
+  ${({ basic }) => (basic ||
     css`
       &::after {
         content: "";
@@ -53,5 +52,8 @@ const ButtonLineIconUI = styled.button`
         border: none;
         transition: all 0.5s;
       }
-    `}
+    `
+  )}
+
+
 `;

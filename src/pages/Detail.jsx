@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 //component
@@ -9,7 +9,7 @@ import DetailImage from "../components/common/DetailImage";
 import ProfileUI from "../components/common/ProfileUI";
 import Count from "../components/common/Count";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
-import Button from "../components/common/Button";
+import { ButtonDef } from "../components/common/Button";
 import LikeBtn from "../components/common/LikeBtn";
 
 //data
@@ -20,15 +20,10 @@ import MoneyIcon from "../assets/icon_money_black.svg";
 import DeliveryIcon from "../assets/icon_delivery_dark.svg";
 
 export default function Detail() {
-  const { id } = useParams();
-
-  // 추후에 api 받아온것으로 수정
-  const data = ProductData[id - 1];
-
-  // 동기비동기로 useState 위로 올리면 에러남
+  const data = ProductData[0];
+  console.log(data.stock);
   const [price, setPrice] = useState(data.price);
 
-  // 카운트 마다 변하는 가격 함수
   const getPrice = (price) => {
     setPrice(price);
   };
@@ -41,7 +36,7 @@ export default function Detail() {
   return (
     <Layout>
       <DetailWrap>
-        <DetailImage img={data.img} />
+        <DetailImage />
 
         <ProductDetail>
           <div className="product_detail_top">
@@ -93,23 +88,27 @@ export default function Detail() {
           <ButtonWrap>
             <LikeBtn />
 
-            <Button
-              text="장바구니 담기"
+            <ButtonDef
               className="cart_button"
               type="button"
               bg="white"
-              color="var(--black-color)"
-            />
+              width="100%"
+              height="56px"
+              br="4px"
+            >
+              장바구니 담기
+            </ButtonDef>
 
-            <Button
-              disabled={data.stock <= 0}
-              noCursor={data.stock <= 0}
-              text="구매하고 싶어요"
+            <ButtonDef
               className="purchase_button"
               type="button"
               bg="black"
-              br="none"
-            />
+              width="100%"
+              height="56px"
+              br="4px"
+            >
+              구매하고 싶어요
+            </ButtonDef>
           </ButtonWrap>
         </ProductDetail>
       </DetailWrap>
@@ -118,13 +117,13 @@ export default function Detail() {
 }
 
 const DetailWrap = styled.div`
-  margin: 0 60px 120px 80px;
+  margin: 40px 60px 120px 80px;
   display: flex;
   gap: 5%;
 `;
 
 const ProductDetail = styled.section`
-  width: 55%;
+  width: 45%;
 
   .product_detail_top {
     display: flex;
@@ -230,6 +229,11 @@ const ButtonWrap = styled.div`
   & button {
     cursor: pointer;
     font-family: var(--font--Medium);
+  }
+
+  .cart_button {
+    color: var(--black-color);
+    border: 1px solid var(--gray300-color);
   }
 
   .purchase_button,

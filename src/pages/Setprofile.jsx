@@ -5,9 +5,7 @@ import { useState } from "react";
 import { InputBox } from "../components/common/Input";
 import { ButtonDef } from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
-import Button from "../components/common/Button";
 
-import SymbolImage from "../assets/symbol.svg";
 import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
 
@@ -19,27 +17,26 @@ export default function Setprofile() {
         <div className="right-inner">
           <H1 className="a11y-hidden">초기 프로필 설정 페이지</H1>
           <ProfileDiv>
-            <input
-              id="fileInput"
-              type="file"
-              style={{ display: "none" }}
-              // onChange={}
-            />
-            <label htmlFor="fileInput">
-              <img
-                src={ProfileImgDef}
-                alt="Upload"
-                // onClick={handleImageClick}
-                style={{ cursor: "pointer" }}
+              <input
+                id="fileInput"
+                type="file"
+                style={{ display: "none" }}
+                // onChange={}
               />
-              <img
-                className="add_button_img"
-                src={PlusBtnImg}
-                alt="Upload"
-                // onClick={handleImageClick}
-                style={{ cursor: "pointer" }}
-              />
-            </label>
+              <label htmlFor="fileInput">
+                <img
+                  src={ProfileImgDef}
+                  alt="Upload"
+                  // onClick={handleImageClick}
+                  style={{ cursor: "pointer" }}
+                />
+                <img className="add_button_img"
+                  src={PlusBtnImg}
+                  alt="Upload"
+                  // onClick={handleImageClick}
+                  style={{ cursor: "pointer" }}
+                />
+              </label>
           </ProfileDiv>
           <InputDiv>
             <Label>이메일</Label>
@@ -66,13 +63,15 @@ export default function Setprofile() {
             <textarea placeholder="나를 소개해보세요"></textarea>
           </InputDiv>
           <ButtonDiv>
-            <Button
-              text="Goodi 시작하기"
+            <ButtonDef
               type="button"
               bg="black"
               width="432px"
-              br="none"
-            />
+              height="56px"
+              br="4px"
+            >
+              Goodi 시작하기
+            </ButtonDef>
           </ButtonDiv>
         </div>
       </RightDiv>
@@ -106,7 +105,11 @@ export const RightDiv = styled.div`
     display: inline;
     margin-right: 17px;
   }
-
+  button {
+    font-family: var(--font--Bold);
+    display: inline;
+    padding: 6px 0px;
+  }
   .join_button {
     font-size: 1.25rem;
   }

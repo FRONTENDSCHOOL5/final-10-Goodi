@@ -5,8 +5,6 @@ import { useState } from "react";
 import { InputBox } from "../components/common/Input";
 import { ButtonDef } from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
-import Button from "../components/common/Button";
-
 
 import SymbolImage from "../assets/symbol.svg";
 import GoogleIcon from "../assets/google.svg";
@@ -20,10 +18,10 @@ export default function Login() {
       <RightDiv>
         <div className="right-inner">
           <H1 className="a11y-hidden">로그인 페이지</H1>
-          <H2>
-            Welcome to
-            <img src={SymbolImage} alt="Symbol" />
-          </H2>
+            <H2>
+              Welcome to
+              <img src={SymbolImage} alt="Symbol" />
+            </H2>
           <InputDiv>
             <Label>이메일</Label>
             <InputBox
@@ -45,13 +43,15 @@ export default function Login() {
             />
           </InputDiv>
           <ButtonDiv>
-            <Button
-              text="로그인"
+            <ButtonDef
               type="button"
               bg="black"
               width="432px"
-              br="none"
-            />
+              height="56px"
+              br="4px"
+            >
+              로그인
+            </ButtonDef>
             <span>SNS 로그인</span>
           </ButtonDiv>
           <SnsDiv>
@@ -104,7 +104,10 @@ export const RightDiv = styled.div`
     margin-right: 17px;
   }
   button {
+    font-family: var(--font--Bold);
+    display: inline;
     border-bottom: 2px solid black;
+    padding: 6px 0px;
   }
   .join_button {
     font-size: 1.25rem;

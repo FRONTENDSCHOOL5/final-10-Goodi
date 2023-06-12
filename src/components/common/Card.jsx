@@ -1,20 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import LikeBtn from "./LikeBtn";
-import ProfileUI from "./ProfileUI";
-import { Link } from "react-router-dom";
+import React from 'react'
+import styled from 'styled-components';
+import LikeBtn from './LikeBtn';
+import ProfileUI from './ProfileUI';
+import { Link } from 'react-router-dom';
 
-export default function Card({
-  profile,
-  name,
-  email,
-  img,
-  title,
-  description,
-  price,
-  id,
-}) {
-  console.log(id);
+export default function Card({ profile, name, email, img, title, description, price }) {
   return (
     <Article>
       <ProfileUI
@@ -23,26 +13,24 @@ export default function Card({
         user_email={email}
         card="true"
       />
-      <CardLink to={`/products/${id}`}>
+      <CardLink to="/">
         <CardContent>
           <img alt="card" src={img} />
           <h2>{title}</h2>
           <p>{description}</p>
-          <strong>
-            {price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
-          </strong>
-          <span>원</span>
+          <strong>{price.toString()
+            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</strong><span>원</span>
         </CardContent>
       </CardLink>
       <LikeBtn />
     </Article>
   );
-}
+};
 
 const CardLink = styled(Link)`
   color: var(--black-color);
   text-decoration: none;
-`;
+  `
 
 const CardContent = styled.div`
   img {
@@ -76,14 +64,14 @@ const CardContent = styled.div`
     font-family: var(--font--Bold);
     margin-right: 8px;
   }
-`;
+`
 
 const Article = styled.article`
   position: relative;
-
+  
   button {
     position: absolute;
     right: 16px;
     bottom: 172px;
   }
-`;
+`

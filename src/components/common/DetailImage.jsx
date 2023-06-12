@@ -3,16 +3,16 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 //image
-import ProductBanner from "../../assets/product_banner.svg";
+import commonBanner from "../../assets/common-banner.svg";
 import LeftArrow from "../../assets/icon_arrow_left.svg";
 import RightArrow from "../../assets/icon_arrow_right.svg";
 
 //data
 import ProductData from "../../mock/productData";
 
-export default function DetailImage({ img }) {
+export default function DetailImage() {
   const data = ProductData[0];
-  console.log(img);
+  console.log(data);
 
   //이미지 index 관리
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,14 +39,10 @@ export default function DetailImage({ img }) {
   return (
     <ProductDetailImg>
       <div className="top_img_wrap">
-        <img
-          className="common_banner"
-          src={ProductBanner}
-          alt="상품 상세 공통 배너"
-        />
+        <img className="common_banner" src={commonBanner} alt="공통 배너"></img>
         <img
           className="top_detail_img"
-          src={img[currentIndex]}
+          src={data.img[currentIndex]}
           alt="상세 이미지"
         />
 
@@ -55,7 +51,7 @@ export default function DetailImage({ img }) {
       </div>
 
       <div className="bottom_img_wrap">
-        {img.map((el, index) => {
+        {data.img.map((el, index) => {
           return (
             <img
               key={index}
@@ -67,12 +63,15 @@ export default function DetailImage({ img }) {
           );
         })}
       </div>
+
+      {/* <button className="left-btn" type="button" onClick={handlerNext}></button>
+      <button className="right-btn" type="button" onClick={handlerPrevious}></button> */}
     </ProductDetailImg>
   );
 }
 
 const ProductDetailImg = styled.section`
-  width: 40%;
+  width: 50%;
 
   .top_img_wrap {
     position: relative;
@@ -90,8 +89,8 @@ const ProductDetailImg = styled.section`
 
   & button {
     cursor: pointer;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50px;
     background-color: white;
     position: absolute;
@@ -119,7 +118,7 @@ const ProductDetailImg = styled.section`
 `;
 
 const LeftButton = styled.button`
-  left: 5%;
+  left: 40px;
   &::before {
     content: "";
     display: block;
@@ -131,7 +130,7 @@ const LeftButton = styled.button`
 `;
 
 const RightButton = styled.button`
-  right: 5%;
+  right: 40px;
 
   &::before {
     content: "";

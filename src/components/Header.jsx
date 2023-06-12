@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <HeaderLayout>
       <h1>
-        <LogoLink to="/main">
+        <LogoLink to="/">
           <img src={Logo} alt="goodi 로고 이미지" />
         </LogoLink>
       </h1>

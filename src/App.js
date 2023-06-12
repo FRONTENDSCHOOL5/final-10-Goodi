@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/main" element={<Main />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/products/:id" element={<Detail />} />
+        <Route path="/detail" element={<Detail />} />
         <Route path="/join" element={<Join />} />
         <Route path="/setprofile" element={<Setprofile />} />
         <Route path="/profile" element={<Profile />} />

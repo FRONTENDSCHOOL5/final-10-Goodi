@@ -1,18 +1,20 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react'
+import styled from "styled-components";
 
-export default function Button({ text, ...props }) {
-  return <ButtonDef {...props}>{text}</ButtonDef>;
+export default function Button() {
+  return (
+    <div>Button</div>
+  )
 }
 
-const ButtonDef = styled.button`
+export const ButtonDef = styled.button`
   background-color: black;
-  background-color: ${(props) => props.bg || "var(--black-color)"};
-  width: ${(props) => props.width || "100%"};
-  padding: ${(props) => props.padding || "18px 0"};
-  border-radius: 4px;
-  border: ${(props) => props.br || "1px solid var(--gray300-color)"};
-  color: ${(props) => props.color || "white"};
+  background-color: ${ props => props.bg};
+  width: ${ props => props.width};
+  height: ${ props => props.height};
+  padding: ${ props => props.padding};
+  border-radius: ${ props => props.br};
+  color: ${props => props.gb == 'white' ? 'black' : 'white'};
   font-size: 1.13rem;
   font-family: var(--font--Bold);
   box-sizing: border-box;
@@ -20,16 +22,4 @@ const ButtonDef = styled.button`
   &:hover {
     cursor: pointer;
   }
-
-  ${(props) =>
-    props.disabled &&
-    css`
-      background-color: var(--gray300-color);
-    `}
-
-  ${(props) =>
-    props.noCursor &&
-    css`
-      cursor: default;
-    `}
-`;
+`
