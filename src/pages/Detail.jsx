@@ -9,7 +9,7 @@ import DetailImage from "../components/common/DetailImage";
 import ProfileUI from "../components/common/ProfileUI";
 import Count from "../components/common/Count";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
-import { ButtonDef } from "../components/common/Button";
+import Button from "../components/common/Button";
 import LikeBtn from "../components/common/LikeBtn";
 
 //data
@@ -93,27 +93,23 @@ export default function Detail() {
           <ButtonWrap>
             <LikeBtn />
 
-            <ButtonDef
+            <Button
+              text="장바구니 담기"
               className="cart_button"
               type="button"
               bg="white"
-              width="100%"
-              height="56px"
-              br="4px"
-            >
-              장바구니 담기
-            </ButtonDef>
+              color="var(--black-color)"
+            />
 
-            <ButtonDef
+            <Button
+              disabled={data.stock <= 0}
+              noCursor={data.stock <= 0}
+              text="구매하고 싶어요"
               className="purchase_button"
               type="button"
               bg="black"
-              width="100%"
-              height="56px"
-              br="4px"
-            >
-              구매하고 싶어요
-            </ButtonDef>
+              br="none"
+            />
           </ButtonWrap>
         </ProductDetail>
       </DetailWrap>
@@ -234,11 +230,6 @@ const ButtonWrap = styled.div`
   & button {
     cursor: pointer;
     font-family: var(--font--Medium);
-  }
-
-  .cart_button {
-    color: var(--black-color);
-    border: 1px solid var(--gray300-color);
   }
 
   .purchase_button,
