@@ -55,16 +55,6 @@ export default function Setprofile() {
             />
           </InputDiv>
           <InputDiv>
-            <Label>비밀번호</Label>
-            <InputBox
-              width="432px"
-              height="48px"
-              onChange={() => {}}
-              type="password"
-              placeholder="비밀번호를 입력하세요"
-            />
-          </InputDiv>
-          <InputDiv>
             <Label>소개 메세지</Label>
             <textarea placeholder="나를 소개해보세요"></textarea>
           </InputDiv>
@@ -122,6 +112,7 @@ export const RightDiv = styled.div`
 `;
 export const ProfileDiv = styled.div`
   position: relative;
+  margin-bottom: 56px;
   .add_button_img {
     position: absolute;
     top: 67px;
@@ -170,5 +161,5 @@ export const Label = styled.label`
   font-weight: 700;
 `;
 export const ButtonDiv = styled.div`
-  margin-top: 10%;
+  margin-top: 13.3%;
 `;
