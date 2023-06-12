@@ -42,23 +42,13 @@ export default function Setprofile() {
             </label>
           </ProfileDiv>
           <InputDiv>
-            <Label>이메일</Label>
+            <Label>닉네임</Label>
             <InputBox
               width="432px"
               height="48px"
               padding="15px"
               onChange={() => {}}
-              placeholder="이메일을 입력해주세요"
-            />
-          </InputDiv>
-          <InputDiv>
-            <Label>비밀번호</Label>
-            <InputBox
-              width="432px"
-              height="48px"
-              onChange={() => {}}
-              type="password"
-              placeholder="비밀번호를 입력하세요"
+              placeholder="닉네임을 입력해주세요"
             />
           </InputDiv>
           <InputDiv>
@@ -113,6 +103,7 @@ export const RightDiv = styled.div`
 `;
 export const ProfileDiv = styled.div`
   position: relative;
+  margin-bottom: 55px;
   .add_button_img {
     position: absolute;
     top: 67px;
@@ -161,5 +152,5 @@ export const Label = styled.label`
   font-weight: 700;
 `;
 export const ButtonDiv = styled.div`
-  margin-top: 10%;
+  margin-top: 13.3%;
 `;
