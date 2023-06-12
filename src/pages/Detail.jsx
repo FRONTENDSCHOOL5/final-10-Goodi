@@ -21,11 +21,16 @@ import DeliveryIcon from "../assets/icon_delivery_dark.svg";
 
 export default function Detail() {
   const data = ProductData[0];
-  // console.log(data);
+  console.log(data.stock);
   const [price, setPrice] = useState(data.price);
 
   const getPrice = (price) => {
     setPrice(price);
+  };
+
+  // 숫자 세자리 수마다 컴마 찍어주는 함수
+  const priceDivide = (price) => {
+    return price.toLocaleString();
   };
 
   return (
@@ -66,12 +71,17 @@ export default function Detail() {
             </div>
           </DeliveryDescription>
           <h4 className="product_count_subtitle">수량</h4>
-          <Count price={price} getPrice={getPrice} productPrice={data.price} />
+          <Count
+            price={price}
+            getPrice={getPrice}
+            productPrice={data.price}
+            stock={data.stock}
+          />
           <hr />
           <ProductPrice>
             <h4 className="product_price_subtitle">총 결제 금액</h4>
             <p className="product_price">
-              <strong>{price}</strong>원
+              <strong>{priceDivide(price)}</strong>원
             </p>
           </ProductPrice>
 
