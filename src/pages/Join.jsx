@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useState } from "react";
+
 import { InputBox } from "../components/common/Input";
 import { ButtonDef } from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
