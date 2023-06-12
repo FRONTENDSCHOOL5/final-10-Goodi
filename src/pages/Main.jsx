@@ -10,13 +10,13 @@ import followerProducts from "../assets/follower-products.svg";
 import popularAuthor from "../assets/popular-author.svg";
 
 import PopularAuthorView from "../components/PopularAuthorView";
-import PopularAuthorData from "../mock/PopularAuthorData";
 import MainLayout from "../layout/MainLayout";
+import ProductData from "../mock/productData";
 
 export default function Main() {
-  const data = PopularAuthorData[0];
-  const data1 = PopularAuthorData[1];
-  const data2 = PopularAuthorData[2];
+  const data = ProductData[12];
+  const data1 = ProductData[10];
+  const data2 = ProductData[11];
 
   return (
     <MainLayout>
@@ -30,7 +30,7 @@ export default function Main() {
         <section>
           <h2 className="a11y-hidden">팔로워 인기 TOP 3 작가 작품</h2>
           <ul>
-            {data.map((item) => {
+            {data.img.map((item) => {
               return (
                 <li key={item.id}>
                   <img src={item.dummyImg} alt="" />
