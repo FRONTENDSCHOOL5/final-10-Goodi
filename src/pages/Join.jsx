@@ -8,11 +8,17 @@ import { ButtonDef } from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
 import Button from "../components/common/Button";
+import { InputBox } from "../components/common/Input";
+import { ButtonDef } from "../components/common/Button";
+
 import SymbolImage from "../assets/symbol.svg";
 import LoginImage1 from "../assets/login_1.svg";
 import LoginImage2 from "../assets/login_image5.svg";
 import LoginImage3 from "../assets/login_image2.svg";
 import LoginMent from "../assets/login_logo.svg";
+
+import { useEffect, useState } from "react";
+
 
 const imageUrls = [LoginImage1, LoginImage2, LoginImage3];
 const transitionDuration = 5000;
@@ -20,6 +26,39 @@ const fadeInDuration = 1000;
 const fadeOutDuration = 1000;
 
 export default function Join() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFadeOut(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) =>
+          prevIndex === imageUrls.length - 1 ? 0 : prevIndex + 1
+        );
+        setFadeOut(false);
+        setFadeIn(true);
+        setTimeout(() => {
+          setFadeIn(false);
+        }, fadeInDuration);
+      }, fadeOutDuration);
+    }, transitionDuration);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  const getCurrentImageUrl = () => {
+    return imageUrls[currentImageIndex];
+  };
+
   return (
     <OuterDiv>
       <LeftDiv>

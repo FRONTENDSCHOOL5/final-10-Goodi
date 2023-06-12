@@ -8,7 +8,6 @@ import { LeftDiv } from "../components/Carousel";
 import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
 
-import Button from "../components/common/Button";
 import SymbolImage from "../assets/symbol.svg";
 import LoginImage1 from "../assets/login_1.svg";
 import LoginImage2 from "../assets/login_image5.svg";

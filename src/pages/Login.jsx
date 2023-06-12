@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import { InputBox } from "../components/common/Input";
 import { ButtonDef } from "../components/common/Button";
-import { LeftDiv } from "../components/Carousel";
 
 import SymbolImage from "../assets/symbol.svg";
 import LoginImage1 from "../assets/login_1.svg";
