@@ -118,13 +118,13 @@ export default function Detail() {
 }
 
 const DetailWrap = styled.div`
-  margin: 40px 60px 120px 80px;
+  margin: 0 60px 120px 80px;
   display: flex;
   gap: 5%;
 `;
 
 const ProductDetail = styled.section`
-  width: 45%;
+  width: 55%;
 
   .product_detail_top {
     display: flex;
