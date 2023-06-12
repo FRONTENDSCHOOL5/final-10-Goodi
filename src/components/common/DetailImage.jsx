@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 //image
-import commonBanner from "../../assets/common-banner.svg";
+import ProductBanner from "../../assets/product_banner.svg";
 import LeftArrow from "../../assets/icon_arrow_left.svg";
 import RightArrow from "../../assets/icon_arrow_right.svg";
 
@@ -39,7 +39,11 @@ export default function DetailImage({ img }) {
   return (
     <ProductDetailImg>
       <div className="top_img_wrap">
-        <img className="common_banner" src={commonBanner} alt="공통 배너"></img>
+        <img
+          className="common_banner"
+          src={ProductBanner}
+          alt="상품 상세 공통 배너"
+        />
         <img
           className="top_detail_img"
           src={img[currentIndex]}
@@ -68,7 +72,7 @@ export default function DetailImage({ img }) {
 }
 
 const ProductDetailImg = styled.section`
-  width: 50%;
+  width: 40%;
 
   .top_img_wrap {
     position: relative;
@@ -86,8 +90,8 @@ const ProductDetailImg = styled.section`
 
   & button {
     cursor: pointer;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50px;
     background-color: white;
     position: absolute;
@@ -115,7 +119,7 @@ const ProductDetailImg = styled.section`
 `;
 
 const LeftButton = styled.button`
-  left: 40px;
+  left: 5%;
   &::before {
     content: "";
     display: block;
@@ -127,7 +131,7 @@ const LeftButton = styled.button`
 `;
 
 const RightButton = styled.button`
-  right: 40px;
+  right: 5%;
 
   &::before {
     content: "";
