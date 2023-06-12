@@ -11,7 +11,7 @@ import myProfileImg from "../../assets/myProfile-image.svg";
 import {InputBox} from "./Input";
 
 export default function Post({ profile, name, email }) {
-  const data = userDummy[1];
+  const data = userDummy[0];
 
   return (
     <PostOuter>
