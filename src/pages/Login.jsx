@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { useState } from "react";
-import axios from 'axios';
 
 import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
@@ -16,7 +15,7 @@ import KakaoIcon from "../assets/kakao.svg";
 import fetchData from "../api/login";
 
 export default function Login() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
     user: {
@@ -24,26 +23,12 @@ export default function Login() {
       password: ""
     }
   })
-  function fetchHandler() {
+
+  function handleLogin() {
     console.log(loginData)
-    fetchData(loginData)
+    fetchData(loginData);
+    // navigate('/main');
   }
-  // const loginData = {
-  //   "user": {
-  //     "email": email,
-  //     "password": password
-  //   }
-  // }
-
-  // console.log(loginData);
-
-  // const handleLogin = (e) => {
-
-  //   const token = res.data.user.token;
-  //   localStorage.setItem("token", token);
-
-  //   navigate('/main');
-  // }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,7 +40,6 @@ export default function Login() {
       }
     }));
   };
-
 
   return (
     <OuterDiv>
@@ -97,7 +81,7 @@ export default function Login() {
               height="3.5rem"
               br=".25rem"
               text="로그인"
-              onClick={fetchHandler}
+              onClick={handleLogin}
             />
             <span>SNS 로그인</span>
           </ButtonDiv>
