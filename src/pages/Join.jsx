@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { InputBox } from "../components/common/Input";
-import { ButtonDef } from "../components/common/Button";
+
 import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
@@ -46,15 +46,13 @@ export default function Join() {
             />
           </InputDiv>
           <ButtonDiv>
-            <ButtonDef
-              type="button"
-              bg="black"
-              width="432px"
-              height="56px"
-              br="4px"
-            >
-              다음
-            </ButtonDef>
+          <Button	
+              text="다음"	
+              type="button"	
+              bg="black"	
+              width="432px"	
+              br="none"	
+            />
           </ButtonDiv>
         </div>
       </RightDiv>
@@ -87,11 +85,6 @@ export const RightDiv = styled.div`
     color: var(--gray500-color);
     display: inline;
     margin-right: 17px;
-  }
-  button {
-    font-family: var(--font--Bold);
-    display: inline;
-    padding: 6px 0px;
   }
   .join_button {
     font-size: 1.25rem;

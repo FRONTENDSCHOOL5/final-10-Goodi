@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { InputBox } from "../components/common/Input";
-import { ButtonDef } from "../components/common/Button";
+import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
 import ProfileImgDef from "../assets/profile_img_def.svg";
@@ -23,13 +23,13 @@ export default function Setprofile() {
         <div className="right-inner">
           <H1 className="a11y-hidden">초기 프로필 설정 페이지</H1>
           <ProfileDiv>
-              <input
-                id="fileInput"
-                type="file"
-                style={{ display: "none" }}
-                // onChange={}
-              />
-              <label htmlFor="fileInput">
+          <input	
+              id="fileInput"	
+              type="file"	
+              style={{ display: "none" }}	
+              // onChange={}	
+            />	
+            <label htmlFor="fileInput">
                 <img
                   src={ProfileImgDef}
                   alt="Upload"
@@ -59,15 +59,13 @@ export default function Setprofile() {
             <textarea placeholder="나를 소개해보세요"></textarea>
           </InputDiv>
           <ButtonDiv>
-            <ButtonDef
-              type="button"
-              bg="black"
-              width="432px"
-              height="56px"
-              br="4px"
-            >
-              Goodi 시작하기
-            </ButtonDef>
+          <Button	
+              text="다음"	
+              type="button"	
+              bg="black"	
+              width="432px"	
+              br="none"	
+            />
           </ButtonDiv>
         </div>
       </RightDiv>
@@ -100,11 +98,6 @@ export const RightDiv = styled.div`
     color: var(--gray500-color);
     display: inline;
     margin-right: 17px;
-  }
-  button {
-    font-family: var(--font--Bold);
-    display: inline;
-    padding: 6px 0px;
   }
   .join_button {
     font-size: 1.25rem;
