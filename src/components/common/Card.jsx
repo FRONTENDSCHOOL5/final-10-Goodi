@@ -4,7 +4,7 @@ import LikeBtn from './LikeBtn';
 import ProfileUI from './ProfileUI';
 import { Link } from 'react-router-dom';
 
-export default function Card({ profile, name, email, img, title, description, price }) {
+export default function Card({ profile, name, email, img, title, description, price, id }) {
   return (
     <Article>
       <ProfileUI
@@ -13,7 +13,7 @@ export default function Card({ profile, name, email, img, title, description, pr
         user_email={email}
         card="true"
       />
-      <CardLink to="/">
+      <CardLink to={`/products/${id}`}>
         <CardContent>
           <img alt="card" src={img} />
           <h2>{title}</h2>
