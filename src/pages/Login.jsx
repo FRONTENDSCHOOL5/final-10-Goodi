@@ -1,38 +1,69 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import axios from 'axios';
 
 import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
 import SymbolImage from "../assets/symbol.svg";
-import LoginImage1 from "../assets/login_1.svg";
-import LoginImage2 from "../assets/login_image5.svg";
-import LoginImage3 from "../assets/login_image2.svg";
-import LoginMent from "../assets/login_logo.svg";
 import GoogleIcon from "../assets/google.svg";
 import FacebookIcon from "../assets/facebook.svg";
 import KakaoIcon from "../assets/kakao.svg";
 
 export default function Login() {
+  const url = "https://api.mandarin.weniv.co.kr";
+  const reqPath = "/user/login";
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loginData = {
+    "user": {
+      "email": email,
+      "password": password
+    }
+  }
+
+  const reqUrl = url + reqPath;
+  const navigate = useNavigate();
+
+  // test 계정 정보 : suritest@test.com / suritest
+  const handleLogin = (e) => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.post(reqUrl, loginData);
+        console.log('결과', res);
+
+        const token = res.data.user.token;
+        localStorage.setItem("token", token);
+
+        navigate('/main');
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
+  };
   return (
     <OuterDiv>
       <LeftDiv />
       <RightDiv>
         <div className="right-inner">
           <H1 className="a11y-hidden">로그인 페이지</H1>
-            <H2>
-              Welcome to
-              <img src={SymbolImage} alt="Symbol" />
-            </H2>
+          <H2>
+            Welcome to
+            <img src={SymbolImage} alt="Symbol" />
+          </H2>
           <InputDiv>
             <Label>이메일</Label>
             <InputBox
               width="432px"
               height="48px"
               padding="15px"
-              onChange={() => {}}
+              onChange={(e) => { setEmail(e.target.value) }}
               placeholder="이메일을 입력해주세요"
             />
           </InputDiv>
@@ -41,19 +72,22 @@ export default function Login() {
             <InputBox
               width="432px"
               height="48px"
-              onChange={() => {}}
+              onChange={(e) => { setPassword(e.target.value) }}
               type="password"
               placeholder="비밀번호를 입력하세요"
             />
           </InputDiv>
           <ButtonDiv>
-          <Button	
-              text="로그인"	
-              type="button"	
-              bg="black"	
-              width="432px"	
-              br="none"	
-            />
+            <Button
+              type="button"
+              bg="black"
+              width="432px"
+              height="56px"
+              br="4px"
+              onClick={handleLogin}
+            >
+              로그인
+            </Button>
             <span>SNS 로그인</span>
           </ButtonDiv>
           <SnsDiv>
