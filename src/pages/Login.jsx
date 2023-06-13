@@ -5,7 +5,7 @@ import { useState } from "react";
 import axios from 'axios';
 
 import { InputBox } from "../components/common/Input";
-import { ButtonDef } from "../components/common/Button";
+import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
 import SymbolImage from "../assets/symbol.svg";
@@ -78,7 +78,7 @@ export default function Login() {
             />
           </InputDiv>
           <ButtonDiv>
-            <ButtonDef
+            <Button
               type="button"
               bg="black"
               width="432px"
@@ -87,7 +87,7 @@ export default function Login() {
               onClick={handleLogin}
             >
               로그인
-            </ButtonDef>
+            </Button>
             <span>SNS 로그인</span>
           </ButtonDiv>
           <SnsDiv>
@@ -140,10 +140,7 @@ export const RightDiv = styled.div`
     margin-right: 17px;
   }
   button {
-    font-family: var(--font--Bold);
-    display: inline;
     border-bottom: 2px solid black;
-    padding: 6px 0px;
   }
   .join_button {
     font-size: 1.25rem;

@@ -2,16 +2,15 @@ import React from "react";
 import styled, { css } from "styled-components";
 import PlusIcon from "../../assets/icon_plus_primary.svg";
 
-export default function ButtonLineIcon(props) {
-  const { button_content, basic } = props;
-  return <ButtonLineIconUI basic={basic}>{button_content}</ButtonLineIconUI>;
+export default function ButtonLineIcon({ text, ...props }) {
+  return <ButtonLineIconUI {...props}>{text}</ButtonLineIconUI>;
 }
 
 const ButtonLineIconUI = styled.button`
-  height: 56px;
-  padding: 16px 24px;
-  background-color:  ${({ basic }) => (basic ? "black" : "white")};
-  color: ${({ basic }) => (basic && "white")};
+  height: ${(props) => props.height || "56px"};
+  padding: 18px 16px;
+  background-color: ${(props) => props.bg || "white"};
+  color: ${(props) => props.color || "black"};
   border-radius: 30px;
   border: 1px solid var(--gray200-color);
   font-size: 15px;
@@ -26,17 +25,18 @@ const ButtonLineIconUI = styled.button`
   box-sizing: border-box;
   white-space: nowrap;
 
-  ${({ basic }) => (basic &&
+  ${({ basic }) =>
+    basic &&
     css`
       &:hover {
         background-color: var(--sub-color);
         border: none;
         transition: all 0.3s;
       }
-    `
-  )}
+    `}
 
-  ${({ basic }) => (basic ||
+  ${({ basic }) =>
+    basic ||
     css`
       &::after {
         content: "";
@@ -52,8 +52,5 @@ const ButtonLineIconUI = styled.button`
         border: none;
         transition: all 0.5s;
       }
-    `
-  )}
-
-
+    `}
 `;
