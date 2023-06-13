@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import ProfileUI from './common/ProfileUI'
-import ButtonLineIcon from './common/ButtonLineIcon'
+import ProfileUI from "./common/ProfileUI";
+import ButtonLineIcon from "./common/ButtonLineIcon";
 
 export default function PopularAuthorView({ data }) {
   return (
@@ -14,7 +14,7 @@ export default function PopularAuthorView({ data }) {
         user_email={data.email}
         mainprofile="true"
       >
-        <ButtonLineIcon button_content="작가 팔로우" />
+        <ButtonLineIcon text="작가 팔로우" />
       </ProfileUI>
 
       <UL>
@@ -24,16 +24,19 @@ export default function PopularAuthorView({ data }) {
               <img src={item.dummyImg} alt="" />
               <ProductHover>
                 <strong>{item.productName}</strong>
-                <p>{item.productPrice.toString()
-                  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</p>
+                <p>
+                  {item.productPrice
+                    .toString()
+                    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                </p>
                 <Link to="/">상품 상세보기</Link>
               </ProductHover>
             </li>
-          )
+          );
         })}
       </UL>
     </Section>
-  )
+  );
 }
 
 const Section = styled.section`
@@ -42,41 +45,40 @@ const Section = styled.section`
   &:last-child {
     margin-bottom: 0;
   }
-`
+`;
 
 const UL = styled.ul`
-    display: grid;
-    grid-template-columns: 2fr repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
 
-    & img {
-      width: 100%;
-      height: 100%;
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+
+  li {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    &:hover div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      flex-direction: column;
+      animation: setMotion 0.2s;
     }
-
-    li {
-      width: 100%;
-      height: 100%;
-      position: relative;
-
-      &:hover div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        flex-direction: column;
-        animation: setMotion 0.2s;
-      }
-    }
-
+  }
 
   li:first-child {
     grid-row: 1 / span 2;
     grid-column: 1 / 2;
   }
 
-  @keyframes setMotion{
+  @keyframes setMotion {
     0% {
       opacity: 0;
     }
@@ -84,7 +86,7 @@ const UL = styled.ul`
       opacity: 1;
     }
   }
-`
+`;
 
 const ProductHover = styled.div`
   display: none;
@@ -96,7 +98,8 @@ const ProductHover = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
 
-  strong, p {
+  strong,
+  p {
     font-size: 20px;
     font-family: var(--font--semibold);
   }
@@ -114,5 +117,4 @@ const ProductHover = styled.div`
       color: var(--main-color);
     }
   }
-`
-
+`;
