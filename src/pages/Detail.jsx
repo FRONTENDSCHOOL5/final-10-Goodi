@@ -51,7 +51,7 @@ export default function Detail() {
               user_name={data.name}
               user_email={data.email}
             />
-            <ButtonLineIcon button_content="작가 팔로우" />
+            <ButtonLineIcon text="작가 팔로우" height="50px" />
           </div>
 
           <h2 className="product_title">{data.title}</h2>
@@ -144,7 +144,7 @@ const ProductDetail = styled.section`
 
   .product_count_subtitle {
     font-family: var(--font--Bold);
-    margin: 100px 0 24px 0;
+    margin: 60px 0 24px 0;
   }
 
   hr {
@@ -158,7 +158,7 @@ const DeliveryDescription = styled.section`
   box-sizing: border-box;
   background-color: var(--gray50-color);
   border-radius: 4px;
-  margin-top: 32px;
+  margin-top: 24px;
 
   & div {
     display: flex;
@@ -223,7 +223,7 @@ const ProductPrice = styled.section`
 
 const ButtonWrap = styled.div`
   display: flex;
-  margin-top: 40px;
+  margin-top: 32px;
   align-items: center;
   gap: 2%;
 
