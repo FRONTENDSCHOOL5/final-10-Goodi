@@ -84,10 +84,9 @@ export default function Login() {
               width="432px"
               height="56px"
               br="4px"
+              text="로그인"
               onClick={handleLogin}
-            >
-              로그인
-            </Button>
+            />
             <span>SNS 로그인</span>
           </ButtonDiv>
           <SnsDiv>
