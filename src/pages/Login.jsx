@@ -151,7 +151,7 @@ export const RightDiv = styled.div`
 export const InputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
+  margin-top: 32px;
 `;
 
 export const H1 = styled.h1`
@@ -170,7 +170,7 @@ export const H2 = styled.div`
   font-family: "Montserrat";
   font-weight: 900;
   display: inline;
-  margin-bottom: 30px;
+  margin-bottom: 22px;
   img {
     vertical-align: text-bottom;
   }

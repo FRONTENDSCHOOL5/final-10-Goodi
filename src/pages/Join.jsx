@@ -1,18 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useState } from "react";
+import axios from "axios";
 
 import { InputBox } from "../components/common/Input";
-
 import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
 import SymbolImage from "../assets/symbol.svg";
-import LoginImage1 from "../assets/login_1.svg";
-import LoginImage2 from "../assets/login_image5.svg";
-import LoginImage3 from "../assets/login_image2.svg";
-import LoginMent from "../assets/login_logo.svg";
-
-import { useEffect, useState } from "react";
 
 export default function Join() {
   return (
@@ -94,7 +90,7 @@ export const RightDiv = styled.div`
 export const InputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 28px;
+  margin-top: 32px;
 `;
 
 export const H1 = styled.h1`
@@ -110,7 +106,7 @@ export const H1 = styled.h1`
 
 export const H2 = styled.div`
   font-size: 2.5rem;
-  margin-bottom: 10%;
+  margin-bottom: 48px;
   font-family: var(--font--en);
   font-weight: 900;
   display: inline;
@@ -125,5 +121,5 @@ export const Label = styled.label`
   font-weight: 700;
 `;
 export const ButtonDiv = styled.div`
-  margin-top: 16%;
+  margin-top: 166px;
 `;

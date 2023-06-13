@@ -105,7 +105,7 @@ export const RightDiv = styled.div`
 `;
 export const ProfileDiv = styled.div`
   position: relative;
-  margin-bottom: 56px;
+  margin-bottom: 30px;
   .add_button_img {
     position: absolute;
     top: 67px;
@@ -116,7 +116,7 @@ export const ProfileDiv = styled.div`
 export const InputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 28px;
+  margin-top: 32px;
 
   textarea {
     resize: none;
@@ -154,5 +154,5 @@ export const Label = styled.label`
   font-weight: 700;
 `;
 export const ButtonDiv = styled.div`
-  margin-top: 13.3%;
+  margin-top: 100px;
 `;
