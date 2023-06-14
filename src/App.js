@@ -7,6 +7,7 @@ import Join from './pages/Join'
 import Detail from './pages/Detail';
 import Setprofile from './pages/Setprofile';
 import Profile from './pages/Profile';
+import Chat from './pages/Chat';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/join" element={<Join />} />
         <Route path="/setprofile" element={<Setprofile />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </BrowserRouter>
   );
