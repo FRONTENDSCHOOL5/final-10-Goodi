@@ -35,7 +35,7 @@ export default function Main() {
                 <li key={item.id}>
                   <img src={item.dummyImg} alt="" />
                 </li>
-              )
+              );
             })}
           </ul>
         </section>
@@ -44,16 +44,20 @@ export default function Main() {
       <span className="Line" />
 
       <MainRight>
-        <Title><img src={followerProducts} alt="Follower Products" /></Title>
+        <Title>
+          <img src={followerProducts} alt="Follower Products" />
+        </Title>
         <CardProduct />
         <ProductLink to="/">나도 굿즈 판매하기</ProductLink>
       </MainRight>
 
       <MainBottom>
-        <Title><img src={popularAuthor} alt="Popular Author" /></Title>
+        <Title>
+          <img src={popularAuthor} alt="Popular Author" />
+        </Title>
         <PopularAuthorView data={data1} />
         <PopularAuthorView data={data2} />
-      </MainBottom >
+      </MainBottom>
     </MainLayout>
   );
 }
