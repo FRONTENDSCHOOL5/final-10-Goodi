@@ -16,7 +16,7 @@ export const postUser = async ({
   const emailAccountName = email.split('@')[0];
 
   const data = await goodiFetchInstance.post(postUserPath, {
-    
+
     user: {
       username,
       email,
