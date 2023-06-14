@@ -1,23 +1,15 @@
-import axios from 'axios';
+import { goodiFetchInstance } from './instance';
 
-const LOGIN_URL = "https://api.mandarin.weniv.co.kr/user/login";
+export const loginUserPath = '/user/login';
+export const loginUser = async ({ email, password }) => {
+  const data = await goodiFetchInstance.post(loginUserPath, {
+    user: {
+      email,
+      password
+    }
+  })
 
-const instance = axios.create({
-  baseURL: LOGIN_URL,
-  headers: {
-    "Content-Type": "application/json"
-  }
-})
-
-// test 계정 정보 : suritest@test.com / suritest
-const fetchData = async (loginData) => {
-  try {
-    const res = await instance.post(LOGIN_URL, loginData);
-    console.log('결과', res);
-    return res.data;
-  } catch (err) {
-    console.error(err);
-  }
+  return data;
 };
 
-export default fetchData;
+// test 계정 정보 : suritest@test.com / suritest
