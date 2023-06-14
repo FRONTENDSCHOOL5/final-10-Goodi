@@ -31,9 +31,13 @@ export default function Chat(reduceTop) {
           <ChatProfile>
             <strong>{chatList[0].name}</strong>
             <p>{chatList[0].email}</p>
-            <ButtonLineIcon>채팅 나가기</ButtonLineIcon>
+            <ButtonLineIcon
+              text="채팅 나가기"
+              height="34px"
+              color="var(--gray300-color)"
+              basic
+            />
           </ChatProfile>
-
         </ChatWrapRight>
       </ChatWrap>
     </Layout>
@@ -71,7 +75,7 @@ const ChatWrapLeft = styled.section`
 const ChatList = styled.section`
   border-bottom: 1px solid var(--gray200-color);
   min-height: 70px;
-  padding: 25px 0;
+  padding: 25px 0 15px;
 
   & > img {
     width: 60px;
@@ -131,9 +135,11 @@ const ChatProfile = styled.div`
   p {
     font-size: 16px;
     font-family: var(--font--Regular);
+    color: var(--gray400-color);
   }
 
   button {
-    
+    grid-area: 1 / 2 / span 2 / 2;
+    margin-top: 10px;
   }
 `

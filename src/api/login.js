@@ -8,7 +8,7 @@ const loginAPI = async (loginData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...loginData }),
-    });
+    })
 
     const accountData = await response.json();
 
