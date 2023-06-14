@@ -68,7 +68,6 @@ const CardContent = styled.div`
 
 const Article = styled.article`
   position: relative;
-  
   button {
     position: absolute;
     right: 16px;
