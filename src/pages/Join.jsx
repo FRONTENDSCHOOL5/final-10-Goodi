@@ -40,16 +40,6 @@ export default function Join() {
             <img src={SymbolImage} alt="Symbol" />
           </H2>
           <InputDiv>
-            <Label>아이디</Label>
-            <InputBox
-              width="432px"
-              height="48px"
-              padding="15px"
-              onChange={(event) => {
-                setAccountName(event.target.value);
-              }}
-              placeholder="이메일을 입력해주세요"
-            />
             <Label>이메일</Label>
             <InputBox
               width="432px"
