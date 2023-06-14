@@ -32,6 +32,7 @@ const ButtonLineIconUI = styled.button`
         background-color: var(--sub-color);
         border: none;
         transition: all 0.3s;
+        color: white;
       }
     `}
 

@@ -17,8 +17,9 @@ import loginAPI from "../api/login";
 export default function Login() {
   const navigate = useNavigate();
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [userErrorMessage, setUserErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState([]);
+  const [userErrorMessage, setUserErrorMessage] = useState([]);
+
 
   const [loginData, setLoginData] = useState({
     user: {
@@ -41,29 +42,35 @@ export default function Login() {
   const handleLogin = async (loginData) => {
     const response = await loginAPI(loginData);
 
-    if (response.hasOwnProperty("user")) {
+    if (response && response.hasOwnProperty("user")) {
       console.log('성공');
       navigate("/main");
-    } else if (loginData.user.email && loginData.user.password) {
-      setErrorMessage(response.message);
+    } else {
+      const errorMessage = (response && response.message) ? response.message : handleError();
+      setErrorMessage(errorMessage);
     }
 
-    console.log(response);
+    console.log(errorMessage);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    handleError();
     await handleLogin(loginData);
   }
 
   const handleError = () => {
-    if (loginData.user.email === "" && loginData.user.password === "") {
-      setUserErrorMessage("아이디를 입력해주세요");
-    } else if (loginData.user.email && loginData.user.password === "") {
-      setUserErrorMessage("비밀번호를 입력해주세요");
+    const errors = [];
+    if (loginData.user.email === "") {
+      errors.push("아이디를 입력해주세요");
+    } else if (loginData.user.password === "") {
+      errors.push("비밀번호를 입력해주세요");
     } else {
-      setUserErrorMessage("");
+      errors.push("");
     }
+
+    setUserErrorMessage(errors);
+
   }
 
   const gotoJoin = () => {
@@ -93,8 +100,8 @@ export default function Login() {
                 placeholder="이메일을 입력해주세요"
               />
               {/* email을 입력하지 않은 경우 */}
-              {userErrorMessage && loginData.user.email === "" && (
-                <div>{userErrorMessage}</div>
+              {userErrorMessage.includes("아이디를 입력해주세요") && (
+                <div>아이디를 입력해주세요</div>
               )}
             </InputDiv>
             <InputDiv>
@@ -109,14 +116,12 @@ export default function Login() {
                 placeholder="비밀번호를 입력하세요"
               />
               {/* password을 입력하지 않은 경우 */}
-              {userErrorMessage &&
-                loginData.user.email &&
-                loginData.user.password === "" && (
-                  <div>{userErrorMessage}</div>
-                )}
+              {userErrorMessage.includes("비밀번호를 입력해주세요") && (
+                <div>비밀번호를 입력해주세요</div>
+              )}
             </InputDiv>
             {errorMessage && loginData.user.email && loginData.user.password && (
-              <div>{userErrorMessage}</div>
+              <div>{errorMessage}</div>
             )}
             <ButtonDiv>
               <Button
