@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Modal from "./common/Modal";
 
 // 이미지 파일
 import SearchIcon from "../assets/icon_search_black.svg";
@@ -15,6 +16,7 @@ import HomeIcon from "../assets/icon_home_active.svg";
 import LocalNav from "./common/LocalNav";
 
 export default function Navigation() {
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const icons = [
     { name: "Search", image: SearchIcon, nav: "/join" },
@@ -28,17 +30,18 @@ export default function Navigation() {
 
   // localNav hidden 관리
   // 예외처리 해줘야할것들:  x 버튼을 눌렀을 경우, 다른 곳을 클릭했을경우
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(true);
 
-  const handleModal = () => {
+  const handleLocalNav = () => {
     setIsHidden((prevIsHidden) => !prevIsHidden);
+  };
+  const handleModal = () => {
+    setShowModal(true);
   };
   // Post, LocalNav 외 다른곳을 눌렀을때 LocalNav 꺼지기
   useEffect(() => {
     const handleClickOutside = (event) => {
       const navigationElement = document.getElementById("navigation");
-      console.log(event);
-      console.log(navigationElement.contains(event.target));
 
       // GPT가 알려준 코드인데 이거 타겟 요소가 아닌곳을 클릭한 경우 false값을 반환하는데 그 외 모든것을 클릭했을 경우가 맞는건지? 첫번째 navigationElement 이건 진짜 뭔지 모르겠음
       if (navigationElement && !navigationElement.contains(event.target)) {
@@ -53,13 +56,23 @@ export default function Navigation() {
 
   return (
     <NavigationLayout id="navigation">
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        text="구디 로그아웃?"
+        buttonText1="로그아웃"
+        buttonText2="취소"
+        showCloseButton={false}
+      />
       {icons.map((el, i) => {
         return (
           <NavList
             className={el.name === "Post" && isHidden ? "active" : ""}
             key={i}
             onClick={() => {
-              return el.name === "Post" ? handleModal() : navigate(el.nav);
+              if (el.name === "Post") handleLocalNav();
+              else if (el.name === "Logout") handleModal();
+              else navigate(el.nav);
             }}
           >
             <img src={el.image} alt={el.name} />
@@ -68,7 +81,7 @@ export default function Navigation() {
           </NavList>
         );
       })}
-      {isHidden ? <LocalNav style={{ zIndex: 9999 }} /> : false}
+      {isHidden ? <LocalNav /> : false}
     </NavigationLayout>
   );
 }
@@ -86,6 +99,7 @@ const NavigationLayout = styled.article`
   box-sizing: border-box;
   position: fixed;
   right: 0;
+  z-index: 1;
 
   & > button:nth-child(1) {
     margin-bottom: 32px;
