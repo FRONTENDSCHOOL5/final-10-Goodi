@@ -1,15 +1,25 @@
-import { goodiFetchInstance } from './instance';
+const LOGIN_URL = "https://api.mandarin.weniv.co.kr/user/login"
 
-export const loginUserPath = '/user/login';
-export const loginUser = async ({ email, password }) => {
-  const data = await goodiFetchInstance.post(loginUserPath, {
-    user: {
-      email,
-      password
+const loginAPI = async (loginData) => {
+  try {
+    const response = await fetch(LOGIN_URL, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...loginData }),
+    });
+
+    const accountData = await response.json();
+
+    if (response.ok) {
+      return accountData;
     }
-  })
 
-  return data;
+  } catch (error) {
+    console.log('Account API 에러가 발생했습니다', error);
+  }
 };
 
+export default loginAPI;
 // test 계정 정보 : suritest@test.com / suritest

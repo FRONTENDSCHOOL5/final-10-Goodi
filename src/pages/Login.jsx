@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { useState } from "react";
@@ -12,83 +12,62 @@ import GoogleIcon from "../assets/google.svg";
 import FacebookIcon from "../assets/facebook.svg";
 import KakaoIcon from "../assets/kakao.svg";
 
-import { useLogin } from "../hook/useLogin";
+import loginAPI from "../api/login";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  // const [loginData, setLoginData] = useState({
-  //   user: {
-  //     email: "",
-  //     password: ""
-  //   }
-  // })
+  const [errorMessage, setErrorMessage] = useState("");
+  const [userErrorMessage, setUserErrorMessage] = useState("");
 
-  // async function handleLogin() {
-  //   const { email, password } = loginData.user;
-
-  //   if (!email || !password) {
-  //     console.log("이메일과 비밀번호를 입력해주세요.");
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await fetchData(loginData.user);
-  //     // 로그인 성공 처리
-  //     console.log(response); // API 응답 확인
-
-  //     // 서버에서 검사한 결과를 받아서 처리
-  //     if (response.success) {
-  //       console.log("로그인 성공");
-  //       navigate('/main');
-  //     } else {
-  //       console.log("이메일 또는 비밀번호가 일치하지 않습니다.");
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setLoginData(prevState => ({
-  //     ...prevState,
-  //     user: {
-  //       ...prevState.user,
-  //       [name]: value
-  //     }
-  //   }));
-  // };
-
-  const { loginResult, errorResult, callMutate } = useLogin();
-
-  useEffect(() => {
-    if (loginResult !== null) {
-      console.log("[TEST]", loginResult)
+  const [loginData, setLoginData] = useState({
+    user: {
+      email: "",
+      password: ""
     }
-  }, [loginResult])
+  })
 
-  useEffect(() => {
-    if (errorResult !== null)
-      window.alert(errorResult.message)
-  }, [errorResult])
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData(prevState => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        [name]: value
+      }
+    }));
+  };
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const handleLogin = async (loginData) => {
+    const response = await loginAPI(loginData);
 
-  function gotoJoin() {
-    navigate('/join');
+    if (response.hasOwnProperty("user")) {
+      console.log('성공');
+      navigate("/main");
+    } else if (loginData.user.email && loginData.user.password) {
+      setErrorMessage(response.message);
+    }
+
+    console.log(response);
   }
 
-  const mainNavigate = () => {
-    callMutate({
-      email,
-      password
-    })
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await handleLogin(loginData);
+  }
 
-    if (loginResult !== null || loginResult === "") {
-      navigate('/main')
+  const handleError = () => {
+    if (loginData.user.email === "" && loginData.user.password === "") {
+      setUserErrorMessage("아이디를 입력해주세요");
+    } else if (loginData.user.email && loginData.user.password === "") {
+      setUserErrorMessage("비밀번호를 입력해주세요");
+    } else {
+      setUserErrorMessage("");
     }
+  }
+
+  const gotoJoin = () => {
+    navigate('/join');
   }
 
   return (
@@ -101,42 +80,53 @@ export default function Login() {
             Welcome to
             <img src={SymbolImage} alt="Symbol" />
           </H2>
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <InputDiv>
               <Label>이메일</Label>
               <InputBox
                 width="432px"
                 height="48px"
                 padding="15px"
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
                 name='email'
+                onChange={handleInputChange}
+                value={loginData.user.email}
                 placeholder="이메일을 입력해주세요"
               />
+              {/* email을 입력하지 않은 경우 */}
+              {userErrorMessage && loginData.user.email === "" && (
+                <div>{userErrorMessage}</div>
+              )}
             </InputDiv>
             <InputDiv>
               <Label>비밀번호</Label>
               <InputBox
                 width="432px"
                 height="48px"
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
+                onChange={handleInputChange}
+                value={loginData.user.password}
                 name='password'
                 type="password"
                 placeholder="비밀번호를 입력하세요"
               />
+              {/* password을 입력하지 않은 경우 */}
+              {userErrorMessage &&
+                loginData.user.email &&
+                loginData.user.password === "" && (
+                  <div>{userErrorMessage}</div>
+                )}
             </InputDiv>
+            {errorMessage && loginData.user.email && loginData.user.password && (
+              <div>{userErrorMessage}</div>
+            )}
             <ButtonDiv>
               <Button
-                type="button"
+                type="submit"
                 bg="black"
                 width="432px"
                 height="56px"
                 br="4px"
                 text="로그인"
-                onClick={mainNavigate}
+                onClick={handleError}
               />
             </ButtonDiv>
           </form>
