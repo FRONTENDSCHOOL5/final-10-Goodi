@@ -1,60 +1,46 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+// 이미지 파일
 import SearchIcon from "../assets/icon_search_black.svg";
 import MypageIcon from "../assets/icon_mypage_active.svg";
 import HeartIcon from "../assets/icon_heart_active.svg";
 import CartIcon from "../assets/icon_cart_active.svg";
 import ChatIcon from "../assets/icon_chat_active.svg";
-import LogoutIcon from "../assets/empty_likeBtn.svg"
+import LogoutIcon from "../assets/icon_logout_active.svg";
+import PostIcon from "../assets/icon_post_active.svg";
+import HomeIcon from "../assets/icon_home_active.svg";
 
 export default function Navigation() {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    navigate('/login');
-  };
-  
+  const icons = [
+    { name: "Search", image: SearchIcon, nav: "/join" },
+    { name: "Home", image: HomeIcon, nav: "/main" },
+    { name: "My page", image: MypageIcon, nav: "/profile" },
+    { name: "Cart", image: CartIcon, nav: "/login" },
+    { name: "Chat", image: ChatIcon, nav: "/login" },
+    { name: "Post", image: PostIcon, nav: "/login" },
+    { name: "Logout", image: LogoutIcon, nav: "/login" },
+  ];
+
   return (
     <NavigationLayout>
-      <NavList to="/" className="search">
-        <img src={SearchIcon} alt="검색 돋보기 아이콘"></img>
-      </NavList>
-
-      <NavList to="/profile">
-        <img src={MypageIcon} alt="사람 아이콘"></img>
-        <p>My page</p>
-      </NavList>
-
-      <NavList to="/">
-        <img src={HeartIcon} alt="하트 아이콘"></img>
-        <p>Like</p>
-      </NavList>
-
-      <NavList to="/">
-        <img src={CartIcon} alt="장바구니 아이콘"></img>
-        <p>Cart</p>
-      </NavList>
-
-      <NavList to="/">
-        <img src={ChatIcon} alt="말풍선 아이콘"></img>
-        <p>Chat</p>
-      </NavList>
-
-      <NavList to="/login">
-        <img src={LogoutIcon} alt="로그아웃 아이콘"></img>
-        <p>Logout</p>
-      </NavList>
+      {icons.map((el, i) => {
+        const a = "dkssud";
+        return (
+          <NavList key={i} onClick={() => navigate(el.nav)}>
+            <img src={el.image} alt={el.name} />
+            <p className={i === 0 ? "a11y-hidden" : ""}>{el.name}</p>
+          </NavList>
+        );
+      })}
     </NavigationLayout>
   );
 }
 
-const StyledLink = styled(Link)`
-  color: var(--black);
-  text-decoration: none;
-`;
-
-const NavList = styled(StyledLink)`
+const NavList = styled.button`
   width: 100%;
   padding: 10px 0;
   box-sizing: border-box;
@@ -68,10 +54,17 @@ const NavList = styled(StyledLink)`
   gap: 4px;
   position: relative;
   z-index: 100;
+  cursor: pointer;
 
   img {
-    width: 32px;
+    width: 28px;
     display: block;
+  }
+
+  &:hover {
+    background-color: #f0ffed;
+    transition: all 0.3s;
+    color: var(--sub-color);
   }
 `;
 
@@ -88,8 +81,7 @@ const NavigationLayout = styled.article`
   box-sizing: border-box;
   position: fixed;
   right: 0;
-
-  .search {
-    margin-bottom: 16px;
+  button:nth-child(1) {
+    margin-bottom: 32px;
   }
 `;
