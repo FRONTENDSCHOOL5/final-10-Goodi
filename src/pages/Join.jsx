@@ -1,16 +1,34 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import axios from "axios";
 
 import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
 import SymbolImage from "../assets/symbol.svg";
+import { useJoin } from "../hook/useJoin";
 
 export default function Join() {
+
+  // useJoin 을 사용하기 위한 기본 메소드를 정의했어요.
+  const { joinResult, errorResult, callMutate } = useJoin()
+
+  useEffect(() => {
+    if (joinResult != null)
+      console.log("[TEST]", joinResult)
+  }, [joinResult])
+
+  useEffect(() => {
+    if (errorResult != null)
+      window.alert(errorResult.message)
+  }, [errorResult])
+
+  // 우리는 데이터를 저장할 상태들을 만들었어요.
+  const [accountName, setAccountName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <OuterDiv>
       <LeftDiv />
@@ -22,12 +40,24 @@ export default function Join() {
             <img src={SymbolImage} alt="Symbol" />
           </H2>
           <InputDiv>
+            <Label>아이디</Label>
+            <InputBox
+              width="432px"
+              height="48px"
+              padding="15px"
+              onChange={(event) => {
+                setAccountName(event.target.value);
+              }}
+              placeholder="이메일을 입력해주세요"
+            />
             <Label>이메일</Label>
             <InputBox
               width="432px"
               height="48px"
               padding="15px"
-              onChange={() => {}}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
               placeholder="이메일을 입력해주세요"
             />
           </InputDiv>
@@ -36,18 +66,31 @@ export default function Join() {
             <InputBox
               width="432px"
               height="48px"
-              onChange={() => {}}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
               type="password"
               placeholder="비밀번호를 입력하세요"
             />
           </InputDiv>
           <ButtonDiv>
-          <Button	
-              text="다음"	
-              type="button"	
-              bg="black"	
-              width="432px"	
-              br="none"	
+            <Button
+              text="다음"
+              type="button"
+              bg="black"
+              width="432px"
+              br="none"
+              onClick={() => {
+                // 다음 버튼을 눌렀을 때 RequestBody 에 맞는 데이터를 입력해서
+                // 회원가입 hooks 를 실행할 수 있도록 해요.
+                callMutate({
+                  email,
+                  password,
+                  username: "꽉오",
+                  accountname: accountName,
+                })
+              }}
+
             />
           </ButtonDiv>
         </div>

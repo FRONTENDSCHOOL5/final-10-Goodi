@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { useState } from "react";
-import axios from 'axios';
 
 import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
@@ -13,40 +12,54 @@ import GoogleIcon from "../assets/google.svg";
 import FacebookIcon from "../assets/facebook.svg";
 import KakaoIcon from "../assets/kakao.svg";
 
+import fetchData from "../api/login";
+
 export default function Login() {
-  const url = "https://api.mandarin.weniv.co.kr";
-  const reqPath = "/user/login";
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginData, setLoginData] = useState({
+    user: {
+      email: "",
+      password: ""
+    }
+  })
 
-  const loginData = {
-    "user": {
-      "email": email,
-      "password": password
+  async function handleLogin() {
+    const { email, password } = loginData.user;
+
+    if (!email || !password) {
+      console.log("이메일과 비밀번호를 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await fetchData(loginData.user);
+      // 로그인 성공 처리
+      console.log(response); // API 응답 확인
+
+      // 서버에서 검사한 결과를 받아서 처리
+      if (response.success) {
+        console.log("로그인 성공");
+        navigate('/main');
+      } else {
+        console.log("이메일 또는 비밀번호가 일치하지 않습니다.");
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
-  const reqUrl = url + reqPath;
-  const navigate = useNavigate();
-
-  // test 계정 정보 : suritest@test.com / suritest
-  const handleLogin = (e) => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.post(reqUrl, loginData);
-        console.log('결과', res);
-
-        const token = res.data.user.token;
-        localStorage.setItem("token", token);
-
-        navigate('/main');
-      } catch (err) {
-        console.error(err);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData(prevState => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        [name]: value
       }
-    };
-    fetchData();
+    }));
   };
+
   return (
     <OuterDiv>
       <LeftDiv />
@@ -60,19 +73,21 @@ export default function Login() {
           <InputDiv>
             <Label>이메일</Label>
             <InputBox
-              width="432px"
-              height="48px"
-              padding="15px"
-              onChange={(e) => { setEmail(e.target.value) }}
+              width="27rem"
+              height="3rem"
+              padding=".9375rem"
+              onChange={handleInputChange}
+              name='email'
               placeholder="이메일을 입력해주세요"
             />
           </InputDiv>
           <InputDiv>
             <Label>비밀번호</Label>
             <InputBox
-              width="432px"
-              height="48px"
-              onChange={(e) => { setPassword(e.target.value) }}
+              width="27rem"
+              height="3rem"
+              onChange={handleInputChange}
+              name='password'
               type="password"
               placeholder="비밀번호를 입력하세요"
             />
@@ -81,9 +96,9 @@ export default function Login() {
             <Button
               type="button"
               bg="black"
-              width="432px"
-              height="56px"
-              br="4px"
+              width="27rem"
+              height="3.5rem"
+              br=".25rem"
               text="로그인"
               onClick={handleLogin}
             />
@@ -133,16 +148,16 @@ export const RightDiv = styled.div`
     justify-content: center;
   }
   p {
-    font-size: 1rem;
+    font-size: 16px;
     color: var(--gray500-color);
     display: inline;
-    margin-right: 17px;
+    margin-right: 1.0625rem;
   }
   button {
-    border-bottom: 2px solid black;
+    border-bottom: .125rem solid black;
   }
   .join_button {
-    font-size: 1.25rem;
+    font-size: 20px;
     font-family: var(--font--Bold);
     cursor: pointer;
   }
@@ -151,41 +166,41 @@ export const RightDiv = styled.div`
 export const InputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 32px;
+  margin-top: 1.5rem;
 `;
 
 export const H1 = styled.h1`
-  clip: rect(1px, 1px, 1px, 1px);
+  clip: rect(.0625rem, .0625rem, .0625rem, .0625rem);
   clip-path: inset(50%);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
+  width: .0625rem;
+  height: .0625rem;
+  margin: -0.0625rem;
   overflow: hidden;
   padding: 0;
   position: absolute;
 `;
 
 export const H2 = styled.div`
-  font-size: 2.5rem;
+  font-size: 40px;
   font-family: "Montserrat";
   font-weight: 900;
   display: inline;
-  margin-bottom: 22px;
+  margin-bottom: 1.875rem;
   img {
     vertical-align: text-bottom;
   }
 `;
 export const Label = styled.label`
   font-family: var(--font--Bold);
-  margin-bottom: 8px;
+  margin-bottom: .5rem;
 `;
 export const ButtonDiv = styled.div`
-  padding: 55px 0;
-  border-bottom: 1px solid var(--gray200-color);
+  padding: 3.4375rem 0;
+  border-bottom: .0625rem solid var(--gray200-color);
   position: relative;
   span {
     background-color: white;
-    padding: 10px;
+    padding: .625rem;
     color: var(--gray200-color);
     position: absolute;
     top: 91%;
@@ -195,13 +210,13 @@ export const ButtonDiv = styled.div`
 `;
 export const SnsDiv = styled.div`
   display: flex;
-  gap: 24px;
-  padding: 44px 0px 81px;
+  gap: 1.5rem;
+  padding: 2.75rem 0rem 5.0625rem;
 `;
 export const SnsBg = styled.div`
   background-color: ${(props) => props.bg};
-  width: 56px;
-  height: 56px;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
   position: relative;
   cursor: pointer;
