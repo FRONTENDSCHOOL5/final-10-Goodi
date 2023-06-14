@@ -13,12 +13,15 @@ export const postUser = async ({
   // 첫번째 인자에는 엔드포인트 뒤의 path 가 들어가고요,
   // 두번째 인자에는 Request Body 가 들어가요.
   // data 에는 Response 가 담겨있어요.
+  const emailAccountName = email.split('@')[0];
+
   const data = await goodiFetchInstance.post(postUserPath, {
+    
     user: {
       username,
       email,
       password,
-      accountname,
+      accountname: emailAccountName,
       intro,
       image
     }
