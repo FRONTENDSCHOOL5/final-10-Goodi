@@ -14,6 +14,7 @@ const fetchData = async (loginData) => {
   try {
     const res = await instance.post(LOGIN_URL, loginData);
     console.log('결과', res);
+    return res.data;
   } catch (err) {
     console.error(err);
   }

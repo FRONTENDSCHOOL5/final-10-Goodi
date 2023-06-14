@@ -15,7 +15,7 @@ import KakaoIcon from "../assets/kakao.svg";
 import fetchData from "../api/login";
 
 export default function Login() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
     user: {
@@ -24,10 +24,29 @@ export default function Login() {
     }
   })
 
-  function handleLogin() {
-    console.log(loginData)
-    fetchData(loginData);
-    // navigate('/main');
+  async function handleLogin() {
+    const { email, password } = loginData.user;
+
+    if (!email || !password) {
+      console.log("이메일과 비밀번호를 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await fetchData(loginData.user);
+      // 로그인 성공 처리
+      console.log(response); // API 응답 확인
+
+      // 서버에서 검사한 결과를 받아서 처리
+      if (response.success) {
+        console.log("로그인 성공");
+        navigate('/main');
+      } else {
+        console.log("이메일 또는 비밀번호가 일치하지 않습니다.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleInputChange = (e) => {
