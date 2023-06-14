@@ -1,23 +1,25 @@
-import axios from 'axios';
+const LOGIN_URL = "https://api.mandarin.weniv.co.kr/user/login"
 
-const LOGIN_URL = "https://api.mandarin.weniv.co.kr/user/login";
-
-const instance = axios.create({
-  baseURL: LOGIN_URL,
-  headers: {
-    "Content-Type": "application/json"
-  }
-})
-
-// test 계정 정보 : suritest@test.com / suritest
-const fetchData = async (loginData) => {
+const loginAPI = async (loginData) => {
   try {
-    const res = await instance.post(LOGIN_URL, loginData);
-    console.log('결과', res);
-    return res.data;
-  } catch (err) {
-    console.error(err);
+    const response = await fetch(LOGIN_URL, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...loginData }),
+    })
+
+    const accountData = await response.json();
+
+    if (response.ok) {
+      return accountData;
+    }
+
+  } catch (error) {
+    console.log('Account API 에러가 발생했습니다', error);
   }
 };
 
-export default fetchData;
+export default loginAPI;
+// test 계정 정보 : suritest@test.com / suritest

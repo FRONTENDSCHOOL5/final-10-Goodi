@@ -6,7 +6,6 @@ export default function Button({ text, ...props }) {
 }
 
 const ButtonDef = styled.button`
-  background-color: black;
   background-color: ${(props) => props.bg || "var(--black-color)"};
   width: ${(props) => props.width || "100%"};
   padding: ${(props) => props.padding || "18px 0"};
