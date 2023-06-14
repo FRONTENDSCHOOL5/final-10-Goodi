@@ -1,13 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import SearchIcon from "../assets/icon_search_black.svg";
 import MypageIcon from "../assets/icon_mypage_active.svg";
 import HeartIcon from "../assets/icon_heart_active.svg";
 import CartIcon from "../assets/icon_cart_active.svg";
 import ChatIcon from "../assets/icon_chat_active.svg";
+import LogoutIcon from "../assets/empty_likeBtn.svg"
 
 export default function Navigation() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate('/login');
+  };
+  
   return (
     <NavigationLayout>
       <NavList to="/" className="search">
@@ -33,6 +40,11 @@ export default function Navigation() {
         <img src={ChatIcon} alt="말풍선 아이콘"></img>
         <p>Chat</p>
       </NavList>
+
+      <NavList to="/login">
+        <img src={LogoutIcon} alt="로그아웃 아이콘"></img>
+        <p>Logout</p>
+      </NavList>
     </NavigationLayout>
   );
 }
@@ -54,6 +66,8 @@ const NavList = styled(StyledLink)`
   justify-content: center;
   align-items: center;
   gap: 4px;
+  position: relative;
+  z-index: 100;
 
   img {
     width: 32px;
