@@ -3,11 +3,15 @@ import Button from "./Button";
 import CloseButton from "../../assets/close-button.svg";
 import { useState } from "react";
 
-export default function Modal({ text,buttonText1, buttonText2, showCloseButton, ...props }) {
-  const [showModal, setShowModal] = useState(true);
-
-  const closeModal = () => {
-    setShowModal(false);
+export default function Modal({
+  text,
+  buttonText1,
+  buttonText2,
+  showCloseButton,
+  ...props
+}) {
+  const handleModal = () => {
+    props.setShowModal(!props.showModal);
   };
 
   const handleModalClick = (event) => {
@@ -15,21 +19,32 @@ export default function Modal({ text,buttonText1, buttonText2, showCloseButton, 
   };
 
   return (
-    <ModalBgDark showModal={showModal} onClick={closeModal}>
-      <ModalBgWhite onClick={handleModalClick}>
-        <ModalInner>
-          <span>{text}</span>
-          <div>
-            <Button width="100%" text={buttonText1}/>
-            <Button width="100%" bg="white" color="black" onClick={closeModal} text={buttonText2} />
-          </div>
-        </ModalInner>
-        {showCloseButton &&
-        <button onClick={closeModal}>
-          <img src={CloseButton} alt="닫기 버튼" />
-        </button>}
-      </ModalBgWhite>
-    </ModalBgDark>
+    <>
+      {props.showModal && 
+        // <ModalBgDark onClick={handleModal}>
+          <ModalBgWhite onClick={handleModal}>
+            <ModalInner>
+              <span>{text}</span>
+              <div>
+                <Button width="100%" text={buttonText1} />
+                <Button
+                  width="100%"
+                  bg="white"
+                  color="black"
+                  onClick={handleModal}
+                  text={buttonText2}
+                />
+              </div>
+            </ModalInner>
+            {showCloseButton && (
+              <button onClick={handleModal}>
+                <img src={CloseButton} alt="닫기 버튼" />
+              </button>
+            )}
+          </ModalBgWhite>
+        
+      }
+    </>
   );
 }
 
@@ -47,7 +62,9 @@ const ModalBgWhite = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  position: relative;
+  position: absolute;
+  box-shadow: 0 0 0 9999px black;
+  z-index: 9999;
   & > button {
     position: absolute;
     top: 16px;
@@ -76,5 +93,5 @@ const ModalInner = styled.div`
   }
   & div button:first-child {
     margin-bottom: 16px;
-  } 
+  }
 `;
