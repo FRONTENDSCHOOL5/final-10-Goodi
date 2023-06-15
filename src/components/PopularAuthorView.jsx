@@ -14,23 +14,16 @@ export default function PopularAuthorView({ data }) {
         user_email={data.email}
         mainprofile="true"
       >
-        <ButtonLineIcon text="작가 팔로우" />
+        <ButtonLineIcon text="작가 팔로우" height="50px" />
       </ProfileUI>
 
       <UL>
         {data.img.map((item) => {
           return (
             <li key={item.id}>
-              <img src={item.dummyImg} alt="" />
-              <ProductHover>
-                <strong>{item.productName}</strong>
-                <p>
-                  {item.productPrice
-                    .toString()
-                    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
-                </p>
-                <Link to="/">상품 상세보기</Link>
-              </ProductHover>
+              <LinkStyle to={`/products/${item.id}`}>
+                <img src={item.dummyImg} alt="" />
+              </LinkStyle>
             </li>
           );
         })}
@@ -40,7 +33,7 @@ export default function PopularAuthorView({ data }) {
 }
 
 const Section = styled.section`
-  margin: 50px 0;
+  margin: 50px 0 60px;
 
   &:last-child {
     margin-bottom: 0;
@@ -53,68 +46,23 @@ const UL = styled.ul`
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
 
-  & img {
-    width: 100%;
-    height: 100%;
-  }
-
-  li {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    
-    &:hover div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      flex-direction: column;
-      animation: setMotion 0.2s;
-    }
-  }
-
   li:first-child {
     grid-row: 1 / span 2;
     grid-column: 1 / 2;
   }
-
-  @keyframes setMotion {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 `;
 
-const ProductHover = styled.div`
-  display: none;
+const LinkStyle = styled(Link)`
   width: 100%;
   height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
 
-  strong,
-  p {
-    font-size: 20px;
-    font-family: var(--font--semibold);
-  }
-
-  a {
-    width: 70%;
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    text-decoration: none;
+  img {
+    width: 100%;
+    height: 100%;
     transition: all 0.3s;
-
-    &:hover {
-      transform: scale(1.1);
-      color: var(--main-color);
-    }
   }
-`;
+  
+  &:hover > img {
+    transform: scale(1.02);
+  }
+`

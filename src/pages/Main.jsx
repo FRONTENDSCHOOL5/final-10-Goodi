@@ -80,56 +80,6 @@ const MainBottom = styled.section`
   padding: 110px 60px 150px 80px;
   grid-row: 2 / 3;
   grid-column: 1 / 4;
-
-  section {
-    margin: 50px 0;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  ul {
-    display: grid;
-    grid-template-columns: 2fr repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
-
-    & img {
-      width: 100%;
-      height: 100%;
-    }
-
-    li {
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      position: relative;
-
-      &:hover div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        flex-direction: column;
-        animation: setMotion 0.2s;
-      }
-    }
-  }
-
-  li:first-child {
-    grid-row: 1 / span 2;
-    grid-column: 1 / 2;
-  }
-
-  @keyframes setMotion {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 `;
 
 const Title = styled.h2`
