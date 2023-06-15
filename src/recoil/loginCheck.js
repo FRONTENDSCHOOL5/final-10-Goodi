@@ -9,4 +9,4 @@ const loginCheck = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export default loginCheck;
+export { loginCheck };

@@ -13,12 +13,20 @@ import FacebookIcon from "../assets/facebook.svg";
 import KakaoIcon from "../assets/kakao.svg";
 
 import loginAPI from "../api/login";
+import { useRecoilState } from "recoil";
+import { loginCheck } from '../recoil/loginCheck';
+import loginToken from "../recoil/loginToken";
+import accountname from "../recoil/accountname";
 
 export default function Login() {
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
+
+  const [isloginCheck, setIsLoginCheck] = useRecoilState(loginCheck);
+  const [token, setToken] = useRecoilState(loginToken);
+  const [isAccountname, setIsAccountname] = useRecoilState(accountname);
 
   const [loginData, setLoginData] = useState({
     user: {
@@ -42,7 +50,16 @@ export default function Login() {
     const response = await loginAPI(loginData);
 
     if (response && response.hasOwnProperty("user")) {
-      console.log('성공');
+      const newToken = response.user.token;
+      const newAccountname = response.user.accountname;
+      setIsLoginCheck(false);
+      setToken(newToken);
+      setIsAccountname(newAccountname);
+
+      console.log(isloginCheck);
+      console.log(newToken);
+      console.log(newAccountname);
+
       navigate("/main");
     } else {
       const errorMessage = (response && response.message) ? response.message : handleError();
