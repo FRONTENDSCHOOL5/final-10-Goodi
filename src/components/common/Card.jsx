@@ -35,6 +35,11 @@ const CardLink = styled(Link)`
 const CardContent = styled.div`
   img {
     width: 100%;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: scale(1.03);
+    }
   }
 
   h2 {
@@ -68,6 +73,7 @@ const CardContent = styled.div`
 
 const Article = styled.article`
   position: relative;
+
   button {
     position: absolute;
     right: 16px;
