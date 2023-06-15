@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Modal from "./common/Modal";
 
 // 이미지 파일
@@ -36,8 +36,12 @@ export default function Navigation() {
     setIsHidden((prevIsHidden) => !prevIsHidden);
   };
   const handleModal = () => {
-    setShowModal(true);
+    setShowModal(!showModal);
   };
+
+  // const handleModal = () => {
+  //   setShowModal(!showModal);
+  // };
   // Post, LocalNav 외 다른곳을 눌렀을때 LocalNav 꺼지기
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -56,14 +60,6 @@ export default function Navigation() {
 
   return (
     <NavigationLayout id="navigation">
-      <Modal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        text="구디 로그아웃?"
-        buttonText1="로그아웃"
-        buttonText2="취소"
-        showCloseButton={false}
-      />
       {icons.map((el, i) => {
         return (
           <NavList
@@ -82,6 +78,17 @@ export default function Navigation() {
         );
       })}
       {isHidden ? <LocalNav /> : false}
+      {showModal && (
+        <Modal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          handleModal={handleModal}
+          text="구디 로그아웃?"
+          buttonText1="로그아웃"
+          buttonText2="취소"
+          showCloseButton={false}
+        />
+      )}
     </NavigationLayout>
   );
 }

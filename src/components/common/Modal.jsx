@@ -1,60 +1,76 @@
 import styled from "styled-components";
 import Button from "./Button";
 import CloseButton from "../../assets/close-button.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Modal({
   text,
   buttonText1,
   buttonText2,
   showCloseButton,
+  showModal,
+  setShowModal,
+  handleModal,
   ...props
 }) {
-  const handleModal = () => {
-    props.setShowModal(!props.showModal);
+  useEffect(() => {
+    // modal이 떠 있을 땐 스크롤 막음
+    disableScroll();
+    // modal 닫히면 다시 스크롤 가능하도록 함
+    return () => enableScroll();
+  }, []);
+
+  // 스크롤 막는 함수
+  const disableScroll = () => {
+    document.body.style.overflow = "hidden";
   };
 
-  const handleModalClick = (event) => {
-    event.stopPropagation();
+  // 스크롤 가능하게 하는 함수
+  const enableScroll = () => {
+    document.body.style.overflow = "auto";
+  };
+
+  const handleModalClick = (e) => {
+    e.stopPropagation();
   };
 
   return (
     <>
-      {props.showModal && 
-        // <ModalBgDark onClick={handleModal}>
-          <ModalBgWhite onClick={handleModal}>
-            <ModalInner>
-              <span>{text}</span>
-              <div>
-                <Button width="100%" text={buttonText1} />
-                <Button
-                  width="100%"
-                  bg="white"
-                  color="black"
-                  onClick={handleModal}
-                  text={buttonText2}
-                />
-              </div>
-            </ModalInner>
-            {showCloseButton && (
-              <button onClick={handleModal}>
-                <img src={CloseButton} alt="닫기 버튼" />
-              </button>
-            )}
-          </ModalBgWhite>
-        
-      }
+      <ModalBgDark showModal={showModal} onClick={handleModal}>
+        <ModalBgWhite showModal={showModal} onClick={handleModalClick}>
+          <ModalInner>
+            <span>{text}</span>
+            <div>
+              <Button width="100%" text={buttonText1} />
+              <Button
+                width="100%"
+                bg="white"
+                color="black"
+                onClick={handleModal}
+                text={buttonText2}
+              />
+            </div>
+          </ModalInner>
+          {showCloseButton && (
+            <button onClick={handleModal}>
+              <img src={CloseButton} alt="닫기 버튼" />
+            </button>
+          )}
+        </ModalBgWhite>
+      </ModalBgDark>
     </>
   );
 }
 
 const ModalBgDark = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   box-sizing: border-box;
-  position: relative;
-  display: ${(props) => (props.showModal ? "block" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 `;
 const ModalBgWhite = styled.div`
   width: 378px;
@@ -63,8 +79,7 @@ const ModalBgWhite = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  box-shadow: 0 0 0 9999px black;
-  z-index: 9999;
+
   & > button {
     position: absolute;
     top: 16px;
@@ -91,7 +106,7 @@ const ModalInner = styled.div`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
-  & div button:first-child {
+  & > div > button:first-child {
     margin-bottom: 16px;
   }
 `;
