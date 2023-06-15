@@ -150,7 +150,7 @@ const ChatProfile = styled.div`
 
   button {
     grid-area: 1 / 2 / span 2 / 2;
-    margin-top: 10px;
+    margin-top: 15px;
   }
 `
 const Chatting = styled.div`

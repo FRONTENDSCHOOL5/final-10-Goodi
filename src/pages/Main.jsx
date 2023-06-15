@@ -10,8 +10,8 @@ import followerProducts from "../assets/follower-products.svg";
 import popularAuthor from "../assets/popular-author.svg";
 
 import PopularAuthorView from "../components/PopularAuthorView";
-import MainLayout from "../layout/MainLayout";
 import ProductData from "../mock/productData";
+import Layout from "../layout/Layout";
 
 export default function Main() {
   const data = ProductData[12];
@@ -19,48 +19,56 @@ export default function Main() {
   const data2 = ProductData[11];
 
   return (
-    <MainLayout>
-      <MainLeft>
-        <article>
-          <img
-            src={commonBanner}
-            alt="팔로워 인기 TOP 3위 작가님들 지금 바로 상품구경"
-          />
-        </article>
-        <section>
-          <h2 className="a11y-hidden">팔로워 인기 TOP 3 작가 작품</h2>
-          <ul>
-            {data.img.map((item) => {
-              return (
-                <li key={item.id}>
-                  <img src={item.dummyImg} alt="" />
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      </MainLeft>
+    <Layout>
+      <MainWrap>
+        <MainLeft>
+          <article>
+            <img
+              src={commonBanner}
+              alt="팔로워 인기 TOP 3위 작가님들 지금 바로 상품구경"
+            />
+          </article>
+          <section>
+            <h2 className="a11y-hidden">팔로워 인기 TOP 3 작가 작품</h2>
+            <ul>
+              {data.img.map((item) => {
+                return (
+                  <li key={item.id}>
+                    <img src={item.dummyImg} alt="" />
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        </MainLeft>
 
-      <span className="Line" />
+        <span className="Line" />
 
-      <MainRight>
-        <Title>
-          <img src={followerProducts} alt="Follower Products" />
-        </Title>
-        <CardProduct />
-        <ProductLink to="/">나도 굿즈 판매하기</ProductLink>
-      </MainRight>
+        <MainRight>
+          <Title>
+            <img src={followerProducts} alt="Follower Products" />
+          </Title>
+          <CardProduct />
+          <ProductLink to="/">나도 굿즈 판매하기</ProductLink>
+        </MainRight>
 
-      <MainBottom>
-        <Title>
-          <img src={popularAuthor} alt="Popular Author" />
-        </Title>
-        <PopularAuthorView data={data1} />
-        <PopularAuthorView data={data2} />
-      </MainBottom>
-    </MainLayout>
+        <MainBottom>
+          <Title>
+            <img src={popularAuthor} alt="Popular Author" />
+          </Title>
+          <PopularAuthorView data={data1} />
+          <PopularAuthorView data={data2} />
+        </MainBottom>
+      </MainWrap>
+    </Layout>
   );
 }
+
+const MainWrap = styled.div`
+  display: grid;
+  grid-template-columns: 0.8fr 0.1fr 1fr;
+  grid-template-rows: auto;
+`
 
 const MainLeft = styled.section`
   article {
@@ -80,6 +88,7 @@ const MainBottom = styled.section`
   padding: 110px 60px 150px 80px;
   grid-row: 2 / 3;
   grid-column: 1 / 4;
+
 `;
 
 const Title = styled.h2`

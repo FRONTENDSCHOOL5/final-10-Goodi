@@ -23,7 +23,7 @@ export default function Navigation() {
     { name: "Home", image: HomeIcon, nav: "/main" },
     { name: "My page", image: MypageIcon, nav: "/profile" },
     { name: "Cart", image: CartIcon, nav: "/login" },
-    { name: "Chat", image: ChatIcon, nav: "/login" },
+    { name: "Chat", image: ChatIcon, nav: "/chat" },
     { name: "Post", image: PostIcon, nav: "" },
     { name: "Logout", image: LogoutIcon, nav: "/login" },
   ];
