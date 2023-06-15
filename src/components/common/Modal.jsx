@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "./Button";
 import CloseButton from "../../assets/close-button.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Modal({
   text,
@@ -13,20 +13,31 @@ export default function Modal({
   handleModal,
   ...props
 }) {
-  // const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    // modal이 떠 있을 땐 스크롤 막음
+    disableScroll();
+    // modal 닫히면 다시 스크롤 가능하도록 함
+    return () => enableScroll();
+  }, []);
 
-  // const handleModal = () => {
-  //   setShowModal(!showModal);
-  // };
+  // 스크롤 막는 함수
+  const disableScroll = () => {
+    document.body.style.overflow = "hidden";
+  };
 
-  // const handleModalClick = (event) => {
-  //   event.stopPropagation();
-  // };
+  // 스크롤 가능하게 하는 함수
+  const enableScroll = () => {
+    document.body.style.overflow = "auto";
+  };
+
+  const handleModalClick = (e) => {
+    e.stopPropagation();
+  };
 
   return (
     <>
       <ModalBgDark showModal={showModal} onClick={handleModal}>
-        <ModalBgWhite showModal={showModal}>
+        <ModalBgWhite showModal={showModal} onClick={handleModalClick}>
           <ModalInner>
             <span>{text}</span>
             <div>
@@ -59,7 +70,6 @@ const ModalBgDark = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  /* display: ${(props) => (props.showModal ? "block" : "none")}; */
   z-index: 9999;
 `;
 const ModalBgWhite = styled.div`
@@ -78,7 +88,6 @@ const ModalBgWhite = styled.div`
   & img {
     cursor: pointer;
   }
-  /* display: ${(props) => (props.showModal ? "block" : "none")}; */
 `;
 const ModalInner = styled.div`
   max-width: 305px;
