@@ -1,5 +1,4 @@
 import React from "react";
-import Layout from "../layout/Layout";
 import styled from "styled-components";
 
 import pointEdgeProfile from "../assets/point-edge-profile.svg";
@@ -9,63 +8,85 @@ import profileImgDef from "../assets/profile_img_def.svg";
 import CardProduct from "../components/common/CardProduct";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import userDummy from "../mock/userDummy";
-import MainLayout from "../layout/MainLayout";
 import Post from "../components/common/Post";
+import Layout from "../layout/Layout";
 
 export default function Profile() {
   const data = userDummy[0];
   console.log(data);
 
   return (
-    <MainLayout reduceTop="true">
-      <ProfileLeft>
-        <ProfileUser>
-          <IntroWrap>
-            <img src={profileImgDef} alt="" />
-            <strong>{data.name}</strong>
-            <p>{data.email}</p>
-          </IntroWrap>
+    <Layout reduceTop="true">
+      <ProfileWrap>
+        <ProfileLeft>
+          <ProfileUser>
+            <IntroWrap>
+              <img src={profileImgDef} alt="" />
+              <strong>{data.name}</strong>
+              <p>{data.email}</p>
+            </IntroWrap>
 
-          <BtnWrap>
-            <ButtonLineIcon
-              text="작가랑 채팅하기"
-              basic="true"
-              bg="black"
-              color="white"
-            />
-            <ButtonLineIcon text="작가 팔로우" />
-          </BtnWrap>
+            <BtnWrap>
+              <ButtonLineIcon
+                text="작가랑 채팅하기"
+                basic="true"
+                bg="black"
+                color="white"
+              />
+              <ButtonLineIcon text="작가 팔로우" />
+            </BtnWrap>
 
-          <p>{data.text}</p>
+            <p>{data.text}</p>
 
-          <FollowWrap>
-            <FollowDiv>
-              <strong>{data.follower}</strong>
-              <p>팔로워</p>
-            </FollowDiv>
-            <FollowDiv>
-              <strong>{data.following}</strong>
-              <p>팔로잉</p>
-            </FollowDiv>
-          </FollowWrap>
-        </ProfileUser>
+            <FollowWrap>
+              <FollowDiv>
+                <strong>{data.follower}</strong>
+                <p>팔로워</p>
+              </FollowDiv>
+              <FollowDiv>
+                <strong>{data.following}</strong>
+                <p>팔로잉</p>
+              </FollowDiv>
+            </FollowWrap>
+          </ProfileUser>
 
-        <div style={{ marginTop: "60px" }}>
-          <Post />
-        </div>
-      </ProfileLeft>
+          <div style={{ marginTop: "60px" }}>
+            <Post />
+          </div>
+        </ProfileLeft>
 
-      <span className="Line" />
+        <span className="Line" />
 
-      <ProfileRight>
-        <Title>
-          <img src={authorProducts} alt="Follower Products" />
-        </Title>
-        <CardProduct />
-      </ProfileRight>
-    </MainLayout>
+        <ProfileRight>
+          <Title>
+            <img src={authorProducts} alt="Follower Products" />
+          </Title>
+          <CardProduct />
+        </ProfileRight>
+      </ProfileWrap>
+    </Layout>
   );
 }
+
+const ProfileWrap = styled.div`
+  display: grid;
+  grid-template-columns: 0.8fr 0.1fr 1fr;
+  grid-template-rows: auto;
+
+  padding: 90px 60px 120px 80px;
+  box-sizing: border-box;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 330px;
+    background: #000;
+  }
+`
 
 const ProfileLeft = styled.section`
   width: 100%;
