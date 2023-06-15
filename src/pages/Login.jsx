@@ -86,6 +86,7 @@ export default function Login() {
             <InputDiv>
               <Label>이메일</Label>
               <InputBox
+                type="email"
                 width="432px"
                 height="48px"
                 padding="15px"
@@ -120,7 +121,6 @@ export default function Login() {
             {errorMessage && loginData.user.email && loginData.user.password && (
               <ErrorMassage>{errorMessage}</ErrorMassage>
             )}
-            { }
             <ButtonDiv>
               <Button
                 type="submit"
