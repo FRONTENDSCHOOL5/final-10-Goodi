@@ -42,7 +42,7 @@ export default function Main() {
           </section>
         </MainLeft>
 
-        <span className="Line" />
+        <Line />
 
         <MainRight>
           <Title>
@@ -135,4 +135,12 @@ const ProductLink = styled(Link)`
     height: 24px;
     background: url(${arrowPrimaryIcon}) no-repeat center/cover;
   }
+`;
+
+const Line = styled.span`
+  width: 1px;
+  height: 100%;
+  display: inline-block;
+  background-color: var(--gray200-color);
+  margin: 0 60px;
 `;

@@ -51,7 +51,7 @@ export default function Detail() {
               user_name={data.name}
               user_email={data.email}
             />
-            <ButtonLineIcon text="작가 팔로우" height="50px" />
+            <ButtonLineIcon text="작가 팔로우" />
           </div>
 
           <h2 className="product_title">{data.title}</h2>
