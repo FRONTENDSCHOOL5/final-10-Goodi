@@ -176,5 +176,4 @@ const ProductLink = styled(Link)`
     height: 24px;
     background: url(${arrowPrimaryIcon}) no-repeat center/cover;
   }
-  /* ButtonLineIconUI 랑 중복 줄일 수 있을 것 같은데 */
 `;
