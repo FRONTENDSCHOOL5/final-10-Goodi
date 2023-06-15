@@ -14,7 +14,7 @@ export default function PopularAuthorView({ data }) {
         user_email={data.email}
         mainprofile="true"
       >
-        <ButtonLineIcon text="작가 팔로우" height="50px" />
+        <ButtonLineIcon text="작가 팔로우" />
       </ProfileUI>
 
       <UL>

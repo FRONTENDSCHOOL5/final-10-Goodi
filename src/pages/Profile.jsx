@@ -10,6 +10,8 @@ import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import userDummy from "../mock/userDummy";
 import Post from "../components/common/Post";
 import Layout from "../layout/Layout";
+import { useState } from "react";
+import Follow from "../components/Follow";
 
 export default function Profile() {
   const data = userDummy[0];
@@ -19,49 +21,43 @@ export default function Profile() {
     <Layout reduceTop="true">
       <ProfileWrap>
         <ProfileLeft>
-          <ProfileUser>
-            <IntroWrap>
-              <img src={profileImgDef} alt="" />
-              <strong>{data.name}</strong>
-              <p>{data.email}</p>
-            </IntroWrap>
+          <IntroWrap>
+            <img src={profileImgDef} alt="" />
+            <strong>{data.name}</strong>
+            <p>{data.email}</p>
+          </IntroWrap>
 
-            <BtnWrap>
-              <ButtonLineIcon
-                text="작가랑 채팅하기"
-                basic="true"
-                bg="black"
-                color="white"
-              />
-              <ButtonLineIcon text="작가 팔로우" />
-            </BtnWrap>
+          <BtnWrap>
+            <ButtonLineIcon
+              text="작가랑 채팅하기"
+              basic="true"
+              bg="black"
+              color="white"
+            />
+            <ButtonLineIcon text="작가 팔로우" />
+          </BtnWrap>
 
-            <p>{data.text}</p>
+          <p>{data.text}</p>
 
-            <FollowWrap>
-              <FollowDiv>
-                <strong>{data.follower}</strong>
-                <p>팔로워</p>
-              </FollowDiv>
-              <FollowDiv>
-                <strong>{data.following}</strong>
-                <p>팔로잉</p>
-              </FollowDiv>
-            </FollowWrap>
-          </ProfileUser>
+          <FollowWrap>
+            <FollowDiv className="followActive">
+              <strong>{data.follower}</strong>
+              <p>팔로워</p>
+            </FollowDiv>
+            <FollowDiv>
+              <strong>{data.following}</strong>
+              <p>팔로잉</p>
+            </FollowDiv>
+          </FollowWrap>
 
-          <div style={{ marginTop: "60px" }}>
-            <Post />
-          </div>
+          <Follow />
         </ProfileLeft>
-
-        <span className="Line" />
 
         <ProfileRight>
           <Title>
             <img src={authorProducts} alt="Follower Products" />
           </Title>
-          <CardProduct />
+          {/* { ? <CardProduct /> : <Post />} */}
         </ProfileRight>
       </ProfileWrap>
     </Layout>
@@ -70,8 +66,9 @@ export default function Profile() {
 
 const ProfileWrap = styled.div`
   display: grid;
-  grid-template-columns: 0.8fr 0.1fr 1fr;
+  grid-template-columns: 0.3fr 1fr;
   grid-template-rows: auto;
+  gap: 30px;
 
   padding: 90px 60px 120px 80px;
   box-sizing: border-box;
@@ -90,11 +87,7 @@ const ProfileWrap = styled.div`
 
 const ProfileLeft = styled.section`
   width: 100%;
-`;
-
-const ProfileUser = styled.section`
-  width: 100%;
-  padding: 50px 40px;
+  padding: 60px 24px 45px;
   background-color: #fff;
   border: 1px solid var(--gray300-color);
   border-radius: 10px;
@@ -113,6 +106,7 @@ const ProfileUser = styled.section`
     font-size: 16px;
     font-family: var(--font--Regular);
     line-height: 1.3;
+    text-align: justify;
   }
 `;
 
@@ -153,13 +147,14 @@ const ProfileRight = styled.section`
 
 const Title = styled.h2`
   position: relative;
+  margin-left: 30px;
 
   &::before {
     content: "";
     display: inline-block;
     position: absolute;
     top: -35px;
-    left: -25px;
+    left: -34px;
     width: 95px;
     height: 40px;
     background: url(${pointEdgeProfile}) no-repeat center/contain;
@@ -174,33 +169,46 @@ const FollowWrap = styled.div`
   justify-content: space-around;
   align-items: center;
   position: relative;
-  gap: 30px;
+  gap: 10px;
+  margin-bottom: 20px;
 
   &::before {
     content: "";
     position: absolute;
-    top: 18px;
+    top: 5px;
     left: 50%;
     width: 1px;
-    height: 100%;
+    height: calc(100% - 5px);
     display: inline-block;
-    background-color: var(--gray100-color);
+    background-color: var(--gray200-color);
+  }
+
+  .followActive {
+    background-color: #F4FFF3;
+    border-radius: 4px;
+
+    strong {
+      color: var(--dark-sub-color);
+    }
   }
 `;
 
+// div 자체에 onClick 함수를 주어야할 것 같습니다.
 const FollowDiv = styled.div`
+  width: 100%;
   text-align: center;
-  margin-top: 24px;
+  margin-top: 5px;
+  padding: 15px;
 
   strong {
     font-family: var(--font--semibold);
-    font-size: 25px;
+    font-size: 20px;
   }
 
   p {
     font-family: var(--font--Medium);
-    font-size: 18px;
+    font-size: 14px;
     color: var(--gray400-color);
-    margin-top: 12px;
+    margin-top: 8px;
   }
 `;

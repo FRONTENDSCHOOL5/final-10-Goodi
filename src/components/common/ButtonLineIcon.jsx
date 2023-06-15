@@ -7,7 +7,7 @@ export default function ButtonLineIcon({ text, ...props }) {
 }
 
 const ButtonLineIconUI = styled.button`
-  height: ${(props) => props.height || "56px"};
+  height: ${(props) => props.height || "50px"};
   padding: 18px 16px;
   background-color: ${(props) => props.bg || "white"};
   color: ${(props) => props.color || "black"};
