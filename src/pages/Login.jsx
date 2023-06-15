@@ -52,7 +52,7 @@ export default function Login() {
     if (response && response.hasOwnProperty("user")) {
       const newToken = response.user.token;
       const newAccountname = response.user.accountname;
-      setIsLoginCheck(false);
+      setIsLoginCheck(true);
       setToken(newToken);
       setIsAccountname(newAccountname);
 
