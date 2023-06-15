@@ -6,9 +6,9 @@ export default function Input() {
 }
 
 export const InputBox = styled.input`
-  border: 1px solid #d3d3d3;
-  width: ${ props => props.width};
-  height: ${ props => props.height};
+  border: 1px solid ${(props) => (props.hasError ? 'red' : '#d3d3d3')};
+  width: ${props => props.width};
+  height: ${props => props.height};
   padding: 15px;
   box-sizing: border-box;
   border-radius: 4px;
