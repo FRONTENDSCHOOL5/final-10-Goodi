@@ -57,6 +57,8 @@ export default function Profile() {
           <Title>
             <img src={authorProducts} alt="Follower Products" />
           </Title>
+          <TogglePost />
+          <CardProduct />
           {/* { ? <CardProduct /> : <Post />} */}
         </ProfileRight>
       </ProfileWrap>
@@ -70,7 +72,7 @@ const ProfileWrap = styled.div`
   grid-template-rows: auto;
   gap: 30px;
 
-  padding: 90px 60px 120px 80px;
+  padding: 90px 60px 0 80px;
   box-sizing: border-box;
   position: relative;
 
@@ -87,6 +89,7 @@ const ProfileWrap = styled.div`
 
 const ProfileLeft = styled.section`
   width: 100%;
+  max-height: 870px;
   padding: 60px 24px 45px;
   background-color: #fff;
   border: 1px solid var(--gray300-color);
@@ -96,7 +99,7 @@ const ProfileLeft = styled.section`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   gap: 35px;
 
@@ -142,12 +145,13 @@ const BtnWrap = styled.div`
 `;
 
 const ProfileRight = styled.section`
-  margin-top: 165px;
+  
 `;
 
 const Title = styled.h2`
   position: relative;
   margin-left: 30px;
+  margin-top: 165px;
 
   &::before {
     content: "";
@@ -212,3 +216,7 @@ const FollowDiv = styled.div`
     margin-top: 8px;
   }
 `;
+
+const TogglePost = styled.div`
+  
+`

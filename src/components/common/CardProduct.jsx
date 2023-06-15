@@ -31,7 +31,7 @@ export default function CardProduct() {
 const CardList = styled.div`
   margin: 80px 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
   gap: 3.75rem;
 `
