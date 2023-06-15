@@ -4,8 +4,12 @@ import styled from 'styled-components'
 
 import chatTitle from '../../src/assets/Chat_title.svg'
 import edgeChat from '../../src/assets/point-edge-chat.svg'
+import sampleChat from '../../src/assets/sample-img/sampleChat.png'
+
 import ProductData from '../mock/productData'
 import ButtonLineIcon from '../components/common/ButtonLineIcon'
+
+import Form from '../components/common/Form'
 
 export default function Chat(reduceTop) {
   const chatList = ProductData;
@@ -38,6 +42,11 @@ export default function Chat(reduceTop) {
               basic
             />
           </ChatProfile>
+          <Chatting>
+            {/* 채팅 구현 필요 (이미지 처리 되어있음) */}
+            <img src={sampleChat} alt="" />
+            <Form />
+          </Chatting>
         </ChatWrapRight>
       </ChatWrap>
     </Layout>
@@ -46,6 +55,7 @@ export default function Chat(reduceTop) {
 
 const ChatWrap = styled.div`
   display: flex;
+  min-height: 100%;
 `
 
 const ChatWrapLeft = styled.section`
@@ -141,5 +151,15 @@ const ChatProfile = styled.div`
   button {
     grid-area: 1 / 2 / span 2 / 2;
     margin-top: 10px;
+  }
+`
+const Chatting = styled.div`
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+
+  img {
+    width: 100%;
   }
 `
