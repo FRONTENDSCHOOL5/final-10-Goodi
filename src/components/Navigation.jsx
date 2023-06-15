@@ -30,7 +30,7 @@ export default function Navigation() {
 
   // localNav hidden 관리
   // 예외처리 해줘야할것들:  x 버튼을 눌렀을 경우, 다른 곳을 클릭했을경우
-  const [isHidden, setIsHidden] = useState(true);
+  const [isHidden, setIsHidden] = useState(false);
 
   const handleLocalNav = () => {
     setIsHidden((prevIsHidden) => !prevIsHidden);
