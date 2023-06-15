@@ -20,7 +20,6 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
 
-
   const [loginData, setLoginData] = useState({
     user: {
       email: "",
@@ -49,8 +48,6 @@ export default function Login() {
       const errorMessage = (response && response.message) ? response.message : handleError();
       setErrorMessage(errorMessage);
     }
-
-    console.log(errorMessage);
   }
 
   const handleSubmit = async (e) => {
@@ -68,9 +65,7 @@ export default function Login() {
     } else {
       errors.push("");
     }
-
     setUserErrorMessage(errors);
-
   }
 
   const gotoJoin = () => {
@@ -98,10 +93,11 @@ export default function Login() {
                 onChange={handleInputChange}
                 value={loginData.user.email}
                 placeholder="이메일을 입력해주세요"
+                hasError={userErrorMessage.includes("아이디를 입력해주세요")}
               />
               {/* email을 입력하지 않은 경우 */}
               {userErrorMessage.includes("아이디를 입력해주세요") && (
-                <div>아이디를 입력해주세요</div>
+                <ErrorMassage>아이디를 입력해주세요</ErrorMassage>
               )}
             </InputDiv>
             <InputDiv>
@@ -114,15 +110,17 @@ export default function Login() {
                 name='password'
                 type="password"
                 placeholder="비밀번호를 입력하세요"
+                hasError={userErrorMessage.includes("비밀번호를 입력해주세요")}
               />
               {/* password을 입력하지 않은 경우 */}
               {userErrorMessage.includes("비밀번호를 입력해주세요") && (
-                <div>비밀번호를 입력해주세요</div>
+                <ErrorMassage>비밀번호를 입력해주세요</ErrorMassage>
               )}
             </InputDiv>
             {errorMessage && loginData.user.email && loginData.user.password && (
-              <div>{errorMessage}</div>
+              <ErrorMassage>{errorMessage}</ErrorMassage>
             )}
+            { }
             <ButtonDiv>
               <Button
                 type="submit"
@@ -227,7 +225,7 @@ const Label = styled.label`
   margin-bottom: 8px;
 `;
 const ButtonDiv = styled.div`
-  padding: 55px 0 40px;
+  padding: 40px 0;
   position: relative;
 
   &::after {
@@ -266,3 +264,8 @@ const SnsBg = styled.div`
     transform: translate(-50%, -50%);
   }
 `;
+const ErrorMassage = styled.div`
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
+`
