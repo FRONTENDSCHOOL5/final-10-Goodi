@@ -32,7 +32,7 @@ const HeaderLayout = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 100;
+  z-index: 1;
 
   .following_wrap {
     display: flex;
