@@ -44,13 +44,16 @@ export default function Setprofile() {
     const response = await userAPI(signUpData);
 
     if (response && response.hasOwnProperty("user")) navigate("/login");
-    else console.log('!')
+    else {
+      const errorMessage = (response && response.message) ? response.message : handleError();
+      setErrorMessage(errorMessage);
+    }
   }
 
   const handleError = () => {
     const errors = [];
     if (signUpData.user.username === "") {
-      errors.push("아이디를 입력해주세요");
+      errors.push("닉네임을 입력해주세요");
     }
     else {
       errors.push("");
@@ -105,7 +108,14 @@ export default function Setprofile() {
               onChange={handleInputChange}
               value={signUpData.user.username}
               placeholder="Goodi에서 사용할 닉네임을 입력해주세요"
+              hasError={userErrorMessage.includes(
+                "닉네임을 입력해주세요"
+              )}
             />
+            {/* email을 입력하지 않은 경우 */}
+            {userErrorMessage.includes("닉네임을 입력해주세요") && (
+          <ErrorMassage>{userErrorMessage}</ErrorMassage>
+        )}
           </InputDiv>
           <InputDiv>
             <Label>소개 메세지</Label>
@@ -211,3 +221,8 @@ const Label = styled.label`
 const ButtonDiv = styled.div`
   margin-top: 100px;
 `;
+const ErrorMassage = styled.div`
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
+`

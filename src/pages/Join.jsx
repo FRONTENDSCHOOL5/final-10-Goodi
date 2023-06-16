@@ -37,19 +37,24 @@ export default function Join() {
     }));
   };
   const handleError = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     const errors = [];
     if (joinData.user.email === "") {
-      errors.push("아이디를 입력해주세요");
-    } else if (joinData.user.password === "") {
-      errors.push("비밀번호를 입력해주세요");
+      errors.push("유효한 이메일을 입력해주세요");
+    }
+    else if (!emailRegex.test(joinData.user.email)){
+      errors.push("유효한 이메일을 입력해주세요");
+    } else if (joinData.user.password.length < 6) {
+      errors.push("비밀번호를 6자리 이상 입력해주세요");
     } else {
       errors.push("");
-      console.log("조인",joinData.user.email);
-      console.log("조인",joinData.user.password);
+      console.log("조인", joinData.user.email);
+      console.log("조인", joinData.user.password);
       navigate("/setprofile", { state: joinData.user });
     }
     setUserErrorMessage(errors);
-  }
+  };
 
   return (
     <OuterDiv>
@@ -71,8 +76,15 @@ export default function Join() {
               name="email"
               onChange={handleInputChange}
               value={joinData.user.email}
-              placeholder="이메일을 입력해주세요"
-              />
+              placeholder="유효한 이메일을 입력해주세요"
+              hasError={userErrorMessage.includes(
+                "유효한 이메일을 입력해주세요"
+              )}
+            />
+            {/* email을 입력하지 않은 경우 */}
+            {userErrorMessage.includes("유효한 이메일을 입력해주세요") && (
+          <ErrorMassage>{userErrorMessage}</ErrorMassage>
+        )}
           </InputDiv>
           <InputDiv>
             <Label>비밀번호</Label>
@@ -84,12 +96,21 @@ export default function Join() {
               onChange={handleInputChange}
               value={joinData.user.password}
               placeholder="비밀번호를 입력하세요"
-              />
+              hasError={userErrorMessage.includes(
+                "비밀번호를 6자리 이상 입력해주세요"
+              )}
+            />
+            {/* 비밀번호가 6글자 미만인 경우 */}
+            {userErrorMessage.includes(
+              "비밀번호를 6자리 이상 입력해주세요"
+            ) && (
+              <ErrorMassage>비밀번호를 6자리 이상 입력해주세요</ErrorMassage>
+            )}
           </InputDiv>
           <ButtonDiv>
             <Button
               text="다음"
-              type="button"
+              type="submit"
               bg="black"
               width="432px"
               br="none"
@@ -173,4 +194,4 @@ const ErrorMassage = styled.div`
   margin-top: 10px;
   color: red;
   font-size: 14px;
-`
+`;
