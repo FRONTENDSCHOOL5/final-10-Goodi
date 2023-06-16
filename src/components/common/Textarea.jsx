@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function Input() {
-  return;
+export default function Textarea({ ...props }) {
+  return (
+    <>
+      <TextareaBox {...props}></TextareaBox>
+      <p>({props.textCount.length} / 100)</p>
+    </>
+  );
 }
 
-export const InputBox = styled.input`
+const TextareaBox = styled.textarea`
+  font-family: var(--font--Regular);
+  resize: none;
+  font-size: 16px;
   border: 1px solid ${(props) => (props.hasError ? "red" : "#d3d3d3")};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -19,5 +27,13 @@ export const InputBox = styled.input`
   }
   &:focus {
     border-color: black;
+    outline: none;
+  }
+
+  & + p {
+    font-size: 14px;
+    color: var(--gray400-color);
+    text-align: right;
+    margin-top: 12px;
   }
 `;
