@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 import ProductData from './../../mock/productData';
 
-export default function CardProduct() {
+export default function CardProduct({ profile }) {
   const cardInfoList = ProductData;
 
   return (
-    <CardList>
+    <CardList profile={profile}>
       {cardInfoList.map((cardInfo) => {
         return (
           <Card
@@ -31,7 +31,7 @@ export default function CardProduct() {
 const CardList = styled.div`
   margin: 80px 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: ${({ profile }) => profile ? "repeat(3, 1fr)" : "repeat(2, 1fr)"};
   grid-template-rows: auto;
   gap: 3.75rem;
 `

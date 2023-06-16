@@ -58,7 +58,7 @@ export default function Profile() {
             <img src={authorProducts} alt="Follower Products" />
           </Title>
           <TogglePost />
-          <CardProduct />
+          <CardProduct profile="true" />
           {/* { ? <CardProduct /> : <Post />} */}
         </ProfileRight>
       </ProfileWrap>
