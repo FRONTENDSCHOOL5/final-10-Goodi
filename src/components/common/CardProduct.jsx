@@ -33,5 +33,5 @@ const CardList = styled.div`
   display: grid;
   grid-template-columns: ${({ profile }) => profile ? "repeat(3, 1fr)" : "repeat(2, 1fr)"};
   grid-template-rows: auto;
-  gap: 3.75rem;
+  gap: ${({ profile }) => profile ? "30px" : "60px"};;
 `

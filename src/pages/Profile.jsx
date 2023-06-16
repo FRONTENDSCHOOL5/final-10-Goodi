@@ -8,10 +8,10 @@ import profileImgDef from "../assets/profile_img_def.svg";
 import CardProduct from "../components/common/CardProduct";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import userDummy from "../mock/userDummy";
-import Post from "../components/common/Post";
 import Layout from "../layout/Layout";
 import { useState } from "react";
 import Follow from "../components/Follow";
+import PostList from "../components/common/PostList";
 
 export default function Profile() {
   const data = userDummy[0];
@@ -79,7 +79,7 @@ export default function Profile() {
             </TabBtn>
           </TabMenu>
           {activeTab === 1 && <CardProduct profile="true" />}
-          {activeTab === 2 && <Post />}
+          {activeTab === 2 && <PostList />}
         </ProfileRight>
       </ProfileWrap>
     </Layout>
@@ -216,7 +216,7 @@ const FollowDiv = styled.div`
 `;
 
 const ProfileRight = styled.section`
-  h2 {
+  & > h2 {
     position: relative;
     margin-left: 30px;
     margin-top: 168px;
@@ -237,7 +237,7 @@ const ProfileRight = styled.section`
 
 const TabMenu = styled.div`
   width: 23%;
-  margin-top: 70px;
+  margin: 70px 0 30px;
   position: relative;
 
   display: flex;
@@ -265,4 +265,5 @@ const TabMenu = styled.div`
 const TabBtn = styled.button`
   padding: 8px 12px;
   color: var(--gray500-color);
+  cursor: pointer;
 `
