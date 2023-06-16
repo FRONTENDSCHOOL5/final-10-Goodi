@@ -26,11 +26,18 @@ const FollowWrap = styled.article`
 
   h2 {
     margin-bottom: 30px;
+
+    & > img {
+      width: 60%;
+    }
   }
 
   a {
     img {
-    width: 48px;
+    width: 40px;
+    }
+    h3 {
+      font-size: 14px;
     }
     p {
       font-size: 12px;

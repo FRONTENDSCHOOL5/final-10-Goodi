@@ -8,14 +8,25 @@ import profileImgDef from "../assets/profile_img_def.svg";
 import CardProduct from "../components/common/CardProduct";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import userDummy from "../mock/userDummy";
-import Post from "../components/common/Post";
 import Layout from "../layout/Layout";
 import { useState } from "react";
 import Follow from "../components/Follow";
+import PostList from "../components/common/PostList";
 
 export default function Profile() {
   const data = userDummy[0];
   console.log(data);
+
+  const [activeTab, setActiveTab] = useState(1);
+  const [activeFollow, setActiveFollow] = useState(1);
+
+  const handleTabClick = (tabNumber) => {
+    setActiveTab(tabNumber);
+  };
+
+  const handleFollowClick = (followNumber) => {
+    setActiveFollow(followNumber);
+  };
 
   return (
     <Layout reduceTop="true">
@@ -40,11 +51,17 @@ export default function Profile() {
           <p>{data.text}</p>
 
           <FollowWrap>
-            <FollowDiv className="followActive">
+            <FollowDiv
+              className={activeFollow === 1 ? 'followActive' : ''}
+              onClick={() => handleFollowClick(1)}
+            >
               <strong>{data.follower}</strong>
               <p>팔로워</p>
             </FollowDiv>
-            <FollowDiv>
+            <FollowDiv
+              className={activeFollow === 2 ? 'followActive' : ''}
+              onClick={() => handleFollowClick(2)}
+            >
               <strong>{data.following}</strong>
               <p>팔로잉</p>
             </FollowDiv>
@@ -54,12 +71,26 @@ export default function Profile() {
         </ProfileLeft>
 
         <ProfileRight>
-          <Title>
+          <h2>
             <img src={authorProducts} alt="Follower Products" />
-          </Title>
-          <TogglePost />
-          <CardProduct profile="true" />
-          {/* { ? <CardProduct /> : <Post />} */}
+          </h2>
+
+          <TabMenu>
+            <TabBtn
+              className={activeTab === 1 ? 'active' : ''}
+              onClick={() => handleTabClick(1)}
+            >
+              상품 목록
+            </TabBtn>
+            <TabBtn
+              className={activeTab === 2 ? 'active' : ''}
+              onClick={() => handleTabClick(2)}
+            >
+              게시글 목록
+            </TabBtn>
+          </TabMenu>
+          {activeTab === 1 && <CardProduct profile="true" />}
+          {activeTab === 2 && <PostList />}
         </ProfileRight>
       </ProfileWrap>
     </Layout>
@@ -144,28 +175,6 @@ const BtnWrap = styled.div`
   gap: 10px;
 `;
 
-const ProfileRight = styled.section`
-  
-`;
-
-const Title = styled.h2`
-  position: relative;
-  margin-left: 30px;
-  margin-top: 165px;
-
-  &::before {
-    content: "";
-    display: inline-block;
-    position: absolute;
-    top: -35px;
-    left: -34px;
-    width: 95px;
-    height: 40px;
-    background: url(${pointEdgeProfile}) no-repeat center/contain;
-    vertical-align: bottom;
-  }
-`;
-
 const FollowWrap = styled.div`
   width: 100%;
   border-top: 1px solid var(--gray300-color);
@@ -197,12 +206,12 @@ const FollowWrap = styled.div`
   }
 `;
 
-// div 자체에 onClick 함수를 주어야할 것 같습니다.
 const FollowDiv = styled.div`
   width: 100%;
   text-align: center;
   margin-top: 5px;
   padding: 15px;
+  cursor: pointer;
 
   strong {
     font-family: var(--font--semibold);
@@ -217,6 +226,55 @@ const FollowDiv = styled.div`
   }
 `;
 
-const TogglePost = styled.div`
-  
+const ProfileRight = styled.section`
+  & > h2 {
+    position: relative;
+    margin-left: 30px;
+    margin-top: 168px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: -35px;
+      left: -34px;
+      width: 95px;
+      height: 40px;
+      background: url(${pointEdgeProfile}) no-repeat center/contain;
+      vertical-align: bottom;
+    }
+  }
+`;
+
+const TabMenu = styled.div`
+  width: 23%;
+  margin: 70px 0 30px;
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 70%;
+    background-color: var(--gray300-color);
+    position: absolute;
+    top: 5px;
+    left: 102px;
+  }
+
+  button.active {
+    font-family: var(--font--semibold);
+    color: black;
+  }
+`
+
+const TabBtn = styled.button`
+  padding: 8px 12px;
+  color: var(--gray500-color);
+  cursor: pointer;
 `

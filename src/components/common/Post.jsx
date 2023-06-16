@@ -8,7 +8,7 @@ import profileImgDef from "../../assets/profile_img_def.svg";
 import postMenu from "../../assets/post_menu.svg";
 import postImg from "../../assets/post_image2.svg";
 import myProfileImg from "../../assets/myProfile-image.svg";
-import {InputBox} from "./Input";
+import { InputBox } from "./Input";
 
 export default function Post({ profile, name, email }) {
   const data = userDummy[0];
@@ -28,7 +28,7 @@ export default function Post({ profile, name, email }) {
         </button>
       </PostTop>
       <PostContent>
-        <img src={postImg} />
+        <img src={postImg} alt="" />
         <div>
           <PostLikeBtn />
           <span>3일 전 게시물</span>
@@ -41,12 +41,12 @@ export default function Post({ profile, name, email }) {
       </PostContent>
       <PostInput>
         <img src={myProfileImg} alt="내 프로필 사진" />
-        <InputBox 
-        width="100%" 
-        height="48px"
-        onChange={() => {}}
-        type="text"
-        placeholder="댓글 작성하기"></InputBox>
+        <InputBox
+          width="100%"
+          height="48px"
+          onChange={() => { }}
+          type="text"
+          placeholder="댓글 작성하기"></InputBox>
       </PostInput>
     </PostOuter>
   );
