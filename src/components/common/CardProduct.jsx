@@ -29,7 +29,7 @@ export default function CardProduct({ profile }) {
 }
 
 const CardList = styled.div`
-  margin: 80px 0;
+  margin: ${({ profile }) => profile ? "30px 0 70px" : "80px 0"};;
   display: grid;
   grid-template-columns: ${({ profile }) => profile ? "repeat(3, 1fr)" : "repeat(2, 1fr)"};
   grid-template-rows: auto;
