@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import userAPI from "../api/user";
 
 import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
@@ -8,14 +12,62 @@ import { LeftDiv } from "../components/Carousel";
 import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
 
-import SymbolImage from "../assets/symbol.svg";
-import LoginImage1 from "../assets/login_1.svg";
-import LoginImage2 from "../assets/login_image5.svg";
-import LoginImage3 from "../assets/login_image2.svg";
-import LoginMent from "../assets/login_logo.svg";
-import { useEffect, useState } from "react";
-
 export default function Setprofile() {
+
+  const [errorMessage, setErrorMessage] = useState([]);
+  const [userErrorMessage, setUserErrorMessage] = useState([]);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { email, password } = location.state || { email: "", password: "" };
+  const [signUpData, setSignUpData] = useState({
+    user: {
+      email: email,
+      password: password,
+      accountname: email.split('@')[0],
+      username: "",
+    },
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSignUpData((prevState) => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        [name]: value,
+      },
+    }));
+  };
+
+  const handleLogin = async (signUpData) => {
+    const response = await userAPI(signUpData);
+
+    if (response && response.hasOwnProperty("user")) navigate("/login");
+    else console.log('!')
+  }
+
+  const handleError = () => {
+    const errors = [];
+    if (signUpData.user.username === "") {
+      errors.push("아이디를 입력해주세요");
+    }
+    else {
+      errors.push("");
+      console.log("사인업",signUpData.user.email);
+      console.log("사인업",signUpData.user.password);
+      console.log("사인업",signUpData.user.username);
+      console.log("사인업",signUpData.user.accountname);
+    }
+    setUserErrorMessage(errors);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    handleError();
+    await handleLogin(signUpData);
+  }
+  
   return (
     <OuterDiv>
       <LeftDiv />
@@ -33,25 +85,26 @@ export default function Setprofile() {
                 <img
                   src={ProfileImgDef}
                   alt="Upload"
-                  // onClick={handleImageClick}
                   style={{ cursor: "pointer" }}
                 />
                 <img className="add_button_img"
                   src={PlusBtnImg}
                   alt="Upload"
-                  // onClick={handleImageClick}
                   style={{ cursor: "pointer" }}
                 />
               </label>
           </ProfileDiv>
+          <form onSubmit={handleSubmit}>
           <InputDiv>
-            <Label>이메일</Label>
+            <Label>닉네임</Label>
             <InputBox
               width="432px"
               height="48px"
               padding="15px"
-              onChange={() => {}}
-              placeholder="이메일을 입력해주세요"
+              name="username"
+              onChange={handleInputChange}
+              value={signUpData.user.username}
+              placeholder="Goodi에서 사용할 닉네임을 입력해주세요"
             />
           </InputDiv>
           <InputDiv>
@@ -60,23 +113,25 @@ export default function Setprofile() {
           </InputDiv>
           <ButtonDiv>
           <Button	
-              text="다음"	
-              type="button"	
+              text="Goodi 시작하기"	
+              type="submit"	
               bg="black"	
               width="432px"	
               br="none"	
+              onClick={handleError}
             />
           </ButtonDiv>
+          </form>
         </div>
       </RightDiv>
     </OuterDiv>
   );
 }
-export const OuterDiv = styled.div`
+const OuterDiv = styled.div`
   display: flex;
 `;
 
-export const RightDiv = styled.div`
+const RightDiv = styled.div`
   width: 57%;
   height: 100vh;
   display: flex;
@@ -103,7 +158,7 @@ export const RightDiv = styled.div`
     font-size: 1.25rem;
   }
 `;
-export const ProfileDiv = styled.div`
+const ProfileDiv = styled.div`
   position: relative;
   margin-bottom: 30px;
   .add_button_img {
@@ -113,7 +168,7 @@ export const ProfileDiv = styled.div`
   }
   cursor: pointer;
 `;
-export const InputDiv = styled.div`
+const InputDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 32px;
@@ -137,7 +192,7 @@ export const InputDiv = styled.div`
   }
 `;
 
-export const H1 = styled.h1`
+const H1 = styled.h1`
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
   width: 1px;
@@ -148,11 +203,11 @@ export const H1 = styled.h1`
   position: absolute;
 `;
 
-export const Label = styled.label`
+const Label = styled.label`
   font-family: var(--font--Bold);
   margin-bottom: 9px;
   font-weight: 700;
 `;
-export const ButtonDiv = styled.div`
+const ButtonDiv = styled.div`
   margin-top: 100px;
 `;

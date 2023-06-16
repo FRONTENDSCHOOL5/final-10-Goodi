@@ -1,33 +1,55 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
 import SymbolImage from "../assets/symbol.svg";
-import { useJoin } from "../hook/useJoin";
+
+import joinAPI from "../api/user";
 
 export default function Join() {
+  const navigate = useNavigate();
 
-  // useJoin 을 사용하기 위한 기본 메소드를 정의했어요.
-  const { joinResult, errorResult, callMutate } = useJoin()
+  const [errorMessage, setErrorMessage] = useState([]);
+  const [userErrorMessage, setUserErrorMessage] = useState([]);
 
-  useEffect(() => {
-    if (joinResult != null)
-      console.log("[TEST]", joinResult)
-  }, [joinResult])
+  const [joinData, setJoinData] = useState({
+    user: {
+      email: "",
+      password: "",
+      accountname: "",
+      username: "",
+    },
+  });
 
-  useEffect(() => {
-    if (errorResult != null)
-      window.alert(errorResult.message)
-  }, [errorResult])
-
-  // 우리는 데이터를 저장할 상태들을 만들었어요.
-  const [accountName, setAccountName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setJoinData((prevState) => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        [name]: value,
+      },
+    }));
+  };
+  const handleError = () => {
+    const errors = [];
+    if (joinData.user.email === "") {
+      errors.push("아이디를 입력해주세요");
+    } else if (joinData.user.password === "") {
+      errors.push("비밀번호를 입력해주세요");
+    } else {
+      errors.push("");
+      console.log("조인",joinData.user.email);
+      console.log("조인",joinData.user.password);
+      navigate("/setprofile", { state: joinData.user });
+    }
+    setUserErrorMessage(errors);
+  }
 
   return (
     <OuterDiv>
@@ -42,26 +64,27 @@ export default function Join() {
           <InputDiv>
             <Label>이메일</Label>
             <InputBox
+              type="email"
               width="432px"
               height="48px"
               padding="15px"
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
+              name="email"
+              onChange={handleInputChange}
+              value={joinData.user.email}
               placeholder="이메일을 입력해주세요"
-            />
+              />
           </InputDiv>
           <InputDiv>
             <Label>비밀번호</Label>
             <InputBox
+              type="password"
               width="432px"
               height="48px"
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-              type="password"
+              name="password"
+              onChange={handleInputChange}
+              value={joinData.user.password}
               placeholder="비밀번호를 입력하세요"
-            />
+              />
           </InputDiv>
           <ButtonDiv>
             <Button
@@ -70,17 +93,7 @@ export default function Join() {
               bg="black"
               width="432px"
               br="none"
-              onClick={() => {
-                // 다음 버튼을 눌렀을 때 RequestBody 에 맞는 데이터를 입력해서
-                // 회원가입 hooks 를 실행할 수 있도록 해요.
-                callMutate({
-                  email,
-                  password,
-                  username: "꽉오",
-                  accountname: accountName,
-                })
-              }}
-
+              onClick={handleError}
             />
           </ButtonDiv>
         </div>
@@ -148,11 +161,16 @@ export const H2 = styled.div`
     vertical-align: text-bottom;
   }
 `;
-export const Label = styled.label`
+const Label = styled.label`
   font-family: var(--font--Bold);
   margin-bottom: 9px;
   font-weight: 700;
 `;
-export const ButtonDiv = styled.div`
+const ButtonDiv = styled.div`
   margin-top: 166px;
 `;
+const ErrorMassage = styled.div`
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
+`

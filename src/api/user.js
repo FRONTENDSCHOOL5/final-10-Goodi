@@ -1,31 +1,25 @@
-import { goodiFetchInstance } from './instance';
+const JOIN_URL = "https://api.mandarin.weniv.co.kr/user"
 
-export const postUserPath = '/user';
-export const postUser = async ({
-  username,
-  email,
-  password,
-  accountname,
-  intro,
-  image,
-}) => {
-  // 요 생성된 기본 설정을 들고있는 Axios 인스턴스를 통해서, 회원가입 API 를 호출해주는 js 함수를 만들었어요.
-  // 첫번째 인자에는 엔드포인트 뒤의 path 가 들어가고요,
-  // 두번째 인자에는 Request Body 가 들어가요.
-  // data 에는 Response 가 담겨있어요.
-  const emailAccountName = email.split('@')[0];
+const joinAPI = async (joinData) => {
+  try {
+    const response = await fetch(JOIN_URL, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...joinData }),
+    })
 
-  const data = await goodiFetchInstance.post(postUserPath, {
+    const accountData = await response.json();
 
-    user: {
-      username,
-      email,
-      password,
-      accountname: emailAccountName,
-      intro,
-      image
+    if (response.ok) {
+      return accountData;
     }
-  })
 
-  return data;
+  } catch (error) {
+    console.log('Account API 에러가 발생했습니다', error);
+  }
 };
+
+export default joinAPI;
+// test 계정 정보 : suritest@test.com / suritest
