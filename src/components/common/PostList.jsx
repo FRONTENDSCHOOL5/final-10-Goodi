@@ -8,9 +8,9 @@ export default function PostList() {
 
   return (
     <PostListWrap>
-      {data.map((user, index) => (
+      {data.map((user) => (
         <Post
-          key={index}
+          key={user.id}
           profile={user.profileImg}
           name={user.name}
           email={user.email}
