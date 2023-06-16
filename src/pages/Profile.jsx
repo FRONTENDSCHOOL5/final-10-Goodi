@@ -18,9 +18,14 @@ export default function Profile() {
   console.log(data);
 
   const [activeTab, setActiveTab] = useState(1);
+  const [activeFollow, setActiveFollow] = useState(1);
 
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
+  };
+
+  const handleFollowClick = (followNumber) => {
+    setActiveFollow(followNumber);
   };
 
   return (
@@ -46,11 +51,17 @@ export default function Profile() {
           <p>{data.text}</p>
 
           <FollowWrap>
-            <FollowDiv className="followActive">
+            <FollowDiv
+              className={activeFollow === 1 ? 'followActive' : ''}
+              onClick={() => handleFollowClick(1)}
+            >
               <strong>{data.follower}</strong>
               <p>팔로워</p>
             </FollowDiv>
-            <FollowDiv>
+            <FollowDiv
+              className={activeFollow === 2 ? 'followActive' : ''}
+              onClick={() => handleFollowClick(2)}
+            >
               <strong>{data.following}</strong>
               <p>팔로잉</p>
             </FollowDiv>
@@ -195,12 +206,12 @@ const FollowWrap = styled.div`
   }
 `;
 
-// div 자체에 onClick 함수를 주어야할 것 같습니다.
 const FollowDiv = styled.div`
   width: 100%;
   text-align: center;
   margin-top: 5px;
   padding: 15px;
+  cursor: pointer;
 
   strong {
     font-family: var(--font--semibold);
