@@ -56,9 +56,7 @@ export default function Login() {
       setToken(newToken);
       setIsAccountname(newAccountname);
 
-      console.log(isloginCheck);
-      console.log(newToken);
-      console.log(newAccountname);
+      console.log(response);
 
       navigate("/main");
     } else {
@@ -88,6 +86,8 @@ export default function Login() {
   const gotoJoin = () => {
     navigate('/join');
   }
+
+  console.log(token);
 
   return (
     <OuterDiv>

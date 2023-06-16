@@ -1,22 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import pointEdgeProfile from "../assets/point-edge-profile.svg";
 import authorProducts from "../assets/Author-Products.svg";
-import profileImgDef from "../assets/profile_img_def.svg";
-
+import goodiLoading from "../assets/goodi_loading.svg";
 import CardProduct from "../components/common/CardProduct";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
-import userDummy from "../mock/userDummy";
 import Layout from "../layout/Layout";
 import { useState } from "react";
 import Follow from "../components/Follow";
 import PostList from "../components/common/PostList";
+import { useRecoilState } from "recoil";
+import loginToken from "../recoil/loginToken";
+import profileAPI from "../api/profile";
 
 export default function Profile() {
-  const data = userDummy[0];
-  console.log(data);
-
   const [activeTab, setActiveTab] = useState(1);
   const [activeFollow, setActiveFollow] = useState(1);
 
@@ -28,14 +26,50 @@ export default function Profile() {
     setActiveFollow(followNumber);
   };
 
+  const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [token, setToken] = useRecoilState(loginToken);
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await profileAPI(token);
+        setProfileData(response);
+        setLoading(false);
+      } catch (error) {
+        console.error("Account API 에러가 발생했습니다", error);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+
+  if (loading) {
+    return (
+      <LoadingStyle>
+        <p>로딩중...</p>
+      </LoadingStyle>
+    );
+  }
+
+  if (!profileData) {
+    return (
+      <LoadingStyle>
+        <p>사용자 정보를 불러올 수 없습니다.</p>
+      </LoadingStyle>
+    )
+  }
+
+  console.log(profileData);
+
   return (
     <Layout reduceTop="true">
       <ProfileWrap>
         <ProfileLeft>
           <IntroWrap>
-            <img src={profileImgDef} alt="" />
-            <strong>{data.name}</strong>
-            <p>{data.email}</p>
+            <img src={profileData.user.image} alt="" />
+            <strong>{profileData.user.username}</strong>
+            <p>{profileData.user.accountname}</p>
           </IntroWrap>
 
           <BtnWrap>
@@ -48,21 +82,21 @@ export default function Profile() {
             <ButtonLineIcon text="작가 팔로우" />
           </BtnWrap>
 
-          <p>{data.text}</p>
+          <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
 
           <FollowWrap>
             <FollowDiv
               className={activeFollow === 1 ? 'followActive' : ''}
               onClick={() => handleFollowClick(1)}
             >
-              <strong>{data.follower}</strong>
+              <strong>{profileData.user.followerCount}</strong>
               <p>팔로워</p>
             </FollowDiv>
             <FollowDiv
               className={activeFollow === 2 ? 'followActive' : ''}
               onClick={() => handleFollowClick(2)}
             >
-              <strong>{data.following}</strong>
+              <strong>{profileData.user.followingCount}</strong>
               <p>팔로잉</p>
             </FollowDiv>
           </FollowWrap>
@@ -272,9 +306,23 @@ const TabMenu = styled.div`
     color: black;
   }
 `
-
 const TabBtn = styled.button`
   padding: 8px 12px;
   color: var(--gray500-color);
   cursor: pointer;
+`
+
+const LoadingStyle = styled.div`
+  background: url(${goodiLoading}) 50% 40% / 30% no-repeat;
+  height: 100vh;
+
+  p {
+    font-size: 38px;
+    text-align: center;
+    font-family: var(--font--Bold);
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+  }
 `
