@@ -5,7 +5,7 @@ const loginAPI = async (loginData) => {
     const response = await fetch(LOGIN_URL, {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
       },
       body: JSON.stringify({ ...loginData }),
     })
