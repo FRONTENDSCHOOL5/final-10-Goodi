@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import defaultImage from "../../assets/profile_img_def.svg"
 
 function ProfileUI(props) {
-  const { user_profile, user_name, user_email, mainprofile, card, children } = props;
+  const { user_profile, user_name, user_email, mainprofile, card, follow, children } = props;
 
   return (
-    <UserProfile mainprofile={mainprofile} card={card}>
-      <img src={user_profile} alt="유저 프로필 이미지" />
+    <UserProfile mainprofile={mainprofile} card={card} follow={follow}>
+      <img src={user_profile || defaultImage} alt="유저 프로필 이미지" />
       <div>
-        <h3>{user_name}</h3>
+        <strong>{user_name}</strong>
         <p>{user_email}</p>
       </div>
       {children}
@@ -33,6 +34,7 @@ const UserProfile = styled(StyledLink)`
 
   & > img {
     width: ${(props) => (props.mainprofile ? "65px" : "56px")};
+    width: ${(props) => (props.follow && "40px")};
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 50%;
@@ -45,14 +47,16 @@ const UserProfile = styled(StyledLink)`
     gap: 6px;
     margin-left: 16px;
 
-    & > h3 {
+    & > strong {
       font-family: var(--font--semibold);
       font-size: ${(props) => (props.mainprofile ? "20px" : "18px")};
+      font-size: ${(props) => (props.follow && "15px")};
     }
     
     & > p {
       color: var(--gray400-color);
       font-size: ${(props) => (props.mainprofile ? "16px" : "14px")};
+      font-size: ${(props) => (props.follow && "12px")};
     }
   }
 `;

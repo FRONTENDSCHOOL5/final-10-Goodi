@@ -13,6 +13,9 @@ import PostList from "../components/common/PostList";
 import { useRecoilState } from "recoil";
 import loginToken from "../recoil/loginToken";
 import profileAPI from "../api/profile";
+import accountname from './../recoil/accountname';
+import followingAPI from "../api/following";
+import followerAPI from "../api/follower";
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState(1);
@@ -24,11 +27,16 @@ export default function Profile() {
 
   const handleFollowClick = (followNumber) => {
     setActiveFollow(followNumber);
+    fetchFollowerData(followNumber);
+    fetchFollowingData(followNumber);
   };
 
   const [profileData, setProfileData] = useState(null);
+  const [followingData, setFollowingData] = useState(null);
+  const [followerData, setFollowerData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useRecoilState(loginToken);
+  const [accountName, setAccountName] = useRecoilState(accountname);
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -43,6 +51,32 @@ export default function Profile() {
 
     fetchProfileData();
   }, []);
+
+  useEffect(() => {
+    fetchFollowingData(activeFollow);
+  }, [activeFollow]);
+
+  useEffect(() => {
+    fetchFollowerData(activeFollow);
+  }, [activeFollow]);
+
+  const fetchFollowingData = async () => {
+    try {
+      const response = await followingAPI(accountName, token);
+      setFollowingData(response);
+    } catch (error) {
+      console.error("Account API 에러가 발생했습니다", error);
+    }
+  };
+
+  const fetchFollowerData = async () => {
+    try {
+      const response = await followerAPI(accountName, token);
+      setFollowerData(response);
+    } catch (error) {
+      console.error("Account API 에러가 발생했습니다", error);
+    }
+  };
 
   if (loading) {
     return (
@@ -60,7 +94,8 @@ export default function Profile() {
     )
   }
 
-  console.log(profileData);
+  console.table(profileData);
+  console.table(followingData);
 
   return (
     <Layout reduceTop="true">
@@ -73,13 +108,14 @@ export default function Profile() {
           </IntroWrap>
 
           <BtnWrap>
-            <ButtonLineIcon
+            {/* <ButtonLineIcon
               text="작가랑 채팅하기"
               basic="true"
               bg="black"
               color="white"
             />
-            <ButtonLineIcon text="작가 팔로우" />
+            <ButtonLineIcon text="작가 팔로우" /> */}
+            <ButtonLineIcon text="프로필 수정하기" basic="true" />
           </BtnWrap>
 
           <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
@@ -101,7 +137,11 @@ export default function Profile() {
             </FollowDiv>
           </FollowWrap>
 
-          <Follow />
+          <Follow
+            followerData={followerData}
+            followingData={followingData}
+            activeFollow={activeFollow}
+          />
         </ProfileLeft>
 
         <ProfileRight>
@@ -154,7 +194,8 @@ const ProfileWrap = styled.div`
 
 const ProfileLeft = styled.section`
   width: 100%;
-  max-height: 870px;
+  max-height: 900px;
+  /* 페이지 네이션 추가 필요 */
   padding: 60px 24px 45px;
   background-color: #fff;
   border: 1px solid var(--gray300-color);
@@ -164,7 +205,6 @@ const ProfileLeft = styled.section`
 
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   gap: 35px;
 
