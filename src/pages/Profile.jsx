@@ -227,6 +227,9 @@ const IntroWrap = styled.div`
   img {
     width: 100px;
     margin-bottom: 18px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   strong {
@@ -321,7 +324,7 @@ const ProfileRight = styled.section`
 `;
 
 const TabMenu = styled.div`
-  width: 23%;
+  width: 25%;
   margin: 70px 0 30px;
   position: relative;
 
@@ -338,7 +341,7 @@ const TabMenu = styled.div`
     background-color: var(--gray300-color);
     position: absolute;
     top: 5px;
-    left: 102px;
+    left: 115px;
   }
 
   button.active {
@@ -347,7 +350,7 @@ const TabMenu = styled.div`
   }
 `
 const TabBtn = styled.button`
-  padding: 8px 12px;
+  padding: 8px 20px;
   color: var(--gray500-color);
   cursor: pointer;
 `
