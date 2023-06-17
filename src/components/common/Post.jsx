@@ -14,7 +14,7 @@ export default function Post({
     content,
     image,
     createdAt
- }) {
+}) {
   return (
     <PostOuter>
       <PostTop>
@@ -34,7 +34,7 @@ export default function Post({
         <img src={image} alt="" />
         <div>
           <span>{createdAt}</span>
-          <div>
+          <div className="like_wrap">
             <span>3</span>
             <PostLikeBtn />
           </div>
@@ -68,13 +68,17 @@ const PostContent = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+  .like_wrap {
+    display: flex;
+    align-items: center;
+  }
   img {
     width: 100%;
   }
   span {
     font-family: var(--font-Regular);
     color: var(--gray400-color);
-    margin-left: 10px;
+    margin-right: 5px;
     font-size: 1rem;
   }
   p {
