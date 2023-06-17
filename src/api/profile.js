@@ -18,3 +18,4 @@ const profileAPI = async (token) => {
 
 export default profileAPI;
 // test 계정 정보 : suritest@test.com / suritest
+// test 계정 정보 : wonbeom@weniv.co.kr / 123123
