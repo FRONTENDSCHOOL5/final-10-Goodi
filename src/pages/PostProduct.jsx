@@ -22,7 +22,7 @@ export default function PostProduct() {
       itemName: "sdf",
       price: 30000, //1원 이상
       link: "sdfsdf",
-      itemImage: "asdjkasdkl",
+      itemImage: "686936815028.jpeg",
     },
   });
 

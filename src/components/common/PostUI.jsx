@@ -10,6 +10,9 @@ import Button from "./Button";
 import PlusIcon from "../../assets/icon_plus_gray.svg";
 import AddIcon from "../../assets/add_button_gray.svg";
 
+// API
+import UploadImage from "../../api/UploadImage";
+
 export default function PostUI({
   src,
   subtext,
@@ -17,12 +20,42 @@ export default function PostUI({
   showInput,
   textareaHeight,
 }) {
-  // 상품설명 글자수 제한
   const [description, setDescription] = useState("");
+  const [imageWrap, setImageWrap] = useState([]);
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
+  // 상품설명 글자수 제한
   const handleTextCount = (e) => {
     const textSlice = e.target.value;
     setDescription(textSlice.slice(0, 100));
+  };
+
+  // 이미지 크기 10mb 이하
+  // image POST
+  const handlePostImage = async (e) => {
+    const file = e.target.files[0];
+    const imgSrc = await UploadImage(file);
+    const index = parseInt(e.target.name);
+    pushImage(imgSrc, index);
+  };
+
+  // image 배열에 집어넣기
+  //! 해결해야하는 오류(이미지 교체하면 해당 인덱스로 교체, 해당 타겟 이미지 교체)
+  //* 각 input에 name 값을 줘서 해당 인덱스 값이 넘어오게 하려고 하는데 잘 안됨
+  const pushImage = (e, i) => {
+    // console.log(i);
+    // const test = (prevImage => prevImage[i] = e);
+    // console.log(test);
+    const newImage = [...imageWrap, e];
+    setImageWrap(newImage);
+  };
+  console.log(imageWrap);
+
+  // 입력된 데이터 합치기
+  const submit = (e) => {
+    e.preventDefault();
+    const join = imageWrap.join();
+    console.log(join);
   };
 
   return (
@@ -34,11 +67,23 @@ export default function PostUI({
       <UploadWrap onSubmit={() => {}}>
         <ImagUploadWrap>
           <ThumbnailWrap>
-            <input id="thumbnail" type="file" style={{ display: "none" }} />
+            <input
+              id="thumbnail"
+              type="file"
+              name="0"
+              style={{ display: "none" }}
+              onChange={(e) => {
+                handlePostImage(e);
+              }}
+            />
             <Thumbnail htmlFor="thumbnail">
               <ThumbnailLabel>
                 <p>대표 이미지</p>
               </ThumbnailLabel>
+              <img
+                src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
+                style={imageWrap[0] ? null : { width: "90px" }}
+              />
             </Thumbnail>
           </ThumbnailWrap>
 
@@ -46,15 +91,33 @@ export default function PostUI({
             <input
               id="productImageOne"
               type="file"
+              name="1"
               style={{ display: "none" }}
+              onChange={(e) => {
+                handlePostImage(e);
+              }}
             />
-            <ProductImage htmlFor="productImageOne"></ProductImage>
-            <ProductImage htmlFor="productImageTwo"></ProductImage>
+            <ProductImage htmlFor="productImageOne">
+              <img
+                src={imageWrap[1] ? BASE_URL + imageWrap[1] : AddIcon}
+                style={imageWrap[1] ? null : { width: "32px" }}
+              />
+            </ProductImage>
+            <ProductImage htmlFor="productImageTwo">
+              <img
+                src={imageWrap[2] ? BASE_URL + imageWrap[2] : AddIcon}
+                style={imageWrap[2] ? null : { width: "32px" }}
+              />
+            </ProductImage>
 
             <input
               id="productImageTwo"
               type="file"
+              name="2"
               style={{ display: "none" }}
+              onChange={(e) => {
+                handlePostImage(e);
+              }}
             />
           </ProductImages>
         </ImagUploadWrap>
@@ -102,7 +165,13 @@ export default function PostUI({
             />
           </InputDiv>
 
-          <Button type="submit" height="56px" text={buttonText} br="4px" />
+          <Button
+            type="submit"
+            height="56px"
+            text={buttonText}
+            br="4px"
+            onClick={submit}
+          />
         </ContentUploadWrap>
       </UploadWrap>
     </PostUiWrap>
@@ -135,7 +204,8 @@ const UploadWrap = styled.form`
 `;
 
 const ImagUploadWrap = styled.div`
-  flex-grow: 3;
+  flex-grow: 1;
+  flex-basis: 400px;
   display: flex;
   gap: 5%;
 `;
@@ -171,20 +241,19 @@ const Thumbnail = styled.label`
   border-radius: 8px;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
+  overflow: hidden;
 
   &:hover {
     background-color: var(--gray100-color);
     transition: all 0.3s;
   }
 
-  &::before {
-    content: "";
-    display: block;
-    width: 90px;
-    height: 90px;
-    margin: auto;
-    background: url(${PlusIcon}) no-repeat;
+  img {
+    width: 100%;
+    aspect-ratio: 1/ 1;
+    object-fit: cover;
   }
 `;
 
@@ -223,24 +292,23 @@ const ProductImage = styled.label`
   background-color: var(--gray100-color);
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 8px;
+  overflow: hidden;
 
   &:hover {
     background-color: var(--gray200-color);
     transition: all 0.3s;
   }
 
-  &::before {
-    content: "";
-    display: block;
-    width: 32px;
-    height: 32px;
-    margin: auto;
-    background: url(${AddIcon}) no-repeat center/cover;
-  }
-
   & + & {
     margin-top: 20px;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 1 /1;
+    object-fit: cover;
   }
 `;
 
