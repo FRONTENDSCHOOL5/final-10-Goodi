@@ -1,19 +1,49 @@
-import React from 'react'
-import userDummy from '../../mock/userDummy'
+import React, { useEffect, useState } from 'react'
 import Post from './Post';
 import styled from 'styled-components';
+import postAPI from "../../api/post";
+import loginToken from "../../recoil/loginToken";
+import accountname from "../../recoil/accountname";
+import { useRecoilState } from "recoil";
 
 export default function PostList() {
-  const data = userDummy; // 더미데이터 배열
+  const [userPostList, setUserPostList] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [token, setToken] = useRecoilState(loginToken);
+  const [accountName, setAccountName] = useRecoilState(accountname);
+
+  useEffect(() => {
+    const fetchPostData = async () => {
+      const { post } = await postAPI({
+        token,
+        accountname: accountName,
+      });
+      setUserPostList(post);
+      setLoading(false);
+    };
+
+    fetchPostData();
+  }, []);
+
+  if (loading) {
+    return (
+      <>
+        로딩중...우헤헷🏓
+      </>
+    )
+  }
 
   return (
     <PostListWrap>
-      {data.map((user) => (
+      {userPostList.map((post) => (
         <Post
-          key={user.id}
-          profile={user.profileImg}
-          name={user.name}
-          email={user.email}
+          key={post.id}
+          username={post.author.username}
+          profileImage={post.author.image}
+          email={""}
+          content={post.content}
+          image={post.image}
+          createdAt={post.createdAt}
         />
       ))}
     </PostListWrap>
