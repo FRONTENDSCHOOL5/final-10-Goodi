@@ -16,28 +16,48 @@ import profileAPI from "../api/profile";
 import accountname from './../recoil/accountname';
 import followingAPI from "../api/following";
 import followerAPI from "../api/follower";
+import updateProfile from "../api/updateProfile";
+import UpdateProfile from "../components/UpdateProfile";
 
-export default function Profile() {
+export default function Profile(props) {
+  // 상품 목록, 게시글 목록 탭
   const [activeTab, setActiveTab] = useState(1);
+  // 팔로워, 팔로잉 탭
   const [activeFollow, setActiveFollow] = useState(1);
 
+  // 상품 목록, 게시글 목록 활성화
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
   };
 
+  // 팔로워, 팔로잉 활성화
   const handleFollowClick = (followNumber) => {
     setActiveFollow(followNumber);
     fetchFollowerData(followNumber);
     fetchFollowingData(followNumber);
   };
 
-  const [profileData, setProfileData] = useState(null);
-  const [followingData, setFollowingData] = useState(null);
-  const [followerData, setFollowerData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [token, setToken] = useRecoilState(loginToken);
   const [accountName, setAccountName] = useRecoilState(accountname);
 
+  // 프로필 정보 불러오기
+  const [profileData, setProfileData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // 팔로워, 팔로잉 불러오기
+  const [followingData, setFollowingData] = useState(null);
+  const [followerData, setFollowerData] = useState(null);
+
+  // 프로필 정보 수정
+  const { user_image, user_name, user_intro } = props;
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedProfileData, setEditedProfileData] = useState({
+    image: user_image,
+    username: user_name,
+    intro: user_intro,
+  });
+
+  // 프로필 정보 API 연동
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -52,6 +72,7 @@ export default function Profile() {
     fetchProfileData();
   }, []);
 
+  // 팔로워, 팔로잉 API 연동
   useEffect(() => {
     fetchFollowingData(activeFollow);
   }, [activeFollow]);
@@ -78,6 +99,7 @@ export default function Profile() {
     }
   };
 
+  // 로딩, 사용자 정보 없음 예외처리
   if (loading) {
     return (
       <LoadingStyle>
@@ -96,53 +118,102 @@ export default function Profile() {
 
   console.table(profileData);
   console.table(followingData);
+  console.log(token);
+
+  // 프로필 수정 버튼 이벤트
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  // input 값 올바르게 받기
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfileData(prevState => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        [name]: value
+      }
+    }));
+  };
+
+  // 저장 버튼 클릭 시 수정된 API에 데이터 전달
+  const handleSaveClick = (e) => {
+    e.preventDefault();
+    const updatedProfileData = {
+      ...profileData,
+      user: {
+        ...profileData.user,
+        ...editedProfileData
+      }
+    };
+    updateProfile(updatedProfileData, token);
+    setIsEditing(false);
+  };
 
   return (
     <Layout reduceTop="true">
       <ProfileWrap>
-        <ProfileLeft>
-          <IntroWrap>
-            <img src={profileData.user.image} alt="" />
-            <strong>{profileData.user.username}</strong>
-            <p>{profileData.user.accountname}</p>
-          </IntroWrap>
 
-          <BtnWrap>
-            {/* <ButtonLineIcon
-              text="작가랑 채팅하기"
-              basic="true"
-              bg="black"
-              color="white"
-            />
-            <ButtonLineIcon text="작가 팔로우" /> */}
-            <ButtonLineIcon text="프로필 수정하기" basic="true" />
-          </BtnWrap>
+        {
+          isEditing ? (
+            <ProfileLeft edit="true">
+              <UpdateProfile
+                handleSaveClick={handleSaveClick}
+                editedProfileData={editedProfileData}
+                handleInputChange={handleInputChange}
+              />
+            </ProfileLeft>
+          ) : (
+            <ProfileLeft>
+              <IntroWrap>
+                <img src={profileData.user.image} alt="" />
+                <strong>{profileData.user.username}</strong>
+                <p>{profileData.user.accountname}</p>
+              </IntroWrap>
 
-          <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
+              <BtnWrap>
+                {/* <ButtonLineIcon
+                    text="작가랑 채팅하기"
+                    basic="true"
+                    bg="black"
+                    color="white"
+                  />
+                  <ButtonLineIcon text="작가 팔로우" /> */}
+                <ButtonLineIcon
+                  text="프로필 수정하기"
+                  onClick={handleEditClick}
+                  basic="true"
+                />
+              </BtnWrap>
 
-          <FollowWrap>
-            <FollowDiv
-              className={activeFollow === 1 ? 'followActive' : ''}
-              onClick={() => handleFollowClick(1)}
-            >
-              <strong>{profileData.user.followerCount}</strong>
-              <p>팔로워</p>
-            </FollowDiv>
-            <FollowDiv
-              className={activeFollow === 2 ? 'followActive' : ''}
-              onClick={() => handleFollowClick(2)}
-            >
-              <strong>{profileData.user.followingCount}</strong>
-              <p>팔로잉</p>
-            </FollowDiv>
-          </FollowWrap>
+              <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
 
-          <Follow
-            followerData={followerData}
-            followingData={followingData}
-            activeFollow={activeFollow}
-          />
-        </ProfileLeft>
+              <FollowWrap>
+                <FollowDiv
+                  className={activeFollow === 1 ? 'followActive' : ''}
+                  onClick={() => handleFollowClick(1)}
+                >
+                  <strong>{profileData.user.followerCount}</strong>
+                  <p>팔로워</p>
+                </FollowDiv>
+                <FollowDiv
+                  className={activeFollow === 2 ? 'followActive' : ''}
+                  onClick={() => handleFollowClick(2)}
+                >
+                  <strong>{profileData.user.followingCount}</strong>
+                  <p>팔로잉</p>
+                </FollowDiv>
+              </FollowWrap>
+
+              <Follow
+                followerData={followerData}
+                followingData={followingData}
+                activeFollow={activeFollow}
+              />
+            </ProfileLeft>
+          )
+        }
 
         <ProfileRight>
           <h2>
@@ -168,7 +239,7 @@ export default function Profile() {
         </ProfileRight>
       </ProfileWrap>
     </Layout>
-  );
+  )
 }
 
 const ProfileWrap = styled.div`
@@ -194,7 +265,7 @@ const ProfileWrap = styled.div`
 
 const ProfileLeft = styled.section`
   width: 100%;
-  max-height: 900px;
+  max-height: ${(props) => props.edit ? "620px" : "900px"};;
   /* 페이지 네이션 추가 필요 */
   padding: 60px 24px 45px;
   background-color: #fff;
@@ -324,7 +395,7 @@ const ProfileRight = styled.section`
 `;
 
 const TabMenu = styled.div`
-  width: 25%;
+  width: 220px;
   margin: 70px 0 30px;
   position: relative;
 
@@ -341,7 +412,7 @@ const TabMenu = styled.div`
     background-color: var(--gray300-color);
     position: absolute;
     top: 5px;
-    left: 115px;
+    left: 103px;
   }
 
   button.active {
@@ -350,7 +421,7 @@ const TabMenu = styled.div`
   }
 `
 const TabBtn = styled.button`
-  padding: 8px 20px;
+  padding: 8px 12px;
   color: var(--gray500-color);
   cursor: pointer;
 `

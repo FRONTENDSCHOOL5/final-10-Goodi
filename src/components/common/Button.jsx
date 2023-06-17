@@ -12,7 +12,7 @@ const ButtonDef = styled.button`
   border-radius: 4px;
   border: ${(props) => props.br || "1px solid var(--gray300-color)"};
   color: ${(props) => props.color || "white"};
-  font-size: 1.13rem;
+  font-size:  ${(props) => props.fontSize || "18px"};
   font-family: var(--font--Bold);
   box-sizing: border-box;
   text-align: center;
