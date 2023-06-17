@@ -75,7 +75,7 @@ export default function PostUI({
                 />
               </InputDiv>
 
-              {/* 숫자만 입력, 0 원 이상 100만원 이하 , 숫자 세개마다 콤마 */}
+              {/* 숫자만 입력, 1 원 이상 100만원 이하 , 숫자 세개마다 콤마 */}
               <InputDiv>
                 <Label>상품가격</Label>
                 <InputBox
