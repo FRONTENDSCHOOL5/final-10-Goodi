@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
 
 //component
 import Layout from "../layout/Layout";
@@ -12,29 +13,32 @@ import ProductUpload from "../assets/Prodcut_upload.svg";
 //API
 import UploadProductAPI from "../api/UploadProductAPI";
 
+//recoil
+import loginToken from "../recoil/loginToken";
+
 // 작성중 다른곳으로 나가려고 할때 모달
 // 작성 완료시 업로드 할것인지 모달
 // 모든 작성 공간은 필수
 
 export default function PostProduct() {
-  const [productData, setProductData] = useState({
-    product: {
-      itemName: "sdf",
-      price: 30000, //1원 이상
-      link: "sdfsdf",
-      itemImage: "686936815028.jpeg",
-    },
-  });
+  // 상품 입력 데이터
+  const [postProductData, setPostProductData] = useState();
 
-  const handleTest = (e) => {
-    e.preventDefault();
-    handlePost(productData);
+  // 유저 토큰
+  const token = useRecoilValue(loginToken);
+
+  const getPostProductData = (data) => {
+    setPostProductData(data);
   };
 
-  const PostProductData = UploadProductAPI();
+  useEffect(() => {
+    if (postProductData) {
+      handlePost();
+    }
+  }, [postProductData]);
 
-  const handlePost = (postProduct) => {
-    PostProductData(postProduct);
+  const handlePost = () => {
+    UploadProductAPI(postProductData, token);
   };
 
   return (
@@ -46,14 +50,8 @@ export default function PostProduct() {
           buttonText="상품 업로드 하기"
           showInput={true}
           textareaHeight="100px"
+          getPostProductData={getPostProductData}
         />
-        <button
-          type="submit"
-          style={{ cursor: "pointer" }}
-          onClick={handleTest}
-        >
-          test
-        </button>
       </PostProductWrap>
     </Layout>
   );
