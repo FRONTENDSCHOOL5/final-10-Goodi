@@ -1,6 +1,6 @@
 const updateProfile = async (profileData, token) => {
   try {
-    const UPDATEPROFILE = "https://api.mandarin.weniv.co.kr/user/login"
+    const UPDATEPROFILE = "https://api.mandarin.weniv.co.kr/user"
 
     const response = await fetch(UPDATEPROFILE, {
       method: 'PUT',

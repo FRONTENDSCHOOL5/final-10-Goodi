@@ -49,13 +49,9 @@ export default function Profile(props) {
   const [followerData, setFollowerData] = useState(null);
 
   // 프로필 정보 수정
-  const { user_image, user_name, user_intro } = props;
   const [isEditing, setIsEditing] = useState(false);
-  const [editedProfileData, setEditedProfileData] = useState({
-    image: user_image,
-    username: user_name,
-    intro: user_intro,
-  });
+  const [editedProfileData, setEditedProfileData] = useState({});
+
 
   // 프로필 정보 API 연동
   useEffect(() => {
@@ -75,9 +71,6 @@ export default function Profile(props) {
   // 팔로워, 팔로잉 API 연동
   useEffect(() => {
     fetchFollowingData(activeFollow);
-  }, [activeFollow]);
-
-  useEffect(() => {
     fetchFollowerData(activeFollow);
   }, [activeFollow]);
 
@@ -145,14 +138,17 @@ export default function Profile(props) {
   // 저장 버튼 클릭 시 수정된 API에 데이터 전달
   const handleSaveClick = (e) => {
     e.preventDefault();
+
     const updatedProfileData = {
       ...profileData,
       user: {
         ...profileData.user,
-        ...editedProfileData
-      }
+        ...editedProfileData.user,
+      },
     };
-    updateProfile(updatedProfileData, token);
+
+    setEditedProfileData(updatedProfileData)
+    updateProfile(profileData, token);
     setIsEditing(false);
   };
 
@@ -165,7 +161,7 @@ export default function Profile(props) {
             <ProfileLeft edit="true">
               <UpdateProfile
                 handleSaveClick={handleSaveClick}
-                editedProfileData={editedProfileData}
+                profileData={profileData}
                 handleInputChange={handleInputChange}
                 handleCancelClick={handleCancelClick}
               />
