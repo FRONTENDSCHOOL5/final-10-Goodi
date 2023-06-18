@@ -267,7 +267,7 @@ const ProfileWrap = styled.div`
 
 const ProfileLeft = styled.section`
   width: 100%;
-  max-height: ${(props) => props.edit ? "670px" : "900px"};;
+  height: fit-content;
   /* 페이지 네이션 추가 필요 */
   padding: 60px 24px 45px;
   background-color: #fff;
@@ -275,6 +275,7 @@ const ProfileLeft = styled.section`
   border-radius: 10px;
   box-sizing: border-box;
   position: relative;
+  margin-bottom: 120px;
 
   display: flex;
   flex-direction: column;
