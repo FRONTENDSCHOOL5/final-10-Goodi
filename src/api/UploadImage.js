@@ -16,6 +16,7 @@ const PostImageAPI = async (file) => {
         })
 
         const data = await response.json();
+
         return data.filename;
 
     } catch (error) {

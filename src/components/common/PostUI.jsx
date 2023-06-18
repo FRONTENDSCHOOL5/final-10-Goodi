@@ -19,9 +19,18 @@ export default function PostUI({
   buttonText,
   showInput,
   textareaHeight,
+  getPostProductData,
 }) {
   const [description, setDescription] = useState("");
   const [imageWrap, setImageWrap] = useState([]);
+  const [productData, setProductData] = useState({
+    product: {
+      itemName: "",
+      price: "", //1원 이상
+      link: "",
+      itemImage: "",
+    },
+  });
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   // 상품설명 글자수 제한
@@ -30,32 +39,45 @@ export default function PostUI({
     setDescription(textSlice.slice(0, 100));
   };
 
-  // 이미지 크기 10mb 이하
-  // image POST
-  const handlePostImage = async (e) => {
-    const file = e.target.files[0];
-    const imgSrc = await UploadImage(file);
-    const index = parseInt(e.target.name);
-    pushImage(imgSrc, index);
-  };
-
-  // image 배열에 집어넣기
   //! 해결해야하는 오류(이미지 교체하면 해당 인덱스로 교체, 해당 타겟 이미지 교체)
   //* 각 input에 name 값을 줘서 해당 인덱스 값이 넘어오게 하려고 하는데 잘 안됨
-  const pushImage = (e, i) => {
-    // console.log(i);
-    // const test = (prevImage => prevImage[i] = e);
-    // console.log(test);
-    const newImage = [...imageWrap, e];
-    setImageWrap(newImage);
-  };
-  console.log(imageWrap);
+  const handleInputChange = async (e) => {
+    const { name, value } = e.target;
+    if (e.target.type === "file") {
+      const file = e.target.files[0];
+      const imgSrc = await UploadImage(file);
 
-  // 입력된 데이터 합치기
-  const submit = (e) => {
+      const newImage = [...imageWrap, imgSrc];
+      setImageWrap(newImage);
+
+      setProductData((prevState) => ({
+        ...prevState,
+        product: {
+          ...prevState.product,
+          itemImage:
+            prevState.product.itemImage +
+            (prevState.product.itemImage ? "," : "") +
+            imgSrc,
+        },
+      }));
+    } else {
+      setProductData((prevState) => ({
+        ...prevState,
+        product: {
+          ...prevState.product,
+          [name]: name === "price" ? parseInt(value) : value,
+        },
+      }));
+    }
+
+    if (name === "link") {
+      handleTextCount(e);
+    }
+  };
+
+  const joinData = (e) => {
     e.preventDefault();
-    const join = imageWrap.join();
-    console.log(join);
+    getPostProductData(productData);
   };
 
   return (
@@ -64,7 +86,7 @@ export default function PostUI({
       <img src={src} alt="product Upload" />
       <p>{subtext}</p>
 
-      <UploadWrap onSubmit={() => {}}>
+      <UploadWrap>
         <ImagUploadWrap>
           <ThumbnailWrap>
             <input
@@ -72,9 +94,7 @@ export default function PostUI({
               type="file"
               name="0"
               style={{ display: "none" }}
-              onChange={(e) => {
-                handlePostImage(e);
-              }}
+              onChange={handleInputChange}
             />
             <Thumbnail htmlFor="thumbnail">
               <ThumbnailLabel>
@@ -93,9 +113,7 @@ export default function PostUI({
               type="file"
               name="1"
               style={{ display: "none" }}
-              onChange={(e) => {
-                handlePostImage(e);
-              }}
+              onChange={handleInputChange}
             />
             <ProductImage htmlFor="productImageOne">
               <img
@@ -115,9 +133,7 @@ export default function PostUI({
               type="file"
               name="2"
               style={{ display: "none" }}
-              onChange={(e) => {
-                handlePostImage(e);
-              }}
+              onChange={handleInputChange}
             />
           </ProductImages>
         </ImagUploadWrap>
@@ -132,9 +148,11 @@ export default function PostUI({
                 <InputBox
                   width="100%"
                   height="48px"
-                  name="product_name"
-                  type="text"
+                  name="itemName"
                   placeholder="상품명을 입력해주세요"
+                  type="text"
+                  onChange={handleInputChange}
+                  value={productData.product.itemName}
                 />
               </InputDiv>
 
@@ -144,9 +162,11 @@ export default function PostUI({
                 <InputBox
                   width="100%"
                   height="48px"
-                  name="product_price"
                   type="number"
                   placeholder="상품가격을 입력해주세요"
+                  name="price"
+                  value={productData.product.price}
+                  onChange={handleInputChange}
                 />
               </InputDiv>
             </>
@@ -157,11 +177,11 @@ export default function PostUI({
             <Textarea
               width="100%"
               height={textareaHeight}
-              name="product_description"
               placeholder="상품에 대한 설명을 입력해주세요"
-              onChange={handleTextCount}
               textCount={description}
               value={description}
+              onChange={handleInputChange}
+              name="link"
             />
           </InputDiv>
 
@@ -170,7 +190,7 @@ export default function PostUI({
             height="56px"
             text={buttonText}
             br="4px"
-            onClick={submit}
+            onClick={joinData}
           />
         </ContentUploadWrap>
       </UploadWrap>
