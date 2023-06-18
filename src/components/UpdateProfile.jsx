@@ -6,7 +6,7 @@ import { InputBox } from './common/Input';
 import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
 
-export default function UpdateProfile({ handleSaveClick, editedProfileData, handleInputChange }) {
+export default function UpdateProfile({ handleSaveClick, editedProfileData, handleInputChange, handleCancelClick }) {
 
   return (
     <>
@@ -52,6 +52,16 @@ export default function UpdateProfile({ handleSaveClick, editedProfileData, hand
             onChange={handleInputChange}
           ></textarea>
         </div>
+        <Button
+          text="수정 취소"
+          type="button"
+          bg="white"
+          color="black"
+          width="100%"
+          padding="14px 0"
+          fontSize="16px"
+          onClick={handleCancelClick}
+        />
         <Button
           text="수정 완료"
           type="submit"
@@ -101,7 +111,11 @@ const Form = styled.form`
   }
 
   button {
-    margin-top: 40px;
+    margin-top: 30px;
+
+    &:last-child {
+      margin-top: 15px;
+    }
   }
 `
 

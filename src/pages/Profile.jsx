@@ -125,6 +125,11 @@ export default function Profile(props) {
     setIsEditing(true);
   };
 
+  // 프로필 수정 취소 이벤트
+  const handleCancelClick = () => {
+    setIsEditing(false);
+  };
+
   // input 값 올바르게 받기
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -162,6 +167,7 @@ export default function Profile(props) {
                 handleSaveClick={handleSaveClick}
                 editedProfileData={editedProfileData}
                 handleInputChange={handleInputChange}
+                handleCancelClick={handleCancelClick}
               />
             </ProfileLeft>
           ) : (
@@ -265,7 +271,7 @@ const ProfileWrap = styled.div`
 
 const ProfileLeft = styled.section`
   width: 100%;
-  max-height: ${(props) => props.edit ? "620px" : "900px"};;
+  max-height: ${(props) => props.edit ? "670px" : "900px"};;
   /* 페이지 네이션 추가 필요 */
   padding: 60px 24px 45px;
   background-color: #fff;
