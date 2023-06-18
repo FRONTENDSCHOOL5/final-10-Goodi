@@ -2,6 +2,10 @@ import styled from "styled-components";
 import Button from "./Button";
 import CloseButton from "../../assets/close-button.svg";
 import { useState, useEffect } from "react";
+import LogoutHandler from "./Logout";
+import { useRecoilState } from "recoil";
+import { loginCheck } from "../../recoil/loginCheck";
+
 
 export default function Modal({
   text,
@@ -13,6 +17,9 @@ export default function Modal({
   handleModal,
   ...props
 }) {
+  // const handleLogout = LogoutHandler().handleLogout;
+  const {handleLogout} = LogoutHandler()
+
   useEffect(() => {
     // modal이 떠 있을 땐 스크롤 막음
     disableScroll();
@@ -33,6 +40,12 @@ export default function Modal({
   const handleModalClick = (e) => {
     e.stopPropagation();
   };
+  // const handleLogout = LogoutHandler();
+  // const [isloginCheck, setIsLoginCheck] = useRecoilState(loginCheck);
+  // if (isloginCheck) {
+  //   handleLogout();
+  //   setIsLoginCheck(false);
+  // }
 
   return (
     <>
@@ -41,7 +54,7 @@ export default function Modal({
           <ModalInner>
             <span>{text}</span>
             <div>
-              <Button width="100%" text={buttonText1} />
+              <Button width="100%" text={buttonText1} onClick={handleLogout} />
               <Button
                 width="100%"
                 bg="white"
