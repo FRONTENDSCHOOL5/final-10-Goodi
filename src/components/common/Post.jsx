@@ -7,6 +7,44 @@ import profileImgDef from "../../assets/profile_img_def.svg";
 import postMenu from "../../assets/post_menu.svg";
 import postImg from "../../assets/post_image2.svg";
 
+const getElapsedTime = (createdAt) => {
+  const currentTime = new Date();
+  const createdDateTime = new Date(createdAt);
+  const elapsedMilliseconds = currentTime - createdDateTime;
+
+  const msInSecond = 1000;
+  const msInMinute = msInSecond * 60;
+  const msInHour = msInMinute * 60;
+  const msInDay = msInHour * 24;
+
+  const days = Math.floor(elapsedMilliseconds / msInDay);
+  const hours = Math.floor(
+    (elapsedMilliseconds % msInDay) / msInHour
+  );
+  const minutes = Math.floor(
+    (elapsedMilliseconds % msInHour) / msInMinute
+  );
+  const seconds = Math.floor(
+    (elapsedMilliseconds % msInMinute) / msInSecond
+  );
+
+  let elapsedTimeString = '';
+  if (days > 0) {
+    elapsedTimeString += `${days}일 `;
+  }
+  if (hours > 0) {
+    elapsedTimeString += `${hours}시간 `;
+  }
+  if (minutes > 0) {
+    elapsedTimeString += `${minutes}분 `;
+  }
+  if (seconds > 0) {
+    elapsedTimeString += `${seconds}초`;
+  }
+
+  return elapsedTimeString;
+}
+
 export default function Post({ 
     username,
     profileImage,
@@ -15,6 +53,8 @@ export default function Post({
     image,
     createdAt
 }) {
+  const elapsedTimeString = getElapsedTime(createdAt);
+
   return (
     <PostOuter>
       <PostTop>
@@ -33,7 +73,7 @@ export default function Post({
         <p>{content}</p>
         <img src={image} alt="" />
         <div>
-          <span>{createdAt}</span>
+          <span>{elapsedTimeString}</span>
           <div className="like_wrap">
             <span>3</span>
             <PostLikeBtn />
