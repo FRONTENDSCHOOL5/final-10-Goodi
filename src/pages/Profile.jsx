@@ -18,6 +18,7 @@ import followingAPI from "../api/following";
 import followerAPI from "../api/follower";
 import updateProfile from "../api/updateProfile";
 import UpdateProfile from "../components/UpdateProfile";
+import NoPostsUI from "../components/NoPostsUI";
 
 export default function Profile(props) {
   // 상품 목록, 게시글 목록 탭
@@ -52,6 +53,12 @@ export default function Profile(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfileData, setEditedProfileData] = useState({});
 
+  // post 개수를 위한 post state 끌어올리기
+  const [postList, setPostList] = useState([]);
+
+  const handlePostListUpdate = (userPostList) => {
+    setPostList(userPostList);
+  };
 
   // 프로필 정보 API 연동
   useEffect(() => {
@@ -236,8 +243,20 @@ export default function Profile(props) {
               게시글 목록
             </TabBtn>
           </TabMenu>
-          {activeTab === 1 && <CardProduct profile="true" />}
-          {activeTab === 2 && <PostList />}
+          {activeTab === 1 && (
+            // profileData.user.post.length > 0 ? (
+            <CardProduct profile="true" />
+            // ) : (
+            // <NoPostsUI />
+            // )
+          )}
+          {activeTab === 2 && (
+            postList.length > 0 ? (
+              <PostList onPostListUpdate={handlePostListUpdate} />
+            ) : (
+              <NoPostsUI />
+            )
+          )}
         </ProfileRight>
       </ProfileWrap>
     </Layout>
@@ -267,7 +286,7 @@ const ProfileWrap = styled.div`
 
 const ProfileLeft = styled.section`
   width: 100%;
-  max-height: ${(props) => props.edit ? "670px" : "900px"};;
+  height: fit-content;
   /* 페이지 네이션 추가 필요 */
   padding: 60px 24px 45px;
   background-color: #fff;
@@ -275,6 +294,7 @@ const ProfileLeft = styled.section`
   border-radius: 10px;
   box-sizing: border-box;
   position: relative;
+  margin-bottom: 120px;
 
   display: flex;
   flex-direction: column;

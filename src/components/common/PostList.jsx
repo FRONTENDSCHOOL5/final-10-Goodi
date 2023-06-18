@@ -6,7 +6,8 @@ import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
 import { useRecoilState } from "recoil";
 
-export default function PostList() {
+export default function PostList(props) {
+  const { onPostListUpdate } = props
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useRecoilState(loginToken);
@@ -20,6 +21,9 @@ export default function PostList() {
       });
       setUserPostList(post);
       setLoading(false);
+      if (onPostListUpdate) {
+        onPostListUpdate(post);
+      }
     };
 
     fetchPostData();

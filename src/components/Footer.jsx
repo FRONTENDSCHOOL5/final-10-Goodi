@@ -13,7 +13,7 @@ export default function Footer() {
         <br />
         오가은, 최나경, 노태희가 팀을 이뤄서 포트폴리오용 사이트입니다 어쩌구{" "}
         <br />
-        ALGOVIEW. ©2023. All Rights Reserved.
+        Goodi. ©2023. All Rights Reserved.
       </p>
       <button className="github_button">
         <img src={GithubBtn} alt="github 이동 버튼" />

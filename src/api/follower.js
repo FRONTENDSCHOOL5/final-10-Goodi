@@ -1,6 +1,6 @@
 const followerAPI = async (accountname, token) => {
   try {
-    const follower_URL = `https://api.mandarin.weniv.co.kr/profile/${accountname}/follower?limit=5&skip=2`
+    const follower_URL = `https://api.mandarin.weniv.co.kr/profile/${accountname}/follower`
     const response = await fetch(follower_URL, {
       method: 'GET',
       headers: {
