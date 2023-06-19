@@ -5,6 +5,7 @@ import postAPI from "../../api/post";
 import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
 import { useRecoilState } from "recoil";
+import NoPostsUI from '../NoPostsUI';
 
 export default function PostList(props) {
   const { onPostListUpdate } = props
@@ -12,6 +13,8 @@ export default function PostList(props) {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useRecoilState(loginToken);
   const [accountName, setAccountName] = useRecoilState(accountname);
+
+  console.log(userPostList);
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -38,18 +41,21 @@ export default function PostList(props) {
   }
 
   return (
-    <PostListWrap>
-      {userPostList.map((post) => (
-        <Post
-          key={post.id}
-          username={post.author.username}
-          profileImage={post.author.image}
-          email={""}
-          content={post.content}
-          image={post.image}
-          createdAt={post.createdAt}
-        />
-      ))}
+    <PostListWrap hasPosts={userPostList.length > 0}>
+      {userPostList.length > 0 ? (
+        userPostList.map((post) => (
+          <Post
+            key={post.id}
+            username={post.author.username}
+            profileImage={post.author.image}
+            email={""}
+            content={post.content}
+            image={post.image}
+            createdAt={post.createdAt}
+          />
+        ))) : (
+        <NoPostsUI />
+      )}
     </PostListWrap>
   );
 
@@ -57,9 +63,14 @@ export default function PostList(props) {
 
 const PostListWrap = styled.section`
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
-  gap: 60px 20px;
-  margin-bottom: 70px;
+  ${({ hasPosts }) =>
+    hasPosts ?
+      `
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 60px 20px;
+      margin-bottom: 70px;
+    `
+      : ""}
 `
