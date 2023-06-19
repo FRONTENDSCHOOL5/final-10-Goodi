@@ -8,10 +8,6 @@ const PostImageAPI = async (file) => {
     try {
         const response = await fetch(IMAGE_URL, {
             method: "POST",
-            // headers: {
-            //     "Content-type": "multipart/form-data",
-            // },
-            //! // 주의: Content-Type은 브라우저가 자동으로 설정하므로 제거해야 합니다.
             body: formData,
         })
 

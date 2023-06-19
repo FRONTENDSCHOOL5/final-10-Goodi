@@ -9,6 +9,7 @@ import Setprofile from './pages/Setprofile';
 import Profile from './pages/Profile';
 import Chat from './pages/Chat';
 import PostProduct from './pages/PostProduct';
+import PostPosting from './pages/PostPosting';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/postproduct" element={<PostProduct />} />
+        <Route path="/postposting" element={<PostPosting />} />
 
       </Routes>
     </BrowserRouter>

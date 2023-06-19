@@ -20,6 +20,7 @@ export default function PostUI({
   showInput,
   textareaHeight,
   getPostProductData,
+  textareaLabel
 }) {
   const [description, setDescription] = useState("");
   const [imageWrap, setImageWrap] = useState([]);
@@ -173,7 +174,7 @@ export default function PostUI({
           )}
 
           <InputDiv>
-            <Label>상품설명</Label>
+          <Label>{textareaLabel}</Label>
             <Textarea
               width="100%"
               height={textareaHeight}
@@ -208,7 +209,7 @@ const PostUiWrap = styled.article`
   background-color: #ffffff;
 
   & > img {
-    width: 400px;
+    height: 58px;
   }
   & > p {
     color: var(--gray400-color);
@@ -340,7 +341,6 @@ const InputDiv = styled.div`
     margin-top: 24px;
   }
 `;
-
 const Label = styled.label`
   font-family: var(--font--Bold);
   margin-bottom: 8px;

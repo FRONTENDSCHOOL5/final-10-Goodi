@@ -9,8 +9,6 @@ import { LeftDiv } from "../components/Carousel";
 
 import SymbolImage from "../assets/symbol.svg";
 
-import joinAPI from "../api/user";
-
 export default function Join() {
   const navigate = useNavigate();
 
@@ -49,8 +47,8 @@ export default function Join() {
       errors.push("비밀번호를 6자리 이상 입력해주세요");
     } else {
       errors.push("");
-      console.log("조인", joinData.user.email);
-      console.log("조인", joinData.user.password);
+      // console.log("조인", joinData.user.email);
+      // console.log("조인", joinData.user.password);
       navigate("/setprofile", { state: joinData.user });
     }
     setUserErrorMessage(errors);
