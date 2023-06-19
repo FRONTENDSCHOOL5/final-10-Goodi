@@ -8,7 +8,7 @@ import PostUI from "../components/common/PostUI";
 
 //이미지
 import PostBackground from "../assets/post_bg.svg";
-import ProductUpload from "../assets/Prodcut_upload.svg";
+import postUproad from "../assets/post_uproad.svg"
 
 //API
 import UploadProductAPI from "../api/UploadProductAPI";
@@ -20,7 +20,7 @@ import loginToken from "../recoil/loginToken";
 // 작성 완료시 업로드 할것인지 모달
 // 모든 작성 공간은 필수
 
-export default function PostProduct() {
+export default function PostPosting() {
   // 상품 입력 데이터
   const [postProductData, setPostProductData] = useState();
 
@@ -45,12 +45,12 @@ export default function PostProduct() {
     <Layout reduceTop="true">
       <PostProductWrap>
         <PostUI
-        textareaLabel="상품설명"
-          src={ProductUpload}
-          subtext="당신의 굿즈상품을 업로드하여 판매해보세요!"
-          buttonText="상품 업로드 하기"
-          showInput={true}
-          textareaHeight="100px"
+          textareaLabel="게시글 내용"
+          src={postUproad}
+          subtext="당신의 게시글을 업로드 해보세요!"
+          buttonText="게시글 업로드 하기"
+          showInput={false}
+          textareaHeight="300px"
           getPostProductData={getPostProductData}
         />
       </PostProductWrap>
