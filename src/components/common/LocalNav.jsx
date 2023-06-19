@@ -6,7 +6,7 @@ export default function LocalNav() {
   const navigate = useNavigate();
   const lists = [
     { name: "상품 등록", nav: "/postproduct" },
-    { name: "게시물 작성", nav: "/postproduct" },
+    { name: "게시물 작성", nav: "/postposting" },
   ];
 
   return (
