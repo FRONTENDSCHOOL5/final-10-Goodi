@@ -264,7 +264,7 @@ export default function Profile(props) {
 
 const ProfileWrap = styled.div`
   display: grid;
-  grid-template-columns: 0.3fr 1fr;
+  grid-template-columns: 0.4fr auto;
   grid-template-rows: auto;
   gap: 30px;
 
@@ -284,7 +284,7 @@ const ProfileWrap = styled.div`
 `
 
 const ProfileLeft = styled.section`
-  width: 100%;
+  min-width: 370px;
   height: fit-content;
   /* 페이지 네이션 추가 필요 */
   padding: 60px 24px 45px;
