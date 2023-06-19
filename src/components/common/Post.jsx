@@ -45,13 +45,13 @@ const getElapsedTime = (createdAt) => {
   return elapsedTimeString;
 }
 
-export default function Post({ 
-    username,
-    profileImage,
-    email,
-    content,
-    image,
-    createdAt
+export default function Post({
+  username,
+  profileImage,
+  email,
+  content,
+  image,
+  createdAt
 }) {
   const elapsedTimeString = getElapsedTime(createdAt);
 
@@ -127,6 +127,7 @@ const PostContent = styled.div`
     font-size: 1rem;
     line-height: 1.4rem;
     margin-bottom: 16px;
+    text-align: justify;
 
     overflow: hidden;
     text-overflow: ellipsis;
