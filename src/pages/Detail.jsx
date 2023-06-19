@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
 
 //component
 import Layout from "../layout/Layout";
@@ -19,14 +20,39 @@ import ProductData from "../mock/productData";
 import MoneyIcon from "../assets/icon_money_black.svg";
 import DeliveryIcon from "../assets/icon_delivery_dark.svg";
 
+//API
+import ProductAPI from "../api/product";
+
+//recoil
+import loginToken from "../recoil/loginToken";
+
 export default function Detail() {
   const { id } = useParams();
+  // 유저 토큰
+  const token = useRecoilValue(loginToken);
+  const [loading, setLoading] = useState(true);
+  const [productData, setProductData] = useState("");
+  const [price, setPrice] = useState(0);
 
-  // 추후에 api 받아온것으로 수정
-  const data = ProductData[id - 1];
+  // product 정보 API에서 받아오기
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await ProductAPI(token, id);
+        setProductData(response.product);
+        setPrice(response.product.price);
+        setLoading(false);
+      } catch (error) {
+        console.error("Account API 에러가 발생했습니다", error);
+      }
+    };
 
-  // 동기비동기로 useState 위로 올리면 에러남
-  const [price, setPrice] = useState(data.price);
+    fetchProductData();
+  }, []);
+
+  if (loading) {
+    return <div>로딩중입니다</div>;
+  }
 
   // 카운트 마다 변하는 가격 함수
   const getPrice = (price) => {
@@ -37,25 +63,25 @@ export default function Detail() {
   const priceDivide = (price) => {
     return price.toLocaleString();
   };
-
+  console.log(productData.price);
   return (
     <Layout>
       <DetailWrap>
-        <DetailImage img={data.img} />
+        <DetailImage img={productData.itemImage.split(",")} />
 
         <ProductDetail>
           <div className="product_detail_top">
             <ProfileUI
-              key={data.id}
-              user_profile={data.profile}
-              user_name={data.name}
-              user_email={data.email}
+              key={productData.author._id}
+              user_profile={productData.author.image}
+              user_name={productData.author.username}
+              user_email={productData.author.accountname}
             />
             <ButtonLineIcon text="작가 팔로우" />
           </div>
 
-          <h2 className="product_title">{data.title}</h2>
-          <p className="product_description">{data.description}</p>
+          <h2 className="product_title">{productData.itemName}</h2>
+          <p className="product_description">{productData.link}</p>
           <DeliveryDescription>
             <div className="delivery_date">
               <img src={DeliveryIcon} alt="박스 아이콘" />
@@ -79,8 +105,7 @@ export default function Detail() {
           <Count
             price={price}
             getPrice={getPrice}
-            productPrice={data.price}
-            stock={data.stock}
+            productPrice={productData.price}
           />
           <hr />
           <ProductPrice>
@@ -102,8 +127,6 @@ export default function Detail() {
             />
 
             <Button
-              disabled={data.stock <= 0}
-              noCursor={data.stock <= 0}
               text="구매하고 싶어요"
               className="purchase_button"
               type="button"

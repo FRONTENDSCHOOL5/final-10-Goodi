@@ -7,12 +7,8 @@ import ProductBanner from "../../assets/product_banner.svg";
 import LeftArrow from "../../assets/icon_arrow_left.svg";
 import RightArrow from "../../assets/icon_arrow_right.svg";
 
-//data
-import ProductData from "../../mock/productData";
-
 export default function DetailImage({ img }) {
-  const data = ProductData[0];
-  console.log(img);
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   //이미지 index 관리
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,14 +16,14 @@ export default function DetailImage({ img }) {
   //다음 버튼을 index + 1
   const handlerNext = () => {
     setCurrentIndex((nextIndex) =>
-      nextIndex === data.img.length - 1 ? 0 : nextIndex + 1
+      nextIndex === img.length - 1 ? 0 : nextIndex + 1
     );
   };
 
   //이전 버튼을 index - 1
   const handlerRight = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? data.img.length - 1 : prevIndex - 1
+      prevIndex === 0 ? img.length - 1 : prevIndex - 1
     );
   };
 
@@ -46,7 +42,7 @@ export default function DetailImage({ img }) {
         />
         <img
           className="top_detail_img"
-          src={img[currentIndex]}
+          src={BASE_URL + img[currentIndex]}
           alt="상세 이미지"
         />
 
@@ -58,10 +54,11 @@ export default function DetailImage({ img }) {
         {img.map((el, index) => {
           return (
             <img
+              style={{ cursor: "pointer" }}
               key={index}
               className={`detail_img ${index === currentIndex ? "active" : ""}`}
               onClick={() => handleSlide(index)}
-              src={el}
+              src={BASE_URL + el}
               alt="상세 이미지"
             />
           );
