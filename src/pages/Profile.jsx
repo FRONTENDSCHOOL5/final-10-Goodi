@@ -162,7 +162,6 @@ export default function Profile(props) {
   return (
     <Layout reduceTop="true">
       <ProfileWrap>
-
         {
           isEditing ? (
             <ProfileLeft edit="true">
@@ -251,11 +250,11 @@ export default function Profile(props) {
             // )
           )}
           {activeTab === 2 && (
-            postList.length > 0 ? (
-              <PostList onPostListUpdate={handlePostListUpdate} />
-            ) : (
-              <NoPostsUI />
-            )
+            // postList.length > 0 ? (
+            <PostList onPostListUpdate={handlePostListUpdate} />
+            // ) : (
+            // <NoPostsUI />
+            // )
           )}
         </ProfileRight>
       </ProfileWrap>
