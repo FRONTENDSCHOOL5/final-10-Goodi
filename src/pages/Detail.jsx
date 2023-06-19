@@ -63,7 +63,7 @@ export default function Detail() {
   const priceDivide = (price) => {
     return price.toLocaleString();
   };
-  console.log(productData.price);
+
   return (
     <Layout>
       <DetailWrap>
