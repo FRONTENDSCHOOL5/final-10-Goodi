@@ -20,10 +20,11 @@ export default function PostUI({
   showInput,
   textareaHeight,
   getPostProductData,
-  textareaLabel
+  textareaLabel,
 }) {
   const [description, setDescription] = useState("");
   const [imageWrap, setImageWrap] = useState([]);
+  const [userErrorMessage, setUserErrorMessage] = useState([]);
   const [productData, setProductData] = useState({
     product: {
       itemName: "",
@@ -80,6 +81,25 @@ export default function PostUI({
     e.preventDefault();
     getPostProductData(productData);
   };
+  console.log(productData.product);
+
+  const handleError = () => {
+    const errors = [];
+    if (productData.product.itemImage === "") {
+      errors.push("상품이미지를 한개 이상 업로드 해주세요");
+    } else if (productData.product.itemName === "") {
+      errors.push("상품명을 입력해주세요");
+    } else if (productData.product.price === "") {
+      errors.push("상품가격을 입력해주세요");
+    } else if (productData.product.link === "") {
+      errors.push("상품소개글을 입력해주세요");
+    } else {
+      errors.push("");
+    }
+    setUserErrorMessage(errors);
+  };
+
+  console.log(userErrorMessage);
 
   return (
     <PostUiWrap>
@@ -87,7 +107,7 @@ export default function PostUI({
       <img src={src} alt="product Upload" />
       <p>{subtext}</p>
 
-      <UploadWrap>
+      <UploadWrap onSubmit={joinData}>
         <ImagUploadWrap>
           <ThumbnailWrap>
             <input
@@ -97,7 +117,16 @@ export default function PostUI({
               style={{ display: "none" }}
               onChange={handleInputChange}
             />
-            <Thumbnail htmlFor="thumbnail">
+            <Thumbnail
+              htmlFor="thumbnail"
+              style={
+                userErrorMessage.includes(
+                  "상품이미지를 한개 이상 업로드 해주세요"
+                )
+                  ? { border: "1px solid red" }
+                  : null
+              }
+            >
               <ThumbnailLabel>
                 <p>대표 이미지</p>
               </ThumbnailLabel>
@@ -106,6 +135,13 @@ export default function PostUI({
                 style={imageWrap[0] ? null : { width: "90px" }}
               />
             </Thumbnail>
+            {userErrorMessage.includes(
+              "상품이미지를 한개 이상 업로드 해주세요"
+            ) && (
+              <ErrorMassage>
+                상품이미지를 한개 이상 업로드 해주세요
+              </ErrorMassage>
+            )}
           </ThumbnailWrap>
 
           <ProductImages>
@@ -154,7 +190,11 @@ export default function PostUI({
                   type="text"
                   onChange={handleInputChange}
                   value={productData.product.itemName}
+                  hasError={userErrorMessage.includes("상품명을 입력해주세요")}
                 />
+                {userErrorMessage.includes("상품명을 입력해주세요") && (
+                  <ErrorMassage>상품명을 입력해주세요</ErrorMassage>
+                )}
               </InputDiv>
 
               {/* 숫자만 입력, 1 원 이상 100만원 이하 , 숫자 세개마다 콤마 */}
@@ -168,13 +208,19 @@ export default function PostUI({
                   name="price"
                   value={productData.product.price}
                   onChange={handleInputChange}
+                  hasError={userErrorMessage.includes(
+                    "상품가격을 입력해주세요"
+                  )}
                 />
+                {userErrorMessage.includes("상품가격을 입력해주세요") && (
+                  <ErrorMassage>상품가격을 입력해주세요</ErrorMassage>
+                )}
               </InputDiv>
             </>
           )}
 
           <InputDiv>
-          <Label>{textareaLabel}</Label>
+            <Label>{textareaLabel}</Label>
             <Textarea
               width="100%"
               height={textareaHeight}
@@ -183,7 +229,11 @@ export default function PostUI({
               value={description}
               onChange={handleInputChange}
               name="link"
+              hasError={userErrorMessage.includes("상품소개글을 입력해주세요")}
             />
+            {userErrorMessage.includes("상품소개글을 입력해주세요") && (
+              <ErrorMassage>상품소개글을 입력해주세요</ErrorMassage>
+            )}
           </InputDiv>
 
           <Button
@@ -191,7 +241,7 @@ export default function PostUI({
             height="56px"
             text={buttonText}
             br="4px"
-            onClick={joinData}
+            onClick={handleError}
           />
         </ContentUploadWrap>
       </UploadWrap>
@@ -344,4 +394,10 @@ const InputDiv = styled.div`
 const Label = styled.label`
   font-family: var(--font--Bold);
   margin-bottom: 8px;
+`;
+
+const ErrorMassage = styled.div`
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
 `;

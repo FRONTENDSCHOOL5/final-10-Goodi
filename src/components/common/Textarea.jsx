@@ -3,14 +3,18 @@ import styled from "styled-components";
 
 export default function Textarea({ ...props }) {
   return (
-    <>
+    <TextareaBoxWrap>
       <TextareaBox {...props}></TextareaBox>
       <p>({props.textCount.length} / 100)</p>
-    </>
+    </TextareaBoxWrap>
   );
 }
+const TextareaBoxWrap = styled.div`
+  position: relative;
+`;
 
 const TextareaBox = styled.textarea`
+  /* position: relative; */
   font-family: var(--font--Regular);
   resize: none;
   font-size: 16px;
@@ -31,9 +35,11 @@ const TextareaBox = styled.textarea`
   }
 
   & + p {
+    position: absolute;
+    right: 0;
     font-size: 14px;
     color: var(--gray400-color);
     text-align: right;
-    margin-top: 12px;
+    margin-top: 8px;
   }
 `;
