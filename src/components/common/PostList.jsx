@@ -21,9 +21,9 @@ export default function PostList(props) {
       });
       setUserPostList(post);
       setLoading(false);
-      if (onPostListUpdate) {
-        onPostListUpdate(post);
-      }
+      // if (onPostListUpdate) {
+      //   onPostListUpdate(post);
+      // }
     };
 
     fetchPostData();
