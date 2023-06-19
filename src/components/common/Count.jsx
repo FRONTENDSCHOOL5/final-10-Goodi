@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-
-//data
-import ProductData from "../../mock/productData";
+import { useState } from "react";
 
 //image
 import PlusIcon from "../../assets/icon_plus_black.svg";
@@ -15,15 +12,8 @@ export default function Count({ getPrice, price, productPrice, stock }) {
 
   // 카운트 증가 함수
   const increaseHandler = () => {
-    if (count < stock) {
-      setCount(count + 1);
-      getPrice(price + productPrice);
-    }
-
-    if (stock === 0) {
-      alert("현재 재고가 없는 상품입니다.");
-      return;
-    }
+    setCount(count + 1);
+    getPrice(price + productPrice);
   };
 
   // 카운트 감소 함수

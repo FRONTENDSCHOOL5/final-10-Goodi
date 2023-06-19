@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
 
 //component
 import Layout from "../layout/Layout";
@@ -21,6 +22,7 @@ import loginToken from "../recoil/loginToken";
 // 모든 작성 공간은 필수
 
 export default function PostProduct() {
+  const navigate = useNavigate();
   // 상품 입력 데이터
   const [postProductData, setPostProductData] = useState();
 
@@ -33,12 +35,15 @@ export default function PostProduct() {
 
   useEffect(() => {
     if (postProductData) {
-      handlePost();
+      handlePost(postProductData, token);
     }
   }, [postProductData]);
 
-  const handlePost = () => {
-    UploadProductAPI(postProductData, token);
+  const handlePost = async (ProductData, token) => {
+    const response = await UploadProductAPI(ProductData, token);
+
+    if (response.hasOwnProperty("product"))
+      navigate(`/products/${response.product.id}`);
   };
 
   return (

@@ -12,7 +12,7 @@ const postProductAPI = async (postProductData, token) => {
       body: JSON.stringify({ ...postProductData })
     })
     const data = await response.json();
-    console.log(data)
+    return data;
 
   } catch (error) {
     console.log("Product API 에러가 발생했습니다", error);
