@@ -15,7 +15,6 @@ import PlusBtnImg from "../assets/add_button.svg";
 
 export default function Setprofile() {
   const [profileSelectedImage, setProfileSelectedImage] = useState(null);
-
   const [errorMessage, setErrorMessage] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
 
@@ -28,11 +27,11 @@ export default function Setprofile() {
       password: password,
       accountname: email.split("@")[0],
       username: "",
-      image: "",
+      image: profileSelectedImage,
       intro: "",
     },
   });
-
+console.log(signUpData.user.intro);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSignUpData((prevState) => ({
@@ -61,10 +60,6 @@ export default function Setprofile() {
       errors.push("닉네임을 입력해주세요");
     } else {
       errors.push("");
-      // console.log("사인업", signUpData.user.email);
-      // console.log("사인업", signUpData.user.password);
-      // console.log("사인업", signUpData.user.username);
-      // console.log("사인업", signUpData.user.accountname);
     }
     setUserErrorMessage(errors);
   };
@@ -101,12 +96,18 @@ export default function Setprofile() {
               onChange={handleImageChange}
             />
             <label htmlFor="fileInput">
-              <img
-                src={profileSelectedImage ? BASE_URL + profileSelectedImage : ProfileImgDef}
-                // src={ProfileImgDef}
-                alt="Upload"
-                style={{ cursor: "pointer" }}
-              />
+              <ProfileImgWrap>
+                <img
+                  src={
+                    profileSelectedImage
+                      ? BASE_URL + profileSelectedImage
+                      : ProfileImgDef
+                  }
+                  alt="Upload"
+                  style={profileSelectedImage ? { width: "100px" } : null }
+                />
+              </ProfileImgWrap>
+
               <img
                 className="add_button_img"
                 src={PlusBtnImg}
@@ -135,7 +136,12 @@ export default function Setprofile() {
             </InputDiv>
             <InputDiv>
               <Label>소개 메세지</Label>
-              <textarea placeholder="나를 소개해보세요"></textarea>
+              <textarea 
+              placeholder="나를 소개해보세요"
+              name="intro"
+              onChange={handleInputChange}
+              value={signUpData.user.intro}
+              ></textarea>
             </InputDiv>
             <ButtonDiv>
               <Button
@@ -187,12 +193,24 @@ const RightDiv = styled.div`
 const ProfileDiv = styled.div`
   position: relative;
   margin-bottom: 30px;
+  cursor: pointer;
   .add_button_img {
     position: absolute;
     top: 67px;
     left: 67px;
   }
-  cursor: pointer;
+`;
+const ProfileImgWrap = styled.div`
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  & > img {
+    width: 100%;
+    aspect-ratio: 1/ 1;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 50%;
+  }
 `;
 const InputDiv = styled.div`
   display: flex;
