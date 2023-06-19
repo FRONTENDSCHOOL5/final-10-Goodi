@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import userAPI from "../api/user";
+import UploadImage from "../api/UploadImage";
 
 import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
@@ -13,6 +14,7 @@ import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
 
 export default function Setprofile() {
+  const [profileSelectedImage, setProfileSelectedImage] = useState(null);
 
   const [errorMessage, setErrorMessage] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
@@ -24,8 +26,10 @@ export default function Setprofile() {
     user: {
       email: email,
       password: password,
-      accountname: email.split('@')[0],
+      accountname: email.split("@")[0],
       username: "",
+      image: "",
+      intro: "",
     },
   });
 
@@ -45,32 +49,43 @@ export default function Setprofile() {
 
     if (response && response.hasOwnProperty("user")) navigate("/login");
     else {
-      const errorMessage = (response && response.message) ? response.message : handleError();
+      const errorMessage =
+        response && response.message ? response.message : handleError();
       setErrorMessage(errorMessage);
     }
-  }
+  };
 
   const handleError = () => {
     const errors = [];
     if (signUpData.user.username === "") {
       errors.push("닉네임을 입력해주세요");
-    }
-    else {
+    } else {
       errors.push("");
-      console.log("사인업",signUpData.user.email);
-      console.log("사인업",signUpData.user.password);
-      console.log("사인업",signUpData.user.username);
-      console.log("사인업",signUpData.user.accountname);
+      // console.log("사인업", signUpData.user.email);
+      // console.log("사인업", signUpData.user.password);
+      // console.log("사인업", signUpData.user.username);
+      // console.log("사인업", signUpData.user.accountname);
     }
     setUserErrorMessage(errors);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleError();
     await handleLogin(signUpData);
-  }
-  
+  };
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+  const handleImageChange = async (e) => {
+    const { name, value } = e.target;
+    if (e.target.type === "file") {
+      const file = e.target.files[0];
+      const imgSrc = await UploadImage(file);
+
+      const newImage = imgSrc;
+      setProfileSelectedImage(newImage);
+    }
+  };
+
   return (
     <OuterDiv>
       <LeftDiv />
@@ -78,59 +93,60 @@ export default function Setprofile() {
         <div className="right-inner">
           <H1 className="a11y-hidden">초기 프로필 설정 페이지</H1>
           <ProfileDiv>
-          <input	
-              id="fileInput"	
-              type="file"	
-              style={{ display: "none" }}	
-              // onChange={}	
-            />	
+            <input
+              id="fileInput"
+              type="file"
+              style={{ display: "none" }}
+              accept="image/jpeg, image/png, image/svg"
+              onChange={handleImageChange}
+            />
             <label htmlFor="fileInput">
-                <img
-                  src={ProfileImgDef}
-                  alt="Upload"
-                  style={{ cursor: "pointer" }}
-                />
-                <img className="add_button_img"
-                  src={PlusBtnImg}
-                  alt="Upload"
-                  style={{ cursor: "pointer" }}
-                />
-              </label>
+              <img
+                src={profileSelectedImage ? BASE_URL + profileSelectedImage : ProfileImgDef}
+                // src={ProfileImgDef}
+                alt="Upload"
+                style={{ cursor: "pointer" }}
+              />
+              <img
+                className="add_button_img"
+                src={PlusBtnImg}
+                alt="Upload"
+                style={{ cursor: "pointer" }}
+              />
+            </label>
           </ProfileDiv>
           <form onSubmit={handleSubmit}>
-          <InputDiv>
-            <Label>닉네임</Label>
-            <InputBox
-              width="432px"
-              height="48px"
-              padding="15px"
-              name="username"
-              onChange={handleInputChange}
-              value={signUpData.user.username}
-              placeholder="Goodi에서 사용할 닉네임을 입력해주세요"
-              hasError={userErrorMessage.includes(
-                "닉네임을 입력해주세요"
+            <InputDiv>
+              <Label>닉네임</Label>
+              <InputBox
+                width="432px"
+                height="48px"
+                padding="15px"
+                name="username"
+                onChange={handleInputChange}
+                value={signUpData.user.username}
+                placeholder="Goodi에서 사용할 닉네임을 입력해주세요"
+                hasError={userErrorMessage.includes("닉네임을 입력해주세요")}
+              />
+              {/* email을 입력하지 않은 경우 */}
+              {userErrorMessage.includes("닉네임을 입력해주세요") && (
+                <ErrorMassage>{userErrorMessage}</ErrorMassage>
               )}
-            />
-            {/* email을 입력하지 않은 경우 */}
-            {userErrorMessage.includes("닉네임을 입력해주세요") && (
-          <ErrorMassage>{userErrorMessage}</ErrorMassage>
-        )}
-          </InputDiv>
-          <InputDiv>
-            <Label>소개 메세지</Label>
-            <textarea placeholder="나를 소개해보세요"></textarea>
-          </InputDiv>
-          <ButtonDiv>
-          <Button	
-              text="Goodi 시작하기"	
-              type="submit"	
-              bg="black"	
-              width="432px"	
-              br="none"	
-              onClick={handleError}
-            />
-          </ButtonDiv>
+            </InputDiv>
+            <InputDiv>
+              <Label>소개 메세지</Label>
+              <textarea placeholder="나를 소개해보세요"></textarea>
+            </InputDiv>
+            <ButtonDiv>
+              <Button
+                text="Goodi 시작하기"
+                type="submit"
+                bg="black"
+                width="432px"
+                br="none"
+                onClick={handleError}
+              />
+            </ButtonDiv>
           </form>
         </div>
       </RightDiv>
@@ -225,4 +241,4 @@ const ErrorMassage = styled.div`
   margin-top: 10px;
   color: red;
   font-size: 14px;
-`
+`;
