@@ -45,12 +45,17 @@ export default function PostUI({
   //* 각 input에 name 값을 줘서 해당 인덱스 값이 넘어오게 하려고 하는데 잘 안됨
   const handleInputChange = async (e) => {
     const { name, value } = e.target;
+    console.log(parseInt(name));
     if (e.target.type === "file") {
       const file = e.target.files[0];
       const imgSrc = await UploadImage(file);
 
-      const newImage = [...imageWrap, imgSrc];
-      setImageWrap(newImage);
+      // const newImage = [...imageWrap, imgSrc];
+      setImageWrap((prevArray) => {
+        const newArray = [...prevArray]; // 기존 배열의 복사본 생성
+        newArray[parseInt(name)] = imgSrc; // 특정 인덱스의 값을 변경
+        return newArray; // 새로운 배열로 업데이트
+      });
 
       setProductData((prevState) => ({
         ...prevState,
@@ -81,7 +86,6 @@ export default function PostUI({
     e.preventDefault();
     getPostProductData(productData);
   };
-  console.log(productData.product);
 
   const handleError = () => {
     const errors = [];
@@ -98,8 +102,6 @@ export default function PostUI({
     }
     setUserErrorMessage(errors);
   };
-
-  console.log(userErrorMessage);
 
   return (
     <PostUiWrap>
