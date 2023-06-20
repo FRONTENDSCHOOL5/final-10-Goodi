@@ -19,6 +19,7 @@ import followerAPI from "../api/follower";
 import updateProfile from "../api/updateProfile";
 import UpdateProfile from "../components/UpdateProfile";
 import NoPostsUI from "../components/NoPostsUI";
+import { useParams } from "react-router-dom";
 
 export default function Profile(props) {
   // 상품 목록, 게시글 목록 탭
@@ -128,6 +129,8 @@ export default function Profile(props) {
   // 프로필 수정 취소 이벤트
   const handleCancelClick = () => {
     setIsEditing(false);
+    setEditedProfileData({});
+    // 수정 취소를 눌렀는데 변경된 값이 화면에 렌더링됨 (값 저장은 X)
   };
 
   // input 값 올바르게 받기
@@ -158,6 +161,8 @@ export default function Profile(props) {
     updateProfile(profileData, token);
     setIsEditing(false);
   };
+
+  console.log(profileData.user);
 
   return (
     <Layout reduceTop="true">
@@ -250,11 +255,7 @@ export default function Profile(props) {
             // )
           )}
           {activeTab === 2 && (
-            // postList.length > 0 ? (
             <PostList onPostListUpdate={handlePostListUpdate} />
-            // ) : (
-            // <NoPostsUI />
-            // )
           )}
         </ProfileRight>
       </ProfileWrap>

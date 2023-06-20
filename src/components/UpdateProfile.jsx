@@ -88,6 +88,8 @@ const ProfileDiv = styled.div`
 `;
 
 const Form = styled.form`
+  width: 100%;
+  
   & > div:first-child {
     margin-bottom: 32px;
   } 

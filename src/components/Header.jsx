@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../assets/logo_black.svg";
+import accountname from "../recoil/accountname";
+import loginToken from "../recoil/loginToken";
+import followingAPI from "../api/following";
+import { useRecoilState } from "recoil";
 
 export default function Header() {
+  const [token, setToken] = useRecoilState(loginToken);
+  const [accountName, setAccountName] = useRecoilState(accountname);
+  const [followingData, setFollowingData] = useState(null);
+
+  useEffect(() => {
+    const fetchFollowingData = async () => {
+      try {
+        const response = await followingAPI(accountName, token);
+        setFollowingData(response);
+      } catch (error) {
+        console.error("Account API 에러가 발생했습니다", error);
+      }
+    };
+    fetchFollowingData();
+  }, [])
+
   return (
     <HeaderLayout>
       <h1>
@@ -11,17 +31,18 @@ export default function Header() {
           <img src={Logo} alt="goodi 로고 이미지" />
         </LogoLink>
       </h1>
-      <div className="following_wrap">
-        <FollowingIcon to="/"></FollowingIcon>
-        <FollowingIcon to="/"></FollowingIcon>
-        <FollowingIcon to="/"></FollowingIcon>
-        <FollowingIcon to="/"></FollowingIcon>
-      </div>
+      <FollowingWrap>
+        {followingData && (
+          followingData.map((data) => {
+            return (
+              <FollowingIcon to="/" key={data._id}><img src={data.image} alt="" /></FollowingIcon>
+            )
+          }).slice(0, 5)
+        )}
+      </FollowingWrap>
     </HeaderLayout>
   );
 }
-
-const StyledLink = styled(Link)``;
 
 const HeaderLayout = styled.header`
   position: fixed;
@@ -33,14 +54,14 @@ const HeaderLayout = styled.header`
   justify-content: space-between;
   align-items: center;
   z-index: 1;
-
-  .following_wrap {
-    display: flex;
-    gap: 12px;
-  }
 `;
 
-const LogoLink = styled(StyledLink)`
+const FollowingWrap = styled.div`
+  display: flex;
+  gap: 12px;
+`
+
+const LogoLink = styled(Link)`
   display: block;
   height: 100%;
   display: flex;
@@ -52,10 +73,13 @@ const LogoLink = styled(StyledLink)`
   }
 `;
 
-const FollowingIcon = styled(StyledLink)`
+const FollowingIcon = styled(Link)`
   display: block;
-  width: 40px;
-  height: 40px;
-  background-color: #cccccc;
-  border-radius: 50%;
+  
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 `;
