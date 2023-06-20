@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import Modal from "./common/Modal";
 
 // 이미지 파일
 import SearchIcon from "../assets/icon_search_black.svg";
@@ -14,29 +13,36 @@ import HomeIcon from "../assets/icon_home_active.svg";
 
 // 컴포넌트
 import LocalNav from "./common/LocalNav";
+import Modal from "./common/Modal";
+import Search from "./common/Search";
 
 export default function Navigation() {
-  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const icons = [
-    { name: "Search", image: SearchIcon, nav: "/join" },
+    { name: "Search", image: SearchIcon, nav: "" },
     { name: "Home", image: HomeIcon, nav: "/main" },
     { name: "My page", image: MypageIcon, nav: "/profile" },
     { name: "Cart", image: CartIcon, nav: "/profileTest" },
     { name: "Chat", image: ChatIcon, nav: "/chat" },
     { name: "Post", image: PostIcon, nav: "" },
-    { name: "Logout", image: LogoutIcon, nav: "/login" },
+    { name: "Logout", image: LogoutIcon, nav: "" },
   ];
 
   // localNav hidden 관리
   // 예외처리 해줘야할것들:  x 버튼을 눌렀을 경우, 다른 곳을 클릭했을경우
   const [isHidden, setIsHidden] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
   const handleLocalNav = () => {
     setIsHidden((prevIsHidden) => !prevIsHidden);
   };
   const handleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const handleSearch = () => {
+    setShowSearch(!showSearch);
   };
 
   // const handleModal = () => {
@@ -68,6 +74,7 @@ export default function Navigation() {
             onClick={() => {
               if (el.name === "Post") handleLocalNav();
               else if (el.name === "Logout") handleModal();
+              else if (el.name === "Search") handleSearch();
               else navigate(el.nav);
             }}
           >
@@ -89,6 +96,7 @@ export default function Navigation() {
           showCloseButton={false}
         />
       )}
+      {showSearch && <Search />}
     </NavigationLayout>
   );
 }
