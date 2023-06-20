@@ -1,6 +1,6 @@
 const followerAPI = async (accountname, token) => {
   try {
-    const follower_URL = `https://api.mandarin.weniv.co.kr/profile/${accountname}/follower?skip=2`
+    const follower_URL = `https://api.mandarin.weniv.co.kr/profile/${accountname}/follower`
     const response = await fetch(follower_URL, {
       method: 'GET',
       headers: {
@@ -10,6 +10,7 @@ const followerAPI = async (accountname, token) => {
     })
 
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error('Account API 에러가 발생했습니다', error);
