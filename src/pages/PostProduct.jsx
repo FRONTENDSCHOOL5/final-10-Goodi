@@ -33,6 +33,8 @@ export default function PostProduct() {
     setPostProductData(data);
   };
 
+  console.log(postProductData);
+
   useEffect(() => {
     if (postProductData) {
       handlePost(postProductData, token);
@@ -50,7 +52,7 @@ export default function PostProduct() {
     <Layout reduceTop="true">
       <PostProductWrap>
         <PostUI
-        textareaLabel="상품설명"
+          textareaLabel="상품설명"
           src={ProductUpload}
           subtext="당신의 굿즈상품을 업로드하여 판매해보세요!"
           buttonText="상품 업로드 하기"

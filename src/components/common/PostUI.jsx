@@ -23,6 +23,7 @@ export default function PostUI({
   textareaLabel,
 }) {
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
   const [imageWrap, setImageWrap] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
   const [productData, setProductData] = useState({
@@ -45,33 +46,30 @@ export default function PostUI({
   //* 각 input에 name 값을 줘서 해당 인덱스 값이 넘어오게 하려고 하는데 잘 안됨
   const handleInputChange = async (e) => {
     const { name, value } = e.target;
-    console.log(parseInt(name));
     if (e.target.type === "file") {
       const file = e.target.files[0];
-      const imgSrc = await UploadImage(file);
 
-      // const newImage = [...imageWrap, imgSrc];
-      setImageWrap((prevArray) => {
-        const newArray = [...prevArray]; // 기존 배열의 복사본 생성
-        newArray[parseInt(name)] = imgSrc; // 특정 인덱스의 값을 변경
-        return newArray; // 새로운 배열로 업데이트
-      });
+      try {
+        setLoading(true);
+        const imgSrc = await UploadImage(file);
+        setImageWrap((prevArray) => {
+          const newArray = [...prevArray];
+          newArray[parseInt(name)] = imgSrc;
+          return newArray;
+        });
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.error(error);
+      }
 
-      setProductData((prevState) => ({
-        ...prevState,
-        product: {
-          ...prevState.product,
-          itemImage:
-            prevState.product.itemImage +
-            (prevState.product.itemImage ? "," : "") +
-            imgSrc,
-        },
-      }));
+      // 대신 맨마지막에 이미지 수정하면 바뀐 이미지는 반영 안됨
     } else {
       setProductData((prevState) => ({
         ...prevState,
         product: {
           ...prevState.product,
+          itemImage: imageWrap.join(),
           [name]: name === "price" ? parseInt(value) : value,
         },
       }));
@@ -87,21 +85,33 @@ export default function PostUI({
     getPostProductData(productData);
   };
 
-  const handleError = () => {
+  const handleError = (e) => {
+    setProductData((prevState) => ({
+      ...prevState,
+      product: {
+        ...prevState.product,
+        itemImage: imageWrap.join(),
+      },
+    }));
     const errors = [];
     if (productData.product.itemImage === "") {
       errors.push("상품이미지를 한개 이상 업로드 해주세요");
-    } else if (productData.product.itemName === "") {
+    } else if (
+      productData.product.itemName === "" ||
+      !productData.product.itemName
+    ) {
       errors.push("상품명을 입력해주세요");
-    } else if (productData.product.price === "") {
+    } else if (productData.product.price === "" || !productData.product.price) {
       errors.push("상품가격을 입력해주세요");
-    } else if (productData.product.link === "") {
+    } else if (productData.product.link === "" || !productData.product.link) {
       errors.push("상품소개글을 입력해주세요");
     } else {
       errors.push("");
     }
     setUserErrorMessage(errors);
   };
+
+  // console.log(productData);
 
   return (
     <PostUiWrap>
@@ -132,10 +142,14 @@ export default function PostUI({
               <ThumbnailLabel>
                 <p>대표 이미지</p>
               </ThumbnailLabel>
-              <img
-                src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
-                style={imageWrap[0] ? null : { width: "90px" }}
-              />
+              {loading ? (
+                <p>Loading...</p>
+              ) : (
+                <img
+                  src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
+                  style={imageWrap[0] ? null : { width: "90px" }}
+                />
+              )}
             </Thumbnail>
             {userErrorMessage.includes(
               "상품이미지를 한개 이상 업로드 해주세요"
@@ -155,16 +169,24 @@ export default function PostUI({
               onChange={handleInputChange}
             />
             <ProductImage htmlFor="productImageOne">
-              <img
-                src={imageWrap[1] ? BASE_URL + imageWrap[1] : AddIcon}
-                style={imageWrap[1] ? null : { width: "32px" }}
-              />
+              {loading ? (
+                <p>Loading...</p>
+              ) : (
+                <img
+                  src={imageWrap[1] ? BASE_URL + imageWrap[1] : AddIcon}
+                  style={imageWrap[1] ? null : { width: "32px" }}
+                />
+              )}
             </ProductImage>
             <ProductImage htmlFor="productImageTwo">
-              <img
-                src={imageWrap[2] ? BASE_URL + imageWrap[2] : AddIcon}
-                style={imageWrap[2] ? null : { width: "32px" }}
-              />
+              {loading ? (
+                <p>Loading...</p>
+              ) : (
+                <img
+                  src={imageWrap[2] ? BASE_URL + imageWrap[2] : AddIcon}
+                  style={imageWrap[2] ? null : { width: "32px" }}
+                />
+              )}
             </ProductImage>
 
             <input
