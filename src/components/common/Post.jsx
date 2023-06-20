@@ -122,14 +122,18 @@ const PostContent = styled.div`
   }
   .p_box{
     min-height: 80px;
+    display: flex;
+    align-items: flex-start;
   }
   p {
     font-family: var(--font-Regular);
     color: var(--gray500-color);
     font-size: 1rem;
     line-height: 1.4rem;
+    display: inline;
+    
     /* margin-bottom: 16px; */
-    text-align: justify;
+    /* text-align: justify; */
 
     /* overflow: hidden;
     text-overflow: ellipsis;
