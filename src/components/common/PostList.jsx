@@ -42,7 +42,7 @@ console.log({userPostList})
             profileImage={post.author.image}
             email={""}
             content={post.content}
-            image={BASE_URL + post.image}
+            image={BASE_URL + post.image.split(',')[0]}
             createdAt={post.createdAt}
           />
         ))
