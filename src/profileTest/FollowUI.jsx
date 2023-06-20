@@ -25,14 +25,13 @@ export default function FollowUI({ profileData }) {
   // 팔로워, 팔로잉 활성화
   const handleFollowClick = (followNumber) => {
     setActiveFollow(followNumber);
-    fetchFollowerData(followNumber);
-    fetchFollowingData(followNumber);
+    followNumber === 1 ? fetchFollowerData() : fetchFollowingData();
   };
 
   // 팔로워, 팔로잉 API 연동
   useEffect(() => {
-    fetchFollowingData(followingData);
-    fetchFollowerData(followerData);
+    fetchFollowingData();
+    fetchFollowerData();
   }, [activeFollow]);
 
   const fetchFollowingData = async () => {
