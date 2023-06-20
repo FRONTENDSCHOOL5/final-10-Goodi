@@ -18,17 +18,11 @@ const getElapsedTime = (createdAt) => {
   const msInDay = msInHour * 24;
 
   const days = Math.floor(elapsedMilliseconds / msInDay);
-  const hours = Math.floor(
-    (elapsedMilliseconds % msInDay) / msInHour
-  );
-  const minutes = Math.floor(
-    (elapsedMilliseconds % msInHour) / msInMinute
-  );
-  const seconds = Math.floor(
-    (elapsedMilliseconds % msInMinute) / msInSecond
-  );
+  const hours = Math.floor((elapsedMilliseconds % msInDay) / msInHour);
+  const minutes = Math.floor((elapsedMilliseconds % msInHour) / msInMinute);
+  const seconds = Math.floor((elapsedMilliseconds % msInMinute) / msInSecond);
 
-  let elapsedTimeString = '';
+  let elapsedTimeString = "";
   if (days > 0) {
     elapsedTimeString += `${days}일 `;
   }
@@ -43,7 +37,7 @@ const getElapsedTime = (createdAt) => {
   }
 
   return elapsedTimeString;
-}
+};
 
 export default function Post({
   username,
@@ -51,7 +45,7 @@ export default function Post({
   email,
   content,
   image,
-  createdAt
+  createdAt,
 }) {
   const elapsedTimeString = getElapsedTime(createdAt);
 
@@ -70,7 +64,9 @@ export default function Post({
         </button>
       </PostTop>
       <PostContent>
-        <p>{content}</p>
+        <div className="p_box">
+          <p>{content}</p>
+        </div>
         <img src={image} alt="" />
         <div>
           <span>{elapsedTimeString}</span>
@@ -114,25 +110,31 @@ const PostContent = styled.div`
   }
   img {
     width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
   }
+
   span {
     font-family: var(--font-Regular);
     color: var(--gray400-color);
     margin-right: 5px;
     font-size: 1rem;
   }
+  .p_box{
+    min-height: 80px;
+  }
   p {
     font-family: var(--font-Regular);
     color: var(--gray500-color);
     font-size: 1rem;
     line-height: 1.4rem;
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     text-align: justify;
 
-    overflow: hidden;
+    /* overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical; */
   }
 `;

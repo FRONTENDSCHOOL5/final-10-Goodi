@@ -35,7 +35,7 @@ export default function PostingUI({
   // 게시글내용 글자수 제한
   const handleTextCount = (e) => {
     const textSlice = e.target.value;
-    setDescription(textSlice.slice(0, 100));
+    setDescription(textSlice.slice(0, 50));
   };
 
   //! 해결해야하는 오류(이미지 교체하면 해당 인덱스로 교체, 해당 타겟 이미지 교체)
