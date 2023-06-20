@@ -13,29 +13,26 @@ import AddIcon from "../../assets/add_button_gray.svg";
 // API
 import UploadImage from "../../api/UploadImage";
 
-export default function PostUI({
+export default function PostingUI({
   src,
   subtext,
   buttonText,
-  showInput,
   textareaHeight,
-  getPostProductData,
+  getPostPostingData,
 }) {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageWrap, setImageWrap] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
-  const [productData, setProductData] = useState({
-    product: {
-      itemName: "",
-      price: "", //1원 이상
-      link: "",
-      itemImage: "",
+  const [postingData, setPostingData] = useState({
+    post: {
+      content:"",
+      image:""
     },
   });
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
-  // 상품설명 글자수 제한
+  // 게시글내용 글자수 제한
   const handleTextCount = (e) => {
     const textSlice = e.target.value;
     setDescription(textSlice.slice(0, 100));
@@ -64,53 +61,45 @@ export default function PostUI({
 
       // 대신 맨마지막에 이미지 수정하면 바뀐 이미지는 반영 안됨
     } else {
-      setProductData((prevState) => ({
+      setDescription(value); 
+      setPostingData((prevState) => ({
         ...prevState,
-        product: {
-          ...prevState.product,
-          itemImage: imageWrap.join(),
+        post: {
+          ...prevState.post,
+          image: imageWrap.join(),
           [name]: name === "price" ? parseInt(value) : value,
         },
       }));
     }
 
-    if (name === "link") {
+    if (name === "content") {
       handleTextCount(e);
     }
   };
 
   const joinData = (e) => {
     e.preventDefault();
-    getPostProductData(productData);
+    getPostPostingData(postingData);
   };
 
   const handleError = (e) => {
-    setProductData((prevState) => ({
+    setPostingData((prevState) => ({
       ...prevState,
-      product: {
-        ...prevState.product,
-        itemImage: imageWrap.join(),
+      post: {
+        ...prevState.post,
+        image: imageWrap.join(),
       },
     }));
     const errors = [];
-    if (productData.product.itemImage === "") {
-      errors.push("상품이미지를 한개 이상 업로드 해주세요");
-    } else if (
-      productData.product.itemName === "" ||
-      !productData.product.itemName
-    ) {
-      errors.push("상품명을 입력해주세요");
-    } else if (productData.product.price === "" || !productData.product.price) {
-      errors.push("상품가격을 입력해주세요");
-    } else if (productData.product.link === "" || !productData.product.link) {
-      errors.push("상품소개글을 입력해주세요");
+    if (postingData.post.image === "") {
+      errors.push("게시글 이미지를 한개 이상 업로드 해주세요");
+    } else if (postingData.post.link === "" || !postingData.post.link) {
+      errors.push("게시글 내용을 입력해주세요");
     } else {
       errors.push("");
     }
     setUserErrorMessage(errors);
   };
-
-  // console.log(productData);
 
   return (
     <PostUiWrap>
@@ -132,7 +121,7 @@ export default function PostUI({
               htmlFor="thumbnail"
               style={
                 userErrorMessage.includes(
-                  "상품이미지를 한개 이상 업로드 해주세요"
+                  "게시글 이미지를 한개 이상 업로드 해주세요"
                 )
                   ? { border: "1px solid red" }
                   : null
@@ -151,10 +140,10 @@ export default function PostUI({
               )}
             </Thumbnail>
             {userErrorMessage.includes(
-              "상품이미지를 한개 이상 업로드 해주세요"
+              "게시글 이미지를 한개 이상 업로드 해주세요"
             ) && (
               <ErrorMassage>
-                상품이미지를 한개 이상 업로드 해주세요
+                게시글 이미지를 한개 이상 업로드 해주세요
               </ErrorMassage>
             )}
           </ThumbnailWrap>
@@ -201,61 +190,20 @@ export default function PostUI({
         <Line />
 
         <ContentUploadWrap>
-          {showInput && (
-            <>
-              <InputDiv>
-                <Label>상품명</Label>
-                <InputBox
-                  width="100%"
-                  height="48px"
-                  name="itemName"
-                  placeholder="상품명을 입력해주세요"
-                  type="text"
-                  onChange={handleInputChange}
-                  value={productData.product.itemName}
-                  hasError={userErrorMessage.includes("상품명을 입력해주세요")}
-                />
-                {userErrorMessage.includes("상품명을 입력해주세요") && (
-                  <ErrorMassage>상품명을 입력해주세요</ErrorMassage>
-                )}
-              </InputDiv>
-
-              {/* 숫자만 입력, 1 원 이상 100만원 이하 , 숫자 세개마다 콤마 */}
-              <InputDiv>
-                <Label>상품가격</Label>
-                <InputBox
-                  width="100%"
-                  height="48px"
-                  type="number"
-                  placeholder="상품가격을 입력해주세요"
-                  name="price"
-                  value={productData.product.price}
-                  onChange={handleInputChange}
-                  hasError={userErrorMessage.includes(
-                    "상품가격을 입력해주세요"
-                  )}
-                />
-                {userErrorMessage.includes("상품가격을 입력해주세요") && (
-                  <ErrorMassage>상품가격을 입력해주세요</ErrorMassage>
-                )}
-              </InputDiv>
-            </>
-          )}
-
           <InputDiv>
-            <Label>상품 설명</Label>
+            <Label>게시글 내용</Label>
             <Textarea
               width="100%"
-              height="100px"
-              placeholder="상품에 대한 설명을 입력해주세요"
+              height="300px"
+              placeholder="게시글 내용을 입력해주세요"
               textCount={description}
               value={description}
               onChange={handleInputChange}
-              name="link"
-              hasError={userErrorMessage.includes("상품소개글을 입력해주세요")}
+              name="content"
+              hasError={userErrorMessage.includes("게시글 내용을 입력해주세요")}
             />
-            {userErrorMessage.includes("상품소개글을 입력해주세요") && (
-              <ErrorMassage>상품소개글을 입력해주세요</ErrorMassage>
+            {userErrorMessage.includes("게시글 내용을 입력해주세요") && (
+              <ErrorMassage>게시글 내용을 입력해주세요</ErrorMassage>
             )}
           </InputDiv>
 
