@@ -7,8 +7,7 @@ import followSymbol from "../assets/follow_symbol.svg"
 import FollowButton from './common/FollowButton';
 
 export default function Follow({ followerData, followingData, activeFollow }) {
-
-
+  console.log(followerData);
   return (
     <FollowWrap>
       {
@@ -24,7 +23,8 @@ export default function Follow({ followerData, followingData, activeFollow }) {
               key={follow._id}
               user_profile={follow.image}
               user_name={follow.username}
-              user_email={follow.accountname}
+              user_email={follow.email}
+              account_name={follow.accountname}
               follow="true"
             />
             <FollowButton follow={follow} />
@@ -41,9 +41,7 @@ export default function Follow({ followerData, followingData, activeFollow }) {
               follow="true"
             >
             </ProfileUI>
-            <FollowButton
-
-            />
+            <FollowButton follow={follow} />
           </BtnWrap>
         ))
       ) : (

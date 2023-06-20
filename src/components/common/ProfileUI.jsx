@@ -4,10 +4,16 @@ import { Link } from "react-router-dom";
 import defaultImage from "../../assets/profile_img_def.svg"
 
 function ProfileUI(props) {
-  const { user_profile, user_name, user_email, mainprofile, card, follow, children } = props;
+  const { user_profile, user_name, user_email, mainprofile, card, follow, account_name, children } = props;
 
   return (
-    <UserProfile mainprofile={mainprofile} card={card} follow={follow}>
+    <UserProfile
+      mainprofile={mainprofile}
+      card={card}
+      follow={follow}
+      to={`/profile/${account_name}`}
+      onClick={(e) => { console.log(e.target); }}
+    >
       <img src={user_profile || defaultImage} alt="유저 프로필 이미지" />
       <div>
         <strong>{user_name}</strong>
@@ -18,12 +24,7 @@ function ProfileUI(props) {
   );
 }
 
-const StyledLink = styled(Link)`
-  color: var(--black-color);
-  text-decoration: none;
-`;
-
-const UserProfile = styled(StyledLink)`
+const UserProfile = styled(Link)`
   width: 100%;
   display: flex;
   align-items: center;

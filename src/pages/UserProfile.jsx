@@ -13,17 +13,18 @@ import PostList from "../components/common/PostList";
 import { useRecoilState } from "recoil";
 import loginToken from "../recoil/loginToken";
 import profileAPI from "../api/profile";
-import accountname from './../recoil/accountname';
+import accountname from '../recoil/accountname';
 import followingAPI from "../api/following";
 import followerAPI from "../api/follower";
 import updateProfile from "../api/updateProfile";
 import UpdateProfile from "../components/UpdateProfile";
 import NoPostsUI from "../components/NoPostsUI";
 import { useParams } from "react-router-dom";
-import UploadImage from "../api/UploadImage";
-import PostImageAPI from "../api/UploadImage";
+import accountProfileAPI from "../api/accountProfile";
 
-export default function Profile() {
+export default function UserProfile(props) {
+  const { account_name } = useParams(); // params가 바뀌면 렌더링 (useEffect)
+
   // 상품 목록, 게시글 목록 탭
   const [activeTab, setActiveTab] = useState(1);
   // 팔로워, 팔로잉 탭
@@ -56,14 +57,18 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProfileData, setEditedProfileData] = useState({});
 
-  // 프로필 이미지 업로드
-  const [isImageEdit, setIsImageEdit] = useState("")
+  // post 개수를 위한 post state 끌어올리기
+  const [postList, setPostList] = useState([]);
+
+  const handlePostListUpdate = (userPostList) => {
+    setPostList(userPostList);
+  };
 
   // 프로필 정보 API 연동
   useEffect(() => {
-    const fetchProfileData = async () => {
+    const fetchAccountNameProfileData = async () => {
       try {
-        const response = await profileAPI(token);
+        const response = await accountProfileAPI(account_name, token);
         setProfileData(response);
         setLoading(false);
       } catch (error) {
@@ -71,8 +76,8 @@ export default function Profile() {
       }
     };
 
-    fetchProfileData();
-  }, []);
+    fetchAccountNameProfileData();
+  }, [account_name]);
 
   // 팔로워, 팔로잉 API 연동
   useEffect(() => {
@@ -80,6 +85,7 @@ export default function Profile() {
     fetchFollowerData(activeFollow);
   }, [activeFollow]);
 
+  // 팔로워, 팔로잉도 account_name이 바뀌었을 때 바뀌게 설정 useEffect
   const fetchFollowingData = async () => {
     try {
       const response = await followingAPI(accountName, token);
@@ -97,9 +103,6 @@ export default function Profile() {
       console.error("Account API 에러가 발생했습니다", error);
     }
   };
-
-  console.log(followerData);
-  console.log(followingData);
 
   // 로딩, 사용자 정보 없음 예외처리
   if (loading) {
@@ -119,7 +122,8 @@ export default function Profile() {
   }
 
   console.table(profileData);
-  console.log(isImageEdit);
+  console.table(followingData);
+  console.log(token);
 
   // 프로필 수정 버튼 이벤트
   const handleEditClick = () => {
@@ -131,7 +135,6 @@ export default function Profile() {
     setIsEditing(false);
     setEditedProfileData({});
     // 수정 취소를 눌렀는데 변경된 값이 화면에 렌더링됨 (값 저장은 X)
-    // 수정 취소를 눌렀을 때 서버에서 받아온 초기값으로 돌림
   };
 
   // input 값 올바르게 받기
@@ -155,14 +158,15 @@ export default function Profile() {
       user: {
         ...profileData.user,
         ...editedProfileData.user,
-        image: isImageEdit,
       },
     };
 
-    setProfileData(updatedProfileData);
+    setEditedProfileData(updatedProfileData)
     updateProfile(profileData, token);
     setIsEditing(false);
   };
+
+  console.log("이거다", profileData);
 
   return (
     <Layout reduceTop="true">
@@ -175,48 +179,46 @@ export default function Profile() {
                 profileData={profileData}
                 handleInputChange={handleInputChange}
                 handleCancelClick={handleCancelClick}
-                setProfileData={setProfileData}
-                setIsImageEdit={setIsImageEdit}
               />
             </ProfileLeft>
           ) : (
             <ProfileLeft>
               <IntroWrap>
-                <img src={profileData.user.image} alt="" />
-                <strong>{profileData.user.username}</strong>
-                <p>{profileData.user.accountname}</p>
+                <img src={profileData.profile.image} alt="" />
+                <strong>{profileData.profile.username}</strong>
+                <p>{profileData.profile.accountname}</p>
               </IntroWrap>
 
               <BtnWrap>
-                {/* <ButtonLineIcon
-                    text="작가랑 채팅하기"
-                    basic="true"
-                    bg="black"
-                    color="white"
-                  />
-                  <ButtonLineIcon text="작가 팔로우" /> */}
                 <ButtonLineIcon
+                  text="작가랑 채팅하기"
+                  basic="true"
+                  bg="black"
+                  color="white"
+                />
+                <ButtonLineIcon text="작가 팔로우" />
+                {/* <ButtonLineIcon
                   text="프로필 수정하기"
                   onClick={handleEditClick}
                   basic="true"
-                />
+                /> */}
               </BtnWrap>
 
-              <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
+              <p>{profileData.profile.intro || "아직 소개글이 없어요!"}</p>
 
               <FollowWrap>
                 <FollowDiv
                   className={activeFollow === 1 ? 'followActive' : ''}
                   onClick={() => handleFollowClick(1)}
                 >
-                  <strong>{profileData.user.followerCount}</strong>
+                  <strong>{profileData.profile.followerCount}</strong>
                   <p>팔로워</p>
                 </FollowDiv>
                 <FollowDiv
                   className={activeFollow === 2 ? 'followActive' : ''}
                   onClick={() => handleFollowClick(2)}
                 >
-                  <strong>{profileData.user.followingCount}</strong>
+                  <strong>{profileData.profile.followingCount}</strong>
                   <p>팔로잉</p>
                 </FollowDiv>
               </FollowWrap>
@@ -250,10 +252,18 @@ export default function Profile() {
             </TabBtn>
           </TabMenu>
           {activeTab === 1 && (
+            // profileData.user.post.length > 0 ? (
             <CardProduct profile="true" />
+            // ) : (
+            // <NoPostsUI />
+            // )
           )}
           {activeTab === 2 && (
-            <PostList />
+            // postList.length > 0 ? (
+            <PostList onPostListUpdate={handlePostListUpdate} />
+            // ) : (
+            // <NoPostsUI />
+            // )
           )}
         </ProfileRight>
       </ProfileWrap>

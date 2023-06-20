@@ -12,6 +12,7 @@ import { LeftDiv } from "../components/Carousel";
 
 import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
+import Profile from "./Profile";
 
 export default function Setprofile() {
   const [profileSelectedImage, setProfileSelectedImage] = useState(null);
@@ -31,7 +32,7 @@ export default function Setprofile() {
       intro: "",
     },
   });
-console.log(signUpData.user.intro);
+  console.log(signUpData.user.intro);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSignUpData((prevState) => ({
@@ -104,7 +105,7 @@ console.log(signUpData.user.intro);
                       : ProfileImgDef
                   }
                   alt="Upload"
-                  style={profileSelectedImage ? { width: "100px" } : null }
+                  style={profileSelectedImage ? { width: "100px" } : null}
                 />
               </ProfileImgWrap>
 
@@ -136,11 +137,11 @@ console.log(signUpData.user.intro);
             </InputDiv>
             <InputDiv>
               <Label>소개 메세지</Label>
-              <textarea 
-              placeholder="나를 소개해보세요"
-              name="intro"
-              onChange={handleInputChange}
-              value={signUpData.user.intro}
+              <textarea
+                placeholder="나를 소개해보세요"
+                name="intro"
+                onChange={handleInputChange}
+                value={signUpData.user.intro}
               ></textarea>
             </InputDiv>
             <ButtonDiv>

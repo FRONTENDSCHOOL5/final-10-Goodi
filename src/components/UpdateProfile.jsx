@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Button from './common/Button';
 import { InputBox } from './common/Input';
 
-import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
 
-export default function UpdateProfile({ handleSaveClick, profileData, handleInputChange, handleCancelClick }) {
+import PostImageAPI from "../api/UploadImage";
+
+export default function UpdateProfile({ handleSaveClick, profileData, handleInputChange, handleCancelClick, setProfileData, setIsImageEdit }) {
+  const [profileSelectedImage, setProfileSelectedImage] = useState(null);
+
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+  const updateImageUrl = BASE_URL + profileSelectedImage;
+  const handleImageChange = async (e) => {
+    const { name, value } = e.target;
+    const file = e.target.files[0];
+    const imgSrc = await PostImageAPI(file);
+
+    setIsImageEdit(BASE_URL + imgSrc);
+
+  };
+  useEffect(() => {
+    setIsImageEdit(updateImageUrl);
+  }, [updateImageUrl, setIsImageEdit]);
+
+  console.log(BASE_URL + profileSelectedImage);
 
   return (
     <>
@@ -15,14 +33,21 @@ export default function UpdateProfile({ handleSaveClick, profileData, handleInpu
           id="fileInput"
           type="file"
           style={{ display: "none" }}
-        // onChange={}	
+          accept="image/jpeg, image/png, image/svg"
+          onChange={handleImageChange}
         />
         <label htmlFor="fileInput">
-          <img
-            src={ProfileImgDef}
-            alt="Upload"
-            style={{ cursor: "pointer" }}
-          />
+          <ProfileImgWrap>
+            <img
+              src={
+                profileSelectedImage
+                  ? updateImageUrl
+                  : profileData.user.image
+              }
+              alt="Upload"
+              style={profileSelectedImage ? { width: "110px" } : null}
+            />
+          </ProfileImgWrap>
           <img className="add_button_img"
             src={PlusBtnImg}
             alt="Upload"
@@ -76,20 +101,33 @@ export default function UpdateProfile({ handleSaveClick, profileData, handleInpu
   )
 }
 
+const ProfileImgWrap = styled.div`
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  & > img {
+    width: 100%;
+    aspect-ratio: 1/ 1;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+`;
+
 const ProfileDiv = styled.div`
   position: relative;
   margin-bottom: 30px;
   .add_button_img {
     position: absolute;
-    top: 67px;
-    left: 67px;
+    top: 70px;
+    left: 70px;
   }
   cursor: pointer;
 `;
 
 const Form = styled.form`
   width: 100%;
-  
+
   & > div:first-child {
     margin-bottom: 32px;
   } 
