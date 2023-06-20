@@ -1,8 +1,8 @@
-const followerAPI = async (accountname, token) => {
+const unfollowAPI = async (accountname, token) => {
   try {
-    const follower_URL = `https://api.mandarin.weniv.co.kr/profile/${accountname}/follower?skip=2`
-    const response = await fetch(follower_URL, {
-      method: 'GET',
+    const unfollow_URL = `https://api.mandarin.weniv.co.kr/profile/${accountname}/unfollow`
+    const response = await fetch(unfollow_URL, {
+      method: 'DELETE',
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-type": "application/json"
@@ -16,4 +16,4 @@ const followerAPI = async (accountname, token) => {
   }
 };
 
-export default followerAPI;
+export default unfollowAPI;

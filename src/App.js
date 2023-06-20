@@ -10,6 +10,8 @@ import Profile from './pages/Profile';
 import Chat from './pages/Chat';
 import PostProduct from './pages/PostProduct';
 import PostPosting from './pages/PostPosting';
+import UserProfile from './pages/UserProfile';
+import ProfileTest from './profileTest/ProfileTest';
 
 function App() {
   return (
@@ -23,10 +25,11 @@ function App() {
         <Route path="/join" element={<Join />} />
         <Route path="/setprofile" element={<Setprofile />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:account_name" element={<UserProfile />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/postproduct" element={<PostProduct />} />
         <Route path="/postposting" element={<PostPosting />} />
-
+        <Route path="/profileTest" element={<ProfileTest />} />
       </Routes>
     </BrowserRouter>
   );

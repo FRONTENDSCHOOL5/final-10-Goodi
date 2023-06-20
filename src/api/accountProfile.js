@@ -1,7 +1,7 @@
-const followerAPI = async (accountname, token) => {
+const accountProfileAPI = async (accountname, token) => {
   try {
-    const follower_URL = `https://api.mandarin.weniv.co.kr/profile/${accountname}/follower?skip=2`
-    const response = await fetch(follower_URL, {
+    const ACCOUNTPROFILE_URL = `https://api.mandarin.weniv.co.kr/profile/${accountname}`
+    const response = await fetch(ACCOUNTPROFILE_URL, {
       method: 'GET',
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -16,4 +16,4 @@ const followerAPI = async (accountname, token) => {
   }
 };
 
-export default followerAPI;
+export default accountProfileAPI;
