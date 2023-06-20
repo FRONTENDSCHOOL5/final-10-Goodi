@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import ProfileUI from './common/ProfileUI';
 import followers from "../assets/Followers.svg"
 import following from "../assets/Following.svg"
 import followSymbol from "../assets/follow_symbol.svg"
+import FollowButton from './common/FollowButton';
 
 export default function Follow({ followerData, followingData, activeFollow }) {
+
+
   return (
     <FollowWrap>
       {
@@ -16,23 +19,32 @@ export default function Follow({ followerData, followingData, activeFollow }) {
 
       {activeFollow === 1 && followerData && followerData.length > 0 ? (
         followerData.map((follow) => (
-          <ProfileUI
-            key={follow.id}
-            user_profile={follow.image}
-            user_name={follow.username}
-            user_email={follow.accountname}
-            follow="true"
-          />
+          <BtnWrap>
+            <ProfileUI
+              key={follow._id}
+              user_profile={follow.image}
+              user_name={follow.username}
+              user_email={follow.accountname}
+              follow="true"
+            />
+            <FollowButton follow={follow} />
+          </BtnWrap>
         ))
       ) : activeFollow === 2 && followingData && followingData.length > 0 ? (
         followingData.map((follow) => (
-          <ProfileUI
-            key={follow.id}
-            user_profile={follow.image}
-            user_name={follow.username}
-            user_email={follow.accountname}
-            follow="true"
-          />
+          <BtnWrap>
+            <ProfileUI
+              key={follow.id}
+              user_profile={follow.image}
+              user_name={follow.username}
+              user_email={follow.accountname}
+              follow="true"
+            >
+            </ProfileUI>
+            <FollowButton
+
+            />
+          </BtnWrap>
         ))
       ) : (
         <FollowNull>
@@ -51,14 +63,20 @@ const FollowWrap = styled.article`
     margin-bottom: 30px;
 
     & > img {
-      width: 60%;
+      width: 50%;
     }
   }
+`
 
-  a {
-    &:last-child {
-      margin-bottom: 0;
-    }
+const BtnWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+
+  & > a {
+    width: 60%;
+    margin-bottom: 0;
   }
 `
 
