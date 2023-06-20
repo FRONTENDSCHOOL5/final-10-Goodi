@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
 import PlusBtnImg from "../assets/add_button.svg";
@@ -18,7 +18,9 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
   const token = useRecoilValue(loginToken);
 
   // 프로필 이미지 업로드
-  const [changeImageURL, setChangeImageURL] = useState("");
+  const [changeImageURL, setChangeImageURL] = useState(profileData.user.image);
+  const [userName, setUserName] = useState(profileData.user.username);
+  const [intro, setIntro] = useState(profileData.user.intro);
 
   // 이미지 fetch
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
@@ -40,11 +42,13 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
       user: {
         ...profileData.user,
         image: changeImageURL,
+        username: userName,
+        intro: intro
       },
     };
 
     setProfileData(updatedProfileData);
-    updateProfile(profileData, token);
+    updateProfile(updatedProfileData, token);
     setIsEditing(false);
   };
 
@@ -58,16 +62,12 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
   // input 값 올바르게 받기
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProfileData(prevState => ({
-      ...prevState,
-      user: {
-        ...prevState.user,
-        [name]: value
-      }
-    }));
-  };
-
-  console.log(profileData);
+    if (name === "username") {
+      setUserName(value)
+    } else {
+      setIntro(value)
+    }
+  }
 
   return (
     <>
@@ -102,7 +102,7 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
             height="48px"
             padding="15px"
             name="username"
-            value={profileData.user.username}
+            value={userName}
             onChange={handleInputChange}
             placeholder="변경할 닉네임을 입력해주세요"
           />
@@ -112,7 +112,7 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
           <textarea
             placeholder="소개 글을 입력해주세요"
             name="intro"
-            value={profileData.user.intro}
+            value={intro}
             onChange={handleInputChange}
           ></textarea>
         </div>
