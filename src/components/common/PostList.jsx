@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import Post from './Post';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import Post from "./Post";
+import styled from "styled-components";
 import postAPI from "../../api/post";
 import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
 import { useRecoilState } from "recoil";
-import NoPostsUI from '../NoPostsUI';
+import NoPostsUI from "../NoPostsUI";
 
 export default function PostList(props) {
-  const { onPostListUpdate } = props
+  const { onPostListUpdate } = props;
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useRecoilState(loginToken);
   const [accountName, setAccountName] = useRecoilState(accountname);
-
-  console.log(userPostList);
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -24,20 +23,13 @@ export default function PostList(props) {
       });
       setUserPostList(post);
       setLoading(false);
-      // if (onPostListUpdate) {
-      //   onPostListUpdate(post);
-      // }
     };
 
     fetchPostData();
   }, []);
-
+console.log({userPostList})
   if (loading) {
-    return (
-      <>
-        로딩중...우헤헷🏓
-      </>
-    )
+    return <>로딩중...우헤헷🏓</>;
   }
 
   return (
@@ -50,22 +42,22 @@ export default function PostList(props) {
             profileImage={post.author.image}
             email={""}
             content={post.content}
-            image={post.image}
+            image={BASE_URL + post.image.split(',')[0]}
             createdAt={post.createdAt}
           />
-        ))) : (
+        ))
+      ) : (
         <NoPostsUI />
       )}
     </PostListWrap>
   );
-
 }
 
 const PostListWrap = styled.section`
   width: 100%;
   ${({ hasPosts }) =>
-    hasPosts ?
-      `
+    hasPosts
+      ? `
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: auto;
@@ -73,4 +65,4 @@ const PostListWrap = styled.section`
       margin-bottom: 70px;
     `
       : ""}
-`
+`;
