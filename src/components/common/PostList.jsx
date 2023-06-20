@@ -8,7 +8,6 @@ import { useRecoilState } from "recoil";
 import NoPostsUI from '../NoPostsUI';
 
 export default function PostList(props) {
-  const { onPostListUpdate } = props
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useRecoilState(loginToken);
@@ -24,9 +23,6 @@ export default function PostList(props) {
       });
       setUserPostList(post);
       setLoading(false);
-      // if (onPostListUpdate) {
-      //   onPostListUpdate(post);
-      // }
     };
 
     fetchPostData();
