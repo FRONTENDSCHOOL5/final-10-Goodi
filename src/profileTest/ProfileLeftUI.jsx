@@ -19,6 +19,8 @@ export default function ProfileLeftUI() {
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  console.log(profileData.user);
+
   // 프로필 정보 수정
   const [isEditing, setIsEditing] = useState(false);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 
 import PlusBtnImg from "../assets/add_button.svg";
@@ -31,8 +31,6 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
     setChangeImageURL(BASE_URL + imgSrc);
   };
 
-  console.log(changeImageURL); // 이미지 url
-
   // 저장 버튼 클릭 시 수정된 API에 데이터 전달
   const handleSaveClick = (e) => {
     e.preventDefault();
@@ -55,8 +53,6 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
   // 프로필 수정 취소 이벤트
   const handleCancelClick = () => {
     setIsEditing(false);
-    // 수정 취소를 눌렀는데 변경된 값이 화면에 렌더링됨 (값 저장은 X)
-    // 수정 취소를 눌렀을 때 서버에서 받아온 초기값으로 돌림
   };
 
   // input 값 올바르게 받기
@@ -82,10 +78,9 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
         <label htmlFor="fileInput">
           <ProfileImgWrap>
             <img
-              src={changeImageURL || profileData.user.image}
+              src={changeImageURL}
               alt="Upload"
             />
-            {/* 이미지를 바꾸지 않고 저장 완료를 누를 시 이미지 null 이슈 */}
           </ProfileImgWrap>
           <img className="add_button_img"
             src={PlusBtnImg}

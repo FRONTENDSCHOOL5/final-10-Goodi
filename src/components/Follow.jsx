@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import ProfileUI from './common/ProfileUI';
 import followers from "../assets/Followers.svg"
@@ -6,8 +6,9 @@ import following from "../assets/Following.svg"
 import followSymbol from "../assets/follow_symbol.svg"
 import FollowButton from './common/FollowButton';
 
-export default function Follow({ followerData, followingData, activeFollow }) {
-  console.log(followerData);
+export default function Follow(props) {
+  const { followerData, followingData, activeFollow } = props;
+
   return (
     <FollowWrap>
       {
@@ -23,11 +24,13 @@ export default function Follow({ followerData, followingData, activeFollow }) {
               key={follow._id}
               user_profile={follow.image}
               user_name={follow.username}
-              user_email={follow.email}
-              account_name={follow.accountname}
+              user_email={follow.accountname}
+              // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
               follow="true"
             />
-            <FollowButton follow={follow} />
+            <FollowButton
+              follow={follow}
+            />
           </BtnWrap>
         ))
       ) : activeFollow === 2 && followingData && followingData.length > 0 ? (
@@ -38,10 +41,13 @@ export default function Follow({ followerData, followingData, activeFollow }) {
               user_profile={follow.image}
               user_name={follow.username}
               user_email={follow.accountname}
+              // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
               follow="true"
             >
             </ProfileUI>
-            <FollowButton follow={follow} />
+            <FollowButton
+              follow={follow}
+            />
           </BtnWrap>
         ))
       ) : (
