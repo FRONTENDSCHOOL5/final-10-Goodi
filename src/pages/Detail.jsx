@@ -12,7 +12,7 @@ import Count from "../components/common/Count";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import Button from "../components/common/Button";
 import LikeBtn from "../components/common/LikeBtn";
-import Toast from "./Toast";
+import Toast from "../components/Toast";
 
 //data
 import ProductData from "../mock/productData";
@@ -56,7 +56,7 @@ export default function Detail() {
     return <div>로딩중입니다</div>;
   }
 
-  // 장바구니에 상품 담기
+  // 장바구니에 상품 담기 toast
   const handleCart = () => {
     setToast(true);
   };
