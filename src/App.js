@@ -11,6 +11,12 @@ import UserProfile from './pages/userProfile/UserProfile';
 import Chat from './pages/Chat';
 import PostProduct from './pages/PostProduct';
 import PostPosting from './pages/PostPosting';
+<<<<<<< HEAD
+import UserProfile from './pages/UserProfile';
+import ProfileTest from './profileTest/ProfileTest';
+import NotFound from './pages/NotFound';
+=======
+>>>>>>> 012494ebc43e86ce1a4871383040aeb933218b12
 
 function App() {
   return (
@@ -28,6 +34,11 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/postproduct" element={<PostProduct />} />
         <Route path="/postposting" element={<PostPosting />} />
+<<<<<<< HEAD
+        <Route path="/profileTest" element={<ProfileTest />} />
+        <Route path="/*" element={<NotFound />} />
+=======
+>>>>>>> 012494ebc43e86ce1a4871383040aeb933218b12
       </Routes>
     </BrowserRouter>
   );
