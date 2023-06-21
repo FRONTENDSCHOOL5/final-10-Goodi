@@ -26,6 +26,7 @@ export default function Follow(props) {
               user_name={follow.username}
               user_email={follow.accountname}
               // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
+              account_name={follow.accountname}
               follow="true"
             />
             <FollowButton
@@ -42,6 +43,7 @@ export default function Follow(props) {
               user_name={follow.username}
               user_email={follow.accountname}
               // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
+              account_name={follow.accountname}
               follow="true"
             >
             </ProfileUI>
