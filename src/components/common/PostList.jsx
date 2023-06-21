@@ -6,9 +6,9 @@ import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
 import { useRecoilState, useRecoilValue } from "recoil";
 import NoPostsUI from "../NoPostsUI";
+import PostListSkeleton from "../../style/skeletonUI/skeletonPage/PostListSkeleton";
 
-export default function PostList(props) {
-  const { onPostListUpdate } = props;
+export default function PostList() {
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useRecoilState(loginToken);
@@ -36,8 +36,9 @@ export default function PostList(props) {
     fetchPostData();
   }, []);
   console.log({ userPostList });
+
   if (loading) {
-    return <>로딩중...우헤헷🏓</>;
+    return <PostListSkeleton />;
   }
 
   return (

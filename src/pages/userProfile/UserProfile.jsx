@@ -15,7 +15,7 @@ export default function UserProfileTest() {
   const navigate = useNavigate();
 
   const navigateMyProfile = () => {
-    navigate('/profileTest');
+    navigate('/profile');
   }
 
   // 리코일 값 불러오기

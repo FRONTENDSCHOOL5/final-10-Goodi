@@ -3,8 +3,6 @@ import styled from "styled-components";
 import ButtonLineIcon from "../../components/common/ButtonLineIcon";
 
 export default function IntroUI({ profileData, setIsEditing }) {
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
-
   // 프로필 수정 버튼 이벤트
   const handleEditClick = () => {
     setIsEditing(true);
