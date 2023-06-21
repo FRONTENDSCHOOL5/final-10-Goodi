@@ -8,6 +8,7 @@ import postMenu from "../../assets/post_menu.svg";
 import nonLikeIcon from "../../assets/empty_likeBtn.svg";
 import likeIcon from "../../assets/post_fullLikeBtn.svg";
 
+
 const getElapsedTime = (createdAt) => {
   const currentTime = new Date();
   const createdDateTime = new Date(createdAt);
@@ -54,6 +55,11 @@ export default function Post({
 }) {
   const elapsedTimeString = getElapsedTime(createdAt);
   console.log("postId 값:", postId);
+  const [heartValue, setHeartValue] = useState(heartCount);
+  const getHeartData = () => {
+    setHeartValue(prev => prev += 1);
+
+  };
   return (
     <PostOuter>
       <PostTop>
@@ -76,8 +82,8 @@ export default function Post({
         <div>
           <span>{elapsedTimeString}</span>
           <div className="like_wrap">
-            <span>{heartCount}</span>
-            <PostLikeBtn postId={postId}/>
+            <span>{heartValue}</span>
+            <PostLikeBtn postId={postId} getHeartData={getHeartData}/>
           </div>
         </div>
       </PostContent>
