@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-
+import UpdateProfile from './UpdateProfile';
 import IntroUI from './IntroUI';
 import FollowUI from './FollowUI';
-
-import UpdateProfile from './UpdateProfile';
 
 export default function ProfileLeftUI({ profileData, setProfileData }) {
   // 프로필 정보 수정

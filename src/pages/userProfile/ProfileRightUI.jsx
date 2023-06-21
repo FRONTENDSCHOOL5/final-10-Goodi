@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 
-import pointEdgeProfile from "../assets/point-edge-profile.svg";
-import authorProducts from "../assets/Author-Products.svg";
-
-import CardProduct from '../components/common/CardProduct';
-import PostList from '../components/common/PostList';
+import pointEdgeProfile from "../../assets/point-edge-profile.svg";
+import authorProducts from "../../assets/Author-Products.svg";
+import CardProduct from '../../components/common/CardProduct';
+import PostList from '../../components/common/PostList';
 
 export default function ProfileRightUI() {
   // 상품 목록, 게시글 목록 탭

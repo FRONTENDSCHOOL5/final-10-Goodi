@@ -12,7 +12,6 @@ import { LeftDiv } from "../components/Carousel";
 
 import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
-import Profile from "./Profile";
 
 export default function Setprofile() {
   const [profileSelectedImage, setProfileSelectedImage] = useState(null);
