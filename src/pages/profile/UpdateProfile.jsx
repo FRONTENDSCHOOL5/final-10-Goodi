@@ -1,17 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-
-import PlusBtnImg from "../assets/add_button.svg";
-
+import PlusBtnImg from "../../assets/add_button.svg";
 import { useRecoilValue } from 'recoil';
-import loginToken from '../recoil/loginToken';
-
-import { InputBox } from '../components/common/Input';
-import Button from '../components/common/Button';
-
-import PostImageAPI from '../api/UploadImage';
-import updateProfile from '../api/updateProfile';
-
+import loginToken from '../../recoil/loginToken';
+import PostImageAPI from '../../api/UploadImage';
+import updateProfile from './../../api/updateProfile';
+import { InputBox } from '../../components/common/Input';
+import Button from '../../components/common/Button';
 
 export default function UpdateProfile({ profileData, setIsEditing, setProfileData }) {
   // 리코일 값 불러오기

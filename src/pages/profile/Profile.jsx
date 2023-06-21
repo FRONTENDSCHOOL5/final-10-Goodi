@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../layout/Layout'
 import styled from 'styled-components';
-import ProfileRightUI from './ProfileRightUI';
-import ProfileLeftUI from './ProfileLeftUI';
-import ProfileSkeleton from '../style/skeletonUI/skeletonPage/ProfileSkeleton';
 import { useRecoilValue } from 'recoil';
-import loginToken from '../recoil/loginToken';
-import profileAPI from '../api/profile';
+import Layout from '../../layout/Layout';
+import loginToken from '../../recoil/loginToken';
+import profileAPI from '../../api/profile';
+import ProfileSkeleton from '../../style/skeletonUI/skeletonPage/ProfileSkeleton';
+import ProfileLeftUI from './ProfileLeftUI';
+import ProfileRightUI from './ProfileRightUI';
 
-export default function ProfileTest() {
+export default function Profile() {
   // 리코일 값 불러오기
   const token = useRecoilValue(loginToken);
 

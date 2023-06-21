@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-
-import Follow from '../components/Follow';
-
-import loginToken from '../recoil/loginToken';
-import accountname from '../recoil/accountname';
-
-import followingAPI from '../api/following';
-import followerAPI from '../api/follower';
+import loginToken from '../../recoil/loginToken';
+import accountname from '../../recoil/accountname';
+import followingAPI from '../../api/following';
+import followerAPI from '../../api/follower';
+import Follow from '../../components/Follow';
 
 export default function FollowUI({ profileData }) {
   // 리코일 값 불러오기
@@ -21,10 +18,6 @@ export default function FollowUI({ profileData }) {
   // 팔로워, 팔로잉 불러오기
   const [followingData, setFollowingData] = useState(null);
   const [followerData, setFollowerData] = useState(null);
-
-  // 팔로워, 팔로잉 count
-  const [followingCount, setFollowingCount] = useState(profileData.user.followingCount);
-  const [followerCount, setFollowerCount] = useState(profileData.user.followerCount);
 
   // 팔로워, 팔로잉 활성화
   const handleFollowClick = (followNumber) => {
@@ -56,10 +49,6 @@ export default function FollowUI({ profileData }) {
     }
   };
 
-  console.log(profileData);
-  console.log(token);
-  console.log(followingData, followerData);
-
   return (
     <>
       <FollowWrap>
@@ -67,14 +56,14 @@ export default function FollowUI({ profileData }) {
           className={activeFollow === 1 ? 'followActive' : ''}
           onClick={() => handleFollowClick(1)}
         >
-          <strong>{followerCount}</strong>
+          <strong>{profileData.user.followerCount}</strong>
           <p>팔로워</p>
         </FollowDiv>
         <FollowDiv
           className={activeFollow === 2 ? 'followActive' : ''}
           onClick={() => handleFollowClick(2)}
         >
-          <strong>{followingCount}</strong>
+          <strong>{profileData.user.followingCount}</strong>
           <p>팔로잉</p>
         </FollowDiv>
       </FollowWrap>

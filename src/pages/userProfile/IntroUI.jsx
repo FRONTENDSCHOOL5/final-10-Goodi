@@ -1,30 +1,31 @@
 import React from 'react'
 import styled from 'styled-components';
-import ButtonLineIcon from '../components/common/ButtonLineIcon';
+import { useNavigate } from 'react-router-dom';
+import ButtonLineIcon from '../../components/common/ButtonLineIcon';
 
-export default function IntroUI({ profileData, setIsEditing }) {
-  // 프로필 수정 버튼 이벤트
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
+export default function IntroUI({ profileData }) {
+  const navigate = useNavigate();
 
   return (
     <>
       <IntroWrap>
-        <img src={profileData.user.image} alt="유저 프로필 이미지" />
-        <strong>{profileData.user.username}</strong>
-        <p>{profileData.user.accountname}</p>
+        <img src={profileData.profile.image} alt="유저 프로필 이미지" />
+        <strong>{profileData.profile.username}</strong>
+        <p>{profileData.profile.accountname}</p>
       </IntroWrap>
 
       <BtnWrap>
         <ButtonLineIcon
-          text="프로필 수정하기"
-          onClick={handleEditClick}
+          text="작가랑 채팅하기"
           basic="true"
+          bg="black"
+          color="white"
+          onClick={() => navigate("/chat")}
         />
+        <ButtonLineIcon text="작가 팔로우" />
       </BtnWrap>
 
-      <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
+      <p>{profileData.profile.intro || "아직 소개글이 없어요!"}</p>
     </>
   )
 }

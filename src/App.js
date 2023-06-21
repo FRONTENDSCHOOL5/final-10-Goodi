@@ -6,12 +6,11 @@ import Login from './pages/Login';
 import Join from './pages/Join'
 import Detail from './pages/Detail';
 import Setprofile from './pages/Setprofile';
-import Profile from './pages/Profile';
+import Profile from './pages/profile/Profile';
+import UserProfile from './pages/userProfile/UserProfile';
 import Chat from './pages/Chat';
 import PostProduct from './pages/PostProduct';
 import PostPosting from './pages/PostPosting';
-import UserProfile from './pages/UserProfile';
-import ProfileTest from './profileTest/ProfileTest';
 
 function App() {
   return (
@@ -29,7 +28,6 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/postproduct" element={<PostProduct />} />
         <Route path="/postposting" element={<PostPosting />} />
-        <Route path="/profileTest" element={<ProfileTest />} />
       </Routes>
     </BrowserRouter>
   );
