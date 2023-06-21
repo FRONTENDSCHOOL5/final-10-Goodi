@@ -18,9 +18,11 @@ export default function Setprofile() {
   const [profileSelectedImage, setProfileSelectedImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
+  
 
   const navigate = useNavigate();
   const location = useLocation();
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const { email, password } = location.state || { email: "", password: "" };
   const [signUpData, setSignUpData] = useState({
     user: {
@@ -28,11 +30,11 @@ export default function Setprofile() {
       password: password,
       accountname: email.split("@")[0],
       username: "",
-      image: profileSelectedImage,
+      image: BASE_URL + profileSelectedImage,
       intro: "",
     },
   });
-  console.log(signUpData.user.intro);
+  // console.log(signUpData.user.intro);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSignUpData((prevState) => ({
@@ -64,21 +66,27 @@ export default function Setprofile() {
     }
     setUserErrorMessage(errors);
   };
-
+console.log(signUpData)
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleError();
     await handleLogin(signUpData);
   };
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+  
   const handleImageChange = async (e) => {
     const { name, value } = e.target;
-    if (e.target.type === "file") {
+    if ("file") {
       const file = e.target.files[0];
       const imgSrc = await UploadImage(file);
-
       const newImage = imgSrc;
       setProfileSelectedImage(newImage);
+      setSignUpData((prevState) => ({
+        ...prevState,
+        user: {
+          ...prevState.user,
+          image: newImage,
+        },
+      }));
     }
   };
 
