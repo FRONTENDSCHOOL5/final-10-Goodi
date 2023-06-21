@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import followAPI from '../../api/follow';
 import loginToken from './../../recoil/loginToken';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import unfollowAPI from '../../api/unfollow';
 
 export default function FollowButton(props) {
-  const [token, setToken] = useRecoilState(loginToken);
-  const [active, setActive] = useState(false);
   const { follow } = props;
+  const token = useRecoilValue(loginToken);
+
+  const [active, setActive] = useState(false);
 
   const handleClick = async () => {
     if (setActive(!active)) {
@@ -23,8 +24,6 @@ export default function FollowButton(props) {
       // 팔로우 취소
     }
   };
-
-  console.log(active);
 
   return (
     <FollowBtn active={active} onClick={handleClick}>
@@ -41,4 +40,5 @@ const FollowBtn = styled.button`
   font-size: 13px;
   border: ${props => props.active ? "1px solid var(--main-color)" : "1px solid var(--gray300-color)"};
   transition: all 0.2s;
+  cursor: pointer;
 `
