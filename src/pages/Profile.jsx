@@ -13,7 +13,7 @@ import PostList from "../components/common/PostList";
 import { useRecoilState } from "recoil";
 import loginToken from "../recoil/loginToken";
 import profileAPI from "../api/profile";
-import accountname from './../recoil/accountname';
+import accountname from "./../recoil/accountname";
 import followingAPI from "../api/following";
 import followerAPI from "../api/follower";
 import updateProfile from "../api/updateProfile";
@@ -57,7 +57,7 @@ export default function Profile() {
   const [editedProfileData, setEditedProfileData] = useState({});
 
   // 프로필 이미지 업로드
-  const [isImageEdit, setIsImageEdit] = useState("")
+  const [isImageEdit, setIsImageEdit] = useState("");
 
   // 프로필 정보 API 연동
   useEffect(() => {
@@ -74,6 +74,7 @@ export default function Profile() {
     fetchProfileData();
   }, []);
 
+  console.log(profileData);
   // 팔로워, 팔로잉 API 연동
   useEffect(() => {
     fetchFollowingData(activeFollow);
@@ -115,7 +116,7 @@ export default function Profile() {
       <LoadingStyle>
         <p>사용자 정보를 불러올 수 없습니다.</p>
       </LoadingStyle>
-    )
+    );
   }
 
   console.table(profileData);
@@ -137,12 +138,12 @@ export default function Profile() {
   // input 값 올바르게 받기
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProfileData(prevState => ({
+    setProfileData((prevState) => ({
       ...prevState,
       user: {
         ...prevState.user,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
@@ -167,68 +168,66 @@ export default function Profile() {
   return (
     <Layout reduceTop="true">
       <ProfileWrap>
-        {
-          isEditing ? (
-            <ProfileLeft edit="true">
-              <UpdateProfile
-                handleSaveClick={handleSaveClick}
-                profileData={profileData}
-                handleInputChange={handleInputChange}
-                handleCancelClick={handleCancelClick}
-                setProfileData={setProfileData}
-                setIsImageEdit={setIsImageEdit}
-              />
-            </ProfileLeft>
-          ) : (
-            <ProfileLeft>
-              <IntroWrap>
-                <img src={profileData.user.image} alt="" />
-                <strong>{profileData.user.username}</strong>
-                <p>{profileData.user.accountname}</p>
-              </IntroWrap>
+        {isEditing ? (
+          <ProfileLeft edit="true">
+            <UpdateProfile
+              handleSaveClick={handleSaveClick}
+              profileData={profileData}
+              handleInputChange={handleInputChange}
+              handleCancelClick={handleCancelClick}
+              setProfileData={setProfileData}
+              setIsImageEdit={setIsImageEdit}
+            />
+          </ProfileLeft>
+        ) : (
+          <ProfileLeft>
+            <IntroWrap>
+              <img src={profileData.user.image} alt="" />
+              <strong>{profileData.user.username}</strong>
+              <p>{profileData.user.accountname}</p>
+            </IntroWrap>
 
-              <BtnWrap>
-                {/* <ButtonLineIcon
+            <BtnWrap>
+              {/* <ButtonLineIcon
                     text="작가랑 채팅하기"
                     basic="true"
                     bg="black"
                     color="white"
                   />
                   <ButtonLineIcon text="작가 팔로우" /> */}
-                <ButtonLineIcon
-                  text="프로필 수정하기"
-                  onClick={handleEditClick}
-                  basic="true"
-                />
-              </BtnWrap>
-
-              <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
-
-              <FollowWrap>
-                <FollowDiv
-                  className={activeFollow === 1 ? 'followActive' : ''}
-                  onClick={() => handleFollowClick(1)}
-                >
-                  <strong>{profileData.user.followerCount}</strong>
-                  <p>팔로워</p>
-                </FollowDiv>
-                <FollowDiv
-                  className={activeFollow === 2 ? 'followActive' : ''}
-                  onClick={() => handleFollowClick(2)}
-                >
-                  <strong>{profileData.user.followingCount}</strong>
-                  <p>팔로잉</p>
-                </FollowDiv>
-              </FollowWrap>
-
-              <Follow
-                followerData={followerData}
-                followingData={followingData}
-                activeFollow={activeFollow}
+              <ButtonLineIcon
+                text="프로필 수정하기"
+                onClick={handleEditClick}
+                basic="true"
               />
-            </ProfileLeft>
-          )
-        }
+            </BtnWrap>
+
+            <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
+
+            <FollowWrap>
+              <FollowDiv
+                className={activeFollow === 1 ? "followActive" : ""}
+                onClick={() => handleFollowClick(1)}
+              >
+                <strong>{profileData.user.followerCount}</strong>
+                <p>팔로워</p>
+              </FollowDiv>
+              <FollowDiv
+                className={activeFollow === 2 ? "followActive" : ""}
+                onClick={() => handleFollowClick(2)}
+              >
+                <strong>{profileData.user.followingCount}</strong>
+                <p>팔로잉</p>
+              </FollowDiv>
+            </FollowWrap>
+
+            <Follow
+              followerData={followerData}
+              followingData={followingData}
+              activeFollow={activeFollow}
+            />
+          </ProfileLeft>
+        )}
 
         <ProfileRight>
           <h2>
@@ -237,28 +236,24 @@ export default function Profile() {
 
           <TabMenu>
             <TabBtn
-              className={activeTab === 1 ? 'active' : ''}
+              className={activeTab === 1 ? "active" : ""}
               onClick={() => handleTabClick(1)}
             >
               상품 목록
             </TabBtn>
             <TabBtn
-              className={activeTab === 2 ? 'active' : ''}
+              className={activeTab === 2 ? "active" : ""}
               onClick={() => handleTabClick(2)}
             >
               게시글 목록
             </TabBtn>
           </TabMenu>
-          {activeTab === 1 && (
-            <CardProduct profile="true" />
-          )}
-          {activeTab === 2 && (
-            <PostList />
-          )}
+          {activeTab === 1 && <CardProduct profile="true" />}
+          {activeTab === 2 && <PostList />}
         </ProfileRight>
       </ProfileWrap>
     </Layout>
-  )
+  );
 }
 
 const ProfileWrap = styled.div`
@@ -272,7 +267,7 @@ const ProfileWrap = styled.div`
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -280,7 +275,7 @@ const ProfileWrap = styled.div`
     height: 330px;
     background: #000;
   }
-`
+`;
 
 const ProfileLeft = styled.section`
   min-width: 370px;
@@ -365,7 +360,7 @@ const FollowWrap = styled.div`
   }
 
   .followActive {
-    background-color: #F4FFF3;
+    background-color: #f4fff3;
     border-radius: 4px;
 
     strong {
@@ -425,7 +420,7 @@ const TabMenu = styled.div`
   gap: 20px;
 
   &:after {
-    content: '';
+    content: "";
     display: inline-block;
     width: 1px;
     height: 70%;
@@ -439,12 +434,12 @@ const TabMenu = styled.div`
     font-family: var(--font--semibold);
     color: black;
   }
-`
+`;
 const TabBtn = styled.button`
   padding: 8px 12px;
   color: var(--gray500-color);
   cursor: pointer;
-`
+`;
 
 const LoadingStyle = styled.div`
   background: url(${goodiLoading}) 50% 40% / 30% no-repeat;
@@ -459,4 +454,4 @@ const LoadingStyle = styled.div`
     top: 60%;
     transform: translate(-50%, -50%);
   }
-`
+`;

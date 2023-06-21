@@ -22,6 +22,10 @@ export default function FollowUI({ profileData }) {
   const [followingData, setFollowingData] = useState(null);
   const [followerData, setFollowerData] = useState(null);
 
+  // 팔로워, 팔로잉 count
+  const [followingCount, setFollowingCount] = useState(profileData.user.followingCount);
+  const [followerCount, setFollowerCount] = useState(profileData.user.followerCount);
+
   // 팔로워, 팔로잉 활성화
   const handleFollowClick = (followNumber) => {
     setActiveFollow(followNumber);
@@ -63,14 +67,14 @@ export default function FollowUI({ profileData }) {
           className={activeFollow === 1 ? 'followActive' : ''}
           onClick={() => handleFollowClick(1)}
         >
-          <strong>{profileData.user.followerCount}</strong>
+          <strong>{followerCount}</strong>
           <p>팔로워</p>
         </FollowDiv>
         <FollowDiv
           className={activeFollow === 2 ? 'followActive' : ''}
           onClick={() => handleFollowClick(2)}
         >
-          <strong>{profileData.user.followingCount}</strong>
+          <strong>{followingCount}</strong>
           <p>팔로잉</p>
         </FollowDiv>
       </FollowWrap>
