@@ -43,7 +43,7 @@ export default function PostPosting() {
     const response = await postingAPI(ProductData, token);
 
     if (response.hasOwnProperty("post"))
-      navigate(`/main/`);
+      navigate(`/profile/`);
       console.log(response)
   };
   
