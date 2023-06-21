@@ -12,6 +12,7 @@ import PostProduct from './pages/PostProduct';
 import PostPosting from './pages/PostPosting';
 import UserProfile from './pages/UserProfile';
 import ProfileTest from './profileTest/ProfileTest';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/postproduct" element={<PostProduct />} />
         <Route path="/postposting" element={<PostPosting />} />
         <Route path="/profileTest" element={<ProfileTest />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
