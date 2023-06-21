@@ -73,6 +73,8 @@ const HistoryTitle = styled.div`
 
 const TagWrap = styled.div`
   display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
   margin-top: 16px;
 `;
 const Tag = styled.div`
@@ -80,10 +82,6 @@ const Tag = styled.div`
   background-color: #eeffed;
   border-radius: 50px;
   font-family: var(--font--Medium);
-
-  & + & {
-    margin-left: 12px;
-  }
 
   button {
     width: 16px;
