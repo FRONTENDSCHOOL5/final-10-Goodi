@@ -54,12 +54,15 @@ export default function Post({
   updateHeartCount,
 }) {
   const elapsedTimeString = getElapsedTime(createdAt);
-  console.log("postId 값:", postId);
   const [heartValue, setHeartValue] = useState(heartCount);
+
   const getHeartData = () => {
     setHeartValue(prev => prev += 1);
-
   };
+  const cancleHeartData = () => {
+      setHeartValue(prev => prev -= 1);
+  };
+
   return (
     <PostOuter>
       <PostTop>
@@ -83,7 +86,7 @@ export default function Post({
           <span>{elapsedTimeString}</span>
           <div className="like_wrap">
             <span>{heartValue}</span>
-            <PostLikeBtn postId={postId} getHeartData={getHeartData}/>
+            <PostLikeBtn postId={postId} getHeartData={getHeartData} cancleHeartData={cancleHeartData}/>
           </div>
         </div>
       </PostContent>
