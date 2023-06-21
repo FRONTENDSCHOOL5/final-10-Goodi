@@ -8,6 +8,9 @@ import SearchInput from "./SearchInput";
 import SearchHistory from "./SearchHistory";
 import SearchResult from "./SearchResult";
 
+// Skeleton
+import SearchSkeleton from "../../style/skeletonUI/skeletonPage/SearchSkeleton";
+
 // API
 import searchAPI from "../../api/Search";
 
@@ -22,6 +25,7 @@ export default function Search({ setShowSearch, showModal, handleSearch }) {
   const [keyword, setKeyword] = useState("");
   const [searchResult, setSearchResult] = useState();
   const token = useRecoilValue(loginToken);
+  const [isLoading, setIsLoading] = useState(false);
 
   // input value 가져오기
   const handleClick = async (e) => {
@@ -30,10 +34,12 @@ export default function Search({ setShowSearch, showModal, handleSearch }) {
   };
 
   const fetchSearchAPI = async () => {
+    setIsLoading(true);
     try {
       const response = await searchAPI(token, keyword);
       setSearchResult(response);
       setIsRecentSearch((preveState) => [...preveState, keyword]);
+      setIsLoading(false);
     } catch (error) {
       console.error("에러", error);
     }
@@ -73,7 +79,14 @@ export default function Search({ setShowSearch, showModal, handleSearch }) {
           handleClick={handleClick}
         />
         <SearchHistory />
-        <SearchResult searchResult={searchResult} />
+        {isLoading ? (
+          <>
+            <h3 className="skeleton_title">검색 결과</h3>
+            <SearchSkeleton />
+          </>
+        ) : (
+          <SearchResult searchResult={searchResult} />
+        )}
       </SearchModal>
     </SearchbgDark>
   );
@@ -122,5 +135,11 @@ const SearchModal = styled.article`
   h2 {
     font-family: var(--font--Bold);
     font-size: 28px;
+  }
+
+  h3.skeleton_title {
+    font-family: var(--font--Bold);
+    font-size: 18px;
+    margin-top: 72px;
   }
 `;
