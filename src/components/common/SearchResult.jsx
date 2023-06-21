@@ -3,14 +3,12 @@ import styled from "styled-components";
 
 // 컴포넌트
 import ProfileUI from "./ProfileUI";
-import FollowButton from "./FollowButton";
+import ButtonFollow from "./ButtonFollow";
 
 // 이미지
 import followSymbol from "../../assets/follow_symbol.svg";
 
-export default function SearchResult({ searchResult }) {
-  const [resultCount, setResultCount] = useState(0);
-
+export default function SearchResult({ searchResult, isFollowing }) {
   return (
     <ResultWrap>
       <ResultTitle>
@@ -27,7 +25,10 @@ export default function SearchResult({ searchResult }) {
                 user_name={el.username}
                 user_email={el.accountname}
               />
-              <FollowButton />
+              <ButtonFollow
+                isFollow={el.isfollow}
+                accountName={el.accountname}
+              />
             </User>
           ))
         ) : (

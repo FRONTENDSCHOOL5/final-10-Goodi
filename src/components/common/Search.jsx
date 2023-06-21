@@ -13,19 +13,21 @@ import SearchSkeleton from "../../style/skeletonUI/skeletonPage/SearchSkeleton";
 
 // API
 import searchAPI from "../../api/Search";
+import followingAPI from "../../api/following";
 
 // Recoil
 import loginToken from "../../recoil/loginToken";
+import accountname from "../../recoil/accountname";
 import { recentSearch } from "../../recoil/recentSearch";
 
-//! 팔로우버튼 기능, 스켈레톤 UI(로딩)
-
+//! 팔로우버튼 기능
 export default function Search({ setShowSearch, showModal, handleSearch }) {
   const [isRecentSearch, setIsRecentSearch] = useRecoilState(recentSearch);
   const [keyword, setKeyword] = useState("");
-  const [searchResult, setSearchResult] = useState();
-  const token = useRecoilValue(loginToken);
+  const [searchResult, setSearchResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const token = useRecoilValue(loginToken);
 
   // input value 가져오기
   const handleClick = async (e) => {
@@ -33,6 +35,7 @@ export default function Search({ setShowSearch, showModal, handleSearch }) {
     await fetchSearchAPI();
   };
 
+  // 검색결과 가져오기
   const fetchSearchAPI = async () => {
     setIsLoading(true);
     try {
