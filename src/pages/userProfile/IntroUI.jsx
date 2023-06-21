@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import ButtonLineIcon from '../../components/common/ButtonLineIcon';
+import FollowButton from '../../components/common/FollowButton';
 
 export default function IntroUI({ profileData }) {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function IntroUI({ profileData }) {
           color="white"
           onClick={() => navigate("/chat")}
         />
-        <ButtonLineIcon text="작가 팔로우" />
+        <FollowButton text="작가 팔로우" />
       </BtnWrap>
 
       <p>{profileData.profile.intro || "아직 소개글이 없어요!"}</p>

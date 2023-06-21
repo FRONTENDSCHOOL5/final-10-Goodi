@@ -4,7 +4,6 @@ import ProfileUI from './common/ProfileUI';
 import followers from "../assets/Followers.svg"
 import following from "../assets/Following.svg"
 import followSymbol from "../assets/follow_symbol.svg"
-import FollowButton from './common/FollowButton';
 
 export default function Follow(props) {
   const { followerData, followingData, activeFollow } = props;
@@ -29,9 +28,6 @@ export default function Follow(props) {
               account_name={follow.accountname}
               follow="true"
             />
-            <FollowButton
-              follow={follow}
-            />
           </BtnWrap>
         ))
       ) : activeFollow === 2 && followingData && followingData.length > 0 ? (
@@ -47,9 +43,6 @@ export default function Follow(props) {
               follow="true"
             >
             </ProfileUI>
-            <FollowButton
-              follow={follow}
-            />
           </BtnWrap>
         ))
       ) : (
