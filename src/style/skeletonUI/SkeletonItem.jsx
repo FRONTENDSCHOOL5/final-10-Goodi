@@ -9,13 +9,13 @@ const SkeletonItem = styled.div`
 
   @keyframes skeleton-gradient {
     0% {
-      background-color: rgba(165, 165, 165, 0.1);
+      background-color: var(--gray50-color);
     }
     50% {
-      background-color: rgba(165, 165, 165, 0.8);
+      background-color: var(--gray100-color);
     }
     100% {
-      background-color: rgba(165, 165, 165, 0.1);
+      background-color: var(--gray50-color);
     }
   }
 

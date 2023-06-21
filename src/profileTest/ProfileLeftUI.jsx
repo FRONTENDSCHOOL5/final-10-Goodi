@@ -1,53 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import loginToken from '../recoil/loginToken';
 
 import IntroUI from './IntroUI';
 import FollowUI from './FollowUI';
 
-import profileAPI from '../api/profile';
 import UpdateProfile from './UpdateProfile';
-import ProfileSkeleton from '../style/skeletonUI/skeletonPage/ProfileSkeleton';
 
-export default function ProfileLeftUI() {
-  // 리코일 값 불러오기
-  const token = useRecoilValue(loginToken);
-
-  // 프로필 정보 불러오기
-  const [profileData, setProfileData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
+export default function ProfileLeftUI({ profileData, setProfileData }) {
   // 프로필 정보 수정
   const [isEditing, setIsEditing] = useState(false);
-
-  // 프로필 정보 불러오기
-  useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        const response = await profileAPI(token);
-        setProfileData(response);
-        setLoading(false);
-      } catch (error) {
-        console.error("Account API 에러가 발생했습니다", error);
-      }
-    };
-
-    fetchProfileData();
-  }, []);
-
-  // 로딩, 사용자 정보 없음 예외처리
-  if (loading) {
-    return (
-      <ProfileSkeleton />
-    );
-  }
-
-  if (!profileData) {
-    return (
-      <ProfileSkeleton />
-    )
-  }
 
   return (
     <>
@@ -102,18 +63,3 @@ const ProfileLeft = styled.section`
     text-align: justify;
   }
 `;
-
-// const LoadingStyle = styled.div`
-//   background: url(${goodiLoading}) 50% 40% / 30% no-repeat;
-//   height: 100vh;
-
-//   p {
-//     font-size: 38px;
-//     text-align: center;
-//     font-family: var(--font--Bold);
-//     position: absolute;
-//     left: 50%;
-//     top: 60%;
-//     transform: translate(-50%, -50%);
-//   }
-// `
