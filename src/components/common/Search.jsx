@@ -15,7 +15,7 @@ import searchAPI from "../../api/Search";
 import loginToken from "../../recoil/loginToken";
 import { recentSearch } from "../../recoil/recentSearch";
 
-//! 팔로우버튼 기능, 최근기록 기능, 스켈레톤 UI(로딩)
+//! 팔로우버튼 기능, 스켈레톤 UI(로딩)
 
 export default function Search({ setShowSearch, showModal, handleSearch }) {
   const [isRecentSearch, setIsRecentSearch] = useRecoilState(recentSearch);
