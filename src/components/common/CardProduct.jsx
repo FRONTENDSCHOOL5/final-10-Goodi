@@ -1,30 +1,65 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from './Card';
 import styled from 'styled-components';
 
-import ProductData from './../../mock/productData';
+import accountname from '../../recoil/accountname';
+import { useRecoilValue } from 'recoil';
+import loginToken from '../../recoil/loginToken';
+import productGetAPI from '../../api/productGet';
+import { useParams } from 'react-router-dom';
+import NoPostsUI from '../NoPostsUI';
 
 export default function CardProduct({ profile }) {
-  const cardInfoList = ProductData;
+  const token = useRecoilValue(loginToken);
+  const myaccount_name = useRecoilValue(accountname);
+
+  const temp = useParams()
+
+  const account_name = temp.account_name ? temp.account_name : myaccount_name
+
+  const [productGetData, setproductGetData] = useState(null);
+
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+
+  useEffect(() => {
+    const productGet = async () => {
+      try {
+        const response = await productGetAPI(account_name, token);
+        setproductGetData(response);
+      } catch (error) {
+        console.error("Account API 에러가 발생했습니다", error);
+      }
+    };
+
+    productGet();
+  }, [account_name]);
 
   return (
-    <CardList profile={profile}>
-      {cardInfoList.map((cardInfo) => {
-        return (
-          <Card
-            key={cardInfo.id}
-            id={cardInfo.id}
-            profile={cardInfo.profile}
-            name={cardInfo.name}
-            email={cardInfo.email}
-            img={cardInfo.img}
-            title={cardInfo.title}
-            description={cardInfo.description}
-            price={cardInfo.price}
-          />
-        );
-      }).slice(0, 6)}
-    </CardList>
+    <>
+      {productGetData === null || productGetData.data === 0 ? (
+        <NoPostsUI />
+      ) : (
+        <CardList profile={profile}>
+          {productGetData.product.map((productInfo) => {
+            return (
+              <Card
+                key={productInfo.id}
+                id={productInfo.id}
+                profile={productInfo.author.image}
+                name={productInfo.author.username}
+                email={productInfo.author.accountname}
+                img={BASE_URL + productInfo.itemImage.split(',')[0]}
+                title={productInfo.itemName}
+                description={productInfo.link}
+                price={productInfo.price}
+              />
+            );
+          })}
+        </CardList>
+      )}
+    </>
+
+
   )
 }
 

@@ -32,6 +32,8 @@ export default function Profile() {
     fetchProfileData();
   }, []);
 
+  console.log(token);
+
   return (
     <Layout reduceTop="true">
       <ProfileWrap>

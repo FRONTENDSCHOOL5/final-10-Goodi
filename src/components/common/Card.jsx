@@ -4,6 +4,7 @@ import LikeBtn from './LikeBtn';
 import ProfileUI from './ProfileUI';
 import { Link } from 'react-router-dom';
 
+
 export default function Card({ profile, name, email, img, title, description, price, id }) {
   return (
     <Article>
