@@ -4,7 +4,7 @@ import styled from "styled-components";
 import postAPI from "../../api/post";
 import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import NoPostsUI from "../NoPostsUI";
 
 export default function PostList(props) {
@@ -12,8 +12,16 @@ export default function PostList(props) {
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useRecoilState(loginToken);
-  const [accountName, setAccountName] = useRecoilState(accountname);
+  const accountName = useRecoilValue(accountname);
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+
+  const updateHeartCount = (postId, count) => {
+    setUserPostList((prevPosts) =>
+      prevPosts.map((post) =>
+        post.id === postId ? { ...post, heartCount: count } : post
+      )
+    );
+  };
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -27,7 +35,7 @@ export default function PostList(props) {
 
     fetchPostData();
   }, []);
-console.log({userPostList})
+  console.log({ userPostList });
   if (loading) {
     return <>로딩중...우헤헷🏓</>;
   }
@@ -37,13 +45,15 @@ console.log({userPostList})
       {userPostList.length > 0 ? (
         userPostList.map((post) => (
           <Post
-            key={post.id}
+            postId={post.id}
             username={post.author.username}
             profileImage={post.author.image}
-            email={""}
+            email={post.author.accountname}
             content={post.content}
-            image={BASE_URL + post.image.split(',')[0]}
+            image={BASE_URL + post.image.split(",")[0]}
             createdAt={post.createdAt}
+            hearted={post.hearted}
+            heartCount={post.heartCount}
           />
         ))
       ) : (

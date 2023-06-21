@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import ProfileUI from "./ProfileUI";
 import PostLikeBtn from "./PostLikeBtn";
-import profileImgDef from "../../assets/profile_img_def.svg";
+
 import postMenu from "../../assets/post_menu.svg";
-import postImg from "../../assets/post_image2.svg";
+import nonLikeIcon from "../../assets/empty_likeBtn.svg";
+import likeIcon from "../../assets/post_fullLikeBtn.svg";
 
 const getElapsedTime = (createdAt) => {
   const currentTime = new Date();
@@ -46,9 +47,13 @@ export default function Post({
   content,
   image,
   createdAt,
+  postId,
+  hearted,
+  heartCount,
+  updateHeartCount,
 }) {
   const elapsedTimeString = getElapsedTime(createdAt);
-
+  console.log("postId 값:", postId);
   return (
     <PostOuter>
       <PostTop>
@@ -71,8 +76,8 @@ export default function Post({
         <div>
           <span>{elapsedTimeString}</span>
           <div className="like_wrap">
-            <span>3</span>
-            <PostLikeBtn />
+            <span>{heartCount}</span>
+            <PostLikeBtn postId={postId}/>
           </div>
         </div>
       </PostContent>
@@ -120,7 +125,7 @@ const PostContent = styled.div`
     margin-right: 5px;
     font-size: 1rem;
   }
-  .p_box{
+  .p_box {
     min-height: 80px;
     display: flex;
     align-items: flex-start;
@@ -131,7 +136,7 @@ const PostContent = styled.div`
     font-size: 1rem;
     line-height: 1.4rem;
     display: inline;
-    
+
     /* margin-bottom: 16px; */
     /* text-align: justify; */
 

@@ -25,6 +25,7 @@ export default function PostPosting() {
   // 상품 입력 데이터
   const [postProductData, setPostProductData] = useState();
 
+
   // 유저 토큰
   const token = useRecoilValue(loginToken);
 
@@ -43,12 +44,13 @@ export default function PostPosting() {
 
     if (response.hasOwnProperty("post"))
       navigate(`/main/`);
+      console.log(response)
   };
   
   //   if (response.hasOwnProperty("post"))
   //     navigate(`/products/${response.product.id}`);
   // };
-
+  
   return (
     <Layout reduceTop="true">
       <PostProductWrap>
@@ -71,3 +73,4 @@ const PostProductWrap = styled.div`
   background: url(${PostBackground}) no-repeat #fafafa;
   padding-bottom: 40px;
 `;
+
