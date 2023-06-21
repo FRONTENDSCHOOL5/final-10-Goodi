@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
 import loginToken from '../recoil/loginToken';
 
-import goodiLoading from "../assets/goodi_loading.svg";
-
 import IntroUI from './IntroUI';
 import FollowUI from './FollowUI';
 
 import profileAPI from '../api/profile';
 import UpdateProfile from './UpdateProfile';
+import ProfileSkeleton from '../style/skeletonUI/skeletonPage/ProfileSkeleton';
 
 export default function ProfileLeftUI() {
   // 리코일 값 불러오기
@@ -18,8 +17,6 @@ export default function ProfileLeftUI() {
   // 프로필 정보 불러오기
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  console.log(profileData.user);
 
   // 프로필 정보 수정
   const [isEditing, setIsEditing] = useState(false);
@@ -42,17 +39,13 @@ export default function ProfileLeftUI() {
   // 로딩, 사용자 정보 없음 예외처리
   if (loading) {
     return (
-      <LoadingStyle>
-        <p>로딩중...</p>
-      </LoadingStyle>
+      <ProfileSkeleton />
     );
   }
 
   if (!profileData) {
     return (
-      <LoadingStyle>
-        <p>사용자 정보를 불러올 수 없습니다.</p>
-      </LoadingStyle>
+      <ProfileSkeleton />
     )
   }
 
@@ -110,17 +103,17 @@ const ProfileLeft = styled.section`
   }
 `;
 
-const LoadingStyle = styled.div`
-  background: url(${goodiLoading}) 50% 40% / 30% no-repeat;
-  height: 100vh;
+// const LoadingStyle = styled.div`
+//   background: url(${goodiLoading}) 50% 40% / 30% no-repeat;
+//   height: 100vh;
 
-  p {
-    font-size: 38px;
-    text-align: center;
-    font-family: var(--font--Bold);
-    position: absolute;
-    left: 50%;
-    top: 60%;
-    transform: translate(-50%, -50%);
-  }
-`
+//   p {
+//     font-size: 38px;
+//     text-align: center;
+//     font-family: var(--font--Bold);
+//     position: absolute;
+//     left: 50%;
+//     top: 60%;
+//     transform: translate(-50%, -50%);
+//   }
+// `
