@@ -10,7 +10,7 @@ import Follow from '../../components/Follow';
 export default function FollowUI({ profileData }) {
   // 리코일 값 불러오기
   const token = useRecoilValue(loginToken);
-  const accountName = useRecoilValue(accountname);
+  const account_name = useRecoilValue(accountname);
 
   // 팔로워, 팔로잉 탭
   const [activeFollow, setActiveFollow] = useState(1);
@@ -33,7 +33,7 @@ export default function FollowUI({ profileData }) {
 
   const fetchFollowingData = async () => {
     try {
-      const response = await followingAPI(accountName, token);
+      const response = await followingAPI(account_name, token);
       setFollowingData(response);
     } catch (error) {
       console.error("Account API 에러가 발생했습니다", error);
@@ -42,7 +42,7 @@ export default function FollowUI({ profileData }) {
 
   const fetchFollowerData = async () => {
     try {
-      const response = await followerAPI(accountName, token);
+      const response = await followerAPI(account_name, token);
       setFollowerData(response);
     } catch (error) {
       console.error("Account API 에러가 발생했습니다", error);
