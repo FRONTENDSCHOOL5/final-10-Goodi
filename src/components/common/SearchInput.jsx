@@ -4,19 +4,20 @@ import styled from "styled-components";
 // 이미지
 import SearchBtn from "../../assets/icon_search_black.svg";
 
-export default function SearchInput() {
-  // 인풋이 active 상태에 따라 form 스타일 변화
+export default function SearchInput({ keyword, setKeyword, handleClick }) {
   const [isActive, setIsActive] = useState(false);
 
   return (
     <SearchInputWrap className={isActive ? "active" : ""}>
       <input
         type="text"
+        value={keyword}
         placeholder="찾으시는 작가를 입력해주세요"
+        onChange={(e) => setKeyword(e.target.value)}
         onFocus={() => setIsActive(true)}
         onBlur={() => setIsActive(false)}
       />
-      <button type="submit"></button>
+      <button type="submit" onClick={handleClick}></button>
     </SearchInputWrap>
   );
 }
