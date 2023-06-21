@@ -96,7 +96,13 @@ export default function Navigation() {
           showCloseButton={false}
         />
       )}
-      {showSearch && <Search />}
+      {showSearch && (
+        <Search
+          setShowSearch={setShowSearch}
+          showModal={showModal}
+          handleSearch={handleSearch}
+        />
+      )}
     </NavigationLayout>
   );
 }
