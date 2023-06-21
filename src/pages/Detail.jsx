@@ -12,6 +12,7 @@ import Count from "../components/common/Count";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import Button from "../components/common/Button";
 import LikeBtn from "../components/common/LikeBtn";
+import Toast from "./Toast";
 
 //data
 import ProductData from "../mock/productData";
@@ -33,6 +34,7 @@ export default function Detail() {
   const [loading, setLoading] = useState(true);
   const [productData, setProductData] = useState("");
   const [price, setPrice] = useState(0);
+  const [toast, setToast] = useState(false);
 
   // product 정보 API에서 받아오기
   useEffect(() => {
@@ -54,6 +56,11 @@ export default function Detail() {
     return <div>로딩중입니다</div>;
   }
 
+  // 장바구니에 상품 담기
+  const handleCart = () => {
+    setToast(true);
+  };
+
   // 카운트 마다 변하는 가격 함수
   const getPrice = (price) => {
     setPrice(price);
@@ -66,6 +73,9 @@ export default function Detail() {
 
   return (
     <Layout>
+      {toast && (
+        <Toast setToast={setToast} text="장바구니에 상품이 담겼습니다." />
+      )}
       <DetailWrap>
         <DetailImage img={productData.itemImage.split(",")} />
 
@@ -124,6 +134,7 @@ export default function Detail() {
               type="button"
               bg="white"
               color="var(--black-color)"
+              onClick={handleCart}
             />
 
             <Button
