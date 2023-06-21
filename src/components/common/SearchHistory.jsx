@@ -1,32 +1,46 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 // 이미지
 import CloseIcon from "../../assets/icon_close.svg";
 
+// recoil
+import { recentSearch } from "../../recoil/recentSearch";
+
 export default function SearchHistory() {
   const [showClose, setShowClose] = useState(true);
+  const [isRecentSearch, setIsRecentSearch] = useRecoilState(recentSearch);
 
-  // 더미데이터
-  const TagMock = [];
-
-  const handleTagText = (e) => {
-    const searchText = e.target.innerText;
+  const handleDelete = (e) => {
+    const searchText = e.target.parentElement.innerText;
     console.log(searchText);
+    setIsRecentSearch((prevState) => {
+      return prevState.filter((e) => e !== searchText);
+    });
+  };
+
+  const handleAllDelete = () => {
+    setIsRecentSearch([]);
   };
 
   return (
     <HistoryWarp>
       <HistoryTitle>
         <h3>최근 검색어</h3>
-        {showClose && <button type="button">모두 닫기</button>}
+        {isRecentSearch.length > 0 ? (
+          <button type="button" onClick={handleAllDelete}>
+            모두 닫기
+          </button>
+        ) : null}
       </HistoryTitle>
       <TagWrap>
-        {TagMock.length > 0 ? (
-          TagMock.map((el, i) => (
+        {isRecentSearch.length > 0 ? (
+          isRecentSearch.map((el, i) => (
             <Tag key={i}>
               {el}
-              <button type="button"></button>
+              <button type="button" onClick={handleDelete}></button>
             </Tag>
           ))
         ) : (
@@ -45,14 +59,15 @@ const HistoryTitle = styled.div`
 
   h3 {
     font-family: var(--font--Bold);
+    padding: 6px 0;
     font-size: 18px;
   }
 
   button {
     color: var(--gray400-color);
-    padding: 6px 0;
     cursor: pointer;
     font-size: 14px;
+    padding: 2px 6px;
   }
 `;
 

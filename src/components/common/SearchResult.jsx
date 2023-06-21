@@ -8,82 +8,18 @@ import FollowButton from "./FollowButton";
 // 이미지
 import followSymbol from "../../assets/follow_symbol.svg";
 
-export default function SearchResult() {
-  const [usersData, setUsersData] = useState([
-    // {
-    //   _id: "6476d74cb2cb2056632cff4a",
-    //   username: "노태희",
-    //   accountname: "weniv_rho",
-    //   intro: "안녕하세요 저는 태희입니다.",
-    //   image:
-    //     "https://i.namu.wiki/i/07fsVOrgPi1C1giwZqDWuRThlwwYjMaAGDothJq6CcsvHmNAa5weXPPjiX7pBEONkcjIJCEjZY0HpgUPk7WqKg.webp",
-    //   isfollow: false,
-    //   following: ["6476d748b2cb2056632cff23", "6476d774b2cb2056632d000a"],
-    //   follower: ["6476dea8b2cb2056632d05b6"],
-    //   followerCount: 1,
-    //   followingCount: 2,
-    // },
-    // {
-    //   _id: "6476f1d7b2cb2056632d07e1",
-    //   username: "노태희",
-    //   accountname: "taehee",
-    //   intro: "소개",
-    //   image: "http://146.56.183.55:5050/Ellipse.png",
-    //   isfollow: false,
-    //   following: [],
-    //   follower: [],
-    //   followerCount: 0,
-    //   followingCount: 0,
-    // },
-    // {
-    //   _id: "648d6cbdb2cb205663380bb5",
-    //   username: "노태희",
-    //   accountname: "taeheerho",
-    //   intro: "바보 태희입니다",
-    //   image: "https://api.mandarin.weniv.co.kr/1686989953204.jpeg",
-    //   isfollow: false,
-    //   following: [],
-    //   follower: [],
-    //   followerCount: 0,
-    //   followingCount: 0,
-    // },
-    // {
-    //   _id: "648f0e5db2cb20566339d655",
-    //   username: "노태희테스트",
-    //   accountname: "shxogml",
-    //   intro: "gdgd",
-    //   image:
-    //     "https://image1.marpple.co/files/u_29089/2023/2/original/46b93b262fce55fbf14c65c869d8970a117d0a071.jpeg?w=126",
-    //   isfollow: false,
-    //   following: [],
-    //   follower: [],
-    //   followerCount: 0,
-    //   followingCount: 0,
-    // },
-    // {
-    //   _id: "64770130b2cb2056632d0c60",
-    //   username: "마산콩태희",
-    //   accountname: "dannna",
-    //   intro: "ㅎㅇㅎㅇ",
-    //   image: "http://146.56.183.55:5050/Ellipse.png",
-    //   isfollow: false,
-    //   following: [],
-    //   follower: [],
-    //   followerCount: 0,
-    //   followingCount: 0,
-    // },
-  ]);
-  const [resultCount, setResultCount] = useState(usersData.length);
+export default function SearchResult({ searchResult }) {
+  const [resultCount, setResultCount] = useState(0);
 
   return (
     <ResultWrap>
       <ResultTitle>
         <h3>검색 결과</h3>
-        <p>{resultCount} 명</p>
+        <p>{!searchResult ? 0 : searchResult?.length} 명</p>
       </ResultTitle>
       <UsersWrap>
-        {usersData.length > 0 ? (
-          usersData.map((el) => (
+        {searchResult?.length > 0 ? (
+          searchResult.map((el) => (
             <User>
               <ProfileUI
                 key={el._id}
@@ -104,20 +40,6 @@ export default function SearchResult() {
     </ResultWrap>
   );
 }
-
-// usersData.map((el, i) => {
-//   return (
-//     <User>
-//       <ProfileUI
-//         key={el._id}
-//         user_profile={el.image}
-//         user_name={el.username}
-//         user_email={el.accountname}
-//       />
-//       <FollowButton />
-//     </User>
-//   );
-// })
 
 const ResultWrap = styled.section`
   margin-top: 72px;
