@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components';
-import ButtonLineIcon from '../../components/common/ButtonLineIcon';
+import React from "react";
+import styled from "styled-components";
+import ButtonLineIcon from "../../components/common/ButtonLineIcon";
 
 export default function IntroUI({ profileData, setIsEditing }) {
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
@@ -13,7 +13,7 @@ export default function IntroUI({ profileData, setIsEditing }) {
   return (
     <>
       <IntroWrap>
-        <img src={BASE_URL + profileData.user.image} alt="유저 프로필 이미지" />
+        <img src={profileData.user.image} alt="유저 프로필 이미지" />
         <strong>{profileData.user.username}</strong>
         <p>{profileData.user.accountname}</p>
       </IntroWrap>
@@ -28,7 +28,7 @@ export default function IntroUI({ profileData, setIsEditing }) {
 
       <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
     </>
-  )
+  );
 }
 
 const IntroWrap = styled.div`
