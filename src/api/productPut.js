@@ -1,6 +1,6 @@
 const productPut = async (product_id, token, productData) => {
   try {
-    const PRODUCTPUT = `https://api.mandarin.weniv.co.kr//product/${product_id}`
+    const PRODUCTPUT = `https://api.mandarin.weniv.co.kr/product/${product_id}`
 
     const response = await fetch(PRODUCTPUT, {
       method: 'PUT',

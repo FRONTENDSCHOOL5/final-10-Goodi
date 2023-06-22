@@ -11,7 +11,6 @@ const productAPI = async (token, id) => {
 
         const data = await response.json();
         return data;
-        console.log(data)
     } catch (error) {
         console.error("Account API 에러가 발생했습니다", error);
     }

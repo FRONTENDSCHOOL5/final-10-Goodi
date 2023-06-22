@@ -67,7 +67,7 @@ export default function Main() {
               <img src={followerProducts} alt="Follower Products" />
             </Title>
             <CardProduct />
-            <ProductLink to="/">나도 굿즈 판매하기</ProductLink>
+            <ProductLink to="/postproduct">나도 굿즈 판매하기</ProductLink>
           </MainRight>
 
           <MainBottom>
