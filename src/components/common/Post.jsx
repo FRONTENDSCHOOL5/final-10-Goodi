@@ -5,10 +5,9 @@ import ProfileUI from "./ProfileUI";
 import PostLikeBtn from "./PostLikeBtn";
 
 import postMenu from "../../assets/post_menu.svg";
-import nonLikeIcon from "../../assets/empty_likeBtn.svg";
-import likeIcon from "../../assets/post_fullLikeBtn.svg";
 import { useRecoilValue } from "recoil";
 import accountname from "../../recoil/accountname";
+import LocalNav from "./LocalNav";
 
 
 const getElapsedTime = (createdAt) => {
@@ -58,11 +57,18 @@ export default function Post({
   const elapsedTimeString = getElapsedTime(createdAt);
   const [heartValue, setHeartValue] = useState(heartCount);
 
+  const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
+
+
   const getHeartData = () => {
     setHeartValue(prev => prev += 1);
   };
   const cancleHeartData = () => {
     setHeartValue(prev => prev -= 1);
+  };
+
+  const handleLocalNav = () => {
+    setIsLocalNavOpen((prevIsHidden) => !prevIsHidden);
   };
 
   const myaccount_name = useRecoilValue(accountname);
@@ -81,7 +87,7 @@ export default function Post({
           card={true}
           account_name={account_name}
         />
-        <button>
+        <button onClick={handleLocalNav}>
           <img src={postMenu} alt="게시글 삭제 및 신고 메뉴" />
         </button>
       </PostTop>
@@ -98,6 +104,16 @@ export default function Post({
           </div>
         </div>
       </PostContent>
+      {isLocalNavOpen ? (
+        <LocalNav
+          lists={[
+            { name: "상품 수정", nav: "/postproduct" },
+            { name: "상품 삭제", nav: "/postproduct" },
+          ]}
+        />
+      ) : (
+        false
+      )}
     </PostOuter>
   );
 }

@@ -6,6 +6,8 @@ import { Link, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import accountname from "../../recoil/accountname";
 import postMenu from "../../assets/post_menu.svg";
+import LocalNav from "./LocalNav";
+import { useState } from "react";
 
 export default function Card({
   profile,
@@ -21,6 +23,11 @@ export default function Card({
   const temp = useParams();
 
   const account_name = temp.account_name ? temp.account_name : myaccount_name;
+  const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
+
+  const handleLocalNav = () => {
+    setIsLocalNavOpen((prevIsHidden) => !prevIsHidden);
+  };
 
   return (
     <Article>
@@ -32,7 +39,7 @@ export default function Card({
           card="true"
           account_name={account_name}
         />
-        <button>
+        <button onClick={handleLocalNav}>
           <img src={postMenu} />
         </button>
       </ArticleTop>
@@ -48,6 +55,16 @@ export default function Card({
         </CardContent>
       </CardLink>
       <LikeBtn />
+      {isLocalNavOpen ? (
+        <LocalNav
+          lists={[
+            { name: "상품 수정", nav: "/postproduct" },
+            { name: "상품 삭제", nav: "/postproduct" },
+          ]}
+        />
+      ) : (
+        false
+      )}
     </Article>
   );
 }
@@ -66,7 +83,7 @@ const CardContent = styled.div`
     aspect-ratio: 1/1;
     object-fit: cover;
   }
-  
+
   &:hover {
     transform: scale(1.03);
   }
@@ -115,6 +132,7 @@ const ArticleTop = styled.div`
   z-index: 1;
   & > button {
     height: 56px;
+    cursor: pointer;
   }
   img {
     height: 56px;
