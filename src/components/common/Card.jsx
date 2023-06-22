@@ -42,6 +42,18 @@ export default function Card({
         <button onClick={handleLocalNav}>
           <img src={postMenu} />
         </button>
+        <LocalNavWrap>
+      {isLocalNavOpen ? (
+        <LocalNav
+          lists={[
+            { name: "상품 수정", nav: "/postproduct" },
+            { name: "상품 삭제", nav: "/postproduct" },
+          ]}
+        />
+      ) : (
+        false
+      )}
+      </LocalNavWrap>
       </ArticleTop>
       <CardLink to={`/products/${id}`}>
         <CardContent>
@@ -55,16 +67,6 @@ export default function Card({
         </CardContent>
       </CardLink>
       <LikeBtn />
-      {isLocalNavOpen ? (
-        <LocalNav
-          lists={[
-            { name: "상품 수정", nav: "/postproduct" },
-            { name: "상품 삭제", nav: "/postproduct" },
-          ]}
-        />
-      ) : (
-        false
-      )}
     </Article>
   );
 }
@@ -130,6 +132,7 @@ const ArticleTop = styled.div`
   display: flex;
   justify-content: space-between;
   z-index: 1;
+  position: relative;
   & > button {
     height: 56px;
     cursor: pointer;
@@ -138,3 +141,8 @@ const ArticleTop = styled.div`
     height: 56px;
   }
 `;
+const LocalNavWrap = styled.div`
+  position: absolute;
+  top: 300%;
+  left: 107%;
+`
