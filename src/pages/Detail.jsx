@@ -26,6 +26,7 @@ import ProductAPI from "../api/product";
 
 //recoil
 import loginToken from "../recoil/loginToken";
+import accountname from "../recoil/accountname";
 
 export default function Detail() {
   const { id } = useParams();
@@ -35,6 +36,10 @@ export default function Detail() {
   const [productData, setProductData] = useState("");
   const [price, setPrice] = useState(0);
   const [toast, setToast] = useState(false);
+
+  const myaccount_name = useRecoilValue(accountname);
+  const temp = useParams();
+  const account_name = temp.account_name ? temp.account_name : myaccount_name;
 
   // product 정보 API에서 받아오기
   useEffect(() => {
@@ -86,6 +91,7 @@ export default function Detail() {
               user_profile={productData.author.image}
               user_name={productData.author.username}
               user_email={productData.author.accountname}
+              account_name={account_name}
             />
             <ButtonLineIcon text="작가 팔로우" />
           </div>
