@@ -13,9 +13,9 @@ export default function CardProduct({ profile }) {
   const token = useRecoilValue(loginToken);
   const myaccount_name = useRecoilValue(accountname);
 
-  const temp = useParams()
+  const temp = useParams();
 
-  const account_name = temp.account_name ? temp.account_name : myaccount_name
+  const account_name = temp.account_name ? temp.account_name : myaccount_name;
 
   const [productGetData, setproductGetData] = useState(null);
 
