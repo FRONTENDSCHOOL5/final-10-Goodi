@@ -34,7 +34,7 @@ export default function Card({
         <ProfileUI
           user_profile={profile}
           user_name={name}
-          user_email={email} 
+          user_email={email}
           card="true"
           account_name={account_name}
         />
@@ -42,17 +42,17 @@ export default function Card({
           <img src={postMenu} />
         </button>
         <LocalNavWrap>
-      {isLocalNavOpen ? (
-        <LocalNav
-          lists={[
-            { name: "상품 수정", nav: "/postproduct" },
-            { name: "상품 삭제", nav: "/postproduct" },
-          ]}
-        />
-      ) : (
-        false
-      )}
-      </LocalNavWrap>
+          {isLocalNavOpen ? (
+            <LocalNav
+              lists={[
+                { name: "상품 수정", nav: "/postproduct" },
+                { name: "상품 삭제", nav: "/postproduct" },
+              ]}
+            />
+          ) : (
+            false
+          )}
+        </LocalNavWrap>
       </ArticleTop>
       <CardLink to={`/products/${id}`}>
         <CardContent>
@@ -77,7 +77,7 @@ const CardLink = styled(Link)`
 
 const CardContent = styled.div`
   transition: all 0.3s;
-  
+
   img {
     width: 100%;
     transition: all 0.3s;
@@ -147,4 +147,4 @@ const LocalNavWrap = styled.div`
   position: absolute;
   top: 300%;
   left: 107%;
-`
+`;

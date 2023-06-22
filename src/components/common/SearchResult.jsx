@@ -9,6 +9,7 @@ import ButtonFollow from "./ButtonFollow";
 import followSymbol from "../../assets/follow_symbol.svg";
 
 export default function SearchResult({ searchResult, isFollowing }) {
+  console.log(searchResult);
   return (
     <ResultWrap>
       <ResultTitle>

@@ -78,7 +78,7 @@ export default function Post({
     <PostOuter>
       <PostTop>
         <ProfileUI
-          user_profile={profileImage}
+          user_profile={BASE_URL + profileImage}
           user_name={username}
           user_email={email}
           mainprofile={false}
@@ -91,9 +91,10 @@ export default function Post({
         <LocalNavWrap>
           {isLocalNavOpen ? (
             <LocalNav
-            width = "100px"
+              width="120px"
+              fontSize="14px"
               lists={[
-                { name: "게시글 수정", nav: "/postposting" },
+                { name: "게시글 수정", nav: `/uploadPosting/${postId}` },
                 { name: "게시글 삭제", nav: "/postposting" },
               ]}
             />
@@ -196,5 +197,5 @@ const PostContent = styled.div`
 const LocalNavWrap = styled.div`
   position: absolute;
   top: 340%;
-  left: 145%;
+  left: 135%;
 `;

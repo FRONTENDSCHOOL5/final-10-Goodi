@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import Card from './Card';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import Card from "./Card";
+import styled from "styled-components";
 
-import accountname from '../../recoil/accountname';
-import { useRecoilValue } from 'recoil';
-import loginToken from '../../recoil/loginToken';
-import productGetAPI from '../../api/productGet';
-import { useParams } from 'react-router-dom';
-import NoPostsUI from '../NoPostsUI';
+import accountname from "../../recoil/accountname";
+import { useRecoilValue } from "recoil";
+import loginToken from "../../recoil/loginToken";
+import productGetAPI from "../../api/productGet";
+import { useParams } from "react-router-dom";
+import NoPostsUI from "../NoPostsUI";
 
 export default function CardProduct({ profile }) {
   const token = useRecoilValue(loginToken);
@@ -34,8 +34,6 @@ export default function CardProduct({ profile }) {
     productGet();
   }, [account_name]);
 
-  console.log(productGetData, account_name);
-
   return (
     <>
       {productGetData === null || productGetData.data === 0 ? (
@@ -47,10 +45,10 @@ export default function CardProduct({ profile }) {
               <Card
                 key={productInfo.id}
                 id={productInfo.id}
-                profile={productInfo.author.image}
+                profile={BASE_URL + productInfo.author.image}
                 name={productInfo.author.username}
                 email={productInfo.author.accountname}
-                img={BASE_URL + productInfo.itemImage.split(',')[0]}
+                img={BASE_URL + productInfo.itemImage.split(",")[0]}
                 title={productInfo.itemName}
                 description={productInfo.link}
                 price={productInfo.price}
@@ -60,15 +58,14 @@ export default function CardProduct({ profile }) {
         </CardList>
       )}
     </>
-
-
-  )
+  );
 }
 
 const CardList = styled.div`
-  margin: ${({ profile }) => profile ? "30px 0 70px" : "80px 0"};;
+  margin: ${({ profile }) => (profile ? "30px 0 70px" : "80px 0")};
   display: grid;
-  grid-template-columns: ${({ profile }) => profile ? "repeat(3, 1fr)" : "repeat(2, 1fr)"};
+  grid-template-columns: ${({ profile }) =>
+    profile ? "repeat(3, 1fr)" : "repeat(2, 1fr)"};
   grid-template-rows: auto;
-  gap: ${({ profile }) => profile ? "60px 30px" : "60px"};;
-`
+  gap: ${({ profile }) => (profile ? "60px 30px" : "60px")};
+`;
