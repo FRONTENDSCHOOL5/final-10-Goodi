@@ -26,8 +26,8 @@ export default function PostingUI({
   const [userErrorMessage, setUserErrorMessage] = useState([]);
   const [postingData, setPostingData] = useState({
     post: {
-      content:"",
-      image:""
+      content: "",
+      image: "",
     },
   });
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
@@ -61,7 +61,7 @@ export default function PostingUI({
 
       // 대신 맨마지막에 이미지 수정하면 바뀐 이미지는 반영 안됨
     } else {
-      setDescription(value); 
+      setDescription(value);
       setPostingData((prevState) => ({
         ...prevState,
         post: {
@@ -201,6 +201,7 @@ export default function PostingUI({
               onChange={handleInputChange}
               name="content"
               hasError={userErrorMessage.includes("게시글 내용을 입력해주세요")}
+              count="50"
             />
             {userErrorMessage.includes("게시글 내용을 입력해주세요") && (
               <ErrorMassage>게시글 내용을 입력해주세요</ErrorMassage>
