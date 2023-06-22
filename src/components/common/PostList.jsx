@@ -7,12 +7,18 @@ import accountname from "../../recoil/accountname";
 import { useRecoilState, useRecoilValue } from "recoil";
 import NoPostsUI from "../NoPostsUI";
 import PostListSkeleton from "../../style/skeletonUI/skeletonPage/PostListSkeleton";
+import { useParams } from "react-router-dom";
 
 export default function PostList() {
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [token, setToken] = useRecoilState(loginToken);
-  const accountName = useRecoilValue(accountname);
+  const token = useRecoilValue(loginToken);
+  const myaccount_name = useRecoilValue(accountname);
+
+  const temp = useParams();
+
+  const account_name = temp.account_name ? temp.account_name : myaccount_name;
+
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   const updateHeartCount = (postId, count) => {
@@ -27,40 +33,42 @@ export default function PostList() {
     const fetchPostData = async () => {
       const { post } = await postAPI({
         token,
-        accountname: accountName,
+        accountname: account_name,
       });
       setUserPostList(post);
       setLoading(false);
     };
 
     fetchPostData();
-  }, []);
-  console.log({ userPostList });
+  }, [account_name]);
+  console.log(userPostList);
 
   if (loading) {
     return <PostListSkeleton />;
   }
 
   return (
-    <PostListWrap hasPosts={userPostList.length > 0}>
-      {userPostList.length > 0 ? (
-        userPostList.map((post) => (
-          <Post
-            postId={post.id}
-            username={post.author.username}
-            profileImage={post.author.image}
-            email={post.author.accountname}
-            content={post.content}
-            image={BASE_URL + post.image.split(",")[0]}
-            createdAt={post.createdAt}
-            hearted={post.hearted}
-            heartCount={post.heartCount}
-          />
-        ))
-      ) : (
+    <>
+      {userPostList === null || userPostList.length === 0 ? (
         <NoPostsUI />
+      ) : (
+        <PostListWrap hasPosts={userPostList.length > 0}>
+          {userPostList.map((post) => (
+            <Post
+              postId={post.id}
+              username={post.author.username}
+              profileImage={post.author.image}
+              email={post.author.accountname}
+              content={post.content}
+              image={BASE_URL + post.image.split(",")[0]}
+              createdAt={post.createdAt}
+              hearted={post.hearted}
+              heartCount={post.heartCount}
+            />))}
+        </PostListWrap>
       )}
-    </PostListWrap>
+    </>
+
   );
 }
 
