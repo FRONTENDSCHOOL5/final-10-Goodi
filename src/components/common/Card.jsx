@@ -26,17 +26,17 @@ export default function Card({
   return (
     <Article>
       <ArticleTop>
-      <ProfileUI
-        user_profile={BASE_URL + profile}
-        user_name={name}
-        user_email={email}
-        card="true"
-        account_name={account_name}
-      />
+        <ProfileUI
+          user_profile={BASE_URL + profile}
+          user_name={name}
+          user_email={email}
+          card="true"
+          account_name={account_name}
+        />
         <button>
           <img src={postMenu} />
         </button>
-        </ArticleTop>
+      </ArticleTop>
       <CardLink to={`/products/${id}`}>
         <CardContent>
           <img alt="card" src={img} />
@@ -62,10 +62,12 @@ const CardContent = styled.div`
   img {
     width: 100%;
     transition: all 0.3s;
-
-    &:hover {
-      transform: scale(1.03);
-    }
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+  
+  &:hover {
+    transform: scale(1.03);
   }
 
   h2 {
@@ -116,4 +118,4 @@ const ArticleTop = styled.div`
   img {
     height: 56px;
   }
-`
+`;
