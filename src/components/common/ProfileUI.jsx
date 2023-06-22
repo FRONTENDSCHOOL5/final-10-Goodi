@@ -46,11 +46,11 @@ const UserProfile = styled(Link)`
     flex-direction: column;
     justify-content: center;
     gap: 6px;
-    margin-left: 16px;
+    margin-left: 10px;
 
     & > strong {
       font-family: var(--font--semibold);
-      font-size: ${(props) => (props.mainprofile ? "20px" : "18px")};
+      font-size: ${(props) => (props.mainprofile ? "20px" : "16px")};
       font-size: ${(props) => (props.follow && "15px")};
     }
     

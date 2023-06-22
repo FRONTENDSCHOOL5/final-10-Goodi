@@ -24,6 +24,7 @@ export default function SearchResult({ searchResult, isFollowing }) {
                 user_profile={el.image}
                 user_name={el.username}
                 user_email={el.accountname}
+                account_name={el.accountname}
               />
               <ButtonFollow
                 isFollow={el.isfollow}

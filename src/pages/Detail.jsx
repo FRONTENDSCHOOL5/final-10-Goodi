@@ -12,7 +12,7 @@ import Count from "../components/common/Count";
 import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import Button from "../components/common/Button";
 import LikeBtn from "../components/common/LikeBtn";
-import Toast from "../components/Toast";
+import Toast from "../components/common/Toast";
 
 //data
 import ProductData from "../mock/productData";

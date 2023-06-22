@@ -9,7 +9,6 @@ import { useRecoilValue } from "recoil";
 import accountname from "../../recoil/accountname";
 import LocalNav from "./LocalNav";
 
-
 const getElapsedTime = (createdAt) => {
   const currentTime = new Date();
   const createdDateTime = new Date(createdAt);
@@ -59,12 +58,11 @@ export default function Post({
 
   const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
 
-
   const getHeartData = () => {
-    setHeartValue(prev => prev += 1);
+    setHeartValue((prev) => (prev += 1));
   };
   const cancleHeartData = () => {
-    setHeartValue(prev => prev -= 1);
+    setHeartValue((prev) => (prev -= 1));
   };
 
   const handleLocalNav = () => {
@@ -83,13 +81,26 @@ export default function Post({
           user_profile={BASE_URL + profileImage}
           user_name={username}
           user_email={email}
-          mainprofile={true}
+          mainprofile={false}
           card={true}
           account_name={account_name}
         />
         <button onClick={handleLocalNav}>
           <img src={postMenu} alt="게시글 삭제 및 신고 메뉴" />
         </button>
+        <LocalNavWrap>
+          {isLocalNavOpen ? (
+            <LocalNav
+            width = "100px"
+              lists={[
+                { name: "게시글 수정", nav: "/postposting" },
+                { name: "게시글 삭제", nav: "/postposting" },
+              ]}
+            />
+          ) : (
+            false
+          )}
+        </LocalNavWrap>
       </PostTop>
       <PostContent>
         <div className="p_box">
@@ -100,20 +111,14 @@ export default function Post({
           <span>{elapsedTimeString}</span>
           <div className="like_wrap">
             <span>{heartValue}</span>
-            <PostLikeBtn postId={postId} getHeartData={getHeartData} cancleHeartData={cancleHeartData} />
+            <PostLikeBtn
+              postId={postId}
+              getHeartData={getHeartData}
+              cancleHeartData={cancleHeartData}
+            />
           </div>
         </div>
       </PostContent>
-      {isLocalNavOpen ? (
-        <LocalNav
-          lists={[
-            { name: "게시글 수정", nav: "/postposting" },
-            { name: "게시글 삭제", nav: "/postposting" },
-          ]}
-        />
-      ) : (
-        false
-      )}
     </PostOuter>
   );
 }
@@ -127,10 +132,18 @@ const PostOuter = styled.div`
   width: 100%;
 `;
 const PostTop = styled.div`
+  position: relative;
   display: flex;
-  button {
-    height: 56px;
+  & > button {
+    height: 40px;
     cursor: pointer;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+  }
+  strong {
+    font-size: 16px;
   }
 `;
 const PostContent = styled.div`
@@ -159,7 +172,7 @@ const PostContent = styled.div`
     font-size: 1rem;
   }
   .p_box {
-    min-height: 80px;
+    height: 85px;
     display: flex;
     align-items: flex-start;
   }
@@ -179,4 +192,9 @@ const PostContent = styled.div`
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical; */
   }
+`;
+const LocalNavWrap = styled.div`
+  position: absolute;
+  top: 340%;
+  left: 145%;
 `;

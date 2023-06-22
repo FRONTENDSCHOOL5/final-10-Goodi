@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-export default function LocalNav({lists}) {
+export default function LocalNav({lists, ...props}) {
   const navigate = useNavigate();
   return (
-    <LocalNavBar>
+    <LocalNavBar {...props}>
       {lists.map((el, i) => {
         return (
           <LocalList key={i}>
@@ -24,7 +24,7 @@ export default function LocalNav({lists}) {
 }
 
 const LocalNavBar = styled.ul`
-  width: 200px;
+  width: ${(props) => props.width || "200px"};
   border-radius: 4px;
   border: 1px solid var(--gray200-color);
   box-sizing: border-box;

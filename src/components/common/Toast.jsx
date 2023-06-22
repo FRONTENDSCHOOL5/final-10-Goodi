@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 // 이미지
-import IconCheck from "../assets/icon_check_primary.svg";
+import IconCheck from "../../assets/icon_check_primary.svg";
 
 export default function Toast({ setToast, text }) {
   useEffect(() => {
