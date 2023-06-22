@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ButtonLineIcon from "../../components/common/ButtonLineIcon";
 
 export default function IntroUI({ profileData, setIsEditing }) {
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   // 프로필 수정 버튼 이벤트
   const handleEditClick = () => {
     setIsEditing(true);
@@ -11,7 +12,7 @@ export default function IntroUI({ profileData, setIsEditing }) {
   return (
     <>
       <IntroWrap>
-        <img src={profileData.user.image} alt="유저 프로필 이미지" />
+        <img src={BASE_URL + profileData.user.image} alt="유저 프로필 이미지" />
         <strong>{profileData.user.username}</strong>
         <p>{profileData.user.accountname}</p>
       </IntroWrap>
