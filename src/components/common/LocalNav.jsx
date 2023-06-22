@@ -2,13 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-export default function LocalNav() {
+export default function LocalNav({lists}) {
   const navigate = useNavigate();
-  const lists = [
-    { name: "상품 등록", nav: "/postproduct" },
-    { name: "게시물 작성", nav: "/postposting" },
-  ];
-
   return (
     <LocalNavBar>
       {lists.map((el, i) => {

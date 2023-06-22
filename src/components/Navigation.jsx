@@ -84,7 +84,16 @@ export default function Navigation() {
           </NavList>
         );
       })}
-      {isHidden ? <LocalNav /> : false}
+      {isHidden ? (
+        <LocalNav
+          lists={[
+            { name: "상품 등록", nav: "/postproduct" },
+            { name: "게시물 작성", nav: "/postposting" },
+          ]}
+        />
+      ) : (
+        false
+      )}
       {showModal && (
         <Modal
           showModal={showModal}
