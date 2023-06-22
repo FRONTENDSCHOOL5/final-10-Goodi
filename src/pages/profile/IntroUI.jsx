@@ -7,11 +7,11 @@ export default function IntroUI({ profileData, setIsEditing }) {
   const handleEditClick = () => {
     setIsEditing(true);
   };
-
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   return (
     <>
       <IntroWrap>
-        <img src={profileData.user.image} alt="유저 프로필 이미지" />
+        <img src={BASE_URL + profileData.user.image} alt="유저 프로필 이미지" />
         <strong>{profileData.user.username}</strong>
         <p>{profileData.user.accountname}</p>
       </IntroWrap>
