@@ -27,6 +27,7 @@ export default function Card({
   const handleLocalNav = () => {
     setIsLocalNavOpen((prevIsHidden) => !prevIsHidden);
   };
+  console.log(profile);
 
   return (
     <Article>

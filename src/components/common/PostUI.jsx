@@ -152,10 +152,10 @@ export default function PostUI({
             {userErrorMessage.includes(
               "상품이미지를 한개 이상 업로드 해주세요"
             ) && (
-                <ErrorMassage>
-                  상품이미지를 한개 이상 업로드 해주세요
-                </ErrorMassage>
-              )}
+              <ErrorMassage>
+                상품이미지를 한개 이상 업로드 해주세요
+              </ErrorMassage>
+            )}
           </ThumbnailWrap>
 
           <ProductImages>

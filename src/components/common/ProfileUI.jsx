@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import defaultImage from "../../assets/profile_img_def.svg";
 
 function ProfileUI(props) {
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const {
     user_profile,
     user_name,
@@ -14,6 +15,8 @@ function ProfileUI(props) {
     account_name,
     children,
   } = props;
+
+  console.log(user_profile);
   return (
     <UserProfile
       mainprofile={mainprofile}
@@ -24,6 +27,14 @@ function ProfileUI(props) {
         console.log(e.target);
       }}
     >
+      {/* <img
+src={
+  profileData.profile.image.includes(BASE_URL)
+    ? profileData.profile.image
+    : BASE_URL + profileData.profile.image
+}
+alt="유저 프로필 이미지"
+/> */}
       <img src={user_profile || defaultImage} alt="유저 프로필 이미지" />
       <div>
         <strong>{user_name}</strong>

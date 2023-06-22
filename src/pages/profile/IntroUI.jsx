@@ -8,11 +8,20 @@ export default function IntroUI({ profileData, setIsEditing }) {
     setIsEditing(true);
   };
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
-  console.log(profileData.user.image)
+  console.log(profileData.user.image);
   return (
     <>
       <IntroWrap>
-        <img src={BASE_URL + profileData.user.image} alt="유저 프로필 이미지" />
+        <img
+          src={
+            profileData.user.image.includes("null")
+              ? BASE_URL + "1687455865316.jpg"
+              : profileData.user.image.includes("http")
+              ? profileData.user.image
+              : BASE_URL + profileData.user.image
+          }
+          alt="유저 프로필 이미지"
+        />
         <strong>{profileData.user.username}</strong>
         <p>{profileData.user.accountname}</p>
       </IntroWrap>
