@@ -7,11 +7,22 @@ import ButtonFollow from "../../components/common/ButtonFollow";
 export default function IntroUI({ profileData }) {
   const navigate = useNavigate();
 
-  console.log(profileData);
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+
+  console.log(profileData.profile.image);
   return (
     <>
       <IntroWrap>
-        <img src={profileData.profile.image} alt="유저 프로필 이미지" />
+        <img
+          src={
+            profileData.profile.image.includes("null")
+              ? BASE_URL + "1687455865316.jpg"
+              : profileData.profile.image.includes("http")
+              ? profileData.profile.image
+              : BASE_URL + profileData.profile.image
+          }
+          alt="유저 프로필 이미지"
+        />
         <strong>{profileData.profile.username}</strong>
         <p>{profileData.profile.accountname}</p>
       </IntroWrap>

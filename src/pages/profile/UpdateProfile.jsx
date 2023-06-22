@@ -95,7 +95,16 @@ export default function UpdateProfile({
         />
         <label htmlFor="fileInput">
           <ProfileImgWrap>
-            <img src={BASE_URL + changeImageURL} alt="Upload" />
+            <img
+              src={
+                changeImageURL.includes("null")
+                  ? BASE_URL + "1687455865316.jpg"
+                  : changeImageURL.includes("http")
+                  ? changeImageURL
+                  : BASE_URL + changeImageURL
+              }
+              alt="Upload"
+            />
           </ProfileImgWrap>
           <img
             className="add_button_img"

@@ -45,7 +45,13 @@ export default function CardProduct({ profile }) {
               <Card
                 key={productInfo.id}
                 id={productInfo.id}
-                profile={BASE_URL + productInfo.author.image}
+                profile={
+                  productInfo.author.image.includes("null")
+                    ? BASE_URL + "1687455865316.jpg"
+                    : productInfo.author.image.includes("http")
+                    ? productInfo.author.image
+                    : BASE_URL + productInfo.author.image
+                }
                 name={productInfo.author.username}
                 email={productInfo.author.accountname}
                 img={BASE_URL + productInfo.itemImage.split(",")[0]}
