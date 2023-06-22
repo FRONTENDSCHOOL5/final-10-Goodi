@@ -1,55 +1,73 @@
-import React from 'react'
-import styled from 'styled-components';
-import LikeBtn from './LikeBtn';
-import ProfileUI from './ProfileUI';
-import { Link, useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import accountname from '../../recoil/accountname';
+import React from "react";
+import styled from "styled-components";
+import LikeBtn from "./LikeBtn";
+import ProfileUI from "./ProfileUI";
+import { Link, useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import accountname from "../../recoil/accountname";
+import postMenu from "../../assets/post_menu.svg";
 
-
-export default function Card({ profile, name, email, img, title, description, price, id }) {
+export default function Card({
+  profile,
+  name,
+  email,
+  img,
+  title,
+  description,
+  price,
+  id,
+}) {
   const myaccount_name = useRecoilValue(accountname);
-
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const temp = useParams();
 
   const account_name = temp.account_name ? temp.account_name : myaccount_name;
 
   return (
     <Article>
-      <ProfileUI
-        user_profile={profile}
-        user_name={name}
-        user_email={email}
-        card="true"
-        account_name={account_name}
-      />
+      <ArticleTop>
+        <ProfileUI
+          user_profile={BASE_URL + profile}
+          user_name={name}
+          user_email={email}
+          card="true"
+          account_name={account_name}
+        />
+        <button>
+          <img src={postMenu} />
+        </button>
+      </ArticleTop>
       <CardLink to={`/products/${id}`}>
         <CardContent>
           <img alt="card" src={img} />
           <h2>{title}</h2>
           <p>{description}</p>
-          <strong>{price.toString()
-            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</strong><span>원</span>
+          <strong>
+            {price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+          </strong>
+          <span>원</span>
         </CardContent>
       </CardLink>
       <LikeBtn />
     </Article>
   );
-};
+}
 
 const CardLink = styled(Link)`
   color: var(--black-color);
   text-decoration: none;
-  `
+`;
 
 const CardContent = styled.div`
   img {
     width: 100%;
     transition: all 0.3s;
-
-    &:hover {
-      transform: scale(1.03);
-    }
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+  
+  &:hover {
+    transform: scale(1.03);
   }
 
   h2 {
@@ -79,14 +97,25 @@ const CardContent = styled.div`
     font-family: var(--font--Bold);
     margin-right: 8px;
   }
-`
+`;
 
 const Article = styled.article`
   position: relative;
 
-  button {
+  & > button {
     position: absolute;
     right: 16px;
     bottom: 172px;
   }
-`
+`;
+const ArticleTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+  & > button {
+    height: 56px;
+  }
+  img {
+    height: 56px;
+  }
+`;

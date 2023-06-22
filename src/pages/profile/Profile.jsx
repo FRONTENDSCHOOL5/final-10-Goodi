@@ -28,7 +28,7 @@ export default function Profile() {
         console.error("Account API 에러가 발생했습니다", error);
       }
     };
-
+    console.log("프로필",profileData)
     fetchProfileData();
   }, []);
 
