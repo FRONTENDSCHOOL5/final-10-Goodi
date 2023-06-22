@@ -66,16 +66,15 @@ export default function Post({
   };
 
   const myaccount_name = useRecoilValue(accountname);
-
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const temp = useParams();
-
   const account_name = temp.account_name ? temp.account_name : myaccount_name;
 
   return (
     <PostOuter>
       <PostTop>
         <ProfileUI
-          user_profile={profileImage}
+          user_profile={BASE_URL + profileImage}
           user_name={username}
           user_email={email}
           mainprofile={true}
