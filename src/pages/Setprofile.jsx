@@ -33,7 +33,6 @@ export default function Setprofile() {
       intro: "",
     },
   });
-  // console.log(signUpData.user.intro);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSignUpData((prevState) => ({
