@@ -1,39 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import PlusBtnImg from "../../assets/add_button.svg";
-import { useRecoilValue } from 'recoil';
-import loginToken from '../../recoil/loginToken';
-import PostImageAPI from '../../api/UploadImage';
-import updateProfile from './../../api/updateProfile';
-import { InputBox } from '../../components/common/Input';
-import Button from '../../components/common/Button';
-import profileAPI from '../../api/profile';
+import { useRecoilValue } from "recoil";
+import loginToken from "../../recoil/loginToken";
+import PostImageAPI from "../../api/UploadImage";
+import updateProfile from "./../../api/updateProfile";
+import { InputBox } from "../../components/common/Input";
+import Button from "../../components/common/Button";
+import profileAPI from "../../api/profile";
 
-export default function UpdateProfile({ profileData, setIsEditing, setProfileData }) {
+export default function UpdateProfile({
+  profileData,
+  setIsEditing,
+  setProfileData,
+}) {
   // 리코일 값 불러오기
   const token = useRecoilValue(loginToken);
-  console.log("업데이트",profileData)
+  console.log("업데이트", profileData);
 
   // 프로필 이미지 업로드
   const [changeImageURL, setChangeImageURL] = useState(profileData.user.image);
-  const [isImageUpload, setIsImageUpload] = useState(false)
+  const [isImageUpload, setIsImageUpload] = useState(false);
   const [userName, setUserName] = useState(profileData.user.username);
   const [intro, setIntro] = useState(profileData.user.intro);
   const [postChangeImg, setPostChangeImg] = useState({
     user: {
-      image: changeImageURL
-    }
-  })
-
+      image: changeImageURL,
+    },
+  });
   // 이미지 fetch
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const handleImageChange = async (e) => {
-    setIsImageUpload(true)
+    setIsImageUpload(true);
     const file = e.target.files[0];
     const imgSrc = await PostImageAPI(file);
 
-    setChangeImageURL(BASE_URL + imgSrc);
-    setIsImageUpload(false)
+    setChangeImageURL(imgSrc);
+    setIsImageUpload(false);
   };
 
   // 저장 버튼 클릭 시 수정된 API에 데이터 전달
@@ -46,10 +49,10 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
         ...profileData.user,
         image: changeImageURL,
         username: userName,
-        intro: intro
+        intro: intro,
       },
     };
-    
+
     setProfileData(updatedProfileData);
     updateProfile(updatedProfileData, token);
     setIsEditing(false);
@@ -64,11 +67,11 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "username") {
-      setUserName(value)
+      setUserName(value);
     } else {
-      setIntro(value)
+      setIntro(value);
     }
-  }
+  };
 
   useEffect(() => {
     const postImage = async (token) => {
@@ -92,12 +95,10 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
         />
         <label htmlFor="fileInput">
           <ProfileImgWrap>
-            <img
-              src={changeImageURL}
-              alt="Upload"
-            />
+            <img src={BASE_URL + changeImageURL} alt="Upload" />
           </ProfileImgWrap>
-          <img className="add_button_img"
+          <img
+            className="add_button_img"
             src={PlusBtnImg}
             alt="Upload"
             style={{ cursor: "pointer" }}
@@ -148,7 +149,7 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
         />
       </Form>
     </>
-  )
+  );
 }
 
 const ProfileImgWrap = styled.div`
@@ -180,8 +181,8 @@ const Form = styled.form`
 
   & > div:first-child {
     margin-bottom: 32px;
-  } 
-  
+  }
+
   textarea {
     resize: none;
     border: 1px solid var(--gray300-color);
@@ -207,7 +208,7 @@ const Form = styled.form`
       margin-top: 15px;
     }
   }
-`
+`;
 
 const Label = styled.label`
   display: block;

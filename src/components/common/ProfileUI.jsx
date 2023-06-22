@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import defaultImage from "../../assets/profile_img_def.svg"
 
 function ProfileUI(props) {
-  const { user_profile, user_name, user_email, mainprofile, card, follow, account_name, children } = props;
 
+  const { user_profile, user_name, user_email, mainprofile, card, follow, account_name, children } = props;
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   return (
     <UserProfile
       mainprofile={mainprofile}
@@ -14,7 +15,7 @@ function ProfileUI(props) {
       to={`/profile/${account_name}`}
       onClick={(e) => { console.log(e.target); }}
     >
-      <img src={user_profile || defaultImage} alt="유저 프로필 이미지" />
+      <img src={ BASE_URL + user_profile || defaultImage} alt="유저 프로필 이미지" />
       <div>
         <strong>{user_name}</strong>
         <p>{user_email}</p>
