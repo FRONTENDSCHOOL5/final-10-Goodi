@@ -130,7 +130,6 @@ const Article = styled.article`
 const ArticleTop = styled.div`
   display: flex;
   justify-content: space-between;
-  z-index: 1;
   position: relative;
   & > button {
     height: 40px;
