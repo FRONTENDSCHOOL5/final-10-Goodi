@@ -134,11 +134,15 @@ const ArticleTop = styled.div`
   z-index: 1;
   position: relative;
   & > button {
-    height: 56px;
+    height: 40px;
     cursor: pointer;
   }
   img {
-    height: 56px;
+    width: 40px;
+    height: 40px;
+  }
+  strong {
+    font-size: 16px;
   }
 `;
 const LocalNavWrap = styled.div`
