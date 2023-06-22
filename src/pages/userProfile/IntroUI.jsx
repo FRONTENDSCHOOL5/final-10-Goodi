@@ -7,7 +7,7 @@ import ButtonFollow from "../../components/common/ButtonFollow";
 export default function IntroUI({ profileData }) {
   const navigate = useNavigate();
 
-  console.log(profileData.profile.isfollow);
+  console.log(profileData);
   return (
     <>
       <IntroWrap>
