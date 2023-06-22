@@ -107,8 +107,8 @@ export default function Post({
       {isLocalNavOpen ? (
         <LocalNav
           lists={[
-            { name: "상품 수정", nav: "/postproduct" },
-            { name: "상품 삭제", nav: "/postproduct" },
+            { name: "게시글 수정", nav: "/postposting" },
+            { name: "게시글 삭제", nav: "/postposting" },
           ]}
         />
       ) : (
