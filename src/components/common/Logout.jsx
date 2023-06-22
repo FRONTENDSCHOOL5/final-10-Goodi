@@ -22,7 +22,7 @@ export default function LogoutHandler() {
     setLogoutCheck(true);
     setIsRecentSearch([]);
 
-    navigate("/login");
+    navigate("/");
   };
 
   return { handleLogout };

@@ -147,16 +147,17 @@ export default function PostUI({
                 <img
                   src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
                   style={imageWrap[0] ? null : { width: "90px" }}
+                  alt=""
                 />
               )}
             </Thumbnail>
             {userErrorMessage.includes(
               "상품이미지를 한개 이상 업로드 해주세요"
             ) && (
-              <ErrorMassage>
-                상품이미지를 한개 이상 업로드 해주세요
-              </ErrorMassage>
-            )}
+                <ErrorMassage>
+                  상품이미지를 한개 이상 업로드 해주세요
+                </ErrorMassage>
+              )}
           </ThumbnailWrap>
 
           <ProductImages>
@@ -174,6 +175,7 @@ export default function PostUI({
                 <img
                   src={imageWrap[1] ? BASE_URL + imageWrap[1] : AddIcon}
                   style={imageWrap[1] ? null : { width: "32px" }}
+                  alt=""
                 />
               )}
             </ProductImage>
@@ -184,6 +186,7 @@ export default function PostUI({
                 <img
                   src={imageWrap[2] ? BASE_URL + imageWrap[2] : AddIcon}
                   style={imageWrap[2] ? null : { width: "32px" }}
+                  alt=""
                 />
               )}
             </ProductImage>

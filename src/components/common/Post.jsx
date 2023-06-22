@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProfileUI from "./ProfileUI";
 import PostLikeBtn from "./PostLikeBtn";
 
 import postMenu from "../../assets/post_menu.svg";
 import nonLikeIcon from "../../assets/empty_likeBtn.svg";
 import likeIcon from "../../assets/post_fullLikeBtn.svg";
+import { useRecoilValue } from "recoil";
+import accountname from "../../recoil/accountname";
 
 
 const getElapsedTime = (createdAt) => {
@@ -60,8 +62,14 @@ export default function Post({
     setHeartValue(prev => prev += 1);
   };
   const cancleHeartData = () => {
-      setHeartValue(prev => prev -= 1);
+    setHeartValue(prev => prev -= 1);
   };
+
+  const myaccount_name = useRecoilValue(accountname);
+
+  const temp = useParams();
+
+  const account_name = temp.account_name ? temp.account_name : myaccount_name;
 
   return (
     <PostOuter>
@@ -72,6 +80,7 @@ export default function Post({
           user_email={email}
           mainprofile={true}
           card={true}
+          account_name={account_name}
         />
         <button>
           <img src={postMenu} alt="게시글 삭제 및 신고 메뉴" />
@@ -86,7 +95,7 @@ export default function Post({
           <span>{elapsedTimeString}</span>
           <div className="like_wrap">
             <span>{heartValue}</span>
-            <PostLikeBtn postId={postId} getHeartData={getHeartData} cancleHeartData={cancleHeartData}/>
+            <PostLikeBtn postId={postId} getHeartData={getHeartData} cancleHeartData={cancleHeartData} />
           </div>
         </div>
       </PostContent>

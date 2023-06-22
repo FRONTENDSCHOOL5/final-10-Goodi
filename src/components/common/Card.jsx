@@ -2,10 +2,18 @@ import React from 'react'
 import styled from 'styled-components';
 import LikeBtn from './LikeBtn';
 import ProfileUI from './ProfileUI';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import accountname from '../../recoil/accountname';
 
 
 export default function Card({ profile, name, email, img, title, description, price, id }) {
+  const myaccount_name = useRecoilValue(accountname);
+
+  const temp = useParams();
+
+  const account_name = temp.account_name ? temp.account_name : myaccount_name;
+
   return (
     <Article>
       <ProfileUI
@@ -13,6 +21,7 @@ export default function Card({ profile, name, email, img, title, description, pr
         user_name={name}
         user_email={email}
         card="true"
+        account_name={account_name}
       />
       <CardLink to={`/products/${id}`}>
         <CardContent>
