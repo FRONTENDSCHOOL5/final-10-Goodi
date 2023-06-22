@@ -81,7 +81,7 @@ export default function Post({
           user_profile={BASE_URL + profileImage}
           user_name={username}
           user_email={email}
-          mainprofile={true}
+          mainprofile={false}
           card={true}
           account_name={account_name}
         />
@@ -134,8 +134,15 @@ const PostTop = styled.div`
   position: relative;
   display: flex;
   & > button {
-    height: 56px;
+    height: 40px;
     cursor: pointer;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+  }
+  strong {
+    font-size: 16px;
   }
 `;
 const PostContent = styled.div`
@@ -164,7 +171,7 @@ const PostContent = styled.div`
     font-size: 1rem;
   }
   .p_box {
-    min-height: 80px;
+    height: 85px;
     display: flex;
     align-items: flex-start;
   }
