@@ -1,12 +1,13 @@
-import React from 'react'
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import ButtonLineIcon from '../../components/common/ButtonLineIcon';
-import FollowButton from '../../components/common/FollowButton';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import ButtonLineIcon from "../../components/common/ButtonLineIcon";
+import ButtonFollow from "../../components/common/ButtonFollow";
 
 export default function IntroUI({ profileData }) {
   const navigate = useNavigate();
 
+  console.log(profileData.profile.isfollow);
   return (
     <>
       <IntroWrap>
@@ -23,12 +24,16 @@ export default function IntroUI({ profileData }) {
           color="white"
           onClick={() => navigate("/chat")}
         />
-        <FollowButton text="작가 팔로우" />
+        <ButtonFollow
+          isFollow={profileData.profile.isfollow}
+          accountName={profileData.profile.accountname}
+          padding="true"
+        />
       </BtnWrap>
 
       <p>{profileData.profile.intro || "아직 소개글이 없어요!"}</p>
     </>
-  )
+  );
 }
 
 const IntroWrap = styled.div`

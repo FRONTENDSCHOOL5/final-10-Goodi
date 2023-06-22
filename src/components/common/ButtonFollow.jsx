@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 
 // 컴포넌트
-import Toast from "../Toast";
+import Toast from "./Toast";
 
 // API
 import followAPI from "../../api/follow";
@@ -13,13 +13,17 @@ import unfollowAPI from "../../api/unfollow";
 import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
 
-export default function ButtonFollow({ isFollow, accountName }) {
+export default function ButtonFollow({ isFollow, accountName, padding }) {
   const token = useRecoilValue(loginToken);
   const myAccountName = useRecoilValue(accountname);
   const [toast, setToast] = useState(false);
 
   // 화면상에서 UI 바로 변경되게 보여주기 위해 필요
-  const [isFollowing, setIsFollowing] = useState(isFollow);
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  useEffect(() => {
+    setIsFollowing(isFollow);
+  }, [isFollow]);
 
   // 팔로우
   const handleFollow = async () => {
@@ -59,11 +63,12 @@ export default function ButtonFollow({ isFollow, accountName }) {
       )}
 
       {isFollowing ? (
-        <FollowDelete type="button" onClick={handleUnFollow}>
+        <FollowDelete padding={padding} type="button" onClick={handleUnFollow}>
           삭제
         </FollowDelete>
       ) : (
         <Follow
+          padding={padding}
           type="button"
           onClick={handleFollow}
           className={myAccountName === accountName ? "a11y-hidden" : ""}
@@ -76,7 +81,8 @@ export default function ButtonFollow({ isFollow, accountName }) {
 }
 
 const FollowDelete = styled.button`
-  padding: 8px 24px;
+  /* padding: 8px 24px; */
+  padding: ${({ padding }) => (padding ? "18px 24px;" : "8px 24px")};
   border: 1px solid var(--gray300-color);
   border-radius: 50px;
   cursor: pointer;
@@ -87,7 +93,8 @@ const FollowDelete = styled.button`
 `;
 
 const Follow = styled.button`
-  padding: 8px 24px;
+  padding: ${({ padding }) => (padding ? "18px 24px;" : "8px 24px")};
+  /* padding: 8px 24px; */
   background-color: var(--main-color);
   color: white;
   border-radius: 50px;
