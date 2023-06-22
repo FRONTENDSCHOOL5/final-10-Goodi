@@ -21,7 +21,7 @@ export default function Card({
 }) {
   const myaccount_name = useRecoilValue(accountname);
   const temp = useParams();
-
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const account_name = temp.account_name ? temp.account_name : myaccount_name;
   const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
 
@@ -33,9 +33,9 @@ export default function Card({
     <Article>
       <ArticleTop>
         <ProfileUI
-          user_profile={profile}
+          user_profile={BASE_URL + profile}
           user_name={name}
-          user_email={email}
+          user_email={email} 
           card="true"
           account_name={account_name}
         />
