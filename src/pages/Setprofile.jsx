@@ -17,7 +17,7 @@ export default function Setprofile() {
   const [profileSelectedImage, setProfileSelectedImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
-  
+
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -48,7 +48,7 @@ export default function Setprofile() {
   const handleLogin = async (signUpData) => {
     const response = await userAPI(signUpData);
 
-    if (response && response.hasOwnProperty("user")) navigate("/login");
+    if (response && response.hasOwnProperty("user")) navigate("/");
     else {
       const errorMessage =
         response && response.message ? response.message : handleError();
@@ -65,13 +65,13 @@ export default function Setprofile() {
     }
     setUserErrorMessage(errors);
   };
-console.log(signUpData)
+  console.log(signUpData)
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleError();
     await handleLogin(signUpData);
   };
-  
+
   const handleImageChange = async (e) => {
     const { name, value } = e.target;
     if ("file") {
