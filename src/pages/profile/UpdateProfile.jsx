@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import PlusBtnImg from "../../assets/add_button.svg";
 import { useRecoilValue } from 'recoil';
@@ -7,23 +7,33 @@ import PostImageAPI from '../../api/UploadImage';
 import updateProfile from './../../api/updateProfile';
 import { InputBox } from '../../components/common/Input';
 import Button from '../../components/common/Button';
+import profileAPI from '../../api/profile';
 
 export default function UpdateProfile({ profileData, setIsEditing, setProfileData }) {
   // 리코일 값 불러오기
   const token = useRecoilValue(loginToken);
+  console.log("업데이트",profileData)
 
   // 프로필 이미지 업로드
   const [changeImageURL, setChangeImageURL] = useState(profileData.user.image);
+  const [isImageUpload, setIsImageUpload] = useState(false)
   const [userName, setUserName] = useState(profileData.user.username);
   const [intro, setIntro] = useState(profileData.user.intro);
+  const [postChangeImg, setPostChangeImg] = useState({
+    user: {
+      image: changeImageURL
+    }
+  })
 
   // 이미지 fetch
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const handleImageChange = async (e) => {
+    setIsImageUpload(true)
     const file = e.target.files[0];
     const imgSrc = await PostImageAPI(file);
 
     setChangeImageURL(BASE_URL + imgSrc);
+    setIsImageUpload(false)
   };
 
   // 저장 버튼 클릭 시 수정된 API에 데이터 전달
@@ -39,7 +49,7 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
         intro: intro
       },
     };
-
+    
     setProfileData(updatedProfileData);
     updateProfile(updatedProfileData, token);
     setIsEditing(false);
@@ -59,6 +69,16 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
       setIntro(value)
     }
   }
+
+  useEffect(() => {
+    const postImage = async (token) => {
+      const response = await profileAPI(token);
+    };
+
+    if (postChangeImg) {
+      postImage(postChangeImg, token);
+    }
+  }, [postChangeImg]);
 
   return (
     <>
@@ -124,6 +144,7 @@ export default function UpdateProfile({ profileData, setIsEditing, setProfileDat
           padding="14px 0"
           fontSize="16px"
           br="none"
+          disabled={isImageUpload}
         />
       </Form>
     </>

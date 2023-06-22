@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import UpdateProfile from './UpdateProfile';
 import IntroUI from './IntroUI';
 import FollowUI from './FollowUI';
 
-export default function ProfileLeftUI({ profileData, setProfileData }) {
+export default function ProfileLeftUI({ 
+  profileData, 
+  setProfileData,
+  setFetchProfile,
+}) {
   // 프로필 정보 수정
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (!isEditing) {
+      setFetchProfile(true)
+    }
+  }, [isEditing, setFetchProfile])
 
   return (
     <>

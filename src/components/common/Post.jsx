@@ -78,7 +78,7 @@ export default function Post({
     <PostOuter>
       <PostTop>
         <ProfileUI
-          user_profile={BASE_URL + profileImage}
+          user_profile={profileImage}
           user_name={username}
           user_email={email}
           mainprofile={false}

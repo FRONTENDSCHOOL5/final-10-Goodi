@@ -24,8 +24,6 @@ export default function UpdateProfile({ handleSaveClick, profileData, handleInpu
     setIsImageEdit(updateImageUrl);
   }, [updateImageUrl, setIsImageEdit]);
 
-  console.log(BASE_URL + profileSelectedImage);
-
   return (
     <>
       <ProfileDiv>
