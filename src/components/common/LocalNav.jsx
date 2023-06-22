@@ -7,7 +7,6 @@ export default function LocalNav({ lists, ...props }) {
   return (
     <LocalNavBar {...props}>
       {lists.map((el, i) => {
-        console.log(el);
         return (
           <LocalList key={i}>
             <LocalListButton

@@ -11,6 +11,7 @@ export default function Header() {
   const [token, setToken] = useRecoilState(loginToken);
   const [accountName, setAccountName] = useRecoilState(accountname);
   const [followingData, setFollowingData] = useState(null);
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   const navigate = useNavigate();
 
@@ -24,9 +25,7 @@ export default function Header() {
       }
     };
     fetchFollowingData();
-  }, [])
-
-  console.log(followingData);
+  }, []);
 
   return (
     <HeaderLayout>
@@ -36,15 +35,31 @@ export default function Header() {
         </LogoLink>
       </h1>
       <FollowingWrap>
-        {followingData && (
-          followingData.map((data) => {
-            return (
-              <FollowingIcon key={data._id} onClick={() => { navigate(`/profile/${data.accountname}`) }} type="button">
-                <img src={data.image} alt="" />
-              </FollowingIcon>
-            )
-          }).slice(0, 5)
-        )}
+        {followingData &&
+          followingData
+            .map((data) => {
+              return (
+                <FollowingIcon
+                  key={data._id}
+                  onClick={() => {
+                    navigate(`/profile/${data.accountname}`);
+                  }}
+                  type="button"
+                >
+                  <img
+                    src={
+                      data.image.includes("null")
+                        ? BASE_URL + "1687455865316.jpg"
+                        : data.image.includes("http")
+                        ? data.image
+                        : BASE_URL + data.image
+                    }
+                    alt=""
+                  />
+                </FollowingIcon>
+              );
+            })
+            .slice(0, 5)}
       </FollowingWrap>
     </HeaderLayout>
   );
@@ -65,7 +80,7 @@ const HeaderLayout = styled.header`
 const FollowingWrap = styled.div`
   display: flex;
   gap: 12px;
-`
+`;
 
 const LogoLink = styled(Link)`
   display: block;

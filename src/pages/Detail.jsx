@@ -55,8 +55,6 @@ export default function Detail() {
     fetchProductData();
   }, []);
 
-  console.log(productData);
-
   if (loading) {
     return <div>로딩중입니다</div>;
   }

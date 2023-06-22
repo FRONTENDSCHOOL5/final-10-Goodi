@@ -8,7 +8,7 @@ import PostingUI from "../components/common/PostingUI";
 
 //이미지
 import PostBackground from "../assets/post_bg.svg";
-import postUproad from "../assets/post_uproad.svg"
+import postUproad from "../assets/post_uproad.svg";
 
 //API
 import postingAPI from "../api/posting";
@@ -24,7 +24,6 @@ export default function PostPosting() {
   const navigate = useNavigate();
   // 상품 입력 데이터
   const [postProductData, setPostProductData] = useState();
-
 
   // 유저 토큰
   const token = useRecoilValue(loginToken);
@@ -42,15 +41,9 @@ export default function PostPosting() {
   const handlePost = async (ProductData, token) => {
     const response = await postingAPI(ProductData, token);
 
-    if (response.hasOwnProperty("post"))
-      navigate(`/profile/`);
-      console.log(response)
+    if (response.hasOwnProperty("post")) navigate(`/profile/`);
   };
-  
-  //   if (response.hasOwnProperty("post"))
-  //     navigate(`/products/${response.product.id}`);
-  // };
-  
+
   return (
     <Layout reduceTop="true">
       <PostProductWrap>
@@ -73,4 +66,3 @@ const PostProductWrap = styled.div`
   background: url(${PostBackground}) no-repeat #fafafa;
   padding-bottom: 40px;
 `;
-

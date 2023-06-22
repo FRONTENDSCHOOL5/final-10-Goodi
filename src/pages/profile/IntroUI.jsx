@@ -8,7 +8,7 @@ export default function IntroUI({ profileData, setIsEditing }) {
     setIsEditing(true);
   };
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
-  console.log(profileData.user.image);
+
   return (
     <>
       <IntroWrap>
