@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../assets/logo_black.svg";
 import accountname from "../recoil/accountname";
@@ -11,6 +11,8 @@ export default function Header() {
   const [token, setToken] = useRecoilState(loginToken);
   const [accountName, setAccountName] = useRecoilState(accountname);
   const [followingData, setFollowingData] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFollowingData = async () => {
@@ -24,6 +26,8 @@ export default function Header() {
     fetchFollowingData();
   }, [])
 
+  console.log(followingData);
+
   return (
     <HeaderLayout>
       <h1>
@@ -35,7 +39,9 @@ export default function Header() {
         {followingData && (
           followingData.map((data) => {
             return (
-              <FollowingIcon to="/" key={data._id}><img src={data.image} alt="" /></FollowingIcon>
+              <FollowingIcon key={data._id} onClick={() => { navigate(`/profile/${data.accountname}`) }} type="button">
+                <img src={data.image} alt="" />
+              </FollowingIcon>
             )
           }).slice(0, 5)
         )}
@@ -73,9 +79,7 @@ const LogoLink = styled(Link)`
   }
 `;
 
-const FollowingIcon = styled(Link)`
-  display: block;
-  
+const FollowingIcon = styled.button`
   img {
     width: 40px;
     height: 40px;

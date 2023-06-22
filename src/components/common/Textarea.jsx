@@ -5,7 +5,7 @@ export default function Textarea({ ...props }) {
   return (
     <TextareaBoxWrap>
       <TextareaBox {...props}></TextareaBox>
-      <p>({props.textCount.length} / 100)</p>
+      {/* <p>({props.textCount.length} / 100)</p> */}
     </TextareaBoxWrap>
   );
 }

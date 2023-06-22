@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 //component
-import { InputBox } from "../../components/common/Input";
+import { InputBox } from "./Input";
 import Textarea from "./Textarea";
 import Button from "./Button";
 
@@ -12,8 +12,13 @@ import AddIcon from "../../assets/add_button_gray.svg";
 
 // API
 import UploadImage from "../../api/UploadImage";
+import { useNavigate, useParams } from "react-router-dom";
+import productAPI from "../../api/product";
+import { useRecoilValue } from "recoil";
+import loginToken from "../../recoil/loginToken";
+import productPut from "../../api/productPut";
 
-export default function PostUI({
+export default function UpdatePostUI({
   src,
   subtext,
   buttonText,
@@ -21,94 +26,78 @@ export default function PostUI({
   textareaHeight,
   getPostProductData,
 }) {
-  const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [imageWrap, setImageWrap] = useState([]);
-  const [userErrorMessage, setUserErrorMessage] = useState([]);
-  const [productData, setProductData] = useState({
-    product: {
-      itemName: "",
-      price: "", //1원 이상
-      link: "",
-      itemImage: "",
-    },
-  });
+  const token = useRecoilValue(loginToken);
+  // const { product_id } = useParams();
+  const navigate = useNavigate();
+
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
-  // 상품설명 글자수 제한
-  const handleTextCount = (e) => {
-    const textSlice = e.target.value;
-    setDescription(textSlice.slice(0, 100));
-  };
+  const [userErrorMessage, setUserErrorMessage] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  //! 해결해야하는 오류(이미지 교체하면 해당 인덱스로 교체, 해당 타겟 이미지 교체)
-  //* 각 input에 name 값을 줘서 해당 인덱스 값이 넘어오게 하려고 하는데 잘 안됨
-  const handleInputChange = async (e) => {
-    const { name, value } = e.target;
-    if (e.target.type === "file") {
-      const file = e.target.files[0];
+  const [imageWrap, setImageWrap] = useState([]);
+  const [product, setProduct] = useState(null);
+  const [formData, setFormData] = useState({
+    id: '',
+    itemName: '',
+    price: 0,
+    link: '',
+    itemImage: '',
+  });
 
+  useEffect(() => {
+    const fetchProduct = async () => {
       try {
-        setLoading(true);
-        const imgSrc = await UploadImage(file);
-        setImageWrap((prevArray) => {
-          const newArray = [...prevArray];
-          newArray[parseInt(name)] = imgSrc;
-          return newArray;
+        const response = await productAPI(token, "6493b0f8b2cb20566360436e");
+        console.log("리스폰스", response.product);
+        setProduct(response.product);
+        setFormData({
+          id: response.product.id,
+          itemName: response.product.itemName,
+          price: response.product.price,
+          link: response.product.link,
+          itemImage: response.product.itemImage,
         });
-        setLoading(false);
       } catch (error) {
-        setLoading(false);
-        console.error(error);
+        console.error('상품 정보 호출 실패', error);
       }
+    };
 
-      // 대신 맨마지막에 이미지 수정하면 바뀐 이미지는 반영 안됨
-    } else {
-      setProductData((prevState) => ({
-        ...prevState,
-        product: {
-          ...prevState.product,
-          itemImage: imageWrap.join(),
-          [name]: name === "price" ? parseInt(value) : value,
-        },
-      }));
-    }
+    fetchProduct();
+  }, []);
 
-    if (name === "link") {
-      handleTextCount(e);
-    }
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const joinData = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    getPostProductData(productData);
+
+    const updatedProductData = {
+      ...formData,
+      id: formData.id,
+      itemName: formData.itemName,
+      price: formData.price,
+      link: formData.link,
+      itemImage: formData.itemImage,
+
+    };
+
+    setFormData(updatedProductData);
+    productPut("6493b0f8b2cb20566360436e", token, formData);
+
+    navigate(`/products/6493b0f8b2cb20566360436e`)
   };
 
-  const handleError = (e) => {
-    setProductData((prevState) => ({
-      ...prevState,
-      product: {
-        ...prevState.product,
-        itemImage: imageWrap.join(),
-      },
-    }));
-    const errors = [];
-    if (productData.product.itemImage === "") {
-      errors.push("상품이미지를 한개 이상 업로드 해주세요");
-    } else if (
-      productData.product.itemName === "" ||
-      !productData.product.itemName
-    ) {
-      errors.push("상품명을 입력해주세요");
-    } else if (productData.product.price === "" || !productData.product.price) {
-      errors.push("상품가격을 입력해주세요");
-    } else if (productData.product.link === "" || !productData.product.link) {
-      errors.push("상품소개글을 입력해주세요");
-    } else {
-      errors.push("");
-    }
-    setUserErrorMessage(errors);
-  };
+  if (!product) {
+    return <div>로딩중입니다</div>;
+  }
+
+  console.log("폼데이터", formData);
+
 
   return (
     <PostUiWrap>
@@ -116,7 +105,7 @@ export default function PostUI({
       <img src={src} alt="product Upload" />
       <p>{subtext}</p>
 
-      <UploadWrap onSubmit={joinData}>
+      <UploadWrap onSubmit={handleSubmit}>
         <ImagUploadWrap>
           <ThumbnailWrap>
             <input
@@ -202,46 +191,33 @@ export default function PostUI({
         <Line />
 
         <ContentUploadWrap>
-          {showInput && (
-            <>
-              <InputDiv>
-                <Label>상품명</Label>
-                <InputBox
-                  width="100%"
-                  height="48px"
-                  name="itemName"
-                  placeholder="상품명을 입력해주세요"
-                  type="text"
-                  onChange={handleInputChange}
-                  value={productData.product.itemName}
-                  hasError={userErrorMessage.includes("상품명을 입력해주세요")}
-                />
-                {userErrorMessage.includes("상품명을 입력해주세요") && (
-                  <ErrorMassage>상품명을 입력해주세요</ErrorMassage>
-                )}
-              </InputDiv>
 
-              {/* 숫자만 입력, 1 원 이상 100만원 이하 , 숫자 세개마다 콤마 */}
-              <InputDiv>
-                <Label>상품가격</Label>
-                <InputBox
-                  width="100%"
-                  height="48px"
-                  type="number"
-                  placeholder="상품가격을 입력해주세요"
-                  name="price"
-                  value={productData.product.price}
-                  onChange={handleInputChange}
-                  hasError={userErrorMessage.includes(
-                    "상품가격을 입력해주세요"
-                  )}
-                />
-                {userErrorMessage.includes("상품가격을 입력해주세요") && (
-                  <ErrorMassage>상품가격을 입력해주세요</ErrorMassage>
-                )}
-              </InputDiv>
-            </>
-          )}
+          <InputDiv>
+            <Label>상품명</Label>
+            <InputBox
+              width="100%"
+              height="48px"
+              name="itemName"
+              placeholder="상품명을 입력해주세요"
+              type="text"
+              onChange={handleInputChange}
+              value={formData.itemName}
+            />
+          </InputDiv>
+
+          <InputDiv>
+            <Label>상품가격</Label>
+            <InputBox
+              width="100%"
+              height="48px"
+              type="number"
+              placeholder="상품가격을 입력해주세요"
+              name="price"
+              value={formData.price}
+              onChange={handleInputChange}
+            />
+          </InputDiv>
+
 
           <InputDiv>
             <Label>상품 설명</Label>
@@ -249,23 +225,18 @@ export default function PostUI({
               width="100%"
               height="100px"
               placeholder="상품에 대한 설명을 입력해주세요"
-              textCount={description}
-              value={description}
+              textCount={formData.link}
+              value={formData.link}
               onChange={handleInputChange}
               name="link"
-              hasError={userErrorMessage.includes("상품소개글을 입력해주세요")}
             />
-            {userErrorMessage.includes("상품소개글을 입력해주세요") && (
-              <ErrorMassage>상품소개글을 입력해주세요</ErrorMassage>
-            )}
           </InputDiv>
 
           <Button
             type="submit"
             height="56px"
-            text={buttonText}
+            text="상품 게시글 수정하기"
             br="4px"
-            onClick={handleError}
           />
         </ContentUploadWrap>
       </UploadWrap>

@@ -16,6 +16,7 @@ import UploadProductAPI from "../api/UploadProductAPI";
 
 //recoil
 import loginToken from "../recoil/loginToken";
+import UpdatePostUI from "../components/common/UpdatePostUI";
 
 // 작성중 다른곳으로 나가려고 할때 모달
 // 작성 완료시 업로드 할것인지 모달
@@ -58,6 +59,13 @@ export default function PostProduct() {
           showInput={true}
           textareaHeight="100px"
           getPostProductData={getPostProductData}
+        />
+        <UpdatePostUI
+          src={ProductUpload}
+          subtext="상품 수정 입력 폼"
+          buttonText="상품 수정 하기"
+          showInput={true}
+          textareaHeight="100px"
         />
       </PostProductWrap>
     </Layout>

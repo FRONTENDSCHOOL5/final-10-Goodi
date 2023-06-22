@@ -14,9 +14,6 @@ import Button from "../components/common/Button";
 import LikeBtn from "../components/common/LikeBtn";
 import Toast from "../components/common/Toast";
 
-//data
-import ProductData from "../mock/productData";
-
 //image
 import MoneyIcon from "../assets/icon_money_black.svg";
 import DeliveryIcon from "../assets/icon_delivery_dark.svg";
@@ -56,6 +53,8 @@ export default function Detail() {
 
     fetchProductData();
   }, []);
+
+  console.log(productData);
 
   if (loading) {
     return <div>로딩중입니다</div>;
