@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import loginToken from '../../recoil/loginToken';
-import accountname from '../../recoil/accountname';
-import followingAPI from '../../api/following';
-import followerAPI from '../../api/follower';
-import Follow from '../../components/Follow';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import loginToken from "../../recoil/loginToken";
+import accountname from "../../recoil/accountname";
+import followingAPI from "../../api/following";
+import followerAPI from "../../api/follower";
+import Follow from "../../components/Follow";
 
 export default function FollowUI({ profileData }) {
   // 리코일 값 불러오기
@@ -22,7 +22,7 @@ export default function FollowUI({ profileData }) {
   // 팔로워, 팔로잉 활성화
   const handleFollowClick = (followNumber) => {
     setActiveFollow(followNumber);
-    followNumber === 1 ? fetchFollowerData() : fetchFollowingData();
+    // followNumber === 1 ? fetchFollowerData() : fetchFollowingData();
   };
 
   // 팔로워, 팔로잉 API 연동
@@ -53,14 +53,14 @@ export default function FollowUI({ profileData }) {
     <>
       <FollowWrap>
         <FollowDiv
-          className={activeFollow === 1 ? 'followActive' : ''}
+          className={activeFollow === 1 ? "followActive" : ""}
           onClick={() => handleFollowClick(1)}
         >
           <strong>{profileData.user.followerCount}</strong>
           <p>팔로워</p>
         </FollowDiv>
         <FollowDiv
-          className={activeFollow === 2 ? 'followActive' : ''}
+          className={activeFollow === 2 ? "followActive" : ""}
           onClick={() => handleFollowClick(2)}
         >
           <strong>{profileData.user.followingCount}</strong>
@@ -74,7 +74,7 @@ export default function FollowUI({ profileData }) {
         activeFollow={activeFollow}
       />
     </>
-  )
+  );
 }
 
 const FollowWrap = styled.div`
@@ -99,7 +99,7 @@ const FollowWrap = styled.div`
   }
 
   .followActive {
-    background-color: #F4FFF3;
+    background-color: #f4fff3;
     border-radius: 4px;
 
     strong {
