@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import Layout from '../../layout/Layout';
-import loginToken from '../../recoil/loginToken';
-import profileAPI from '../../api/profile';
-import ProfileSkeleton from '../../style/skeletonUI/skeletonPage/ProfileSkeleton';
-import ProfileLeftUI from './ProfileLeftUI';
-import ProfileRightUI from './ProfileRightUI';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import Layout from "../../layout/Layout";
+import loginToken from "../../recoil/loginToken";
+import profileAPI from "../../api/profile";
+import ProfileSkeleton from "../../style/skeletonUI/skeletonPage/ProfileSkeleton";
+import ProfileLeftUI from "./ProfileLeftUI";
+import ProfileRightUI from "./ProfileRightUI";
 
 export default function Profile() {
-  // 리코일 값 불러오기
-  const token = useRecoilValue(loginToken);
-
   // 프로필 정보 불러오기
+  const token = useRecoilValue(loginToken);
   const [profileData, setProfileData] = useState(null);
-
   const [loading, setLoading] = useState(true);
+  const [fetchProfile, setFetchProfile] = useState(true);
 
   // 프로필 정보 불러오기
   useEffect(() => {
@@ -24,15 +22,16 @@ export default function Profile() {
         const response = await profileAPI(token);
         setProfileData(response);
         setLoading(false);
+        setFetchProfile(false);
       } catch (error) {
-        console.error("Account API 에러가 발생했습니다", error);
+        console.error("Profile API 에러가 발생했습니다", error);
       }
     };
-    console.log("프로필",profileData)
-    fetchProfileData();
-  }, []);
 
-  console.log(token);
+    if (fetchProfile) {
+      fetchProfileData();
+    }
+  }, [setFetchProfile, fetchProfile, setProfileData, setLoading]);
 
   return (
     <Layout reduceTop="true">
@@ -45,13 +44,14 @@ export default function Profile() {
               setLoading={setLoading}
               profileData={profileData}
               setProfileData={setProfileData}
+              setFetchProfile={setFetchProfile}
             />
             <ProfileRightUI />
           </>
         )}
       </ProfileWrap>
     </Layout>
-  )
+  );
 }
 
 const ProfileWrap = styled.div`
@@ -65,7 +65,7 @@ const ProfileWrap = styled.div`
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -73,4 +73,4 @@ const ProfileWrap = styled.div`
     height: 330px;
     background: #000;
   }
-`
+`;
