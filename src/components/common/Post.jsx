@@ -9,7 +9,6 @@ import { useRecoilValue } from "recoil";
 import accountname from "../../recoil/accountname";
 import LocalNav from "./LocalNav";
 
-
 const getElapsedTime = (createdAt) => {
   const currentTime = new Date();
   const createdDateTime = new Date(createdAt);
@@ -59,12 +58,11 @@ export default function Post({
 
   const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
 
-
   const getHeartData = () => {
-    setHeartValue(prev => prev += 1);
+    setHeartValue((prev) => (prev += 1));
   };
   const cancleHeartData = () => {
-    setHeartValue(prev => prev -= 1);
+    setHeartValue((prev) => (prev -= 1));
   };
 
   const handleLocalNav = () => {
@@ -90,6 +88,18 @@ export default function Post({
         <button onClick={handleLocalNav}>
           <img src={postMenu} alt="게시글 삭제 및 신고 메뉴" />
         </button>
+        <LocalNavWrap>
+          {isLocalNavOpen ? (
+            <LocalNav
+              lists={[
+                { name: "게시글 수정", nav: "/postposting" },
+                { name: "게시글 삭제", nav: "/postposting" },
+              ]}
+            />
+          ) : (
+            false
+          )}
+        </LocalNavWrap>
       </PostTop>
       <PostContent>
         <div className="p_box">
@@ -100,20 +110,14 @@ export default function Post({
           <span>{elapsedTimeString}</span>
           <div className="like_wrap">
             <span>{heartValue}</span>
-            <PostLikeBtn postId={postId} getHeartData={getHeartData} cancleHeartData={cancleHeartData} />
+            <PostLikeBtn
+              postId={postId}
+              getHeartData={getHeartData}
+              cancleHeartData={cancleHeartData}
+            />
           </div>
         </div>
       </PostContent>
-      {isLocalNavOpen ? (
-        <LocalNav
-          lists={[
-            { name: "게시글 수정", nav: "/postposting" },
-            { name: "게시글 삭제", nav: "/postposting" },
-          ]}
-        />
-      ) : (
-        false
-      )}
     </PostOuter>
   );
 }
@@ -127,8 +131,9 @@ const PostOuter = styled.div`
   width: 100%;
 `;
 const PostTop = styled.div`
+  position: relative;
   display: flex;
-  button {
+  & > button {
     height: 56px;
     cursor: pointer;
   }
@@ -179,4 +184,9 @@ const PostContent = styled.div`
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical; */
   }
+`;
+const LocalNavWrap = styled.div`
+  position: absolute;
+  top: 300%;
+  left: 107%;
 `;
