@@ -34,6 +34,8 @@ export default function CardProduct({ profile }) {
     productGet();
   }, [account_name]);
 
+  console.log(productGetData, account_name);
+
   return (
     <>
       {productGetData === null || productGetData.data === 0 ? (
