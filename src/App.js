@@ -13,6 +13,7 @@ import PostProduct from './pages/PostProduct';
 import PostPosting from './pages/PostPosting';
 import NotFound from './pages/NotFound';
 import UpdatePostUI from './components/common/UpdatePostUI';
+import UpdatePosting from './pages/UpdatePosting';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/postposting" element={<PostPosting />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/product/:product_id" element={<UpdatePostUI />} />
+        <Route path="/uploadPosting/:posting_id" element={<UpdatePosting />} />
       </Routes>
     </BrowserRouter>
   );
