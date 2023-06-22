@@ -59,6 +59,8 @@ const CardLink = styled(Link)`
 `;
 
 const CardContent = styled.div`
+  transition: all 0.3s;
+  
   img {
     width: 100%;
     transition: all 0.3s;
