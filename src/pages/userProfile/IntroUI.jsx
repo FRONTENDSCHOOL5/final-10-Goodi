@@ -9,7 +9,6 @@ export default function IntroUI({ profileData }) {
 
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
-  console.log(profileData.profile.image);
   return (
     <>
       <IntroWrap>

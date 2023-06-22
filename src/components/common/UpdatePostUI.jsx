@@ -38,11 +38,11 @@ export default function UpdatePostUI({
   const [imageWrap, setImageWrap] = useState([]);
   const [product, setProduct] = useState(null);
   const [formData, setFormData] = useState({
-    id: '',
-    itemName: '',
+    id: "",
+    itemName: "",
     price: 0,
-    link: '',
-    itemImage: '',
+    link: "",
+    itemImage: "",
   });
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function UpdatePostUI({
           itemImage: response.product.itemImage,
         });
       } catch (error) {
-        console.error('상품 정보 호출 실패', error);
+        console.error("상품 정보 호출 실패", error);
       }
     };
 
@@ -83,13 +83,12 @@ export default function UpdatePostUI({
       price: formData.price,
       link: formData.link,
       itemImage: formData.itemImage,
-
     };
 
     setFormData(updatedProductData);
     productPut("6493b0f8b2cb20566360436e", token, formData);
 
-    navigate(`/products/6493b0f8b2cb20566360436e`)
+    navigate(`/products/6493b0f8b2cb20566360436e`);
   };
 
   if (!product) {
@@ -97,7 +96,6 @@ export default function UpdatePostUI({
   }
 
   console.log("폼데이터", formData);
-
 
   return (
     <PostUiWrap>
@@ -141,10 +139,10 @@ export default function UpdatePostUI({
             {userErrorMessage.includes(
               "상품이미지를 한개 이상 업로드 해주세요"
             ) && (
-                <ErrorMassage>
-                  상품이미지를 한개 이상 업로드 해주세요
-                </ErrorMassage>
-              )}
+              <ErrorMassage>
+                상품이미지를 한개 이상 업로드 해주세요
+              </ErrorMassage>
+            )}
           </ThumbnailWrap>
 
           <ProductImages>
@@ -191,7 +189,6 @@ export default function UpdatePostUI({
         <Line />
 
         <ContentUploadWrap>
-
           <InputDiv>
             <Label>상품명</Label>
             <InputBox
@@ -217,7 +214,6 @@ export default function UpdatePostUI({
               onChange={handleInputChange}
             />
           </InputDiv>
-
 
           <InputDiv>
             <Label>상품 설명</Label>

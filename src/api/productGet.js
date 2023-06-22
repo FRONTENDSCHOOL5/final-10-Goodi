@@ -1,5 +1,4 @@
 const productGetAPI = async (accountname, token) => {
-  console.log(accountname, token);
   try {
     const productGet_URL = `https://api.mandarin.weniv.co.kr/product/${accountname}`
     const response = await fetch(productGet_URL, {
@@ -11,8 +10,6 @@ const productGetAPI = async (accountname, token) => {
     })
 
     const data = await response.json();
-
-    console.log(data)
 
     return data;
   } catch (error) {

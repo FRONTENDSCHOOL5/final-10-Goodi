@@ -16,7 +16,6 @@ function ProfileUI(props) {
     children,
   } = props;
 
-  console.log(user_profile);
   return (
     <UserProfile
       mainprofile={mainprofile}
@@ -27,14 +26,6 @@ function ProfileUI(props) {
         console.log(e.target);
       }}
     >
-      {/* <img
-src={
-  profileData.profile.image.includes(BASE_URL)
-    ? profileData.profile.image
-    : BASE_URL + profileData.profile.image
-}
-alt="유저 프로필 이미지"
-/> */}
       <img src={user_profile || defaultImage} alt="유저 프로필 이미지" />
       <div>
         <strong>{user_name}</strong>

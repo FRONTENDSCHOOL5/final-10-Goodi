@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -14,7 +14,7 @@ import KakaoIcon from "../assets/kakao.svg";
 
 import loginAPI from "../api/login";
 import { useRecoilState } from "recoil";
-import { loginCheck } from '../recoil/loginCheck';
+import { loginCheck } from "../recoil/loginCheck";
 import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
 
@@ -31,18 +31,18 @@ export default function Login() {
   const [loginData, setLoginData] = useState({
     user: {
       email: "",
-      password: ""
-    }
-  })
+      password: "",
+    },
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setLoginData(prevState => ({
+    setLoginData((prevState) => ({
       ...prevState,
       user: {
         ...prevState.user,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
@@ -60,16 +60,17 @@ export default function Login() {
 
       navigate("/main");
     } else {
-      const errorMessage = (response && response.message) ? response.message : handleError();
+      const errorMessage =
+        response && response.message ? response.message : handleError();
       setErrorMessage(errorMessage);
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleError();
     await handleLogin(loginData);
-  }
+  };
 
   const handleError = () => {
     const errors = [];
@@ -81,13 +82,11 @@ export default function Login() {
       errors.push("");
     }
     setUserErrorMessage(errors);
-  }
+  };
 
   const gotoJoin = () => {
-    navigate('/join');
-  }
-
-  console.log(token);
+    navigate("/join");
+  };
 
   return (
     <OuterDiv>
@@ -107,7 +106,7 @@ export default function Login() {
                 width="432px"
                 height="48px"
                 padding="15px"
-                name='email'
+                name="email"
                 onChange={handleInputChange}
                 value={loginData.user.email}
                 placeholder="이메일을 입력해주세요"
@@ -125,7 +124,7 @@ export default function Login() {
                 height="48px"
                 onChange={handleInputChange}
                 value={loginData.user.password}
-                name='password'
+                name="password"
                 type="password"
                 placeholder="비밀번호를 입력하세요"
                 hasError={userErrorMessage.includes("비밀번호를 입력해주세요")}
@@ -135,9 +134,11 @@ export default function Login() {
                 <ErrorMassage>비밀번호를 입력해주세요</ErrorMassage>
               )}
             </InputDiv>
-            {errorMessage && loginData.user.email && loginData.user.password && (
-              <ErrorMassage>{errorMessage}</ErrorMassage>
-            )}
+            {errorMessage &&
+              loginData.user.email &&
+              loginData.user.password && (
+                <ErrorMassage>{errorMessage}</ErrorMassage>
+              )}
             <ButtonDiv>
               <Button
                 type="submit"
@@ -246,7 +247,7 @@ const ButtonDiv = styled.div`
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     width: 100%;
     height: 1px;
     background-color: var(--gray200-color);
@@ -285,4 +286,4 @@ const ErrorMassage = styled.div`
   margin-top: 10px;
   color: red;
   font-size: 14px;
-`
+`;
