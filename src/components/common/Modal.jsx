@@ -32,6 +32,10 @@ export default function Modal({
       const response = await deletePostAPI(postId, token);
       setCheckDelete((prev) => !prev);
       return response;
+    } else if (e.target.innerText === "상품을 삭제하겠습니다") {
+      const response = await productDeleteAPI(postId, token);
+      setCheckDelete((prev) => !prev);
+      return response;
     } else {
       handleLogout();
     }

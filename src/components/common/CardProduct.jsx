@@ -8,10 +8,14 @@ import loginToken from "../../recoil/loginToken";
 import productGetAPI from "../../api/productGet";
 import { useParams } from "react-router-dom";
 import NoPostsUI from "../NoPostsUI";
+import { checkProfile } from "../../recoil/checkChange";
+import { checkDeletePost } from "../../recoil/checkChange";
 
 export default function CardProduct({ profile }) {
   const token = useRecoilValue(loginToken);
   const myaccount_name = useRecoilValue(accountname);
+  const checkProfileChange = useRecoilValue(checkProfile);
+  const checkDelete = useRecoilValue(checkDeletePost);
 
   const temp = useParams();
 
@@ -30,9 +34,8 @@ export default function CardProduct({ profile }) {
         console.error("Account API 에러가 발생했습니다", error);
       }
     };
-
     productGet();
-  }, [account_name]);
+  }, [account_name, checkProfileChange, checkDelete]);
 
   return (
     <>
@@ -49,8 +52,8 @@ export default function CardProduct({ profile }) {
                   productInfo.author.image.includes("null")
                     ? BASE_URL + "1687455865316.jpg"
                     : productInfo.author.image.includes("http")
-                    ? productInfo.author.image
-                    : BASE_URL + productInfo.author.image
+                      ? productInfo.author.image
+                      : BASE_URL + productInfo.author.image
                 }
                 name={productInfo.author.username}
                 email={productInfo.author.accountname}
