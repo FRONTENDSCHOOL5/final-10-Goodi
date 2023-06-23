@@ -6,8 +6,10 @@ import PostLikeBtn from "./PostLikeBtn";
 
 import postMenu from "../../assets/post_menu.svg";
 import { useRecoilValue } from "recoil";
+import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
 import LocalNav from "./LocalNav";
+import Modal from "./Modal";
 
 const getElapsedTime = (createdAt) => {
   const currentTime = new Date();
@@ -58,6 +60,8 @@ export default function Post({
 
   const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
 
+  const [showModal, setShowModal] = useState(false);
+
   const getHeartData = () => {
     setHeartValue((prev) => (prev += 1));
   };
@@ -67,6 +71,10 @@ export default function Post({
 
   const handleLocalNav = () => {
     setIsLocalNavOpen((prevIsHidden) => !prevIsHidden);
+  };
+
+  const handleModal = () => {
+    setShowModal(!showModal);
   };
 
   const myaccount_name = useRecoilValue(accountname);
@@ -97,11 +105,13 @@ export default function Post({
         <LocalNavWrap>
           {isLocalNavOpen ? (
             <LocalNav
+              // seta={seta}
+              handleModal={handleModal}
               width="120px"
               fontSize="14px"
               lists={[
                 { name: "게시글 수정", nav: `/uploadPosting/${postId}` },
-                { name: "게시글 삭제", nav: "/postposting" },
+                { name: "게시글 삭제", nav: "" },
               ]}
             />
           ) : (
@@ -126,6 +136,18 @@ export default function Post({
           </div>
         </div>
       </PostContent>
+      {showModal && (
+        <Modal
+          postId={postId}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          handleModal={handleModal}
+          text="게시물을 정말 삭제하시겠습니까?"
+          buttonText1="삭제하겠습니다"
+          buttonText2="아니요, 삭제하지 않습니다"
+          showCloseButton={false}
+        />
+      )}
     </PostOuter>
   );
 }

@@ -99,9 +99,9 @@ export default function Navigation() {
           showModal={showModal}
           setShowModal={setShowModal}
           handleModal={handleModal}
-          text="구디 로그아웃?"
-          buttonText1="로그아웃"
-          buttonText2="취소"
+          text="구디를 정말 떠나시겠습니까?"
+          buttonText1="네, 나중에 또 오겠습니다"
+          buttonText2="아니요, 좀 더 있을래요"
           showCloseButton={false}
         />
       )}

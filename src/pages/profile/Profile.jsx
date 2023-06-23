@@ -7,6 +7,7 @@ import profileAPI from "../../api/profile";
 import ProfileSkeleton from "../../style/skeletonUI/skeletonPage/ProfileSkeleton";
 import ProfileLeftUI from "./ProfileLeftUI";
 import ProfileRightUI from "./ProfileRightUI";
+import { checkFollow } from "../../recoil/checkChange";
 
 export default function Profile() {
   // 프로필 정보 불러오기
@@ -14,6 +15,7 @@ export default function Profile() {
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [fetchProfile, setFetchProfile] = useState(true);
+  const checkFollowChange = useRecoilValue(checkFollow);
 
   // 프로필 정보 불러오기
   useEffect(() => {
@@ -29,9 +31,15 @@ export default function Profile() {
     };
     if (fetchProfile) {
       setFetchProfile(false);
-      fetchProfileData()
+      fetchProfileData();
     }
-  }, [setFetchProfile, fetchProfile, setProfileData, setLoading]);
+  }, [
+    setFetchProfile,
+    fetchProfile,
+    setProfileData,
+    setLoading,
+    checkFollowChange,
+  ]);
 
   return (
     <Layout reduceTop="true">

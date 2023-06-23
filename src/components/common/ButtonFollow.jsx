@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 // 컴포넌트
 import Toast from "./Toast";
@@ -12,11 +12,13 @@ import unfollowAPI from "../../api/unfollow";
 // Recoil
 import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
+import { checkFollow } from "../../recoil/checkChange";
 
 export default function ButtonFollow({ isFollow, accountName, padding }) {
   const token = useRecoilValue(loginToken);
   const myAccountName = useRecoilValue(accountname);
   const [toast, setToast] = useState(false);
+  const [checkFollowChange, setCheckFollowChange] = useRecoilState(checkFollow);
 
   // 화면상에서 UI 바로 변경되게 보여주기 위해 필요
   const [isFollowing, setIsFollowing] = useState(false);
@@ -31,6 +33,7 @@ export default function ButtonFollow({ isFollow, accountName, padding }) {
       const response = await followAPI(accountName, token);
       setIsFollowing(true);
       handleCart();
+      setCheckFollowChange((prev) => !prev);
     } catch (error) {
       console.error("API 에러", error);
     }
@@ -47,6 +50,7 @@ export default function ButtonFollow({ isFollow, accountName, padding }) {
       const response = await unfollowAPI(accountName, token);
       setIsFollowing(false);
       handleCart();
+      setCheckFollowChange((prev) => !prev);
     } catch (error) {
       console.error("API 에러", error);
     }
