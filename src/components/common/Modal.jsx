@@ -5,7 +5,10 @@ import { useState, useEffect } from "react";
 import LogoutHandler from "./Logout";
 import { useRecoilState } from "recoil";
 import { loginCheck } from "../../recoil/loginCheck";
-
+import { useRecoilValue } from "recoil";
+import loginToken from "../../recoil/loginToken";
+import productDeleteAPI from "../../api/productDelete";
+import { checkDeletePost } from "../../recoil/checkChange";
 
 export default function Modal({
   text,
@@ -15,10 +18,24 @@ export default function Modal({
   showModal,
   setShowModal,
   handleModal,
+  postId,
   ...props
 }) {
   // const handleLogout = LogoutHandler().handleLogout;
-  const {handleLogout} = LogoutHandler()
+  const token = useRecoilValue(loginToken);
+  const { handleLogout } = LogoutHandler();
+  const [checkDelete, setCheckDelete] = useRecoilState(checkDeletePost);
+
+  const handleClick = async (e) => {
+    if (e.target.innerText === "삭제하겠습니다") {
+      const response = await productDeleteAPI(postId, token);
+      setCheckDelete((prev) => !prev);
+      return response;
+    } else {
+      handleLogout();
+    }
+    handleLogout();
+  };
 
   useEffect(() => {
     // modal이 떠 있을 땐 스크롤 막음
@@ -37,24 +54,14 @@ export default function Modal({
     document.body.style.overflow = "auto";
   };
 
-  const handleModalClick = (e) => {
-    e.stopPropagation();
-  };
-  // const handleLogout = LogoutHandler();
-  // const [isloginCheck, setIsLoginCheck] = useRecoilState(loginCheck);
-  // if (isloginCheck) {
-  //   handleLogout();
-  //   setIsLoginCheck(false);
-  // }
-
   return (
     <>
       <ModalBgDark showModal={showModal} onClick={handleModal}>
-        <ModalBgWhite showModal={showModal} onClick={handleModalClick}>
+        <ModalBgWhite showModal={showModal} onClick={handleModal}>
           <ModalInner>
             <span>{text}</span>
             <div>
-              <Button width="100%" text={buttonText1} onClick={handleLogout} />
+              <Button width="100%" text={buttonText1} onClick={handleClick} />
               <Button
                 width="100%"
                 bg="white"
@@ -88,6 +95,7 @@ const ModalBgDark = styled.div`
 const ModalBgWhite = styled.div`
   width: 378px;
   background-color: white;
+  border-radius: 8px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -109,7 +117,7 @@ const ModalInner = styled.div`
   padding-top: 60px;
   & span {
     display: block;
-    font-size: 18px;
+    font-size: 19px;
     margin-bottom: 30px;
     text-align: center;
 
@@ -119,6 +127,13 @@ const ModalInner = styled.div`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+
+  & > div > button {
+    font-size: 14px;
+    font-family: var(--font--semibold);
+    border-radius: 4px;
+  }
+
   & > div > button:first-child {
     margin-bottom: 16px;
   }
