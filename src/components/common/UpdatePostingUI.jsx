@@ -25,6 +25,7 @@ export default function UpdatePostingUI({
 }) {
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const [imgLoading, setImgLoading] = useState(false);
+  const [userError, setUserError] = useState([]);
 
   // 글자수 자르기
   const handleTextCount = (e) => {
@@ -57,7 +58,7 @@ export default function UpdatePostingUI({
       <img src={src} alt="product Upload" />
       <p>{subtext}</p>
 
-      <UploadWrap>
+      <UploadWrap onSubmit={joinData}>
         <ImagUploadWrap>
           <ThumbnailWrap>
             <input
@@ -142,13 +143,7 @@ export default function UpdatePostingUI({
               count="50"
             />
 
-            <Button
-              type="submit"
-              height="56px"
-              text={buttonText}
-              br="4px"
-              onClick={joinData}
-            />
+            <Button type="submit" height="56px" text={buttonText} br="4px" />
           </InputDiv>
         </ContentUploadWrap>
       </UploadWrap>

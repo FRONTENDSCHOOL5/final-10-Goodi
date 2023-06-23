@@ -2,20 +2,25 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-export default function LocalNav({ lists, ...props }) {
+export default function LocalNav({ lists, handleModal, ...props }) {
   const navigate = useNavigate();
+
   return (
     <LocalNavBar {...props}>
       {lists.map((el, i) => {
         return (
           <LocalList key={i}>
-            <LocalListButton
-              onClick={() => {
-                navigate(el.nav);
-              }}
-            >
-              {el.name}
-            </LocalListButton>
+            {el.nav === "" ? (
+              <LocalListButton onClick={handleModal}>{el.name}</LocalListButton>
+            ) : (
+              <LocalListButton
+                onClick={() => {
+                  navigate(el.nav);
+                }}
+              >
+                {el.name}
+              </LocalListButton>
+            )}
           </LocalList>
         );
       })}
@@ -25,7 +30,6 @@ export default function LocalNav({ lists, ...props }) {
 
 const LocalNavBar = styled.ul`
   width: ${(props) => props.width || "200px"};
-  font-size: ${(props) => props.fontSize || "16px"};
   border-radius: 4px;
   border: 1px solid var(--gray200-color);
   box-sizing: border-box;
