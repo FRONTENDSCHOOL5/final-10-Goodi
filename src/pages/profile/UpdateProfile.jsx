@@ -17,7 +17,6 @@ export default function UpdateProfile({
   // 리코일 값 불러오기
   const token = useRecoilValue(loginToken);
   console.log("업데이트", profileData);
-
   // 프로필 이미지 업로드
   const [changeImageURL, setChangeImageURL] = useState(profileData.user.image);
   const [isImageUpload, setIsImageUpload] = useState(false);
@@ -40,7 +39,7 @@ export default function UpdateProfile({
   };
 
   // 저장 버튼 클릭 시 수정된 API에 데이터 전달
-  const handleSaveClick = (e) => {
+  const handleSaveClick = async (e) => {
     e.preventDefault();
 
     const updatedProfileData = {
@@ -53,9 +52,10 @@ export default function UpdateProfile({
       },
     };
 
-    setProfileData(updatedProfileData);
-    updateProfile(updatedProfileData, token);
-    setIsEditing(false);
+    await setProfileData(updatedProfileData);
+    await updateProfile(updatedProfileData, token);
+    await setIsEditing(false);
+    window.location.reload();
   };
 
   // 프로필 수정 취소 이벤트
