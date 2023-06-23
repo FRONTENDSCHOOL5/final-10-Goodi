@@ -9,10 +9,10 @@ import Layout from "../layout/Layout";
 import DetailImage from "../components/common/DetailImage";
 import ProfileUI from "../components/common/ProfileUI";
 import Count from "../components/common/Count";
-import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import Button from "../components/common/Button";
 import LikeBtn from "../components/common/LikeBtn";
 import Toast from "../components/common/Toast";
+import ButtonFollow from "../components/common/ButtonFollow";
 
 //image
 import MoneyIcon from "../assets/icon_money_black.svg";
@@ -97,7 +97,10 @@ export default function Detail() {
               user_email={productData.author.accountname}
               account_name={account_name}
             />
-            <ButtonLineIcon text="작가 팔로우" />
+            <ButtonFollow
+              isFollow={productData.author.isfollow}
+              accountName={productData.author.accountname}
+            />
           </div>
 
           <h2 className="product_title">{productData.itemName}</h2>
