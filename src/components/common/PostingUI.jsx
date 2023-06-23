@@ -92,9 +92,7 @@ export default function PostingUI({
     }));
     const errors = [];
     if (postingData.post.image === "") {
-      errors.push("게시글 이미지를 한개 이상 업로드 해주세요");
-    } else if (postingData.post.link === "" || !postingData.post.link) {
-      errors.push("게시글 내용을 입력해주세요");
+      errors.push("게시글 이미지를 한개 이상 업로드 해주세요"); 
     } else {
       errors.push("");
     }
@@ -200,12 +198,8 @@ export default function PostingUI({
               value={description}
               onChange={handleInputChange}
               name="content"
-              hasError={userErrorMessage.includes("게시글 내용을 입력해주세요")}
               count="50"
             />
-            {userErrorMessage.includes("게시글 내용을 입력해주세요") && (
-              <ErrorMassage>게시글 내용을 입력해주세요</ErrorMassage>
-            )}
           </InputDiv>
 
           <Button
