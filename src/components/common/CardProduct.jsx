@@ -8,11 +8,13 @@ import loginToken from "../../recoil/loginToken";
 import productGetAPI from "../../api/productGet";
 import { useParams } from "react-router-dom";
 import NoPostsUI from "../NoPostsUI";
+import { checkProfile } from "../../recoil/checkChange";
 import { checkDeletePost } from "../../recoil/checkChange";
 
 export default function CardProduct({ profile }) {
   const token = useRecoilValue(loginToken);
   const myaccount_name = useRecoilValue(accountname);
+  const checkProfileChange = useRecoilValue(checkProfile);
   const checkDelete = useRecoilValue(checkDeletePost);
 
   const temp = useParams();
@@ -33,7 +35,7 @@ export default function CardProduct({ profile }) {
       }
     };
     productGet();
-  }, [account_name, checkDelete]);
+  }, [account_name, checkProfileChange, checkDelete]);
 
   return (
     <>
