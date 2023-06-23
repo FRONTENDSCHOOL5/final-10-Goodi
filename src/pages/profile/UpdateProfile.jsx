@@ -8,6 +8,8 @@ import updateProfile from "./../../api/updateProfile";
 import { InputBox } from "../../components/common/Input";
 import Button from "../../components/common/Button";
 import profileAPI from "../../api/profile";
+import { useRecoilState } from "recoil";
+import { checkProfile } from "../../recoil/checkChange";
 
 export default function UpdateProfile({
   profileData,
@@ -22,11 +24,14 @@ export default function UpdateProfile({
   const [isImageUpload, setIsImageUpload] = useState(false);
   const [userName, setUserName] = useState(profileData.user.username);
   const [intro, setIntro] = useState(profileData.user.intro);
+  const [checkProfileChange, setCheckProfileChange] =
+    useRecoilState(checkProfile);
   const [postChangeImg, setPostChangeImg] = useState({
     user: {
       image: changeImageURL,
     },
   });
+
   // 이미지 fetch
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const handleImageChange = async (e) => {
@@ -39,7 +44,7 @@ export default function UpdateProfile({
   };
 
   // 저장 버튼 클릭 시 수정된 API에 데이터 전달
-  const handleSaveClick = async (e) => {
+  const handleSaveClick = (e) => {
     e.preventDefault();
 
     const updatedProfileData = {
@@ -52,10 +57,11 @@ export default function UpdateProfile({
       },
     };
 
-    await setProfileData(updatedProfileData);
-    await updateProfile(updatedProfileData, token);
-    await setIsEditing(false);
-    window.location.reload();
+    setProfileData(updatedProfileData);
+    updateProfile(updatedProfileData, token);
+    setIsEditing(false);
+    setCheckProfileChange((prev) => !prev);
+    // window.location.reload();
   };
 
   // 프로필 수정 취소 이벤트
@@ -82,6 +88,8 @@ export default function UpdateProfile({
       postImage(postChangeImg, token);
     }
   }, [postChangeImg]);
+
+  console.log("ddd", checkProfileChange);
 
   return (
     <>

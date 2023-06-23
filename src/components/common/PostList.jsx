@@ -9,6 +9,7 @@ import NoPostsUI from "../NoPostsUI";
 import PostListSkeleton from "../../style/skeletonUI/skeletonPage/PostListSkeleton";
 import { useParams } from "react-router-dom";
 import { checkDeletePost } from "../../recoil/checkChange";
+import { checkProfile } from "../../recoil/checkChange";
 
 export default function PostList() {
   const [userPostList, setUserPostList] = useState(null);
@@ -16,6 +17,7 @@ export default function PostList() {
   const token = useRecoilValue(loginToken);
   const myaccount_name = useRecoilValue(accountname);
   const checkDelete = useRecoilValue(checkDeletePost);
+  const checkProfileChange = useRecoilValue(checkProfile);
 
   const temp = useParams();
 
@@ -42,7 +44,7 @@ export default function PostList() {
     };
 
     fetchPostData();
-  }, [account_name, checkDelete]);
+  }, [account_name, checkDelete, checkProfileChange]);
   console.log(userPostList);
 
   if (loading) {
