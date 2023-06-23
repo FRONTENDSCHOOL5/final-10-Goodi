@@ -27,9 +27,9 @@ export default function Profile() {
         console.error("Profile API 에러가 발생했습니다", error);
       }
     };
-
     if (fetchProfile) {
-      fetchProfileData();
+      setFetchProfile(false);
+      fetchProfileData()
     }
   }, [setFetchProfile, fetchProfile, setProfileData, setLoading]);
 
