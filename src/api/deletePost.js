@@ -1,4 +1,4 @@
-const deletePostAPI = async (token, id) => {
+const deletePostAPI = async (id, token) => {
     const DELETEPOST_URL = `https://api.mandarin.weniv.co.kr/post/${id}`
 
     try {

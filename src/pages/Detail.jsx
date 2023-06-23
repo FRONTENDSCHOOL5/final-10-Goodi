@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
 //component
@@ -9,17 +8,17 @@ import Layout from "../layout/Layout";
 import DetailImage from "../components/common/DetailImage";
 import ProfileUI from "../components/common/ProfileUI";
 import Count from "../components/common/Count";
-import ButtonLineIcon from "../components/common/ButtonLineIcon";
 import Button from "../components/common/Button";
 import LikeBtn from "../components/common/LikeBtn";
 import Toast from "../components/common/Toast";
+import ButtonFollow from "../components/common/ButtonFollow";
 
 //image
 import MoneyIcon from "../assets/icon_money_black.svg";
 import DeliveryIcon from "../assets/icon_delivery_dark.svg";
 
 //API
-import ProductAPI from "../api/product";
+import productAPI from "../api/product";
 
 //recoil
 import loginToken from "../recoil/loginToken";
@@ -36,14 +35,14 @@ export default function Detail() {
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   const myaccount_name = useRecoilValue(accountname);
-  const temp = useParams();
-  const account_name = temp.account_name ? temp.account_name : myaccount_name;
+  // const temp = useParams();
+  const account_name = id.account_name ? id.account_name : myaccount_name;
 
   // product 정보 API에서 받아오기
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await ProductAPI(token, id);
+        const response = await productAPI(token, id);
         setProductData(response.product);
         setPrice(response.product.price);
         setLoading(false);
@@ -90,14 +89,17 @@ export default function Detail() {
                 productData.author.image.includes("null")
                   ? BASE_URL + "1687455865316.jpg"
                   : productData.author.image.includes("http")
-                  ? productData.author.image
-                  : BASE_URL + productData.author.image
+                    ? productData.author.image
+                    : BASE_URL + productData.author.image
               }
               user_name={productData.author.username}
               user_email={productData.author.accountname}
               account_name={account_name}
             />
-            <ButtonLineIcon text="작가 팔로우" />
+            <ButtonFollow
+              isFollow={productData.author.isfollow}
+              accountName={productData.author.accountname}
+            />
           </div>
 
           <h2 className="product_title">{productData.itemName}</h2>
