@@ -8,6 +8,7 @@ import accountname from "../../recoil/accountname";
 import postMenu from "../../assets/post_menu.svg";
 import LocalNav from "./LocalNav";
 import { useState } from "react";
+import Modal from "./Modal";
 
 export default function Card({
   profile,
@@ -23,9 +24,14 @@ export default function Card({
   const temp = useParams();
   const account_name = temp.account_name ? temp.account_name : myaccount_name;
   const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleLocalNav = () => {
     setIsLocalNavOpen((prevIsHidden) => !prevIsHidden);
+  };
+
+  const handleModal = () => {
+    setShowModal(!showModal);
   };
 
   return (
@@ -39,14 +45,17 @@ export default function Card({
           account_name={account_name}
         />
         <button onClick={handleLocalNav}>
-          <img src={postMenu} />
+          <img src={postMenu} alt="" />
         </button>
         <LocalNavWrap>
           {isLocalNavOpen ? (
             <LocalNav
+              handleModal={handleModal}
+              width="120px"
+              fontSize="14px"
               lists={[
-                { name: "상품 수정", nav: "/postproduct" },
-                { name: "상품 삭제", nav: "/postproduct" },
+                { name: "상품 수정", nav: `/product/${id}` },
+                { name: "상품 삭제", nav: "" },
               ]}
             />
           ) : (
@@ -66,6 +75,18 @@ export default function Card({
         </CardContent>
       </CardLink>
       <LikeBtn />
+      {showModal && (
+        <Modal
+          postId={id}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          handleModal={handleModal}
+          text="상품을 정말 삭제하시겠습니까?"
+          buttonText1="상품을 삭제하겠습니다"
+          buttonText2="아니요, 삭제하지 않습니다"
+          showCloseButton={false}
+        />
+      )}
     </Article>
   );
 }
