@@ -11,7 +11,6 @@ import Count from "../components/common/Count";
 import Button from "../components/common/Button";
 import LikeBtn from "../components/common/LikeBtn";
 import Toast from "../components/common/Toast";
-import ButtonFollow from "../components/common/ButtonFollow";
 
 //image
 import MoneyIcon from "../assets/icon_money_black.svg";
@@ -53,7 +52,7 @@ export default function Detail() {
 
     fetchProductData();
   }, []);
-
+  console.log(productData);
   if (loading) {
     return <div>로딩중입니다</div>;
   }
@@ -95,10 +94,6 @@ export default function Detail() {
               user_name={productData.author.username}
               user_email={productData.author.accountname}
               account_name={account_name}
-            />
-            <ButtonFollow
-              isFollow={productData.author.isfollow}
-              accountName={productData.author.accountname}
             />
           </div>
 
