@@ -19,6 +19,7 @@ import productAPI from "../api/product";
 import { useRecoilValue } from "recoil";
 import loginToken from "../recoil/loginToken";
 import productPut from "../api/productPut";
+import PostImageAPI from "../api/UploadImage";
 
 export default function UpdateProductUI() {
   const token = useRecoilValue(loginToken);
@@ -51,13 +52,37 @@ export default function UpdateProductUI() {
           link: response.product.link,
           itemImage: response.product.itemImage,
         });
+        setImageWrap(response.product.itemImage.split(","))
       } catch (error) {
         console.error("상품 정보 호출 실패", error);
       }
     };
-
     fetchProduct();
   }, []);
+
+  useEffect(() => {
+    setFormData({ ...formData, itemImage: imageWrap.join(',') })
+  }, [imageWrap])
+
+  const handleChangeImage = async (e) => {
+    const { name } = e.target;
+    const file = e.target.files[0];
+    const imgSrc = await PostImageAPI(file)
+
+    try {
+      setLoading(true);
+      setImageWrap((prevArray) => {
+        const newArray = [...prevArray];
+        newArray[parseInt(name)] = imgSrc;
+        return newArray;
+      });
+      setLoading(false);
+    }
+    catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
+  }
 
   const handleInputChange = (e) => {
     setFormData({
@@ -75,7 +100,7 @@ export default function UpdateProductUI() {
         itemName: formData.itemName,
         price: formData.price,
         link: formData.link,
-        itemImage: formData.itemImage,
+        itemImage: formData.itemImage
       }
     };
 
@@ -87,7 +112,6 @@ export default function UpdateProductUI() {
   if (!product) {
     return <div>로딩중입니다</div>;
   }
-
 
   return (
     <Layout reduceTop="true">
@@ -104,7 +128,7 @@ export default function UpdateProductUI() {
                   type="file"
                   name="0"
                   style={{ display: "none" }}
-                  onChange={handleInputChange}
+                  onChange={handleChangeImage}
                 />
                 <Thumbnail htmlFor="thumbnail">
                   <ThumbnailLabel>
@@ -113,6 +137,7 @@ export default function UpdateProductUI() {
                   {loading ? (
                     <p>Loading...</p>
                   ) : (
+
                     <img
                       src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
                       style={imageWrap[0] ? null : { width: "90px" }}
@@ -128,13 +153,14 @@ export default function UpdateProductUI() {
                   type="file"
                   name="1"
                   style={{ display: "none" }}
-                  onChange={handleInputChange}
+                  onChange={handleChangeImage}
                 />
                 <ProductImage htmlFor="productImageOne">
                   {loading ? (
                     <p>Loading...</p>
                   ) : (
                     <img
+                      name='1'
                       src={imageWrap[1] ? BASE_URL + imageWrap[1] : AddIcon}
                       style={imageWrap[1] ? null : { width: "32px" }}
                       alt=""
@@ -146,6 +172,7 @@ export default function UpdateProductUI() {
                     <p>Loading...</p>
                   ) : (
                     <img
+                      name='2'
                       src={imageWrap[2] ? BASE_URL + imageWrap[2] : AddIcon}
                       style={imageWrap[2] ? null : { width: "32px" }}
                       alt=""
@@ -158,7 +185,7 @@ export default function UpdateProductUI() {
                   type="file"
                   name="2"
                   style={{ display: "none" }}
-                  onChange={handleInputChange}
+                  onChange={handleChangeImage}
                 />
               </ProductImages>
             </ImagUploadWrap>
