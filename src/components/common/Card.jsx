@@ -166,6 +166,6 @@ const ArticleTop = styled.div`
 `;
 const LocalNavWrap = styled.div`
   position: absolute;
-  top: 300%;
-  left: 107%;
+  top: 360%;
+  left: 138%;
 `;
