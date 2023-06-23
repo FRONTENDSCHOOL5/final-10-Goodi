@@ -6,12 +6,15 @@ import accountname from "../recoil/accountname";
 import loginToken from "../recoil/loginToken";
 import followingAPI from "../api/following";
 import { useRecoilState } from "recoil";
+import { checkFollow } from "../recoil/checkChange";
+import { useRecoilValue } from "recoil";
 
 export default function Header() {
   const [token, setToken] = useRecoilState(loginToken);
   const [accountName, setAccountName] = useRecoilState(accountname);
   const [followingData, setFollowingData] = useState(null);
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+  const checkFollowChange = useRecoilValue(checkFollow);
 
   const navigate = useNavigate();
 
@@ -25,7 +28,7 @@ export default function Header() {
       }
     };
     fetchFollowingData();
-  }, []);
+  }, [checkFollowChange]);
 
   return (
     <HeaderLayout>

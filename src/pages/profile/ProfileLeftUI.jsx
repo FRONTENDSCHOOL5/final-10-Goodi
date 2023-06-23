@@ -1,49 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
-import UpdateProfile from './UpdateProfile';
-import IntroUI from './IntroUI';
-import FollowUI from './FollowUI';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import UpdateProfile from "./UpdateProfile";
+import IntroUI from "./IntroUI";
+import FollowUI from "./FollowUI";
+import { useRecoilValue } from "recoil";
+import { checkFollow } from "../../recoil/checkChange";
 
-export default function ProfileLeftUI({ 
-  profileData, 
+export default function ProfileLeftUI({
+  profileData,
   setProfileData,
   setFetchProfile,
 }) {
   // 프로필 정보 수정
   const [isEditing, setIsEditing] = useState(false);
+  const checkFollowChange = useRecoilValue(checkFollow);
 
   useEffect(() => {
     if (!isEditing) {
-      setFetchProfile(true)
+      setFetchProfile(true);
     }
-  }, [isEditing, setFetchProfile])
+  }, [isEditing, setFetchProfile, checkFollowChange]);
 
   return (
     <>
-      {
-        isEditing ? (
-          <ProfileLeft edit="true">
-            <UpdateProfile
-              profileData={profileData}
-              setIsEditing={setIsEditing}
-              setProfileData={setProfileData}
-            />
-          </ProfileLeft>
-        ) :
-          <ProfileLeft>
-            <IntroUI
-              profileData={profileData}
-              setIsEditing={setIsEditing}
-            />
-            <FollowUI
-              profileData={profileData}
-              setIsEditing={setIsEditing}
-              setProfileData={setProfileData}
-            />
-          </ProfileLeft>
-      }
+      {isEditing ? (
+        <ProfileLeft edit="true">
+          <UpdateProfile
+            profileData={profileData}
+            setIsEditing={setIsEditing}
+            setProfileData={setProfileData}
+          />
+        </ProfileLeft>
+      ) : (
+        <ProfileLeft>
+          <IntroUI profileData={profileData} setIsEditing={setIsEditing} />
+          <FollowUI
+            profileData={profileData}
+            setIsEditing={setIsEditing}
+            setProfileData={setProfileData}
+          />
+        </ProfileLeft>
+      )}
     </>
-  )
+  );
 }
 
 const ProfileLeft = styled.section`

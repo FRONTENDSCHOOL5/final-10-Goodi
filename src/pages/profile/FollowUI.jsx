@@ -6,11 +6,13 @@ import accountname from "../../recoil/accountname";
 import followingAPI from "../../api/following";
 import followerAPI from "../../api/follower";
 import Follow from "../../components/Follow";
+import { checkFollow } from "../../recoil/checkChange";
 
 export default function FollowUI({ profileData }) {
   // 리코일 값 불러오기
   const token = useRecoilValue(loginToken);
   const account_name = useRecoilValue(accountname);
+  const checkFollowChange = useRecoilValue(checkFollow);
 
   // 팔로워, 팔로잉 탭
   const [activeFollow, setActiveFollow] = useState(1);
@@ -29,7 +31,7 @@ export default function FollowUI({ profileData }) {
   useEffect(() => {
     fetchFollowingData();
     fetchFollowerData();
-  }, [activeFollow]);
+  }, [activeFollow, checkFollowChange]);
 
   const fetchFollowingData = async () => {
     try {
