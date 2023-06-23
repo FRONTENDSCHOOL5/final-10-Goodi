@@ -12,8 +12,8 @@ import Chat from './pages/Chat';
 import PostProduct from './pages/PostProduct';
 import PostPosting from './pages/PostPosting';
 import NotFound from './pages/NotFound';
-import UpdatePostUI from './components/common/UpdatePostUI';
 import UpdatePosting from './pages/UpdatePosting';
+import UpdateProduct from './pages/UpdateProduct';
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
         <Route path="/postproduct" element={<PostProduct />} />
         <Route path="/postposting" element={<PostPosting />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/product/:product_id" element={<UpdatePostUI />} />
+        <Route path="/product/:product_id" element={<UpdateProduct />} />
         <Route path="/uploadPosting/:posting_id" element={<UpdatePosting />} />
       </Routes>
     </BrowserRouter>

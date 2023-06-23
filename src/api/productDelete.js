@@ -1,6 +1,6 @@
 const productDeleteAPI = async (product_id, token) => {
   try {
-    const productDelete_URL = `https://api.mandarin.weniv.co.kr/post/${product_id}`
+    const productDelete_URL = `https://api.mandarin.weniv.co.kr/product/${product_id}`
     const response = await fetch(productDelete_URL, {
       method: 'DELETE',
       headers: {
