@@ -22,6 +22,7 @@ import productAPI from "../api/product";
 //recoil
 import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
+import DetailSkeleton from "../style/skeletonUI/skeletonPage/DetailSkeleton";
 
 export default function Detail() {
   const { id } = useParams();
@@ -52,10 +53,6 @@ export default function Detail() {
 
     fetchProductData();
   }, []);
-  console.log(productData);
-  if (loading) {
-    return <div>로딩중입니다</div>;
-  }
 
   // 장바구니에 상품 담기 toast
   const handleCart = () => {
@@ -74,86 +71,92 @@ export default function Detail() {
 
   return (
     <Layout>
-      {toast && (
-        <Toast setToast={setToast} text="장바구니에 상품이 담겼습니다." />
+      {loading ? (
+        <DetailSkeleton />
+      ) : (
+        <>
+          {toast && (
+            <Toast setToast={setToast} text="장바구니에 상품이 담겼습니다." />
+          )}
+          <DetailWrap>
+            <DetailImage img={productData.itemImage.split(",")} />
+
+            <ProductDetail>
+              <div className="product_detail_top">
+                <ProfileUI
+                  key={productData.author._id}
+                  user_profile={
+                    productData.author.image.includes("null")
+                      ? BASE_URL + "1687455865316.jpg"
+                      : productData.author.image.includes("http")
+                        ? productData.author.image
+                        : BASE_URL + productData.author.image
+                  }
+                  user_name={productData.author.username}
+                  user_email={productData.author.accountname}
+                  account_name={account_name}
+                />
+              </div>
+
+              <h2 className="product_title">{productData.itemName}</h2>
+              <p className="product_description">{productData.link}</p>
+              <DeliveryDescription>
+                <div className="delivery_date">
+                  <img src={DeliveryIcon} alt="박스 아이콘" />
+                  <h4 className="delivery_price_subtitle">배송 기간</h4>
+                  <p className="delivery_price_text">
+                    지금 주문하면 <strong>3일 이내</strong> 출고 예정 (주말, 공휴일
+                    제외)
+                  </p>
+                </div>
+                <div className="delivery_price">
+                  <img src={MoneyIcon} alt="동전 아이콘" />
+                  <h4 className="delivery_price_subtitle">배송비</h4>
+                  <p className="delivery_price_text">
+                    구디 제품 80,000원 이상 구매시 무료배송
+                    <br />
+                    제주도를 포함한 도서/산간지역은 추가 배송비 3,000원
+                  </p>
+                </div>
+              </DeliveryDescription>
+              <h4 className="product_count_subtitle">수량</h4>
+              <Count
+                price={price}
+                getPrice={getPrice}
+                productPrice={productData.price}
+              />
+              <hr />
+              <ProductPrice>
+                <h4 className="product_price_subtitle">총 결제 금액</h4>
+                <p className="product_price">
+                  <strong>{priceDivide(price)}</strong>원
+                </p>
+              </ProductPrice>
+
+              <ButtonWrap>
+                <LikeBtn />
+
+                <Button
+                  text="장바구니 담기"
+                  className="cart_button"
+                  type="button"
+                  bg="white"
+                  color="var(--black-color)"
+                  onClick={handleCart}
+                />
+
+                <Button
+                  text="구매하고 싶어요"
+                  className="purchase_button"
+                  type="button"
+                  bg="black"
+                  br="none"
+                />
+              </ButtonWrap>
+            </ProductDetail>
+          </DetailWrap>
+        </>
       )}
-      <DetailWrap>
-        <DetailImage img={productData.itemImage.split(",")} />
-
-        <ProductDetail>
-          <div className="product_detail_top">
-            <ProfileUI
-              key={productData.author._id}
-              user_profile={
-                productData.author.image.includes("null")
-                  ? BASE_URL + "1687455865316.jpg"
-                  : productData.author.image.includes("http")
-                    ? productData.author.image
-                    : BASE_URL + productData.author.image
-              }
-              user_name={productData.author.username}
-              user_email={productData.author.accountname}
-              account_name={account_name}
-            />
-          </div>
-
-          <h2 className="product_title">{productData.itemName}</h2>
-          <p className="product_description">{productData.link}</p>
-          <DeliveryDescription>
-            <div className="delivery_date">
-              <img src={DeliveryIcon} alt="박스 아이콘" />
-              <h4 className="delivery_price_subtitle">배송 기간</h4>
-              <p className="delivery_price_text">
-                지금 주문하면 <strong>3일 이내</strong> 출고 예정 (주말, 공휴일
-                제외)
-              </p>
-            </div>
-            <div className="delivery_price">
-              <img src={MoneyIcon} alt="동전 아이콘" />
-              <h4 className="delivery_price_subtitle">배송비</h4>
-              <p className="delivery_price_text">
-                구디 제품 80,000원 이상 구매시 무료배송
-                <br />
-                제주도를 포함한 도서/산간지역은 추가 배송비 3,000원
-              </p>
-            </div>
-          </DeliveryDescription>
-          <h4 className="product_count_subtitle">수량</h4>
-          <Count
-            price={price}
-            getPrice={getPrice}
-            productPrice={productData.price}
-          />
-          <hr />
-          <ProductPrice>
-            <h4 className="product_price_subtitle">총 결제 금액</h4>
-            <p className="product_price">
-              <strong>{priceDivide(price)}</strong>원
-            </p>
-          </ProductPrice>
-
-          <ButtonWrap>
-            <LikeBtn />
-
-            <Button
-              text="장바구니 담기"
-              className="cart_button"
-              type="button"
-              bg="white"
-              color="var(--black-color)"
-              onClick={handleCart}
-            />
-
-            <Button
-              text="구매하고 싶어요"
-              className="purchase_button"
-              type="button"
-              bg="black"
-              br="none"
-            />
-          </ButtonWrap>
-        </ProductDetail>
-      </DetailWrap>
     </Layout>
   );
 }
