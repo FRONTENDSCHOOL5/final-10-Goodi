@@ -1,62 +1,86 @@
-import React from 'react'
-import Layout from '../layout/Layout'
-import styled from 'styled-components'
+import React, { useState, useEffect } from "react";
+import Layout from "../layout/Layout";
+import styled from "styled-components";
+import { useRecoilValue, useRecoilState } from "recoil";
 
-import chatTitle from '../../src/assets/Chat_title.svg'
-import edgeChat from '../../src/assets/point-edge-chat.svg'
-import sampleChat from '../../src/assets/sample-img/sampleChat.png'
+// 이미지
+import edgeChat from "../../src/assets/point-edge-chat.svg";
+import sampleChat from "../../src/assets/sample-img/sampleChat.png";
 
-import ProductData from '../mock/productData'
-import ButtonLineIcon from '../components/common/ButtonLineIcon'
+// 컴포넌트
+import Form from "../components/common/Form";
 
-import Form from '../components/common/Form'
+// API
+import profileAPI from "../api/profile";
+import followingAPI from "../api/following";
+
+// Recoil
+import loginToken from "../recoil/loginToken";
+import accountname from "../recoil/accountname";
+
+// Mock Data
+import chatDummy from "../mock/chatDummy";
 
 export default function Chat(reduceTop) {
-  const chatList = ProductData;
+  const token = useRecoilValue(loginToken);
+  const accountName = useRecoilValue(accountname);
+
+  const [profileData, setProfileData] = useState("");
+  const [followingList, setFollowingList] = useState("");
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await profileAPI(token);
+        const followingData = await followingAPI(accountName, token);
+        setProfileData(response.user);
+        setFollowingList(followingData);
+      } catch (error) {
+        console.log("api에러", error);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+
+  console.log(chatDummy);
 
   return (
     <Layout reduceTop={reduceTop}>
       <ChatWrap>
         <ChatWrapLeft>
-          <h2><img src={chatTitle} alt="채팅 페이지" /></h2>
-          {chatList.map((chat) => {
-            return (
-              <ChatList>
-                <img src={chat.profile} alt="유저 프로필 이미지" />
-                <strong>{chat.name}</strong>
-                <span>2023년 6월 17일</span>
-                <p>{chat.description}</p>
-              </ChatList>
-            )
-          }).slice(0, 4)}
+          {followingList.map((el, i) => {
+            return <ChatUser key={el._id}>{chatDummy[i]}</ChatUser>;
+          })}
         </ChatWrapLeft>
 
         <ChatWrapRight>
           <ChatProfile>
-            <strong>{chatList[0].name}</strong>
-            <p>{chatList[0].email}</p>
-            <ButtonLineIcon
-              text="채팅 나가기"
-              height="34px"
-              color="var(--gray300-color)"
-              basic
-            />
+            <ProileTextWrap>
+              <strong>{profileData.username}</strong>
+              <p>{profileData.accountname}</p>
+            </ProileTextWrap>
+            <ExitButton>채팅 나가기</ExitButton>
           </ChatProfile>
+
+          <ChatContents>
+            <DefaultChat>안녕하세요</DefaultChat>
+          </ChatContents>
+
           <Chatting>
-            {/* 채팅 구현 필요 (이미지 처리 되어있음) */}
-            <img src={sampleChat} alt="" />
             <Form />
           </Chatting>
         </ChatWrapRight>
       </ChatWrap>
     </Layout>
-  )
+  );
 }
 
 const ChatWrap = styled.div`
+  position: relative;
   display: flex;
   min-height: 100%;
-`
+`;
 
 const ChatWrapLeft = styled.section`
   width: 50%;
@@ -80,86 +104,77 @@ const ChatWrapLeft = styled.section`
       vertical-align: bottom;
     }
   }
-`
+`;
 
-const ChatList = styled.section`
-  border-bottom: 1px solid var(--gray200-color);
-  min-height: 70px;
-  padding: 25px 0 15px;
-
-  & > img {
-    width: 60px;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 50%;
-    float: left;
-    margin-right: 20px;
-  } 
-
-  strong {
-    display: inline-block;
-    font-size: 20px;
-    font-family: var(--font--Bold);
-    margin: 10px 0;
-  }
-
-  p {
-    font-size: 16px;
-    font-family: var(--font--Regular);
-    display: inline-block;
-    width: 85%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  span {
-    font-size: 12px;
-    font-family: var(--font--Medium);
-    color: var(--gray300-color);
-    float: right;
-    margin-top: 10px;
-  }
-`
+const ChatUser = styled.section``;
 
 const ChatWrapRight = styled.section`
   width: 50%;
-  background-color: #FAFAFA;
-`
+  background-color: #fafafa;
+`;
 
 const ChatProfile = styled.div`
+  width: 48%;
   background-color: white;
-  padding: 0 60px;
+  padding: 20px 32px;
   border-bottom: 1px solid var(--gray200-color);
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 0.5;
 
+  button {
+    z-index: 1;
+  }
+`;
+
+const ProileTextWrap = styled.div`
   strong {
     font-size: 20px;
     font-family: var(--font--Bold);
-    margin: 10px 0;
   }
 
   p {
-    font-size: 16px;
+    margin-top: 6px;
+    font-size: 15px;
     font-family: var(--font--Regular);
     color: var(--gray400-color);
   }
+`;
 
-  button {
-    grid-area: 1 / 2 / span 2 / 2;
-    margin-top: 15px;
+const ExitButton = styled.button`
+  color: var(--gray400-color);
+  border-radius: 50px;
+  border: 1px solid var(--gray200-color);
+  padding: 8px 16px;
+  font-size: 14px;
+
+  &:hover {
+    background-color: var(--gray50-color);
   }
-`
+`;
+
+const ChatContents = styled.div`
+  margin-top: 120px;
+  height: 500px;
+  padding: 0 32px;
+  /* background-color: violet; */
+  overflow: scroll;
+`;
+
+const DefaultChat = styled.section`
+  background-color: white;
+  display: inline-block;
+  padding: 16px 18px;
+  border-radius: 8px 8px 8px 0;
+  border: 1px solid var(--gray200-color);
+`;
+
 const Chatting = styled.div`
-  padding: 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 100px;
-
-  img {
-    width: 100%;
-  }
-`
+  width: 50%;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+`;
