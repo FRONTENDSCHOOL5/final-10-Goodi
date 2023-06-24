@@ -14,6 +14,7 @@ import PostPosting from './pages/PostPosting';
 import NotFound from './pages/NotFound';
 import UpdatePosting from './pages/UpdatePosting';
 import UpdateProduct from './pages/UpdateProduct';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/*" element={<NotFound />} />
         <Route path="/product/:product_id" element={<UpdateProduct />} />
         <Route path="/uploadPosting/:posting_id" element={<UpdatePosting />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );

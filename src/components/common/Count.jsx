@@ -6,9 +6,8 @@ import { useState } from "react";
 import PlusIcon from "../../assets/icon_plus_black.svg";
 import MinusIcon from "../../assets/icon_minus_black.svg";
 
-export default function Count({ getPrice, price, productPrice, stock }) {
-  // 카운트 수량 관리
-  const [count, setCount] = useState(1);
+export default function Count({ count, setCount, getPrice, price, productPrice, stock }) {
+
 
   // 카운트 증가 함수
   const increaseHandler = () => {
