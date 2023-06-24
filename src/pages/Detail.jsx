@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 //component
 import Layout from "../layout/Layout";
@@ -23,6 +23,7 @@ import productAPI from "../api/product";
 import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
 import DetailSkeleton from "../style/skeletonUI/skeletonPage/DetailSkeleton";
+import { cartItemsState } from "../recoil/cartItemState";
 
 export default function Detail() {
   const { id } = useParams();
@@ -33,6 +34,26 @@ export default function Detail() {
   const [price, setPrice] = useState(0);
   const [toast, setToast] = useState(false);
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+
+  // 카운트 수량 관리
+  const [count, setCount] = useState(1);
+
+  // 장바구니 상태
+  const [cartItem, setCartItem] = useRecoilState(cartItemsState);
+
+  const addToCart = () => {
+    const newItem = {
+      userImage: productData.author.image,
+      userName: productData.author.username,
+      id: productData.id,
+      productName: productData.itemName,
+      productPrice: productData.price,
+      productImage: productData.itemImage.split(",")[0],
+      productCount: count,
+    }
+    setToast(true);
+    setCartItem([...cartItem, newItem]);
+  }
 
   const myaccount_name = useRecoilValue(accountname);
   // const temp = useParams();
@@ -53,11 +74,6 @@ export default function Detail() {
 
     fetchProductData();
   }, []);
-
-  // 장바구니에 상품 담기 toast
-  const handleCart = () => {
-    setToast(true);
-  };
 
   // 카운트 마다 변하는 가격 함수
   const getPrice = (price) => {
@@ -121,6 +137,8 @@ export default function Detail() {
               </DeliveryDescription>
               <h4 className="product_count_subtitle">수량</h4>
               <Count
+                count={count}
+                setCount={setCount}
                 price={price}
                 getPrice={getPrice}
                 productPrice={productData.price}
@@ -142,7 +160,7 @@ export default function Detail() {
                   type="button"
                   bg="white"
                   color="var(--black-color)"
-                  onClick={handleCart}
+                  onClick={addToCart}
                 />
 
                 <Button

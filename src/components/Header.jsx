@@ -54,8 +54,8 @@ export default function Header() {
                       data.image.includes("null")
                         ? BASE_URL + "1687455865316.jpg"
                         : data.image.includes("http")
-                        ? data.image
-                        : BASE_URL + data.image
+                          ? data.image
+                          : BASE_URL + data.image
                     }
                     alt=""
                   />
@@ -103,5 +103,6 @@ const FollowingIcon = styled.button`
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
   }
 `;
