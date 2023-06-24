@@ -61,7 +61,7 @@ export default function Cart() {
                   <CartUserInfo>
                     <img src={item.userImage === BASE_URL + "null" ? defaultImage : item.userImage} alt="" />
                     <strong>{item.userName}</strong>
-                    <button onClick={cartResetButton}><img src={iconClose} alt="상품 삭제 버튼" /></button>
+                    <button onClick={() => removeItem(item.id)}><img src={iconClose} alt="상품 삭제 버튼" /></button>
                   </CartUserInfo>
                   <CartProductInfo>
                     <img src={BASE_URL + item.productImage} alt="" />
@@ -105,6 +105,15 @@ export default function Cart() {
               </ul>
             </OrderInfo>
             <Button disabled={cartItem.length === 0} text="주문서 작성" />
+            <Button
+              disabled={cartItem.length === 0}
+              text="상품 전체 삭제"
+              onClick={cartResetButton}
+              bg="white"
+              color="black"
+              br="1px solid black"
+              padding="16px 0"
+            />
           </CartRightSticky>
         </CartRight>
       </CartWrap>
@@ -257,6 +266,18 @@ const CartRightSticky = styled.div`
   position: sticky;
   right: 0;
   top: 5rem;
+
+  button {
+    &:last-child {
+      margin-top: 18px;
+      transition: all .3s;
+    }
+    &:last-child:hover {
+      background-color: #FF4747;
+      color: white;
+      border: 1px solid #FF4747;
+    }
+  }
 `
 
 const CartRightTitle = styled.h3`
