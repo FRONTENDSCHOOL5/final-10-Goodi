@@ -1,44 +1,54 @@
-import React from 'react'
-import { InputBox } from './Input'
-import styled from 'styled-components'
+import React from "react";
+import { InputBox } from "./Input";
+import styled from "styled-components";
 
-import sendBtn from "../../assets/send_button.svg";
-import sendBtnHover from "../../assets/send_button_hover.svg";
-import { useState } from 'react';
+import sendBtn from "../../assets/icon-send-gray.svg";
+import sendBtnHover from "../../assets/icon-send-black.svg";
+import { useState } from "react";
 
 export default function Form() {
   /* input에 값이 들어왔을 때 버튼 색상 변경 */
   const [hasInput, setHasInput] = useState(false);
+  // const [isHovered, setIsHovered] = useState(false);
+
+  const handleInputChange = (e) => {
+    setHasInput(e.target.value);
+  };
 
   return (
-    <FormStyle>
-      <InputBox
+    <FormLayout>
+      <FormInput
         type="text"
-        width="100%"
-        height="60px"
-        backgroundColor="white"
-        placeholder='메시지를 입력해주세요'
+        placeholder="메시지를 입력해주세요"
+        onChange={handleInputChange}
       />
-      <FormButton />
-    </FormStyle>
-  )
+      <FormButton type="submit" hasInput={hasInput} />
+    </FormLayout>
+  );
 }
 
-const FormStyle = styled.form`
-  position: relative;
-`
+const FormLayout = styled.form`
+  padding: 24px 32px 50px 32px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  border-top: 1px solid var(--gray200-color);
+`;
+
+const FormInput = styled.input`
+  width: 100%;
+  &::placeholder {
+    color: var(--gray300-color);
+  }
+`;
 
 const FormButton = styled.button`
-  position: absolute;
-  right: 15px;
-  top: 10px;
-  background: url(${sendBtn}) no-repeat center center/contain;
-  width: 40px;
-  height: 40px;
+  background: ${({ hasInput }) =>
+    hasInput === ""
+      ? `url(${sendBtn}) no-repeat center center/contain`
+      : `url(${sendBtnHover}) no-repeat center center/contain`};
+  width: 32px;
+  height: 32px;
   transition: all 0.3s;
-
-  /* input에 값이 들어왔을 때 버튼 색상 변경 */
-  &:hover {
-    background: url(${sendBtnHover}) no-repeat center center/contain;
-  }
-`
+`;
