@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../layout/Layout";
-import styled from "styled-components";
-import { useRecoilValue, useRecoilState } from "recoil";
+import styled, { keyframes } from "styled-components";
+import { useRecoilValue } from "recoil";
 
 // 이미지
 import edgeChat from "../../src/assets/point-edge-chat.svg";
-import sampleChat from "../../src/assets/sample-img/sampleChat.png";
+import chatTitle from "../assets/Chat_title.svg";
+import chatDefImage from "../assets/profile_img_def.svg";
+import userDefImage from "../assets/caht-img-def.svg";
 
 // 컴포넌트
 import Form from "../components/common/Form";
+import ChatSkeleton from "../style/skeletonUI/skeletonPage/ChatSkeleton";
+import Toast from "../components/common/Toast";
 
 // API
 import profileAPI from "../api/profile";
@@ -24,10 +28,51 @@ import chatDummy from "../mock/chatDummy";
 export default function Chat(reduceTop) {
   const token = useRecoilValue(loginToken);
   const accountName = useRecoilValue(accountname);
+  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
+  const [toast, setToast] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [profileData, setProfileData] = useState("");
   const [followingList, setFollowingList] = useState("");
 
+  // 활성화하여 채팅할 상대 팔로잉 유저 ID 로 구별
+  const [isActive, setIsActive] = useState("");
+
+  // 상대방이 보낸 채팅 내용 화면에 노출
+  const [chatContnet, setChatContent] = useState("");
+
+  // 인풋창에 현재 입력하고 있는 값
+  const [hasInput, setHasInput] = useState("");
+  const [userImage, setUserImage] = useState("");
+
+  // 내가 보내는 채팅 내용 화면에 노출
+  const [submitChat, setSubmitChat] = useState([]);
+
+  // 채팅 내용 활성화
+  const [isChat, setIsChat] = useState(false);
+
+  // 클릭한 해당 유저 정보가져오기
+  const handleChat = (e) => {
+    const dummyChat = e.currentTarget.dataset.dummyChat;
+    const id = e.currentTarget.dataset.id;
+    const image = e.currentTarget.dataset.image;
+    setSubmitChat([]);
+    setIsActive(id);
+    setChatContent(dummyChat);
+    setUserImage(image);
+    setIsChat(true);
+  };
+
+  // 채팅을 전송하면 화면에 노출
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitChat((prevArray) => [...prevArray, hasInput]);
+    setHasInput("");
+  };
+
+  console.log(followingList.length === 0);
+
+  // 프로필, 팔로잉 데이터 가져오기
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -35,6 +80,7 @@ export default function Chat(reduceTop) {
         const followingData = await followingAPI(accountName, token);
         setProfileData(response.user);
         setFollowingList(followingData);
+        setLoading(false);
       } catch (error) {
         console.log("api에러", error);
       }
@@ -43,32 +89,118 @@ export default function Chat(reduceTop) {
     fetchProfileData();
   }, []);
 
-  console.log(chatDummy);
+  // 채팅을 나가면 해당 채팅 유저 나가짐
+  const handleExit = () => {
+    setFollowingList(followingList.filter((el) => el._id !== isActive));
+    setIsChat(false);
+    setToast(true);
+  };
 
   return (
     <Layout reduceTop={reduceTop}>
+      {toast && <Toast setToast={setToast} text="채팅을 나갔습니다." />}
       <ChatWrap>
-        <ChatWrapLeft>
-          {followingList.map((el, i) => {
-            return <ChatUser key={el._id}>{chatDummy[i]}</ChatUser>;
-          })}
-        </ChatWrapLeft>
-
+        {loading ? (
+          <ChatSkeleton />
+        ) : (
+          <ChatWrapLeft>
+            <h2>
+              <img src={chatTitle} alt="채팅 페이지" />
+            </h2>
+            {followingList.length === 0 ? (
+              <ChatUserNull>
+                <img src={userDefImage} alt="채팅할 상대가 없을시 이미지" />
+                <p>현재 진행중인 채팅이 없어요</p>
+              </ChatUserNull>
+            ) : (
+              <div>
+                {followingList?.map((el, i) => {
+                  {
+                    console.log(chatDummy[i]?.text);
+                  }
+                  return (
+                    <ChatUser
+                      className={isActive === el._id ? "active" : ""}
+                      key={el._id}
+                      onClick={handleChat}
+                      data-dummy-chat={chatDummy[i]?.text}
+                      data-id={el._id}
+                      data-image={el.image}
+                    >
+                      <img
+                        src={
+                          el.image.includes("null")
+                            ? BASE_URL + "1687455865316.jpg"
+                            : el.image && el.image.includes("http")
+                            ? el.image
+                            : BASE_URL + el.image
+                        }
+                        alt="유저 이미지"
+                      />
+                      <ChatText>
+                        <div>
+                          <strong>{el.username}</strong>
+                          <p>{chatDummy[i]?.date}</p>
+                        </div>
+                        <p className="dummy_chat">{chatDummy[i]?.text}</p>
+                      </ChatText>
+                    </ChatUser>
+                  );
+                })}
+              </div>
+            )}
+          </ChatWrapLeft>
+        )}
         <ChatWrapRight>
           <ChatProfile>
             <ProileTextWrap>
               <strong>{profileData.username}</strong>
               <p>{profileData.accountname}</p>
             </ProileTextWrap>
-            <ExitButton>채팅 나가기</ExitButton>
+            {isChat && (
+              <ExitButton onClick={handleExit}>채팅 나가기</ExitButton>
+            )}
           </ChatProfile>
 
-          <ChatContents>
-            <DefaultChat>안녕하세요</DefaultChat>
-          </ChatContents>
+          {isChat ? (
+            <ChatContents>
+              <DefaultChat>
+                {chatContnet && (
+                  <img
+                    src={
+                      userImage.includes("null")
+                        ? BASE_URL + "1687455865316.jpg"
+                        : userImage && userImage.includes("http")
+                        ? userImage
+                        : BASE_URL + userImage
+                    }
+                    alt="채팅 상대 이미지"
+                  />
+                )}
+                {chatContnet && <div>{chatContnet}</div>}
+              </DefaultChat>
+              {submitChat &&
+                submitChat.map((el, i) => {
+                  return (
+                    <SubmitChatWrap>
+                      <SubmitChat key={i}>{el}</SubmitChat>
+                    </SubmitChatWrap>
+                  );
+                })}
+            </ChatContents>
+          ) : (
+            <ChatContentsNull>
+              <img src={chatDefImage} alt="기본 이미지" />
+              <p>채팅할 유저를 선택해주세요!</p>
+            </ChatContentsNull>
+          )}
 
           <Chatting>
-            <Form />
+            <Form
+              hasInput={hasInput}
+              setHasInput={setHasInput}
+              handleSubmit={handleSubmit}
+            />
           </Chatting>
         </ChatWrapRight>
       </ChatWrap>
@@ -84,13 +216,18 @@ const ChatWrap = styled.div`
 
 const ChatWrapLeft = styled.section`
   width: 50%;
-  padding: 0 60px 60px 80px;
   border-right: 1px solid var(--gray200-color);
   box-sizing: border-box;
 
   h2 {
-    margin: 60px 0 30px;
+    width: 140px;
+    margin: 60px 0 20px 80px;
     position: relative;
+    background: url(${chatTitle}) no-repeat cover;
+
+    & img {
+      width: 100%;
+    }
 
     &::before {
       content: "";
@@ -104,9 +241,66 @@ const ChatWrapLeft = styled.section`
       vertical-align: bottom;
     }
   }
+
+  & > div {
+    height: 500px;
+    overflow: scroll;
+  }
 `;
 
-const ChatUser = styled.section``;
+const ChatUser = styled.section`
+  padding: 28px 60px 28px 80px;
+  display: flex;
+  border-bottom: 1px solid var(--gray200-color);
+  align-items: center;
+  gap: 24px;
+  transition: all 0.3s;
+
+  &.active {
+    background-color: #f0ffed;
+  }
+
+  &:hover {
+    background-color: #f0ffed;
+  }
+
+  & img {
+    width: 56px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50px;
+  }
+`;
+
+const ChatText = styled.div`
+  width: 100%;
+  overflow: hidden;
+
+  & div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  & div strong {
+    font-family: var(--font--Bold);
+    font-size: 18px;
+  }
+
+  & div p {
+    color: var(--gray300-color);
+    font-size: 12px;
+  }
+
+  & > p {
+    width: 100%;
+    margin-top: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--gray500-color);
+  }
+`;
 
 const ChatWrapRight = styled.section`
   width: 50%;
@@ -156,20 +350,97 @@ const ExitButton = styled.button`
   }
 `;
 
+const ChatContentsNull = styled.div`
+  margin-top: 200px;
+  text-align: center;
+
+  & img {
+    width: 80px;
+  }
+
+  & p {
+    color: var(--gray300-color);
+    margin-top: 24px;
+  }
+`;
+
+const ChatUserNull = styled.div`
+  margin-top: 120px;
+  text-align: center;
+
+  & img {
+    width: 80px;
+  }
+
+  & p {
+    color: var(--gray300-color);
+    margin-top: 24px;
+  }
+`;
+
 const ChatContents = styled.div`
   margin-top: 120px;
-  height: 500px;
-  padding: 0 32px;
-  /* background-color: violet; */
+  height: 350px;
+  padding: 0 32px 50px 32px;
   overflow: scroll;
+  position: relative;
 `;
 
 const DefaultChat = styled.section`
-  background-color: white;
+  margin-bottom: 48px;
+  display: flex;
+  gap: 16px;
+
+  img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50px;
+    /* aspect-ratio: 1 / 1; */
+    object-fit: cover;
+  }
+
+  & div {
+    max-width: 70%;
+    background-color: white;
+    display: inline-block;
+    padding: 16px 18px;
+    border-radius: 8px 8px 8px 0;
+    border: 1px solid var(--gray200-color);
+    line-height: 1.5;
+  }
+`;
+
+const SubmitChatWrap = styled.section`
+  flex-direction: row-reverse;
+  display: flex;
+  position: relative;
+  transform: translateX(1000px);
+  animation: translate ease 0.6s forwards;
+
+  & + & {
+    margin-top: 16px;
+  }
+
+  @keyframes translate {
+    from {
+      transform: translateY(1000px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+`;
+
+const SubmitChat = styled.div`
+  max-width: 70%;
+  background-color: var(--dark-sub-color);
   display: inline-block;
   padding: 16px 18px;
-  border-radius: 8px 8px 8px 0;
-  border: 1px solid var(--gray200-color);
+  border-radius: 8px 8px 0 8px;
+  color: white;
+  line-height: 1.5;
 `;
 
 const Chatting = styled.div`
