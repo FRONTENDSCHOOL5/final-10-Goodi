@@ -6,9 +6,9 @@ import sendBtn from "../../assets/icon-send-gray.svg";
 import sendBtnHover from "../../assets/icon-send-black.svg";
 import { useState } from "react";
 
-export default function Form() {
+export default function Form({ hasInput, setHasInput, handleSubmit }) {
   /* input에 값이 들어왔을 때 버튼 색상 변경 */
-  const [hasInput, setHasInput] = useState(false);
+  // const [hasInput, setHasInput] = useState("");
   // const [isHovered, setIsHovered] = useState(false);
 
   const handleInputChange = (e) => {
@@ -16,11 +16,12 @@ export default function Form() {
   };
 
   return (
-    <FormLayout>
+    <FormLayout onSubmit={handleSubmit}>
       <FormInput
         type="text"
         placeholder="메시지를 입력해주세요"
         onChange={handleInputChange}
+        value={hasInput}
       />
       <FormButton type="submit" hasInput={hasInput} />
     </FormLayout>
@@ -51,4 +52,5 @@ const FormButton = styled.button`
   width: 32px;
   height: 32px;
   transition: all 0.3s;
+  cursor: pointer;
 `;
