@@ -16,32 +16,25 @@ export default function Cart() {
 
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
+
+
   const removeItem = (itemId) => {
     const updatedItems = cartItem.filter(item => item.id !== itemId);
     setCartItem(updatedItems);
   };
 
-  const updateQuantity = (itemId, newQuantity) => {
-    const updatedItems = cartItem.map(item => {
-      if (item.id === itemId) {
-        return { ...item, quantity: newQuantity };
-      }
-      return item;
-    });
-    setCartItem(updatedItems);
+  const calculateTotalCount = () => {
+    return cartItem.reduce((total, item) => total + item.productCount, 0);
   };
 
-  // const calculateTotal = () => {
-  //   return cartItem.reduce((total, item) => total + (item.productPrice * item.productCount), 0);
-  // };
+  const calculateTotalPrice = () => {
+    return cartItem.reduce((total, item) => total + (item.productPrice * item.productCount), 0);
+  };
 
   const cartRest = useResetRecoilState(cartItemsState);
   const cartResetButton = () => {
     cartRest();
   };
-
-  console.log(cartItem);
-  console.log(cartItem.itemImage);  // 사진 없으면 undefined
 
   return (
     <Layout reduceTop="true">
@@ -88,11 +81,11 @@ export default function Cart() {
               <ul>
                 <li>
                   <span>총 수량</span>
-                  <span>0개</span>
+                  <span>{calculateTotalCount()} 개</span>
                 </li>
                 <li>
                   <span>총 상품금액</span>
-                  <span>0원</span>
+                  <span>{calculateTotalPrice()} 원</span>
                 </li>
                 <li>
                   <span>총 배송비</span>
@@ -100,7 +93,7 @@ export default function Cart() {
                 </li>
                 <li>
                   <strong>총 주문금액</strong>
-                  <strong>0원</strong>
+                  <strong>{calculateTotalPrice()} 원</strong>
                 </li>
               </ul>
             </OrderInfo>
@@ -276,6 +269,11 @@ const CartRightSticky = styled.div`
       background-color: #FF4747;
       color: white;
       border: 1px solid #FF4747;
+    }
+    &:last-child:disabled {
+      color: white;
+      border: 1px solid var(--gray100-color);
+      pointer-events: none;
     }
   }
 `
