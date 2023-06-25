@@ -51,8 +51,21 @@ export default function Detail() {
       productImage: productData.itemImage.split(",")[0],
       productCount: count,
     }
+
     setToast(true);
-    setCartItem([...cartItem, newItem]);
+
+    const existingItem = cartItem.find((cartItem) => cartItem.id === newItem.id);
+
+    if (existingItem) {
+      // 이미 장바구니에 있는 상품인 경우
+      const updatedItems = cartItem.map((cartItem) =>
+        cartItem.id === newItem.id ? { ...cartItem, productCount: cartItem.productCount + count } : cartItem
+      );
+      setCartItem(updatedItems);
+    } else {
+      // 장바구니에 없는 상품인 경우
+      setCartItem([...cartItem, newItem]);
+    }
   }
 
   const myaccount_name = useRecoilValue(accountname);

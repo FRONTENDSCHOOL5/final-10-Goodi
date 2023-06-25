@@ -15,8 +15,11 @@ import HomeIcon from "../assets/icon_home_active.svg";
 import LocalNav from "./common/LocalNav";
 import Modal from "./common/Modal";
 import Search from "./common/Search";
+import { useRecoilValue } from "recoil";
+import { cartItemsState } from "../recoil/cartItemState";
 
 export default function Navigation() {
+  const cartItem = useRecoilValue(cartItemsState);
   const navigate = useNavigate();
   const icons = [
     { name: "Search", image: SearchIcon, nav: "" },
@@ -37,6 +40,7 @@ export default function Navigation() {
   const handleLocalNav = () => {
     setIsHidden((prevIsHidden) => !prevIsHidden);
   };
+
   const handleModal = () => {
     setShowModal(!showModal);
   };
@@ -64,6 +68,8 @@ export default function Navigation() {
     };
   }, []);
 
+  console.log(cartItem);
+
   return (
     <NavigationLayout id="navigation">
       {icons.map((el, i) => {
@@ -81,6 +87,9 @@ export default function Navigation() {
             <img src={el.image} alt={el.name} />
             <p className={i === 0 ? "a11y-hidden" : ""}>{el.name}</p>
             {el.name === "Post" && isHidden && <ActiveBar />}
+            {el.name === "Cart" && (
+              <div><span>{cartItem.length}</span></div>
+            )}
           </NavList>
         );
       })}
@@ -166,6 +175,25 @@ const NavList = styled.button`
     background-color: #f0ffed;
     transition: all 0.3s;
     color: var(--dark-sub-color);
+  }
+
+  div {
+    position: relative;
+  }
+
+  span {
+    position: absolute;
+    top: -51px;
+    right: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    background-color: var(--main-color);
+    color: #fff;
+    font-size: 12px;
+    border-radius: 50%;
   }
 `;
 
