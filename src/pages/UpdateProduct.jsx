@@ -127,12 +127,6 @@ export default function UpdateProductUI() {
     navigate(`/products/${product_id}`);
   };
 
-  if (!product) {
-    return <div>로딩중입니다</div>;
-  }
-
-  console.log(formData);
-
   return (
     <Layout reduceTop="true">
       <PostProductWrap>
