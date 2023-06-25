@@ -29,6 +29,7 @@ export default function UpdateProductUI() {
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   const [loading, setLoading] = useState(false);
+  const [userErrorMessage, setUserErrorMessage] = useState([]);
 
   const [imageWrap, setImageWrap] = useState([]);
   const [product, setProduct] = useState(null);
@@ -94,6 +95,23 @@ export default function UpdateProductUI() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const errors = [];
+    if (formData.itemName === "" || !formData.itemName) {
+      errors.push("상품명을 입력해주세요");
+    }
+    if (formData.price === "" || !formData.price) {
+      errors.push("상품가격을 입력해주세요");
+    }
+    if (formData.link === "" || !formData.link) {
+      errors.push("상품소개글을 입력해주세요");
+    }
+    setUserErrorMessage(errors);
+
+    if (errors.length > 0) {
+      setUserErrorMessage(errors);
+      return;
+    }
+
     const updatedProductData = {
       product: {
         id: formData.id,
@@ -112,6 +130,8 @@ export default function UpdateProductUI() {
   if (!product) {
     return <div>로딩중입니다</div>;
   }
+
+  console.log(formData);
 
   return (
     <Layout reduceTop="true">
@@ -203,7 +223,11 @@ export default function UpdateProductUI() {
                   type="text"
                   onChange={handleInputChange}
                   value={formData.itemName}
+                  hasError={userErrorMessage.includes("상품명을 입력해주세요")}
                 />
+                {userErrorMessage.includes("상품명을 입력해주세요") && (
+                  <ErrorMassage>상품명을 입력해주세요</ErrorMassage>
+                )}
               </InputDiv>
 
               <InputDiv>
@@ -216,7 +240,13 @@ export default function UpdateProductUI() {
                   name="price"
                   value={formData.price}
                   onChange={handleInputChange}
+                  hasError={userErrorMessage.includes(
+                    "상품가격을 입력해주세요"
+                  )}
                 />
+                {userErrorMessage.includes("상품가격을 입력해주세요") && (
+                  <ErrorMassage>상품가격을 입력해주세요</ErrorMassage>
+                )}
               </InputDiv>
 
               <InputDiv>
@@ -229,7 +259,11 @@ export default function UpdateProductUI() {
                   value={formData.link}
                   onChange={handleInputChange}
                   name="link"
+                  hasError={userErrorMessage.includes("상품소개글을 입력해주세요")}
                 />
+                {userErrorMessage.includes("상품소개글을 입력해주세요") && (
+                  <ErrorMassage>상품소개글을 입력해주세요</ErrorMassage>
+                )}
               </InputDiv>
 
               <Button
