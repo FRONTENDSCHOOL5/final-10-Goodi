@@ -54,9 +54,7 @@ export default function Post({
 }) {
   const elapsedTimeString = getElapsedTime(createdAt);
   const [heartValue, setHeartValue] = useState(heartCount);
-
   const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
-
   const [showModal, setShowModal] = useState(false);
 
   const getHeartData = () => {
