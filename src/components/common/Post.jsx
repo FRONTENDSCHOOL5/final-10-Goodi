@@ -28,16 +28,13 @@ const getElapsedTime = (createdAt) => {
 
   let elapsedTimeString = "";
   if (days > 0) {
-    elapsedTimeString += `${days}일 `;
-  }
-  if (hours > 0) {
-    elapsedTimeString += `${hours}시간 `;
-  }
-  if (minutes > 0) {
-    elapsedTimeString += `${minutes}분 `;
-  }
-  if (seconds > 0) {
-    elapsedTimeString += `${seconds}초`;
+    elapsedTimeString += `${days}일 전`;
+  } else if (hours > 0) {
+    elapsedTimeString += `${hours}시간 전`;
+  } else if (minutes > 0) {
+    elapsedTimeString += `${minutes}분 전`;
+  } else {
+    elapsedTimeString += `${seconds}초 전`;
   }
 
   return elapsedTimeString;
