@@ -72,7 +72,7 @@ export default function Main() {
 
 const MainWrap = styled.div`
   display: grid;
-  grid-template-columns: 0.8fr 0.1fr 1fr;
+  grid-template-columns: 0.7fr 0.1fr 1fr;
   grid-template-rows: auto;
 `;
 

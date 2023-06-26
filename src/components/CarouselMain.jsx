@@ -115,7 +115,7 @@ export default function CarouselMain() {
   const intergratedData = [
     CarouselImg1,
     CarouselImg3,
-    CarouselImg5,
+    // CarouselImg5,
     CarouselImg6,
   ];
 
@@ -143,7 +143,7 @@ export default function CarouselMain() {
         <Outer>
         <CarouselContainer>
           {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={activeIndex % 4}>
+            <SlideImgs key={index * 10} index={activeIndex % 3}>
               <img src={el} alt={`${index}번 슬라이드`} />
             </SlideImgs>
           ))}
@@ -152,7 +152,7 @@ export default function CarouselMain() {
         <Outer>
         <CarouselContainer>
           {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={(activeIndex + 1) % 4}>
+            <SlideImgs key={index * 10} index={(activeIndex + 1) % 3}>
               <img src={el} alt={`${index}번 슬라이드`} />
             </SlideImgs>
           ))}
@@ -161,13 +161,13 @@ export default function CarouselMain() {
         <Outer>
         <CarouselContainer>
           {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={(activeIndex + 2) % 4}>
+            <SlideImgs key={index * 10} index={(activeIndex + 2) % 3}>
               <img src={el} alt={`${index}번 슬라이드`} />
             </SlideImgs>
           ))}
         </CarouselContainer>
         </Outer>
-        <Outer>
+        {/* <Outer>
         <CarouselContainer>
           {intergratedData.map((el, index) => (
             <SlideImgs key={index * 10} index={(activeIndex + 3) % 4}>
@@ -175,7 +175,7 @@ export default function CarouselMain() {
             </SlideImgs>
           ))}
         </CarouselContainer>
-        </Outer>
+        </Outer> */}
       </div>
     </section>
   );
