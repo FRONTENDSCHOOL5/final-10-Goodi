@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 //component
@@ -34,6 +34,8 @@ export default function Detail() {
   const [productData, setProductData] = useState("");
   const [price, setPrice] = useState(0);
   const [toast, setToast] = useState(false);
+
+  const navigate = useNavigate();
 
   // 카운트 수량 관리
   const [count, setCount] = useState(1);
@@ -176,6 +178,7 @@ export default function Detail() {
                   type="button"
                   bg="black"
                   br="none"
+                  onClick={() => navigate('/chat')}
                 />
               </ButtonWrap>
             </ProductDetail>
