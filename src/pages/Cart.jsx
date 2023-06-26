@@ -28,12 +28,19 @@ export default function Cart() {
   };
 
   const calculateTotalPrice = () => {
-    return cartItem.reduce((total, item) => total + (item.productPrice * item.productCount), 0);
+    const priceComma = cartItem.reduce((total, item) => total + (item.productPrice * item.productCount), 0);
+    return priceDivide(priceComma);
   };
 
   const cartRest = useResetRecoilState(cartItemsState);
   const cartResetButton = () => {
     cartRest();
+  };
+
+  // 숫자 세자리 수마다 컴마 찍어주는 함수
+  const priceDivide = (price) => {
+    return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+
   };
 
   return (
@@ -52,7 +59,16 @@ export default function Cart() {
               {cartItem.map((item) => (
                 <CartProductItem key={item.id}>
                   <CartUserInfo>
-                    <img src={item.userImage === BASE_URL + "null" ? defaultImage : item.userImage} alt="" />
+                    <img
+                      src={
+                        item.userImage.includes("null")
+                          ? BASE_URL + "1687455865316.jpg"
+                          : item.userImage && item.userImage.includes("http")
+                            ? item.userImage
+                            : BASE_URL + item.userImage
+                      }
+                      alt="유저 이미지"
+                    />
                     <strong>{item.userName}</strong>
                     <button onClick={() => removeItem(item.id)}><img src={iconClose} alt="상품 삭제 버튼" /></button>
                   </CartUserInfo>
@@ -61,9 +77,9 @@ export default function Cart() {
                     <CartProductDesc>
                       <p>No. {item.id}</p>
                       <strong>{item.productName}</strong>
-                      <p>{item.productPrice} 원</p>
+                      <p>{priceDivide(item.productPrice)} 원</p>
                       <CartProductTotal>
-                        <strong>{item.productPrice * item.productCount} 원</strong>
+                        <strong>{priceDivide(item.productPrice * item.productCount)} 원</strong>
                         <span>수량 {item.productCount}개</span>
                       </CartProductTotal>
                     </CartProductDesc>
@@ -97,7 +113,7 @@ export default function Cart() {
                 </li>
               </ul>
             </OrderInfo>
-            <Button disabled={cartItem.length === 0} text="주문서 작성" />
+            <Button disabled={cartItem.length === 0} text="구매하고 싶어요" />
             <Button
               disabled={cartItem.length === 0}
               text="상품 전체 삭제"
