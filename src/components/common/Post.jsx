@@ -10,6 +10,7 @@ import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
 import LocalNav from "./LocalNav";
 import Modal from "./Modal";
+import checkImageUrl from "./checkImageUrl";
 
 const getElapsedTime = (createdAt) => {
   const currentTime = new Date();
@@ -73,7 +74,6 @@ export default function Post({
   };
 
   const myaccount_name = useRecoilValue(accountname);
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const temp = useParams();
   const account_name = temp.account_name ? temp.account_name : myaccount_name;
 
@@ -81,13 +81,7 @@ export default function Post({
     <PostOuter>
       <PostTop>
         <ProfileUI
-          user_profile={
-            profileImage.includes("null")
-              ? BASE_URL + "1687455865316.jpg"
-              : profileImage.includes("http")
-              ? profileImage
-              : BASE_URL + profileImage
-          }
+          user_profile={checkImageUrl(profileImage, 'profile')}
           user_name={username}
           user_email={email}
           mainprofile={false}

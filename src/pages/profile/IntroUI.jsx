@@ -1,25 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import ButtonLineIcon from "../../components/common/ButtonLineIcon";
+import checkImageUrl from "../../components/common/checkImageUrl";
 
 export default function IntroUI({ profileData, setIsEditing }) {
   // 프로필 수정 버튼 이벤트
   const handleEditClick = () => {
     setIsEditing(true);
   };
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   return (
     <>
       <IntroWrap>
         <img
-          src={
-            profileData.user.image.includes("null")
-              ? BASE_URL + "1687455865316.jpg"
-              : profileData.user.image.includes("http")
-              ? profileData.user.image
-              : BASE_URL + profileData.user.image
-          }
+          src={checkImageUrl(profileData.user.image, 'profile')}
           alt="유저 프로필 이미지"
         />
         <strong>{profileData.user.username}</strong>

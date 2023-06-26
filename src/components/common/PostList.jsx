@@ -4,12 +4,13 @@ import styled from "styled-components";
 import postAPI from "../../api/post";
 import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import NoPostsUI from "../NoPostsUI";
 import PostListSkeleton from "../../style/skeletonUI/skeletonPage/PostListSkeleton";
 import { useParams } from "react-router-dom";
 import { checkDeletePost } from "../../recoil/checkChange";
 import { checkProfile } from "../../recoil/checkChange";
+import checkImageUrl from "./checkImageUrl";
 
 export default function PostList({ account }) {
   const [userPostList, setUserPostList] = useState(null);
@@ -21,8 +22,6 @@ export default function PostList({ account }) {
 
   const temp = useParams();
   const account_name = account ? account : temp.account_name ? temp.account_name : myaccount_name;
-
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   const updateHeartCount = (postId, count) => {
     setUserPostList((prevPosts) =>
@@ -39,11 +38,11 @@ export default function PostList({ account }) {
           token,
           accountname: account_name,
         });
-  
+
         if (response.post) {
           setUserPostList(response.post);
         }
-  
+
         setLoading(false);
       } catch (error) {
         // 오류 처리
@@ -51,9 +50,9 @@ export default function PostList({ account }) {
         setLoading(false); // 오류 발생 시 로딩 상태 변경
       }
     };
-  
+
     fetchPostData(); // fetchPostData 함수 호출
-  
+
     // 의존성 배열에 account_name을 추가하여 account_name이 변경될 때마다 useEffect를 호출하도록 설정
   }, [account_name, checkDelete, checkProfileChange]);
 
@@ -70,7 +69,7 @@ export default function PostList({ account }) {
               profileImage={post.author.image}
               email={post.author.accountname}
               content={post.content}
-              image={BASE_URL + post.image.split(",")[0]}
+              image={checkImageUrl(post.image.split(",")[0], 'post')}
               createdAt={post.createdAt}
               hearted={post.hearted}
               heartCount={post.heartCount}

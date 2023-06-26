@@ -24,11 +24,11 @@ import accountname from "../recoil/accountname";
 
 // Mock Data
 import chatDummy from "../mock/chatDummy";
+import checkImageUrl from "../components/common/checkImageUrl";
 
 export default function Chat(reduceTop) {
   const token = useRecoilValue(loginToken);
   const accountName = useRecoilValue(accountname);
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   const [toast, setToast] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -128,13 +128,7 @@ export default function Chat(reduceTop) {
                       data-image={el.image}
                     >
                       <img
-                        src={
-                          el.image.includes("null")
-                            ? BASE_URL + "1687455865316.jpg"
-                            : el.image && el.image.includes("http")
-                            ? el.image
-                            : BASE_URL + el.image
-                        }
+                        src={checkImageUrl(el.image, 'profile')}
                         alt="유저 이미지"
                       />
                       <ChatText>
@@ -168,11 +162,7 @@ export default function Chat(reduceTop) {
                 {chatContnet && (
                   <img
                     src={
-                      userImage.includes("null")
-                        ? BASE_URL + "1687455865316.jpg"
-                        : userImage && userImage.includes("http")
-                        ? userImage
-                        : BASE_URL + userImage
+                      checkImageUrl(userImage, 'profile')
                     }
                     alt="채팅 상대 이미지"
                   />

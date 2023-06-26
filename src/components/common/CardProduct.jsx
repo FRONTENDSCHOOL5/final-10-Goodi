@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import NoPostsUI from "../NoPostsUI";
 import { checkProfile } from "../../recoil/checkChange";
 import { checkDeletePost } from "../../recoil/checkChange";
+import checkImageUrl from "./checkImageUrl";
 
 export default function CardProduct({ profile }) {
   const token = useRecoilValue(loginToken);
@@ -49,15 +50,11 @@ export default function CardProduct({ profile }) {
                 key={productInfo.id}
                 id={productInfo.id}
                 profile={
-                  productInfo.author.image.includes("null")
-                    ? BASE_URL + "1687455865316.jpg"
-                    : productInfo.author.image.includes("http")
-                      ? productInfo.author.image
-                      : BASE_URL + productInfo.author.image
+                  checkImageUrl(productInfo.author.image, 'profile')
                 }
                 name={productInfo.author.username}
                 email={productInfo.author.accountname}
-                img={BASE_URL + productInfo.itemImage.split(",")[0]}
+                img={checkImageUrl(BASE_URL + productInfo.itemImage.split(",")[0], 'post')}
                 title={productInfo.itemName}
                 description={productInfo.link}
                 price={productInfo.price}

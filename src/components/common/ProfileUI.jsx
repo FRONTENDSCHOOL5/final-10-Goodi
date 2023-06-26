@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import defaultImage from "../../assets/profile_img_def.svg";
 
 function ProfileUI(props) {
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const {
     user_profile,
     user_name,

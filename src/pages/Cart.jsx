@@ -7,16 +7,14 @@ import Button from '../components/common/Button';
 import Layout from '../layout/Layout';
 
 import cartNullIcon from "../assets/cart_null_icon.svg"
-import defaultImage from "../assets/profile_img_def.svg";
 import iconClose from "../assets/icon_close.svg";
+import checkImageUrl from '../components/common/checkImageUrl';
 
 
 export default function Cart() {
   const [cartItem, setCartItem] = useRecoilState(cartItemsState);
 
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
-
-
 
   const removeItem = (itemId) => {
     const updatedItems = cartItem.filter(item => item.id !== itemId);
@@ -40,7 +38,6 @@ export default function Cart() {
   // 숫자 세자리 수마다 컴마 찍어주는 함수
   const priceDivide = (price) => {
     return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
-
   };
 
   return (
@@ -60,20 +57,14 @@ export default function Cart() {
                 <CartProductItem key={item.id}>
                   <CartUserInfo>
                     <img
-                      src={
-                        item.userImage.includes("null")
-                          ? BASE_URL + "1687455865316.jpg"
-                          : item.userImage && item.userImage.includes("http")
-                            ? item.userImage
-                            : BASE_URL + item.userImage
-                      }
+                      src={checkImageUrl(item.userImage, 'profile')}
                       alt="유저 이미지"
                     />
                     <strong>{item.userName}</strong>
                     <button onClick={() => removeItem(item.id)}><img src={iconClose} alt="상품 삭제 버튼" /></button>
                   </CartUserInfo>
                   <CartProductInfo>
-                    <img src={BASE_URL + item.productImage} alt="" />
+                    <img src={checkImageUrl(item.productImage, 'post')} alt="" />
                     <CartProductDesc>
                       <p>No. {item.id}</p>
                       <strong>{item.productName}</strong>
