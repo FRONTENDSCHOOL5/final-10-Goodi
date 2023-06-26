@@ -28,12 +28,19 @@ export default function Cart() {
   };
 
   const calculateTotalPrice = () => {
-    return cartItem.reduce((total, item) => total + (item.productPrice * item.productCount), 0);
+    const priceComma = cartItem.reduce((total, item) => total + (item.productPrice * item.productCount), 0);
+    return priceDivide(priceComma);
   };
 
   const cartRest = useResetRecoilState(cartItemsState);
   const cartResetButton = () => {
     cartRest();
+  };
+
+  // 숫자 세자리 수마다 컴마 찍어주는 함수
+  const priceDivide = (price) => {
+    return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+
   };
 
   return (
@@ -61,9 +68,9 @@ export default function Cart() {
                     <CartProductDesc>
                       <p>No. {item.id}</p>
                       <strong>{item.productName}</strong>
-                      <p>{item.productPrice} 원</p>
+                      <p>{priceDivide(item.productPrice)} 원</p>
                       <CartProductTotal>
-                        <strong>{item.productPrice * item.productCount} 원</strong>
+                        <strong>{priceDivide(item.productPrice * item.productCount)} 원</strong>
                         <span>수량 {item.productCount}개</span>
                       </CartProductTotal>
                     </CartProductDesc>
