@@ -91,6 +91,7 @@ const FollowDelete = styled.button`
   border-radius: 50px;
   cursor: pointer;
   text-align: center;
+  white-space: nowrap;
 
   &:hover {
     background-color: var(--gray50-color);
