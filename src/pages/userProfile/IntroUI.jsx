@@ -17,8 +17,8 @@ export default function IntroUI({ profileData }) {
             profileData.profile.image.includes("null")
               ? BASE_URL + "1687455865316.jpg"
               : profileData.profile.image.includes("http")
-              ? profileData.profile.image
-              : BASE_URL + profileData.profile.image
+                ? profileData.profile.image
+                : BASE_URL + profileData.profile.image
           }
           alt="유저 프로필 이미지"
         />
@@ -32,6 +32,7 @@ export default function IntroUI({ profileData }) {
           basic="true"
           bg="black"
           color="white"
+          br="none"
           onClick={() => navigate("/chat")}
         />
         <ButtonFollow
