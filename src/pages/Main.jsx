@@ -1,12 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CardProduct from "../components/common/CardProduct";
 import { Link } from "react-router-dom";
-
-import CarouselImg1 from "../assets/sample-img/sample-image-1.png";
-import CarouselImg2 from "../assets/sample-img/sample-image-8.png";
-import CarouselImg3 from "../assets/sample-img/sample-image-3.png";
-import CarouselImg5 from "../assets/sample-img/sample-image-15.png";
 
 import PostList from "../components/common/PostList";
 
@@ -17,15 +12,11 @@ import followerProducts from "../assets/follower-products.svg";
 import popularAuthor from "../assets/popular-author.svg";
 
 import PopularAuthorView from "../components/PopularAuthorView";
-import ProductData from "../mock/productData";
 import Layout from "../layout/Layout";
 import MainSkeleton from "../style/skeletonUI/skeletonPage/MainSkeleton";
 import CarouselMain from "../components/CarouselMain";
 
 export default function Main() {
-  const data = ProductData[12];
-  const data1 = ProductData[10];
-  const data2 = ProductData[11];
   const [loading, setLoading] = useState(false);
 
   return (
