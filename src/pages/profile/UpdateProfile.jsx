@@ -10,6 +10,7 @@ import Button from "../../components/common/Button";
 import profileAPI from "../../api/profile";
 import { useRecoilState } from "recoil";
 import { checkProfile } from "../../recoil/checkChange";
+import checkImageUrl from "../../components/common/checkImageUrl";
 
 export default function UpdateProfile({
   profileData,
@@ -104,13 +105,7 @@ export default function UpdateProfile({
         <label htmlFor="fileInput">
           <ProfileImgWrap>
             <img
-              src={
-                changeImageURL.includes("null")
-                  ? BASE_URL + "1687455865316.jpg"
-                  : changeImageURL.includes("http")
-                  ? changeImageURL
-                  : BASE_URL + changeImageURL
-              }
+              src={checkImageUrl(changeImageURL, 'profile')}
               alt="Upload"
             />
           </ProfileImgWrap>
