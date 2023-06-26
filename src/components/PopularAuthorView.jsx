@@ -12,10 +12,10 @@ import { useParams } from "react-router-dom";
 import { checkDeletePost } from "../recoil/checkChange";
 import { checkProfile } from "../recoil/checkChange";
 import ButtonFollow from "./common/ButtonFollow";
-
+import followAPI from "../api/follow";
 import iconHeartWhite from "../assets/icon_heart_line_white.svg"
 
-export default function PostList({ account, heartCount }) {
+export default function PopularAuthorview({ account, heartCount }) {
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = useRecoilValue(loginToken);
@@ -31,14 +31,44 @@ export default function PostList({ account, heartCount }) {
       : myaccount_name;
 
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+  const [isFollowing, setIsFollowing] = useState(false);
+  
+  const handleFollow = async () => {
+    try {
+      const response = await followAPI(account_name, token);
+      setIsFollowing(true);
+    } catch (error) {
+      console.error("API 에러", error);
+    }
+  };
 
-  // const updateHeartCount = (postId, count) => {
-  //   setUserPostList((prevPosts) =>
-  //     prevPosts.map((post) =>
-  //       post.id === postId ? { ...post, heartCount: count } : post
-  //     )
-  //   );
-  // };
+  // 언팔로우 버튼 클릭 시 팔로우 상태 변경
+  const handleUnfollow = () => {
+    setIsFollowing(false);
+  };
+
+  useEffect(() => {
+    const fetchPostData = async () => {
+      try {
+        const response = await postAPI({
+          token,
+          accountname: account_name,
+        });
+
+        if (response.post) {
+          setUserPostList(response.post);
+        }
+
+        setLoading(false);
+      } catch (error) {
+        // 오류 처리
+        console.log(error);
+        setLoading(false); // 오류 발생 시 로딩 상태 변경
+      }
+    };
+
+    fetchPostData(); // fetchPostData 함수 호출
+  }, [account_name, checkDelete, checkProfileChange]);
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -64,7 +94,7 @@ export default function PostList({ account, heartCount }) {
 
     // 의존성 배열에 account_name을 추가하여 account_name이 변경될 때마다 useEffect를 호출하도록 설정
   }, [account_name, checkDelete, checkProfileChange]);
-
+  console.log(isFollowing)
   const handleMouseEnter = (postId) => {
     setUserPostList((prevPosts) =>
       prevPosts.map((post) =>
@@ -103,7 +133,7 @@ export default function PostList({ account, heartCount }) {
                 account_name={account_name}
                 style={{ margin: "20px" }}
               />
-              <ButtonFollow padding={false} />
+              <ButtonFollow padding={false} account_name={account_name} onClick={handleFollow} isFollow={isFollowing} />
             </BottomWrap>
           )}
           <PostListWrap hasPosts={userPostList.length > 0}>
