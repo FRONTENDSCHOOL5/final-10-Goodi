@@ -59,7 +59,16 @@ export default function Cart() {
               {cartItem.map((item) => (
                 <CartProductItem key={item.id}>
                   <CartUserInfo>
-                    <img src={item.userImage === BASE_URL + "null" ? defaultImage : item.userImage} alt="" />
+                    <img
+                      src={
+                        item.userImage.includes("null")
+                          ? BASE_URL + "1687455865316.jpg"
+                          : item.userImage && item.userImage.includes("http")
+                            ? item.userImage
+                            : BASE_URL + item.userImage
+                      }
+                      alt="유저 이미지"
+                    />
                     <strong>{item.userName}</strong>
                     <button onClick={() => removeItem(item.id)}><img src={iconClose} alt="상품 삭제 버튼" /></button>
                   </CartUserInfo>
@@ -104,7 +113,7 @@ export default function Cart() {
                 </li>
               </ul>
             </OrderInfo>
-            <Button disabled={cartItem.length === 0} text="주문서 작성" />
+            <Button disabled={cartItem.length === 0} text="구매하고 싶어요" />
             <Button
               disabled={cartItem.length === 0}
               text="상품 전체 삭제"
