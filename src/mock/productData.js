@@ -136,8 +136,8 @@ const ProductData = [
     {
         "id": 11,
         "profile": sampleImg7,
-        "name": "작가 1",
-        "email": "dksljdf@gmail.com",
+        "name": "젤리 스튜디오",
+        "email": "popular1@test.com",
         "img": [
             {
                 id: 1,
@@ -198,8 +198,8 @@ const ProductData = [
     {
         "id": 12,
         "profile": sampleImg16,
-        "name": "작가 2",
-        "email": "dksljdf@gmail.com",
+        "name": "오렌지 마말레이드",
+        "email": "popular2@test.com",
         "img": [
             {
                 id: 1,

@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { checkDeletePost } from "../../recoil/checkChange";
 import { checkProfile } from "../../recoil/checkChange";
 
-export default function PostList() {
+export default function PostList({ account }) {
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = useRecoilValue(loginToken);
@@ -20,8 +20,7 @@ export default function PostList() {
   const checkProfileChange = useRecoilValue(checkProfile);
 
   const temp = useParams();
-
-  const account_name = temp.account_name ? temp.account_name : myaccount_name;
+  const account_name = account ? account : temp.account_name ? temp.account_name : myaccount_name;
 
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
@@ -35,21 +34,28 @@ export default function PostList() {
 
   useEffect(() => {
     const fetchPostData = async () => {
-      const { post } = await postAPI({
-        token,
-        accountname: account_name,
-      });
-      setUserPostList(post);
-      setLoading(false);
+      try {
+        const response = await postAPI({
+          token,
+          accountname: account_name,
+        });
+  
+        if (response.post) {
+          setUserPostList(response.post);
+        }
+  
+        setLoading(false);
+      } catch (error) {
+        // 오류 처리
+        console.log(error);
+        setLoading(false); // 오류 발생 시 로딩 상태 변경
+      }
     };
-
-    fetchPostData();
+  
+    fetchPostData(); // fetchPostData 함수 호출
+  
+    // 의존성 배열에 account_name을 추가하여 account_name이 변경될 때마다 useEffect를 호출하도록 설정
   }, [account_name, checkDelete, checkProfileChange]);
-  console.log(userPostList);
-
-  if (loading) {
-    return <PostListSkeleton />;
-  }
 
   return (
     <>
