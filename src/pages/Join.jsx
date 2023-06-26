@@ -7,7 +7,7 @@ import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
-import SymbolImage from "../assets/symbol.svg";
+import JoinTo from "../assets/Join to.svg";
 
 export default function Join() {
   const navigate = useNavigate();
@@ -40,8 +40,7 @@ export default function Join() {
     const errors = [];
     if (joinData.user.email === "") {
       errors.push("유효한 이메일을 입력해주세요");
-    }
-    else if (!emailRegex.test(joinData.user.email)){
+    } else if (!emailRegex.test(joinData.user.email)) {
       errors.push("유효한 이메일을 입력해주세요");
     } else if (joinData.user.password.length < 6) {
       errors.push("비밀번호를 6자리 이상 입력해주세요");
@@ -61,8 +60,7 @@ export default function Join() {
         <div className="right-inner">
           <H1 className="a11y-hidden">회원가입 페이지</H1>
           <H2>
-            Join to
-            <img src={SymbolImage} alt="Symbol" />
+            <img src={JoinTo} alt="Join to" />
           </H2>
           <InputDiv>
             <Label>이메일</Label>
@@ -81,8 +79,8 @@ export default function Join() {
             />
             {/* email을 입력하지 않은 경우 */}
             {userErrorMessage.includes("유효한 이메일을 입력해주세요") && (
-          <ErrorMassage>{userErrorMessage}</ErrorMassage>
-        )}
+              <ErrorMassage>{userErrorMessage}</ErrorMassage>
+            )}
           </InputDiv>
           <InputDiv>
             <Label>비밀번호</Label>
@@ -170,14 +168,8 @@ export const H1 = styled.h1`
 `;
 
 export const H2 = styled.div`
-  font-size: 2.5rem;
-  margin-bottom: 48px;
-  font-family: var(--font--en);
-  font-weight: 900;
-  display: inline;
-
   img {
-    vertical-align: text-bottom;
+    height: 76px;
   }
 `;
 const Label = styled.label`
