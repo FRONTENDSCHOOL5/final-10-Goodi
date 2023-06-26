@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import FooterLogo from "../assets/logo_gray.svg";
 import GithubBtn from "../assets/github_button.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
+  const navigate = useNavigate();
   return (
     <FooterLayout>
       <img src={FooterLogo} alt="footer 로고" />
