@@ -121,6 +121,7 @@ export default function UpdateProfile({
         <div>
           <Label>닉네임</Label>
           <InputBox
+            required
             width="100%"
             height="48px"
             padding="15px"
