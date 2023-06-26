@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 //image
 import ProductBanner from "../../assets/product_banner.svg";
 import LeftArrow from "../../assets/icon_arrow_left.svg";
 import RightArrow from "../../assets/icon_arrow_right.svg";
+import checkImageUrl from "./checkImageUrl";
 
 export default function DetailImage({ img }) {
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
-
   //이미지 index 관리
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -42,7 +41,7 @@ export default function DetailImage({ img }) {
         />
         <img
           className="top_detail_img"
-          src={BASE_URL + img[currentIndex]}
+          src={checkImageUrl(img[currentIndex], 'post')}
           alt="상세 이미지"
         />
 
@@ -58,7 +57,7 @@ export default function DetailImage({ img }) {
               key={index}
               className={`detail_img ${index === currentIndex ? "active" : ""}`}
               onClick={() => handleSlide(index)}
-              src={BASE_URL + el}
+              src={checkImageUrl(el, 'post')}
               alt="상세 이미지"
             />
           );

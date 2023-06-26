@@ -5,10 +5,10 @@ import followers from "../assets/Followers.svg";
 import following from "../assets/Following.svg";
 import followSymbol from "../assets/follow_symbol.svg";
 import ButtonFollow from "./common/ButtonFollow";
+import checkImageUrl from "./common/checkImageUrl";
 
 export default function Follow(props) {
   const { followerData, followingData, activeFollow } = props;
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   return (
     <FollowWrap>
@@ -26,13 +26,7 @@ export default function Follow(props) {
         followerData.map((follow) => (
           <BtnWrap key={follow._id}>
             <ProfileUI
-              user_profile={
-                follow.image.includes("null")
-                  ? BASE_URL + "1687455865316.jpg"
-                  : follow.image.includes("http")
-                  ? follow.image
-                  : BASE_URL + follow.image
-              }
+              user_profile={checkImageUrl(follow.image, 'profile')}
               user_name={follow.username}
               user_email={follow.accountname}
               // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
@@ -49,13 +43,7 @@ export default function Follow(props) {
         followingData.map((follow) => (
           <BtnWrap key={follow._id}>
             <ProfileUI
-              user_profile={
-                follow.image.includes("null")
-                  ? BASE_URL + "1687455865316.jpg"
-                  : follow.image.includes("http")
-                  ? follow.image
-                  : BASE_URL + follow.image
-              }
+              user_profile={checkImageUrl(follow.image, 'profile')}
               user_name={follow.username}
               user_email={follow.accountname}
               // followerData 에는 email이 없어서 accountname으로 대체하여 삽입

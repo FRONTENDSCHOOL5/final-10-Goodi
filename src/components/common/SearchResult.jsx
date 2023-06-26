@@ -8,9 +8,9 @@ import ButtonFollow from "./ButtonFollow";
 // 이미지
 import followSymbol from "../../assets/follow_symbol.svg";
 import DefProfileImg from "../../assets/profile_img_def.svg";
+import checkImageUrl from "./checkImageUrl";
 
 export default function SearchResult({ searchResult, isFollowing }) {
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   return (
     <ResultWrap>
       <ResultTitle>
@@ -23,13 +23,7 @@ export default function SearchResult({ searchResult, isFollowing }) {
             <User>
               <ProfileUI
                 key={el._id}
-                user_profile={
-                  el.image.includes("null")
-                    ? BASE_URL + "1687455865316.jpg"
-                    : el.image && el.image.includes("http")
-                    ? el.image
-                    : BASE_URL + el.image
-                }
+                user_profile={checkImageUrl(el.image, 'profile')}
                 user_name={el.username}
                 user_email={el.accountname}
                 account_name={el.accountname}

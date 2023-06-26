@@ -3,23 +3,16 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import ButtonLineIcon from "../../components/common/ButtonLineIcon";
 import ButtonFollow from "../../components/common/ButtonFollow";
+import checkImageUrl from "../../components/common/checkImageUrl";
 
 export default function IntroUI({ profileData }) {
   const navigate = useNavigate();
-
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   return (
     <>
       <IntroWrap>
         <img
-          src={
-            profileData.profile.image.includes("null")
-              ? BASE_URL + "1687455865316.jpg"
-              : profileData.profile.image.includes("http")
-                ? profileData.profile.image
-                : BASE_URL + profileData.profile.image
-          }
+          src={checkImageUrl(profileData.profile.image, "profile")}
           alt="유저 프로필 이미지"
         />
         <strong>{profileData.profile.username}</strong>

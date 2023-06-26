@@ -8,12 +8,12 @@ import followingAPI from "../api/following";
 import { useRecoilState } from "recoil";
 import { checkFollow } from "../recoil/checkChange";
 import { useRecoilValue } from "recoil";
+import checkImageUrl from "./common/checkImageUrl";
 
 export default function Header() {
   const [token, setToken] = useRecoilState(loginToken);
   const [accountName, setAccountName] = useRecoilState(accountname);
   const [followingData, setFollowingData] = useState(null);
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const checkFollowChange = useRecoilValue(checkFollow);
 
   const navigate = useNavigate();
@@ -50,13 +50,7 @@ export default function Header() {
                   type="button"
                 >
                   <img
-                    src={
-                      data.image.includes("null")
-                        ? BASE_URL + "1687455865316.jpg"
-                        : data.image.includes("http")
-                          ? data.image
-                          : BASE_URL + data.image
-                    }
+                    src={checkImageUrl(data.image, 'profile')}
                     alt=""
                   />
                 </FollowingIcon>

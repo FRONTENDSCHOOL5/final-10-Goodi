@@ -24,6 +24,7 @@ import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
 import DetailSkeleton from "../style/skeletonUI/skeletonPage/DetailSkeleton";
 import { cartItemsState } from "../recoil/cartItemState";
+import checkImageUrl from "../components/common/checkImageUrl";
 
 export default function Detail() {
   const { id } = useParams();
@@ -33,7 +34,6 @@ export default function Detail() {
   const [productData, setProductData] = useState("");
   const [price, setPrice] = useState(0);
   const [toast, setToast] = useState(false);
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   // 카운트 수량 관리
   const [count, setCount] = useState(1);
@@ -114,13 +114,7 @@ export default function Detail() {
               <div className="product_detail_top">
                 <ProfileUI
                   key={productData.author._id}
-                  user_profile={
-                    productData.author.image.includes("null")
-                      ? BASE_URL + "1687455865316.jpg"
-                      : productData.author.image.includes("http")
-                        ? productData.author.image
-                        : BASE_URL + productData.author.image
-                  }
+                  user_profile={checkImageUrl(productData.author.image, 'profile')}
                   user_name={productData.author.username}
                   user_email={productData.author.accountname}
                   account_name={account_name}
