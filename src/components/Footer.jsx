@@ -15,12 +15,16 @@ export default function Footer() {
         <br />
         Goodi. ©2023. All Rights Reserved.
       </p>
-      <button className="github_button">
+      <GithubButton
+        to="https://github.com/FRONTENDSCHOOL5/final-10-Goodi"
+        target="_blank"
+      >
         <img src={GithubBtn} alt="github 이동 버튼" />
-      </button>
+      </GithubButton>
     </FooterLayout>
   );
 }
+
 const FooterLayout = styled.footer`
   background-color: var(--gray100-color);
   width: calc(100% - 80px);
@@ -45,12 +49,10 @@ const FooterLayout = styled.footer`
   img {
     width: 165px;
   }
+`;
 
-  .github_button {
-    cursor: pointer;
-  }
-
-  .github_button img {
+const GithubButton = styled(Link)`
+  img {
     width: 112px;
   }
 `;

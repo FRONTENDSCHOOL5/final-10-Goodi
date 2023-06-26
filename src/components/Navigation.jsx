@@ -49,15 +49,9 @@ export default function Navigation() {
     setShowSearch(!showSearch);
   };
 
-  // const handleModal = () => {
-  //   setShowModal(!showModal);
-  // };
-  // Post, LocalNav 외 다른곳을 눌렀을때 LocalNav 꺼지기
   useEffect(() => {
     const handleClickOutside = (event) => {
       const navigationElement = document.getElementById("navigation");
-
-      // GPT가 알려준 코드인데 이거 타겟 요소가 아닌곳을 클릭한 경우 false값을 반환하는데 그 외 모든것을 클릭했을 경우가 맞는건지? 첫번째 navigationElement 이건 진짜 뭔지 모르겠음
       if (navigationElement && !navigationElement.contains(event.target)) {
         setIsHidden(false);
       }
@@ -67,8 +61,6 @@ export default function Navigation() {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
-  console.log(cartItem);
 
   return (
     <NavigationLayout id="navigation">
@@ -88,7 +80,9 @@ export default function Navigation() {
             <p className={i === 0 ? "a11y-hidden" : ""}>{el.name}</p>
             {el.name === "Post" && isHidden && <ActiveBar />}
             {el.name === "Cart" && (
-              <div><span>{cartItem.length}</span></div>
+              <div>
+                <span>{cartItem.length}</span>
+              </div>
             )}
           </NavList>
         );
@@ -135,7 +129,6 @@ const NavigationLayout = styled.article`
   flex-direction: column;
   padding-top: 20px;
   gap: 16px;
-  box-sizing: border-box;
   position: fixed;
   right: 0;
   z-index: 1;
@@ -147,7 +140,8 @@ const NavigationLayout = styled.article`
 
 const NavList = styled.button`
   width: 100%;
-  padding: 10px 0;
+  /* max-height: 66px; */
+  padding: 10px 0 0 0;
   box-sizing: border-box;
   text-align: center;
   color: var(--gray400-color);
@@ -157,7 +151,7 @@ const NavList = styled.button`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  position: relative;
+  /* position: relative; */
   z-index: 100;
   cursor: pointer;
 
@@ -169,6 +163,7 @@ const NavList = styled.button`
   &.active {
     background-color: #f0ffed;
     color: var(--dark-sub-color);
+    margin-bottom: 0;
   }
 
   &:hover {
@@ -201,6 +196,4 @@ const ActiveBar = styled.div`
   width: calc(100% - 12px);
   height: 3px;
   background-color: var(--main-color);
-  position: absolute;
-  bottom: 0;
 `;

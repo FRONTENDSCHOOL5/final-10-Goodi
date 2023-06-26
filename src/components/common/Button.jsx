@@ -12,8 +12,8 @@ const ButtonDef = styled.button`
   border-radius: 4px;
   border: ${(props) => props.br || "1px solid var(--gray300-color)"};
   color: ${(props) => props.color || "white"};
-  font-size:  ${(props) => props.fontSize || "18px"};
-  font-family: var(--font--Bold);
+  font-size: ${(props) => props.fontSize || "18px"};
+  font-family: var(--font--Medium);
   box-sizing: border-box;
   text-align: center;
   &:hover {
@@ -31,4 +31,8 @@ const ButtonDef = styled.button`
     css`
       cursor: default;
     `}
+
+    &:active {
+    transform: scale(0.99);
+  }
 `;
