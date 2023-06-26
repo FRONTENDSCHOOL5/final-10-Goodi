@@ -21,8 +21,6 @@ const GlobalStyle = createGlobalStyle`
     --font--semibold: 'Pretendard-semiBold';
     --font--Medium: 'Pretendard-Medium';
     --font--Regular: 'Pretendard-Regular';
-    // 사용시 fontweight : 900 으로 꼭 줘야함
-    --font--en: "Montserrat";
   }
 
   ${reset}
