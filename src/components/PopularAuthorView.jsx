@@ -5,16 +5,15 @@ import postAPI from "../api/post";
 import ProfileUI from "./common/ProfileUI";
 import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import NoPostsUI from "../components/NoPostsUI";
 import PostListSkeleton from "../style/skeletonUI/SkeletonItem";
 import { useParams } from "react-router-dom";
 import { checkDeletePost } from "../recoil/checkChange";
 import { checkProfile } from "../recoil/checkChange";
-import { Link } from "react-router-dom";
-import PostLikeBtn from "./common/PostLikeBtn";
 import ButtonFollow from "./common/ButtonFollow";
-import Button from "./common/Button";
+
+import iconHeartWhite from "../assets/icon_heart_line_white.svg"
 
 export default function PostList({ account, heartCount }) {
   const [userPostList, setUserPostList] = useState(null);
@@ -28,8 +27,8 @@ export default function PostList({ account, heartCount }) {
   const account_name = account
     ? account
     : temp.account_name
-    ? temp.account_name
-    : myaccount_name;
+      ? temp.account_name
+      : myaccount_name;
 
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
@@ -104,7 +103,7 @@ export default function PostList({ account, heartCount }) {
                 account_name={account_name}
                 style={{ margin: "20px" }}
               />
-              <ButtonFollow padding={false}/>
+              <ButtonFollow padding={false} />
             </BottomWrap>
           )}
           <PostListWrap hasPosts={userPostList.length > 0}>
@@ -146,7 +145,10 @@ export default function PostList({ account, heartCount }) {
                             />
                           </LikeDiv> */}
                           <HoverContent>
-                            <LikesCount>{post.heartCount}</LikesCount>
+                            <LikesCount>
+                              <img src={iconHeartWhite} alt="좋아요 개수" />
+                              {post.heartCount}
+                            </LikesCount>
                             <PostContent>{post.content}</PostContent>
                           </HoverContent>
                         </>
@@ -215,27 +217,13 @@ const BottomImgDiv = styled.div`
   height: 100%;
   cursor: pointer;
 `;
+
 const BottomImg = styled.img`
-  transition: all 0.3s;
   position: relative;
   width: 100%;
   height: 100%;
-
-  &:hover {
-    transform: scale(1.02);
-    background-color: black;
-  }
-
-  & :hover::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.6;
-  }
 `;
+
 const HoverContent = styled.div`
   position: absolute;
   top: 0;
@@ -246,21 +234,37 @@ const HoverContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
-  opacity: 0.8;
-  transition: opacity 0.3s;
+
+  visibility: visible;
+  animation: setMotion 0.3s;
+
+  @keyframes setMotion{
+    0%{
+        opacity:0;
+      }
+    100%{
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+  }
 `;
 
 const LikesCount = styled.span`
   font-size: 16px;
   margin-bottom: 14px;
+
+  img {
+    width: 23px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
 `;
 
 const PostContent = styled.p`
   font-size: 14px;
   text-align: center;
-  line-height: 18px;
+  line-height: 1.5;
   width: 90%;
 `;
 //postId={post.id}
