@@ -307,7 +307,7 @@ const ChatProfile = styled.div`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  z-index: 0.5;
+  z-index: 1;
 
   button {
     z-index: 1;

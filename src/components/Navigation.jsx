@@ -138,7 +138,7 @@ const NavigationLayout = styled.article`
   box-sizing: border-box;
   position: fixed;
   right: 0;
-  z-index: 1;
+  z-index: 2;
 
   & > button:nth-child(1) {
     margin-bottom: 32px;
