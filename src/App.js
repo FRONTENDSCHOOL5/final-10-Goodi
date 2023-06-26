@@ -15,11 +15,13 @@ import NotFound from './pages/NotFound';
 import UpdatePosting from './pages/UpdatePosting';
 import UpdateProduct from './pages/UpdateProduct';
 import Cart from './pages/Cart';
+import ScrollToTop from './components/common/ScrollToTop';
 
 function App() {
   return (
     <BrowserRouter>
       <Link to="/login"></Link>
+      <ScrollToTop />
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Login />} />
