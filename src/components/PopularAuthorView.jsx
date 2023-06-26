@@ -13,6 +13,8 @@ import { checkDeletePost } from "../recoil/checkChange";
 import { checkProfile } from "../recoil/checkChange";
 import { Link } from "react-router-dom";
 import PostLikeBtn from "./common/PostLikeBtn";
+import ButtonFollow from "./common/ButtonFollow";
+import Button from "./common/Button";
 
 export default function PostList({ account, heartCount }) {
   const [userPostList, setUserPostList] = useState(null);
@@ -92,15 +94,18 @@ export default function PostList({ account, heartCount }) {
       ) : (
         <>
           {userPostList && userPostList.length > 0 && (
-            <ProfileUI
-              user_profile={BASE_URL + userPostList[0].author.image}
-              user_name={userPostList[0].author.username}
-              user_email={userPostList[0].author.accountname}
-              mainprofile={true}
-              card={true}
-              account_name={account_name}
-              style={{ margin: "20px" }}
-            />
+            <BottomWrap>
+              <ProfileUI
+                user_profile={BASE_URL + userPostList[0].author.image}
+                user_name={userPostList[0].author.username}
+                user_email={userPostList[0].author.accountname}
+                mainprofile={true}
+                card={true}
+                account_name={account_name}
+                style={{ margin: "20px" }}
+              />
+              <ButtonFollow padding={false}/>
+            </BottomWrap>
           )}
           <PostListWrap hasPosts={userPostList.length > 0}>
             <Post>
@@ -163,21 +168,25 @@ const PostListWrap = styled.section`
     hasPosts
       ? `
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: auto;
       grid-template-rows: auto;
       gap: 60px 20px;
       margin-bottom: 70px;
     `
       : ""}
 `;
+
+const BottomWrap = styled.div`
+  display: flex;
+  align-items: center;
+`
 const PopularProfile = styled.div`
   width: 100%;
   height: 100px;
-
   background-color: red;
   & > img {
     width: 80px;
-    height: 70px;
+    height: 80px;
     border-radius: 50%;
     margin-top: 10px;
   }
@@ -187,7 +196,7 @@ const LikeDiv = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, 50%);
-`
+`;
 const Post = styled.ul`
   display: grid;
   grid-template-columns: 2fr repeat(4, 1fr);
@@ -209,6 +218,8 @@ const BottomImgDiv = styled.div`
 const BottomImg = styled.img`
   transition: all 0.3s;
   position: relative;
+  width: 100%;
+  height: 100%;
 
   &:hover {
     transform: scale(1.02);
@@ -243,7 +254,7 @@ const HoverContent = styled.div`
 
 const LikesCount = styled.span`
   font-size: 16px;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 `;
 
 const PostContent = styled.p`
