@@ -5,6 +5,7 @@ import { loginCheck } from "../../recoil/loginCheck";
 import loginToken from "../../recoil/loginToken";
 import { useNavigate } from "react-router-dom";
 import { recentSearch } from "../../recoil/recentSearch";
+import { cartItemsState } from "../../recoil/cartItemState";
 
 export default function LogoutHandler() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function LogoutHandler() {
   const [_accountname, setAccountname] = useRecoilState(accountname);
   const [_logoutCheck, setLogoutCheck] = useRecoilState(logoutCheck);
   const [isRecentSearch, setIsRecentSearch] = useRecoilState(recentSearch);
+  const [cartItemLogout, setCartItemLogout] = useRecoilState(cartItemsState);
 
   const handleLogout = () => {
     setLoginCheck(false);
@@ -21,12 +23,10 @@ export default function LogoutHandler() {
     setAccountname("");
     setLogoutCheck(true);
     setIsRecentSearch([]);
+    setCartItemLogout([]);
 
     navigate("/");
   };
 
   return { handleLogout };
-}
-
-//useSetRecoilState
-//const setPaymentFilter = useSetRecoilState(paymentFilterAtom);
+};
