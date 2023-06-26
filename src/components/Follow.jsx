@@ -70,6 +70,7 @@ const FollowWrap = styled.article`
   width: 100%;
 
   h2 {
+    height: 33px;
     margin-bottom: 30px;
 
     & > img {
