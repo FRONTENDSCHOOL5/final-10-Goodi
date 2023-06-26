@@ -1,23 +1,31 @@
-import React from 'react'
-import { useRecoilState, useResetRecoilState } from 'recoil';
-import { cartItemsState } from '../recoil/cartItemState';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Button from '../components/common/Button';
-import Layout from '../layout/Layout';
+import React from "react";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { cartItemsState } from "../recoil/cartItemState";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Button from "../components/common/Button";
+import Layout from "../layout/Layout";
+import { useNavigate } from "react-router-dom";
 
-import cartNullIcon from "../assets/cart_null_icon.svg"
+import cartNullIcon from "../assets/cart_null_icon.svg";
+import defaultImage from "../assets/profile_img_def.svg";
 import iconClose from "../assets/icon_close.svg";
-import checkImageUrl from '../components/common/checkImageUrl';
-
+import checkImageUrl from "../components/common/checkImageUrl";
 
 export default function Cart() {
   const [cartItem, setCartItem] = useRecoilState(cartItemsState);
-
+  const navigate = useNavigate();
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
+  const handleButtonClick = () => {
+    if (cartItem.length !== 0) {
+      navigate("/chat");
+      console.log()
+    }
+  };
+
   const removeItem = (itemId) => {
-    const updatedItems = cartItem.filter(item => item.id !== itemId);
+    const updatedItems = cartItem.filter((item) => item.id !== itemId);
     setCartItem(updatedItems);
   };
 
@@ -26,7 +34,10 @@ export default function Cart() {
   };
 
   const calculateTotalPrice = () => {
-    const priceComma = cartItem.reduce((total, item) => total + (item.productPrice * item.productCount), 0);
+    const priceComma = cartItem.reduce(
+      (total, item) => total + item.productPrice * item.productCount,
+      0
+    );
     return priceDivide(priceComma);
   };
 
@@ -37,12 +48,12 @@ export default function Cart() {
 
   // 숫자 세자리 수마다 컴마 찍어주는 함수
   const priceDivide = (price) => {
-    return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+    return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   };
 
   return (
     <Layout reduceTop="true">
-      <h2 className='a11y-hidden'>장바구니</h2>
+      <h2 className="a11y-hidden">장바구니</h2>
       <CartWrap>
         <CartLeft>
           {cartItem.length === 0 ? (
@@ -57,20 +68,28 @@ export default function Cart() {
                 <CartProductItem key={item.id}>
                   <CartUserInfo>
                     <img
-                      src={checkImageUrl(item.userImage, 'profile')}
+                      src={checkImageUrl(item.userImage, "profile")}
                       alt="유저 이미지"
                     />
                     <strong>{item.userName}</strong>
-                    <button onClick={() => removeItem(item.id)}><img src={iconClose} alt="상품 삭제 버튼" /></button>
+                    <button onClick={() => removeItem(item.id)}>
+                      <img src={iconClose} alt="상품 삭제 버튼" />
+                    </button>
                   </CartUserInfo>
                   <CartProductInfo>
-                    <img src={checkImageUrl(item.productImage, 'post')} alt="" />
+                    <img
+                      src={checkImageUrl(item.productImage, "post")}
+                      alt=""
+                    />
                     <CartProductDesc>
                       <p>No. {item.id}</p>
                       <strong>{item.productName}</strong>
                       <p>{priceDivide(item.productPrice)} 원</p>
                       <CartProductTotal>
-                        <strong>{priceDivide(item.productPrice * item.productCount)} 원</strong>
+                        <strong>
+                          {priceDivide(item.productPrice * item.productCount)}{" "}
+                          원
+                        </strong>
                         <span>수량 {item.productCount}개</span>
                       </CartProductTotal>
                     </CartProductDesc>
@@ -78,7 +97,6 @@ export default function Cart() {
                 </CartProductItem>
               ))}
             </ul>
-
           )}
         </CartLeft>
         <CartRight>
@@ -104,7 +122,12 @@ export default function Cart() {
                 </li>
               </ul>
             </OrderInfo>
-            <Button disabled={cartItem.length === 0} text="구매하고 싶어요" />
+            <Button
+              disabled={cartItem.length === 0}
+              text="구매하고 싶어요"
+              onClick={handleButtonClick}
+              padding="16px 0"
+            />
             <Button
               disabled={cartItem.length === 0}
               text="상품 전체 삭제"
@@ -126,22 +149,22 @@ const CartWrap = styled.div`
   justify-content: space-between;
   gap: 64px;
   padding: 40px 50px 40px 80px;
-`
+`;
 
 const CartLeft = styled.section`
   width: 60%;
   min-height: 550px;
-`
+`;
 
 const CartProductItem = styled.li`
-  border: 1px solid #EBEBEB;
+  border: 1px solid #ebebeb;
   border-radius: 0 0 4px 4px;
   margin-bottom: 28px;
 
   &:last-child {
     margin-bottom: 0;
   }
-`
+`;
 
 const CartUserInfo = styled.div`
   width: 100%;
@@ -175,7 +198,7 @@ const CartUserInfo = styled.div`
       margin: 0 auto;
     }
   }
-`
+`;
 
 const CartProductInfo = styled.div`
   width: 100%;
@@ -189,12 +212,12 @@ const CartProductInfo = styled.div`
     aspect-ratio: 1 / 1;
     object-fit: cover;
   }
-`
+`;
 
 const CartProductDesc = styled.div`
   width: 100%;
   p {
-  margin-bottom: 14px;
+    margin-bottom: 14px;
 
     &:first-child {
       margin-top: 5px;
@@ -212,7 +235,7 @@ const CartProductDesc = styled.div`
     font-size: 20px;
     margin-bottom: 14px;
   }
-`
+`;
 
 const CartProductTotal = styled.div`
   width: 100%;
@@ -231,7 +254,7 @@ const CartProductTotal = styled.div`
     color: var(--dark-sub-color);
     font-size: 18px;
   }
-`
+`;
 
 const CartNull = styled.div`
   height: 100%;
@@ -255,12 +278,12 @@ const CartNull = styled.div`
     text-decoration: none;
     border-radius: 4px;
   }
-`
+`;
 
 const CartRight = styled.section`
   width: 40%;
   position: relative;
-`
+`;
 
 const CartRightSticky = styled.div`
   position: sticky;
@@ -270,26 +293,26 @@ const CartRightSticky = styled.div`
   button {
     &:last-child {
       margin-top: 18px;
-      transition: all .3s;
+      transition: all 0.3s;
     }
     &:last-child:hover {
-      background-color: #FF4747;
+      background-color: #ff4747;
       color: white;
-      border: 1px solid #FF4747;
+      border: 1px solid #ff4747;
     }
-    &:last-child:disabled {
+    &:disabled {
       color: white;
       border: 1px solid var(--gray100-color);
       pointer-events: none;
     }
   }
-`
+`;
 
 const CartRightTitle = styled.h3`
   font-size: 24px;
   font-family: var(--font--Bold);
   margin-bottom: 15px;
-`
+`;
 
 const OrderInfo = styled.div`
   width: 100%;
@@ -325,4 +348,4 @@ const OrderInfo = styled.div`
       }
     }
   }
-`
+`;
