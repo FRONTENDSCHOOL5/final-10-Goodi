@@ -235,6 +235,13 @@ const ChatWrapLeft = styled.section`
   & > div {
     height: 500px;
     overflow: scroll;
+
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+
+    &::-webkit-scrollbar {
+      display: none; /* 크롬, 사파리, 오페라, 엣지 */
+    }
   }
 `;
 
@@ -374,6 +381,13 @@ const ChatContents = styled.div`
   padding: 0 32px 50px 32px;
   overflow: scroll;
   position: relative;
+
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+
+  &::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  }
 `;
 
 const DefaultChat = styled.section`
