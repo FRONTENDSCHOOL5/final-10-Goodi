@@ -6,6 +6,77 @@ import CarouselImg3 from "../assets/sample-img/sample-image-3.png";
 import CarouselImg5 from "../assets/sample-img/sample-image-15.png";
 import CarouselImg6 from "../assets/sample-img/sample-image-18.png";
 
+export default function CarouselMain() {
+  const compareFn = (a, b) => {
+    return a.endline - b.endline;
+  };
+  const intergratedData = [
+    CarouselImg1,
+    CarouselImg3,
+    CarouselImg5,
+    CarouselImg6,
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [fixedIndex, setFixedIndex] = useState(-1);
+
+  const carouselHandler = (direction) => {
+    if (activeIndex <= 2) {
+      setActiveIndex((prev) => (prev += 1));
+    } else {
+      setActiveIndex(0);
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      carouselHandler();
+    }, 3700);
+  }, []);
+
+  return (
+    <section className="container">
+      <div className="wrapper">
+        <Outer>
+          <CarouselContainer>
+            {intergratedData.map((el, index) => (
+              <SlideImgs key={index * 10} index={activeIndex % 4}>
+                <img src={el} alt={`${index}번 슬라이드`} />
+              </SlideImgs>
+            ))}
+          </CarouselContainer>
+        </Outer>
+        <Outer>
+          <CarouselContainer>
+            {intergratedData.map((el, index) => (
+              <SlideImgs key={index * 10} index={(activeIndex + 1) % 4}>
+                <img src={el} alt={`${index}번 슬라이드`} />
+              </SlideImgs>
+            ))}
+          </CarouselContainer>
+        </Outer>
+        <Outer>
+          <CarouselContainer>
+            {intergratedData.map((el, index) => (
+              <SlideImgs key={index * 10} index={(activeIndex + 2) % 4}>
+                <img src={el} alt={`${index}번 슬라이드`} />
+              </SlideImgs>
+            ))}
+          </CarouselContainer>
+        </Outer>
+        <Outer>
+          <CarouselContainer>
+            {intergratedData.map((el, index) => (
+              <SlideImgs key={index * 10} index={(activeIndex + 3) % 4}>
+                <img src={el} alt={`${index}번 슬라이드`} />
+              </SlideImgs>
+            ))}
+          </CarouselContainer>
+        </Outer>
+      </div>
+    </section>
+  );
+}
 
 const Outer = styled.div`
   overflow: hidden;
@@ -107,76 +178,3 @@ const SlideNum = styled.div`
   color: rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.2);
 `;
-
-export default function CarouselMain() {
-  const compareFn = (a, b) => {
-    return a.endline - b.endline;
-  };
-  const intergratedData = [
-    CarouselImg1,
-    CarouselImg3,
-    CarouselImg5,
-    CarouselImg6,
-  ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [fixedIndex, setFixedIndex] = useState(-1);
-
-  const carouselHandler = (direction) => {
-      if (activeIndex <= 2) {
-        setActiveIndex((prev) => (prev += 1));
-      } else {
-        setActiveIndex(0);
-      }
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      carouselHandler();
-    }, 3700);
-  }, []);
-
-  console.log()
-  return (
-    <section className="container">
-      <div className="wrapper">
-        <Outer>
-        <CarouselContainer>
-          {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={activeIndex % 4}>
-              <img src={el} alt={`${index}번 슬라이드`} />
-            </SlideImgs>
-          ))}
-        </CarouselContainer>
-        </Outer>
-        <Outer>
-        <CarouselContainer>
-          {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={(activeIndex + 1) % 4}>
-              <img src={el} alt={`${index}번 슬라이드`} />
-            </SlideImgs>
-          ))}
-        </CarouselContainer>
-        </Outer>
-        <Outer>
-        <CarouselContainer>
-          {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={(activeIndex + 2) % 4}>
-              <img src={el} alt={`${index}번 슬라이드`} />
-            </SlideImgs>
-          ))}
-        </CarouselContainer>
-        </Outer>
-        <Outer>
-        <CarouselContainer>
-          {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={(activeIndex + 3) % 4}>
-              <img src={el} alt={`${index}번 슬라이드`} />
-            </SlideImgs>
-          ))}
-        </CarouselContainer>
-        </Outer>
-      </div>
-    </section>
-  );
-}
