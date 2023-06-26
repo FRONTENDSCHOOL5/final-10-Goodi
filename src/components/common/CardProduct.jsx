@@ -49,12 +49,13 @@ export default function CardProduct({ profile }) {
               <Card
                 key={productInfo.id}
                 id={productInfo.id}
-                profile={
-                  checkImageUrl(productInfo.author.image, 'profile')
-                }
+                profile={checkImageUrl(productInfo.author.image, "profile")}
                 name={productInfo.author.username}
                 email={productInfo.author.accountname}
-                img={checkImageUrl(BASE_URL + productInfo.itemImage.split(",")[0], 'post')}
+                img={checkImageUrl(
+                  BASE_URL + productInfo.itemImage.split(",")[0],
+                  "post"
+                )}
                 title={productInfo.itemName}
                 description={productInfo.link}
                 price={productInfo.price}

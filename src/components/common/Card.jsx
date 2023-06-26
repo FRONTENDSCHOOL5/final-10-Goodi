@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import LikeBtn from "./LikeBtn";
 import ProfileUI from "./ProfileUI";
@@ -20,15 +20,34 @@ export default function Card({
   price,
   id,
 }) {
+  const handleClick = useRef();
   const myaccount_name = useRecoilValue(accountname);
   const temp = useParams();
   const account_name = temp.account_name ? temp.account_name : myaccount_name;
-  const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const handleLocalNav = () => {
-    setIsLocalNavOpen((prevIsHidden) => !prevIsHidden);
+    setIsHidden((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const localNavElement = document.getElementById("localNavElement");
+
+      if (
+        localNavElement &&
+        !localNavElement.contains(event.target) &&
+        !handleClick.current.contains(event.target)
+      ) {
+        setIsHidden(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -45,11 +64,12 @@ export default function Card({
           account_name={account_name}
         />
         <button onClick={handleLocalNav}>
-          <img src={postMenu} alt="" />
+          <img src={postMenu} alt="" ref={handleClick} />
         </button>
         <LocalNavWrap>
-          {isLocalNavOpen ? (
+          {isHidden ? (
             <LocalNav
+              setIsHidden={setIsHidden}
               handleModal={handleModal}
               width="120px"
               fontSize="14px"
