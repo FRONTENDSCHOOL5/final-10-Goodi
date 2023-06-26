@@ -27,10 +27,14 @@ export default function Card({
   const [isHidden, setIsHidden] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  console.log(myaccount_name);
+  console.log(temp);
+
   const handleLocalNav = () => {
     setIsHidden((prevState) => !prevState);
   };
 
+  // 바깥쪽 눌렀을때 로컬네비 꺼짐
   useEffect(() => {
     const handleClickOutside = (event) => {
       const localNavElement = document.getElementById("localNavElement");
@@ -63,9 +67,11 @@ export default function Card({
           card="true"
           account_name={account_name}
         />
-        <button onClick={handleLocalNav}>
-          <img src={postMenu} alt="" ref={handleClick} />
-        </button>
+        {account_name === myaccount_name && (
+          <button onClick={handleLocalNav}>
+            <img src={postMenu} alt="" ref={handleClick} />
+          </button>
+        )}
         <LocalNavWrap>
           {isHidden ? (
             <LocalNav

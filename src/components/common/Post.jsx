@@ -107,13 +107,15 @@ export default function Post({
           card={true}
           account_name={account_name}
         />
-        <button onClick={handleLocalNav}>
-          <img
-            src={postMenu}
-            alt="게시글 삭제 및 신고 메뉴"
-            ref={handleClick}
-          />
-        </button>
+        {account_name === myaccount_name && (
+          <button onClick={handleLocalNav}>
+            <img
+              src={postMenu}
+              alt="게시글 삭제 및 신고 메뉴"
+              ref={handleClick}
+            />
+          </button>
+        )}
         <LocalNavWrap>
           {isHidden ? (
             <LocalNav
