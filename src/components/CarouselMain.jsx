@@ -16,7 +16,7 @@ const CarouselContainer = styled.section`
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  /* height: 100%; */
+  pointer-events: none;
 `;
 
 const SlideImgs = styled.div`
@@ -129,15 +129,11 @@ export default function CarouselMain() {
         setActiveIndex(0);
       }
   };
-  // const carouselHandler = () => {
-  //   setActiveIndex((prev) => (prev + 1) % 4);
-  // };
+
   useEffect(() => {
     const interval = setInterval(() => {
       carouselHandler();
     }, 3700);
-
-    // return () => clearInterval(interval);
   }, []);
 
   console.log()
@@ -147,7 +143,7 @@ export default function CarouselMain() {
         <Outer>
         <CarouselContainer>
           {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={activeIndex%4}>
+            <SlideImgs key={index * 10} index={activeIndex % 4}>
               <img src={el} alt={`${index}번 슬라이드`} />
             </SlideImgs>
           ))}
@@ -156,7 +152,7 @@ export default function CarouselMain() {
         <Outer>
         <CarouselContainer>
           {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={(activeIndex + 1)%4}>
+            <SlideImgs key={index * 10} index={(activeIndex + 1) % 4}>
               <img src={el} alt={`${index}번 슬라이드`} />
             </SlideImgs>
           ))}
@@ -165,7 +161,7 @@ export default function CarouselMain() {
         <Outer>
         <CarouselContainer>
           {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={(activeIndex + 2)%4}>
+            <SlideImgs key={index * 10} index={(activeIndex + 2) % 4}>
               <img src={el} alt={`${index}번 슬라이드`} />
             </SlideImgs>
           ))}
@@ -174,7 +170,7 @@ export default function CarouselMain() {
         <Outer>
         <CarouselContainer>
           {intergratedData.map((el, index) => (
-            <SlideImgs key={index * 10} index={(activeIndex + 3)%4}>
+            <SlideImgs key={index * 10} index={(activeIndex + 3) % 4}>
               <img src={el} alt={`${index}번 슬라이드`} />
             </SlideImgs>
           ))}
