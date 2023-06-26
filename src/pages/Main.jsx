@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CardProduct from "../components/common/CardProduct";
+import CardProduct from "../components/common/MainRight";
 import { Link } from "react-router-dom";
 
 import PostList from "../components/common/PostList";
