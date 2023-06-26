@@ -13,6 +13,7 @@ const ButtonLineIconUI = styled.button`
   color: ${(props) => props.color || "black"};
   border-radius: 30px;
   border: 1px solid var(--gray200-color);
+  border: ${(props) => props.br || "1px solid var(--gray200-color)"};
   font-size: 15px;
   font-family: var(--font--semibold);
   cursor: pointer;
