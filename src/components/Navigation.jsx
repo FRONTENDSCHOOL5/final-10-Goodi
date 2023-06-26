@@ -31,8 +31,6 @@ export default function Navigation() {
     { name: "Logout", image: LogoutIcon, nav: "" },
   ];
 
-  // localNav hidden 관리
-  // 예외처리 해줘야할것들:  x 버튼을 눌렀을 경우, 다른 곳을 클릭했을경우
   const [isHidden, setIsHidden] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -89,6 +87,7 @@ export default function Navigation() {
       })}
       {isHidden ? (
         <LocalNav
+          setIsHidden={setIsHidden}
           lists={[
             { name: "상품 등록", nav: "/postproduct" },
             { name: "게시물 작성", nav: "/postposting" },
