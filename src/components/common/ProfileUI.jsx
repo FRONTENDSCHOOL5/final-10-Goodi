@@ -7,7 +7,6 @@ function ProfileUI(props) {
   const {
     user_profile,
     user_name,
-    user_email,
     mainprofile,
     card,
     follow,
@@ -28,7 +27,7 @@ function ProfileUI(props) {
       <img src={user_profile || defaultImage} alt="유저 프로필 이미지" />
       <div>
         <strong>{user_name}</strong>
-        <p>{user_email}</p>
+        <p>{account_name}</p>
       </div>
       {children}
     </UserProfile>
