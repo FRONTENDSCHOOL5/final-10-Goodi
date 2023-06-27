@@ -17,7 +17,6 @@ import ButtonFollow from "./common/ButtonFollow";
 import followAPI from "../api/follow";
 import iconHeartWhite from "../assets/icon_heart_line_white.svg";
 
-
 export default function PopularAuthorview({ account, heartCount }) {
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -35,7 +34,7 @@ export default function PopularAuthorview({ account, heartCount }) {
 
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const [isFollowing, setIsFollowing] = useState(false);
-console.log("userPostList", userPostList)
+  console.log("userPostList", userPostList);
   const handleFollow = async () => {
     try {
       const response = await followAPI(account_name, token);
@@ -101,7 +100,7 @@ console.log("userPostList", userPostList)
 
     // 의존성 배열에 account_name을 추가하여 account_name이 변경될 때마다 useEffect를 호출하도록 설정
   }, [account_name, checkDelete, checkProfileChange]);
-  
+
   const handleMouseEnter = (postId) => {
     setUserPostList((prevPosts) =>
       prevPosts.map((post) =>
@@ -131,12 +130,7 @@ console.log("userPostList", userPostList)
                 mainprofile={false}
                 card={true}
                 account_name={account_name}
-                isFollow={!(userPostList[0].author.isFollow)}
                 style={{ margin: "20px" }}
-              />
-              <ButtonFollow
-                isFollow={(userPostList[0].author.isFollow)}
-                accountName={account_name}
               />
             </BottomWrap>
           )}
