@@ -147,7 +147,7 @@ export default function UpdateProductUI() {
                   <ThumbnailLabel>
                     <p>대표 이미지</p>
                   </ThumbnailLabel>
-                  {!loading ? (
+                  {loading ? (
                     <LoadingImage>
                       <span className="circle1"></span>
                       <span className="circle2"></span>
@@ -171,7 +171,7 @@ export default function UpdateProductUI() {
                   onChange={handleChangeImage}
                 />
                 <ProductImage htmlFor="productImageOne">
-                  {!loading ? (
+                  {loading ? (
                     <LoadingImage>
                       <span className="circle1"></span>
                       <span className="circle2"></span>
@@ -186,7 +186,7 @@ export default function UpdateProductUI() {
                   )}
                 </ProductImage>
                 <ProductImage htmlFor="productImageTwo">
-                  {!loading ? (
+                  {loading ? (
                     <LoadingImage>
                       <span className="circle1"></span>
                       <span className="circle2"></span>

@@ -27,11 +27,6 @@ export default function Card({
   const [isHidden, setIsHidden] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-<<<<<<< Updated upstream
-  console.log(email);
-
-=======
->>>>>>> Stashed changes
   const handleLocalNav = () => {
     setIsHidden((prevState) => !prevState);
   };
