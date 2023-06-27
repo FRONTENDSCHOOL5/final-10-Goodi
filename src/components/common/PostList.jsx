@@ -20,8 +20,14 @@ export default function PostList({ account }) {
   const checkDelete = useRecoilValue(checkDeletePost);
   const checkProfileChange = useRecoilValue(checkProfile);
 
+  console.log(userPostList);
+
   const temp = useParams();
-  const account_name = account ? account : temp.account_name ? temp.account_name : myaccount_name;
+  const account_name = account
+    ? account
+    : temp.account_name
+    ? temp.account_name
+    : myaccount_name;
 
   const updateHeartCount = (postId, count) => {
     setUserPostList((prevPosts) =>
@@ -69,7 +75,7 @@ export default function PostList({ account }) {
               profileImage={post.author.image}
               email={post.author.accountname}
               content={post.content}
-              image={checkImageUrl(post.image.split(",")[0], 'post')}
+              image={checkImageUrl(post.image.split(",")[0], "post")}
               createdAt={post.createdAt}
               hearted={post.hearted}
               heartCount={post.heartCount}

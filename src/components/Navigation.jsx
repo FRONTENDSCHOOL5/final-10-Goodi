@@ -141,7 +141,7 @@ const NavigationLayout = styled.article`
 const NavList = styled.button`
   width: 100%;
   /* max-height: 66px; */
-  padding: 10px 0 0 0;
+  padding: 10px 0 10px 0;
   box-sizing: border-box;
   text-align: center;
   color: var(--gray400-color);
