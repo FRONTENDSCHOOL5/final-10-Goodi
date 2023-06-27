@@ -109,4 +109,20 @@ const CardList = styled.div`
     profile ? "repeat(3, 1fr)" : "repeat(2, 1fr)"};
   grid-template-rows: auto;
   gap: ${({ profile }) => (profile ? "60px 30px" : "60px")};
+
+  position: relative;
+
+  & > article {
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 40px;
+      height: 45px;
+      background-color: white;
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: default;
+    }
+  }
 `;
