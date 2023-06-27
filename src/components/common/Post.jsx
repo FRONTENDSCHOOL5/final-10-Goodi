@@ -145,6 +145,7 @@ export default function Post({
               postId={postId}
               getHeartData={getHeartData}
               cancleHeartData={cancleHeartData}
+              liked={hearted}
             />
           </div>
         </div>
