@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 //component
-import { InputBox } from "../../components/common/Input";
 import Textarea from "./Textarea";
 import Button from "./Button";
 
 // 이미지
-import PlusIcon from "../../assets/icon_plus_gray.svg";
 import AddIcon from "../../assets/add_button_gray.svg";
 
 // API
@@ -73,7 +71,10 @@ export default function UpdatePostingUI({
                 <p>대표 이미지</p>
               </ThumbnailLabel>
               {imgLoading ? (
-                <div>로딩중</div>
+                <LoadingImage>
+                  <span className="circle1"></span>
+                  <span className="circle2"></span>
+                </LoadingImage>
               ) : (
                 getImage && (
                   <img src={BASE_URL + getImage[0]} alt="첫번째 이미지" />
@@ -92,7 +93,10 @@ export default function UpdatePostingUI({
             />
             <PostingImage htmlFor="productImageOne">
               {imgLoading ? (
-                <div>로딩중</div>
+                <LoadingImage>
+                  <span className="circle1"></span>
+                  <span className="circle2"></span>
+                </LoadingImage>
               ) : (
                 getImage && (
                   <img
@@ -106,7 +110,10 @@ export default function UpdatePostingUI({
 
             <PostingImage htmlFor="productImageTwo">
               {imgLoading ? (
-                <div>로딩중</div>
+                <LoadingImage>
+                  <span className="circle1"></span>
+                  <span className="circle2"></span>
+                </LoadingImage>
               ) : (
                 getImage && (
                   <img
@@ -254,6 +261,7 @@ const PostingImage = styled.label`
   justify-content: center;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
 
   &:hover {
     background-color: var(--gray200-color);
@@ -296,4 +304,39 @@ const InputDiv = styled.div`
 const Label = styled.label`
   font-family: var(--font--Bold);
   margin-bottom: 8px;
+`;
+
+const LoadingImage = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 40px;
+  animation: loading 1s ease 100;
+
+  & .circle1 {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c5c5c5;
+  }
+
+  & .circle2 {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c5c5c5;
+    margin-top: 20px;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
 `;

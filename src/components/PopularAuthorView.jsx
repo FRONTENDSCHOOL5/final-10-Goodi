@@ -32,7 +32,7 @@
 
 //   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 //   const [isFollowing, setIsFollowing] = useState(false);
-  
+
 //   const handleFollow = async () => {
 //     try {
 //       const response = await followAPI(account_name, token);
@@ -406,6 +406,8 @@ export default function PopularAuthorview({ account, heartCount }) {
     setHeartValue((prev) => (prev -= 1));
   };
 
+  console.log(userPostList);
+
   return (
     <>
       {userPostList === null || userPostList.length === 0 ? (
@@ -424,10 +426,7 @@ export default function PopularAuthorview({ account, heartCount }) {
                 style={{ margin: "20px" }}
               />
 
-              <ButtonFollow
-                isFollow={isFollowing}
-                accountName={account_name}
-              />
+              <ButtonFollow isFollow={isFollowing} accountName={account_name} />
             </BottomWrap>
           )}
           <PostListWrap hasPosts={userPostList.length > 0}>

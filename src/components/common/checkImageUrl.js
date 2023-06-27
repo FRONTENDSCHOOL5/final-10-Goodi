@@ -3,7 +3,6 @@ function checkImageUrl(Img, position) {
   const pattern = /^https:\/\/api\.mandarin\.weniv\.co\.kr\/(\d{13})\.(png|svg|jpg|jpeg|gif|webp)$/;
 
   if (pattern.test(Img)) {
-    console.log('통과!')
     return Img
   }
   else {
@@ -18,7 +17,6 @@ function checkImageUrl(Img, position) {
 
     const regex = /(\d+)\.(png|svg|jpg|jpeg|gif|webp)$/;
     const match = Img.match(regex);
-    console.log(match)
     const fileNameWithExtension = match && match[1].length === 13 ? match[1] + '.' + match[2] : null
 
     if (fileNameWithExtension) {
