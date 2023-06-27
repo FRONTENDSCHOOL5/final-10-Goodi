@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import ProfileUI from "./ProfileUI";
@@ -53,9 +53,10 @@ export default function Post({
   heartCount,
   updateHeartCount,
 }) {
+  const handleClick = useRef();
   const elapsedTimeString = getElapsedTime(createdAt);
   const [heartValue, setHeartValue] = useState(heartCount);
-  const [isLocalNavOpen, setIsLocalNavOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const getHeartData = () => {
@@ -66,12 +67,30 @@ export default function Post({
   };
 
   const handleLocalNav = () => {
-    setIsLocalNavOpen((prevIsHidden) => !prevIsHidden);
+    setIsHidden((prevIsHidden) => !prevIsHidden);
   };
 
   const handleModal = () => {
     setShowModal(!showModal);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const localNavElement = document.getElementById("localNavElement");
+
+      if (
+        localNavElement &&
+        !localNavElement.contains(event.target) &&
+        !handleClick.current.contains(event.target)
+      ) {
+        setIsHidden(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   const myaccount_name = useRecoilValue(accountname);
   const temp = useParams();
@@ -81,20 +100,25 @@ export default function Post({
     <PostOuter>
       <PostTop>
         <ProfileUI
-          user_profile={checkImageUrl(profileImage, 'profile')}
+          user_profile={checkImageUrl(profileImage, "profile")}
           user_name={username}
           user_email={email}
           mainprofile={false}
           card={true}
           account_name={account_name}
         />
-        <button onClick={handleLocalNav}>
-          <img src={postMenu} alt="게시글 삭제 및 신고 메뉴" />
-        </button>
+        {account_name === myaccount_name && (
+          <button onClick={handleLocalNav}>
+            <img
+              src={postMenu}
+              alt="게시글 삭제 및 신고 메뉴"
+              ref={handleClick}
+            />
+          </button>
+        )}
         <LocalNavWrap>
-          {isLocalNavOpen ? (
+          {isHidden ? (
             <LocalNav
-              // seta={seta}
               handleModal={handleModal}
               width="120px"
               fontSize="14px"
@@ -200,15 +224,6 @@ const PostContent = styled.div`
     font-size: 1rem;
     line-height: 1.4rem;
     display: inline;
-
-    /* margin-bottom: 16px; */
-    /* text-align: justify; */
-
-    /* overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical; */
   }
 `;
 const LocalNavWrap = styled.div`

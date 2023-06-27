@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CardProduct from "../components/common/CardProduct";
+import CardProduct from "../components/common/MainRight";
 import { Link } from "react-router-dom";
 
 import PostList from "../components/common/PostList";
@@ -82,7 +82,7 @@ const MainRight = styled.section`
 `;
 
 const MainBottom = styled.section`
-  padding: 110px 60px 150px 80px;
+  padding: 110px 60px 70px 80px;
   grid-row: 2 / 3;
   grid-column: 1 / 4;
 `;

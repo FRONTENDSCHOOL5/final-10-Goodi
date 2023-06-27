@@ -7,10 +7,10 @@ import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
 
-import SymbolImage from "../assets/symbol.svg";
 import GoogleIcon from "../assets/google.svg";
 import FacebookIcon from "../assets/facebook.svg";
 import KakaoIcon from "../assets/kakao.svg";
+import WelcomTo from "../assets/Welcome to.svg";
 
 import loginAPI from "../api/login";
 import { useRecoilState } from "recoil";
@@ -56,8 +56,6 @@ export default function Login() {
       setToken(newToken);
       setIsAccountname(newAccountname);
 
-      console.log(response);
-
       navigate("/main");
     } else {
       const errorMessage =
@@ -95,8 +93,7 @@ export default function Login() {
         <div className="right-inner">
           <H1 className="a11y-hidden">로그인 페이지</H1>
           <H2>
-            Welcome to
-            <img src={SymbolImage} alt="Symbol" />
+            <img src={WelcomTo} alt="welcome to" />
           </H2>
           <form onSubmit={handleSubmit}>
             <InputDiv>
@@ -229,13 +226,17 @@ const H1 = styled.h1`
 `;
 
 const H2 = styled.div`
-  font-size: 40px;
+  /* font-size: 40px;
   font-family: "Montserrat";
   font-weight: 900;
   display: inline;
   margin-bottom: 30px;
   img {
     vertical-align: text-bottom;
+  } */
+
+  img {
+    height: 76px;
   }
 `;
 const Label = styled.label`

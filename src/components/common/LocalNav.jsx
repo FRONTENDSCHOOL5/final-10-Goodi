@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-export default function LocalNav({ lists, handleModal, ...props }) {
+export default function LocalNav({
+  lists,
+  handleModal,
+  setIsHidden,
+  ...props
+}) {
   const navigate = useNavigate();
 
   return (
-    <LocalNavBar {...props}>
+    <LocalNavBar {...props} id="localNavElement">
       {lists.map((el, i) => {
         return (
           <LocalList key={i}>
