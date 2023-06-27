@@ -147,13 +147,11 @@ export default function PopularAuthorview({ account, heartCount }) {
                         (window.location.href = `/profile/${post.author.accountname}`)
                       }
                     >
-                      <a href={`/profile/${post.author.accountname}`}>
                         <BottomImg
                           src={BASE_URL + (post.image.split(",")[0] || "")}
                           alt=""
                           key={post.id}
                         />
-                      </a>
                       {/* 좋아요 개수와 게시글 내용을 보여주는 요소 */}
                       {post.isHovered && (
                         <>
