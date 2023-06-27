@@ -10,7 +10,6 @@
 
 <div align="center">
   <br/ >
-  <img height="100px" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/a8750e4a-6020-4b40-a6f6-ff841e56d1df" alt="Goodi logo" />
   <h3>개인 굿즈도 이제 편리하게 판매하세요!</h3>
   <br/ >
 </div>
