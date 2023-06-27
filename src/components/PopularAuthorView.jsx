@@ -10,7 +10,7 @@ import accountname from "../recoil/accountname";
 import { useRecoilValue } from "recoil";
 import NoPostsUI from "../components/NoPostsUI";
 import PostListSkeleton from "../style/skeletonUI/SkeletonItem";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { checkDeletePost } from "../recoil/checkChange";
 import { checkProfile } from "../recoil/checkChange";
 import ButtonFollow from "./common/ButtonFollow";
@@ -18,6 +18,7 @@ import followAPI from "../api/follow";
 import iconHeartWhite from "../assets/icon_heart_line_white.svg";
 
 export default function PopularAuthorview({ account, heartCount }) {
+  const navigate = useNavigate();
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = useRecoilValue(loginToken);
@@ -34,23 +35,10 @@ export default function PopularAuthorview({ account, heartCount }) {
 
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const [isFollowing, setIsFollowing] = useState(false);
-  console.log("userPostList", userPostList);
-  const handleFollow = async () => {
-    try {
-      const response = await followAPI(account_name, token);
-      setIsFollowing(true);
-    } catch (error) {
-      console.error("API 에러", error);
-    }
-  };
 
-  const handleUnfollow = async () => {
-    try {
-      const response = await unfollowAPI(account_name, token);
-      setIsFollowing(false);
-    } catch (error) {
-      console.error("API 에러", error);
-    }
+  const handleNavigate = () => {
+    navigate();
+    console.log("sdf");
   };
 
   useEffect(() => {
@@ -144,14 +132,14 @@ export default function PopularAuthorview({ account, heartCount }) {
                       onMouseEnter={() => handleMouseEnter(post.id)}
                       onMouseLeave={handleMouseLeave}
                       onClick={() =>
-                        (window.location.href = `/profile/${post.author.accountname}`)
+                        navigate(`/profile/${post.author?.accountname}`)
                       }
                     >
-                        <BottomImg
-                          src={BASE_URL + (post.image.split(",")[0] || "")}
-                          alt=""
-                          key={post.id}
-                        />
+                      <BottomImg
+                        src={BASE_URL + (post.image.split(",")[0] || "")}
+                        alt=""
+                        key={post.id}
+                      />
                       {/* 좋아요 개수와 게시글 내용을 보여주는 요소 */}
                       {post.isHovered && (
                         <>

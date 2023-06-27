@@ -38,7 +38,7 @@ export default function Header() {
         </LogoLink>
       </h1>
       <FollowingWrap>
-        {followingData ? (
+        {!followingData ? (
           <div></div>
         ) : (
           followingData

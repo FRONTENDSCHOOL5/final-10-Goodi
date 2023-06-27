@@ -15,9 +15,9 @@ export default function ProtectRoute({ children }) {
     }
   }, []);
 
-  if (!isLogin) {
-    return null;
-  }
+  // if (!isLogin) {
+  //   return null;
+  // }
 
   return children;
 }

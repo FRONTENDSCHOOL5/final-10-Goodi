@@ -5,7 +5,7 @@ import LoginImage1 from "../assets/login_1.svg";
 import LoginImage2 from "../assets/login_image5.svg";
 import LoginImage3 from "../assets/login_image2.svg";
 
-export function LeftDiv () {
+export function LeftDiv() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
@@ -53,12 +53,16 @@ export function LeftDiv () {
         fadeInDuration={fadeInDuration}
         fadeOutDuration={fadeOutDuration}
       >
-        <img src={getCurrentImageUrl()} alt="carousel" onLoad={handleImageLoad} />
+        <img
+          src={getCurrentImageUrl()}
+          alt="carousel"
+          onLoad={handleImageLoad}
+        />
       </ImageContainer>
       <img className="login-ment" src={LoginMent} alt="Login Ment" />
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   background-color: black;

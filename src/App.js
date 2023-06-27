@@ -20,7 +20,7 @@ import ProtectRoute from './pages/ProtectRoute';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/final-10-Goodi'>
       <ScrollToTop />
       <GlobalStyle />
       <Routes>
