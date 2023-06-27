@@ -89,7 +89,7 @@ const MainBottom = styled.section`
 
 const Title = styled.h2`
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
   &::before {
     content: "";
@@ -102,10 +102,6 @@ const Title = styled.h2`
     background: url(${pointEdge}) no-repeat center/contain;
     vertical-align: bottom;
   }
-`;
-
-const StyledPostList = styled(PostList)`
-  display: none;
 `;
 
 const ProductLink = styled(Link)`
