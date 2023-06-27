@@ -11,10 +11,9 @@ import nonLikeIcon from "../../assets/empty_likeBtn.svg";
 import likeIcon from "../../assets/post_fullLikeBtn.svg";
 
 // 기능 구현된거 없어요!!
-function PostLikeBtn({ liked, postId, getHeartData, cancleHeartData }) {
+function PostLikeBtn({  postId, getHeartData, cancleHeartData , liked }) {
   const initialHearted = localStorage.getItem(`hearted_${postId}`) === "true";
   const [token] = useRecoilState(loginToken);
-  // const [liked, setLiked] = useRecoilState(likedState);
   const [IsLiked, setIsLiked] = useState(liked);
   const [heartCount, setHeartCount] = useState(0); 
   const [hearted, sethearted] = useState(initialHearted);
@@ -29,7 +28,7 @@ function PostLikeBtn({ liked, postId, getHeartData, cancleHeartData }) {
 
     setIsButtonDisabled(true); // 버튼 비활성화
 
-    if (hearted) {
+    if (IsLiked) {
       // 이미 하트를 누른 경우, 좋아요 취소
       const response = await cancleLikeAPI(token, postId);
       if (response) {
