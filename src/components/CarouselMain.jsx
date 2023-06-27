@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
-import CarouselImg1 from "../assets/sample-img/sample-image-1.png";
-import CarouselImg3 from "../assets/sample-img/sample-image-3.png";
-import CarouselImg5 from "../assets/sample-img/sample-image-15.png";
-import CarouselImg6 from "../assets/sample-img/sample-image-18.png";
+import CarouselImg4 from "../assets/sample-img/sample-image-4.jpg";
+import CarouselImg22 from "../assets/sample-img/sample-image-22.png";
+import CarouselImg25 from "../assets/sample-img/sample-image-25.jpg";
+import CarouselImg26 from "../assets/sample-img/sample-image-26.png";
+
 
 export default function CarouselMain() {
-  const compareFn = (a, b) => {
-    return a.endline - b.endline;
-  };
   const intergratedData = [
-    CarouselImg1,
-    CarouselImg3,
-    CarouselImg5,
-    CarouselImg6,
+    CarouselImg26,
+    CarouselImg25,
+    CarouselImg22,
+    CarouselImg4
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [fixedIndex, setFixedIndex] = useState(-1);
 
   const carouselHandler = (direction) => {
     if (activeIndex <= 2) {
@@ -31,7 +28,7 @@ export default function CarouselMain() {
   useEffect(() => {
     const interval = setInterval(() => {
       carouselHandler();
-    }, 3700);
+    }, 7000);
   }, []);
 
   return (
@@ -80,7 +77,7 @@ export default function CarouselMain() {
 
 const Outer = styled.div`
   overflow: hidden;
-  aspect-ratio: 375/390;
+  aspect-ratio: 375/350;
 `
 const CarouselContainer = styled.section`
   display: flex;
@@ -99,82 +96,9 @@ const SlideImgs = styled.div`
   height: inherit;
   background-color: black;
   transform: translateY(-${(props) => props.index * 100}%);
-  /* transition: 1000ms all; */
+
   img {
-    aspect-ratio: 375/390;
+    aspect-ratio: 375/350;
     object-fit: cover;
-    
   }
-`;
-
-const SlideDescription = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  left: 20px;
-  bottom: 25px;
-  span {
-    color: white;
-  }
-
-  span:nth-child(1) {
-    font-size: ${(props) => props.theme.fontSize.sm};
-    margin-bottom: 20px;
-    span {
-      padding: 4px 8px;
-      border: 1px solid white;
-      border-radius: 10px;
-    }
-  }
-
-  span:nth-child(2) {
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: ${(props) => props.theme.fontSize.lg};
-  }
-  span:nth-child(3) {
-    margin-bottom: 15px;
-    font-weight: bold;
-    font-size: ${(props) => props.theme.fontSize.lg};
-  }
-
-  span:nth-child(4) {
-    font-size: ${(props) => props.theme.fontSize.base};
-    color: #aaaaaa;
-  }
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  justify-content: space-between;
-  padding: 0px 18px;
-  color: rgba(255, 255, 255, 0.4);
-
-  button {
-    width: 32px;
-    height: 32px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transition: 0.3s all;
-  }
-  button:hover {
-    background-color: rgba(255, 255, 255, 0.6);
-  }
-`;
-
-const SlideNum = styled.div`
-  width: 55px;
-  right: 14px;
-  bottom: 18px;
-  padding: 8px 12px;
-  position: absolute;
-  border-radius: 15px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.2);
 `;
