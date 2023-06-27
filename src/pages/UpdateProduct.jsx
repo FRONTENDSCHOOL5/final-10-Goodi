@@ -53,7 +53,7 @@ export default function UpdateProductUI() {
           link: response.product.link,
           itemImage: response.product.itemImage,
         });
-        setImageWrap(response.product.itemImage.split(","))
+        setImageWrap(response.product.itemImage.split(","));
       } catch (error) {
         console.error("상품 정보 호출 실패", error);
       }
@@ -62,13 +62,13 @@ export default function UpdateProductUI() {
   }, []);
 
   useEffect(() => {
-    setFormData({ ...formData, itemImage: imageWrap.join(',') })
-  }, [imageWrap])
+    setFormData({ ...formData, itemImage: imageWrap.join(",") });
+  }, [imageWrap]);
 
   const handleChangeImage = async (e) => {
     const { name } = e.target;
     const file = e.target.files[0];
-    const imgSrc = await PostImageAPI(file)
+    const imgSrc = await PostImageAPI(file);
 
     try {
       setLoading(true);
@@ -78,12 +78,11 @@ export default function UpdateProductUI() {
         return newArray;
       });
       setLoading(false);
-    }
-    catch (error) {
+    } catch (error) {
       setLoading(false);
       console.error(error);
     }
-  }
+  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -118,8 +117,8 @@ export default function UpdateProductUI() {
         itemName: formData.itemName,
         price: formData.price,
         link: formData.link,
-        itemImage: formData.itemImage
-      }
+        itemImage: formData.itemImage,
+      },
     };
 
     await productPut(product_id, token, updatedProductData);
@@ -148,10 +147,12 @@ export default function UpdateProductUI() {
                   <ThumbnailLabel>
                     <p>대표 이미지</p>
                   </ThumbnailLabel>
-                  {loading ? (
-                    <p>Loading...</p>
+                  {!loading ? (
+                    <LoadingImage>
+                      <span className="circle1"></span>
+                      <span className="circle2"></span>
+                    </LoadingImage>
                   ) : (
-
                     <img
                       src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
                       style={imageWrap[0] ? null : { width: "90px" }}
@@ -170,11 +171,14 @@ export default function UpdateProductUI() {
                   onChange={handleChangeImage}
                 />
                 <ProductImage htmlFor="productImageOne">
-                  {loading ? (
-                    <p>Loading...</p>
+                  {!loading ? (
+                    <LoadingImage>
+                      <span className="circle1"></span>
+                      <span className="circle2"></span>
+                    </LoadingImage>
                   ) : (
                     <img
-                      name='1'
+                      name="1"
                       src={imageWrap[1] ? BASE_URL + imageWrap[1] : AddIcon}
                       style={imageWrap[1] ? null : { width: "32px" }}
                       alt=""
@@ -182,11 +186,14 @@ export default function UpdateProductUI() {
                   )}
                 </ProductImage>
                 <ProductImage htmlFor="productImageTwo">
-                  {loading ? (
-                    <p>Loading...</p>
+                  {!loading ? (
+                    <LoadingImage>
+                      <span className="circle1"></span>
+                      <span className="circle2"></span>
+                    </LoadingImage>
                   ) : (
                     <img
-                      name='2'
+                      name="2"
                       src={imageWrap[2] ? BASE_URL + imageWrap[2] : AddIcon}
                       style={imageWrap[2] ? null : { width: "32px" }}
                       alt=""
@@ -253,7 +260,9 @@ export default function UpdateProductUI() {
                   value={formData.link}
                   onChange={handleInputChange}
                   name="link"
-                  hasError={userErrorMessage.includes("상품소개글을 입력해주세요")}
+                  hasError={userErrorMessage.includes(
+                    "상품소개글을 입력해주세요"
+                  )}
                 />
                 {userErrorMessage.includes("상품소개글을 입력해주세요") && (
                   <ErrorMassage>상품소개글을 입력해주세요</ErrorMassage>
@@ -273,7 +282,6 @@ export default function UpdateProductUI() {
     </Layout>
   );
 }
-
 
 const PostProductWrap = styled.div`
   padding-top: 100px;
@@ -398,6 +406,7 @@ const ProductImage = styled.label`
   justify-content: center;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
 
   &:hover {
     background-color: var(--gray200-color);
@@ -432,4 +441,39 @@ const ErrorMassage = styled.div`
   margin-top: 10px;
   color: red;
   font-size: 14px;
+`;
+
+const LoadingImage = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 40px;
+  animation: loading 1s ease 100;
+
+  & .circle1 {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c5c5c5;
+  }
+
+  & .circle2 {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c5c5c5;
+    margin-top: 20px;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
 `;

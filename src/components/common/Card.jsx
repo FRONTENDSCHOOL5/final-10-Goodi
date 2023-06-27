@@ -27,8 +27,11 @@ export default function Card({
   const [isHidden, setIsHidden] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+<<<<<<< Updated upstream
   console.log(email);
 
+=======
+>>>>>>> Stashed changes
   const handleLocalNav = () => {
     setIsHidden((prevState) => !prevState);
   };
@@ -39,6 +42,7 @@ export default function Card({
       const localNavElement = document.getElementById("localNavElement");
 
       if (
+        handleClick &&
         localNavElement &&
         !localNavElement.contains(event.target) &&
         !handleClick.current.contains(event.target)

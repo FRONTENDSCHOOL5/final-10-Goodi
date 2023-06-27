@@ -92,7 +92,7 @@ export default function PostingUI({
     }));
     const errors = [];
     if (postingData.post.image === "") {
-      errors.push("게시글 이미지를 한개 이상 업로드 해주세요"); 
+      errors.push("게시글 이미지를 한개 이상 업로드 해주세요");
     } else {
       errors.push("");
     }
@@ -129,7 +129,10 @@ export default function PostingUI({
                 <p>대표 이미지</p>
               </ThumbnailLabel>
               {loading ? (
-                <p>Loading...</p>
+                <LoadingImage>
+                  <span className="circle1"></span>
+                  <span className="circle2"></span>
+                </LoadingImage>
               ) : (
                 <img
                   src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
@@ -156,7 +159,10 @@ export default function PostingUI({
             />
             <ProductImage htmlFor="productImageOne">
               {loading ? (
-                <p>Loading...</p>
+                <LoadingImage>
+                  <span className="circle1"></span>
+                  <span className="circle2"></span>
+                </LoadingImage>
               ) : (
                 <img
                   src={imageWrap[1] ? BASE_URL + imageWrap[1] : AddIcon}
@@ -166,7 +172,10 @@ export default function PostingUI({
             </ProductImage>
             <ProductImage htmlFor="productImageTwo">
               {loading ? (
-                <p>Loading...</p>
+                <LoadingImage>
+                  <span className="circle1"></span>
+                  <span className="circle2"></span>
+                </LoadingImage>
               ) : (
                 <img
                   src={imageWrap[2] ? BASE_URL + imageWrap[2] : AddIcon}
@@ -332,6 +341,7 @@ const ProductImage = styled.label`
   justify-content: center;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
 
   &:hover {
     background-color: var(--gray200-color);
@@ -366,4 +376,39 @@ const ErrorMassage = styled.div`
   margin-top: 10px;
   color: red;
   font-size: 14px;
+`;
+
+const LoadingImage = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 40px;
+  animation: loading 1s ease 100;
+
+  & .circle1 {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c5c5c5;
+  }
+
+  & .circle2 {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c5c5c5;
+    margin-top: 20px;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
 `;
