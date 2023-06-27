@@ -11,9 +11,9 @@ export default function Footer() {
     <FooterLayout>
       <img src={FooterLogo} alt="footer 로고" />
       <p className="footer_text">
-        <strong>상업적 목적이 없는 포트폴리오용 사이트입니다 : {")"}</strong>{" "}
+        <strong>상업적 목적이 없는 포트폴리오용 사이트입니다</strong>
         <br />
-        오가은, 최나경, 노태희가 팀을 이뤄서 포트폴리오용 사이트입니다 어쩌구{" "}
+        오가은, 최나경, 노태희가 팀을 이뤄서 포트폴리오용 사이트입니다
         <br />
         Goodi. ©2023. All Rights Reserved.
       </p>
