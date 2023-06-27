@@ -38,9 +38,11 @@ export default function Header() {
         </LogoLink>
       </h1>
       <FollowingWrap>
-        {followingData &&
+        {followingData ? (
+          <div></div>
+        ) : (
           followingData
-            .map((data) => {
+            ?.map((data) => {
               return (
                 <FollowingIcon
                   key={data._id}
@@ -49,14 +51,12 @@ export default function Header() {
                   }}
                   type="button"
                 >
-                  <img
-                    src={checkImageUrl(data.image, 'profile')}
-                    alt=""
-                  />
+                  <img src={checkImageUrl(data.image, "profile")} alt="" />
                 </FollowingIcon>
               );
             })
-            .slice(0, 5)}
+            .slice(0, 5)
+        )}
       </FollowingWrap>
     </HeaderLayout>
   );

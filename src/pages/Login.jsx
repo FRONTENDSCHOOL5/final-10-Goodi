@@ -1,11 +1,12 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 
 import { InputBox } from "../components/common/Input";
 import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
+import Toast from "../components/common/Toast";
 
 import GoogleIcon from "../assets/google.svg";
 import FacebookIcon from "../assets/facebook.svg";
@@ -17,16 +18,37 @@ import { useRecoilState } from "recoil";
 import { loginCheck } from "../recoil/loginCheck";
 import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
+import { useRecoilValue } from "recoil";
 
 export default function Login() {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const isLogin = useRecoilValue(loginCheck);
   const [errorMessage, setErrorMessage] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
+  const [toast, setToast] = useState(false);
 
   const [isloginCheck, setIsLoginCheck] = useRecoilState(loginCheck);
   const [token, setToken] = useRecoilState(loginToken);
   const [isAccountname, setIsAccountname] = useRecoilState(accountname);
+  const { state } = useLocation();
+  const [errorMSG, setErrorMSG] = useState("");
+
+  useEffect(() => {
+    if (isloginCheck) {
+      navigate("/main");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (state) {
+      setToast(true);
+      setErrorMSG(state);
+      setTimeout(() => {
+        setErrorMSG("");
+      }, 3000);
+    }
+  }, []);
 
   const [loginData, setLoginData] = useState({
     user: {
@@ -90,6 +112,7 @@ export default function Login() {
     <OuterDiv>
       <LeftDiv />
       <RightDiv>
+        {errorMSG && <Toast setToast={setToast} text={state} />}
         <div className="right-inner">
           <H1 className="a11y-hidden">로그인 페이지</H1>
           <H2>
