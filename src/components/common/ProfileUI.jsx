@@ -11,6 +11,7 @@ function ProfileUI(props) {
     card,
     follow,
     account_name,
+    isfollow,
     children,
   } = props;
 
