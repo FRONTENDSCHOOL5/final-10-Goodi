@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CardProduct from "../components/common/MainRight";
 import { Link } from "react-router-dom";
 
 import PostList from "../components/common/PostList";
@@ -15,6 +14,7 @@ import PopularAuthorView from "../components/PopularAuthorView";
 import Layout from "../layout/Layout";
 import MainSkeleton from "../style/skeletonUI/skeletonPage/MainSkeleton";
 import CarouselMain from "../components/CarouselMain";
+import MainRightCard from "../components/common/MainRightCard";
 
 export default function Main() {
   const [loading, setLoading] = useState(false);
@@ -44,8 +44,7 @@ export default function Main() {
             <Title>
               <img src={followerProducts} alt="Follower Products" />
             </Title>
-            {/* <CardProduct /> */}
-            <CardProduct />
+            <MainRightCard />
             <ProductLink to="/postproduct">나도 굿즈 판매하기</ProductLink>
           </MainRight>
 
@@ -90,7 +89,7 @@ const MainBottom = styled.section`
 
 const Title = styled.h2`
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
   &::before {
     content: "";
@@ -103,10 +102,6 @@ const Title = styled.h2`
     background: url(${pointEdge}) no-repeat center/contain;
     vertical-align: bottom;
   }
-`;
-
-const StyledPostList = styled(PostList)`
-  display: none;
 `;
 
 const ProductLink = styled(Link)`

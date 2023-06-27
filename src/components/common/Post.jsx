@@ -228,6 +228,6 @@ const PostContent = styled.div`
 `;
 const LocalNavWrap = styled.div`
   position: absolute;
-  top: 346%;
-  left: 137%;
+  top: 43px;
+  right: 0;
 `;

@@ -27,8 +27,7 @@ export default function Card({
   const [isHidden, setIsHidden] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  console.log(myaccount_name);
-  console.log(temp);
+  console.log(email);
 
   const handleLocalNav = () => {
     setIsHidden((prevState) => !prevState);
@@ -63,9 +62,9 @@ export default function Card({
         <ProfileUI
           user_profile={profile}
           user_name={name}
-          user_email={email}
           card="true"
-          account_name={account_name}
+          account_name={email}
+          id={id}
         />
         {account_name === myaccount_name && (
           <button onClick={handleLocalNav}>
@@ -192,6 +191,6 @@ const ArticleTop = styled.div`
 `;
 const LocalNavWrap = styled.div`
   position: absolute;
-  top: 360%;
-  left: 138%;
+  top: 43px;
+  right: 0;
 `;

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 export default function LocalNav({
@@ -39,9 +39,6 @@ const LocalNavBar = styled.ul`
   border: 1px solid var(--gray200-color);
   box-sizing: border-box;
   background-color: white;
-  position: relative;
-  left: -216px;
-  top: -160px;
   padding: 6px 6px;
   box-shadow: -2px 4px 6px 0 rgba(0, 0, 0, 0.08);
   z-index: 1;
@@ -50,6 +47,12 @@ const LocalNavBar = styled.ul`
     border-top: 1px solid var(--gray200-color);
     padding-top: 4px;
   }
+
+  ${(props) => props.navibar && css`
+    position: absolute;
+    bottom: 227px;
+    right: 90px;
+  `}
 `;
 
 const LocalList = styled.li``;
@@ -61,6 +64,7 @@ const LocalListButton = styled.button`
   padding: 14px 0;
   font-family: var(--font--Medium);
   cursor: pointer;
+  position: relative;
 
   &:hover {
     background-color: #f0ffed;
