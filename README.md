@@ -7,15 +7,17 @@
 ## new Ten
 > 🦁멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 10팀
 >
-> 🔗 배포 링크 [https://frontendschool5.github.io/final-10-Goodi](https://frontendschool5.github.io/final-10-Goodi)
+> 🔗 <strong>배포 링크</strong> [https://frontendschool5.github.io/final-10-Goodi](https://frontendschool5.github.io/final-10-Goodi)  <br />
+> 테스트 ID: goodi@test.com  <br />
+> 테스트 password: 123123  <br />
 > 
 > 프로젝트 기간 : 2023.06.01 ~ 2023.06.28
 
 <div align="center">
-  <br/ >
+  <br />
   <img height="100px" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/a8750e4a-6020-4b40-a6f6-ff841e56d1df" alt="Goodi logo" />
   <h3>개인 굿즈도 이제 편리하게 판매하세요!</h3>
-  <br/ >
+  <br />
 </div>
 
 <div align="center">
