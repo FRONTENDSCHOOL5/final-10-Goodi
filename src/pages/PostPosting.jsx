@@ -8,7 +8,7 @@ import PostingUI from "../components/common/PostingUI";
 
 //이미지
 import PostBackground from "../assets/post_bg.svg";
-import postUproad from "../assets/post_uproad.svg";
+import postUproad from "../assets/post_upload.svg";
 
 //API
 import postingAPI from "../api/posting";
