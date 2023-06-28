@@ -41,8 +41,8 @@
       <figcaption>회원가입</figcaption>
       <br />
       <br />
-      <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/dac6e147-1cb2-4302-8012-7d8135fb08a2" />
-      <figcaption>로그인</figcaption>
+    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/dac6e147-1cb2-4302-8012-7d8135fb08a2" />
+    <figcaption>로그인</figcaption>
   </details>
 
   <details>
@@ -61,15 +61,22 @@
     <br />
     <br />
   </details>
+  
    <details>
     <summary><strong>프로필</strong></summary>
      <br />
     <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/dd07e8da-d571-45cb-b58b-0c8305e8ca1a" />
      <figcaption> 프로필 </figcaption>
+      <br />
+    <br />
+    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/bdefc79e-e7ca-4152-9384-fae5138b135d" />
+      <br />
+      <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/569a9413-ab6e-4f48-a678-953a23af3f1d" />
+     <figcaption> 프로필 수정 </figcaption>
   </details>
   
   <details>
-    <summary><strong>상품 상세/장바구니/채팅</strong></summary>
+    <summary><strong>상품 상세/장바구니</strong></summary>
      <br />
     <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/a3d8614a-754d-42b2-8dc7-81a7bf44739b" />
      <figcaption> 상품 상세 </figcaption>
@@ -78,8 +85,30 @@
     <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/c60daeb6-f409-4bab-8d8e-3f124f99005f" />
      <figcaption> 장바구니 </figcaption>
   </details>
-</details>
 
+   <details>
+    <summary><strong>채팅</strong></summary>
+     <br />
+    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/b960ef1b-2edc-4bbc-8716-9468c319978b" />
+     <figcaption> 채팅 </figcaption>
+       <br />
+    <br />
+    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/5fe64541-3247-4772-a567-af402ba903c0" />
+     <figcaption> 채팅 나가기 </figcaption>
+  </details>
+
+  <details>
+    <summary><strong>검색/팔로우</strong></summary>
+     <br />
+    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/07a20a17-2548-4bd0-a3ae-1ee954a158e2" />
+     <figcaption> 검색 </figcaption>
+    <br />
+    <br />
+    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/858a6379-e6cf-4a29-bb10-6593bb872ef9" />
+     <figcaption> 팔로우/팔로잉 </figcaption>
+  </details>
+  <br />
+</details>
 
 - "Goodi" 는 <strong>개인 굿즈 판매를 위한 플랫폼</strong> 입니다.
 - 누구나 자신의 굿즈를 판매할 수 있고, 구매할 수 있습니다.
@@ -166,9 +195,10 @@ goodi
     ├── api
     ├── assets
     ├── components
-    ├── hooks
-    ├── pages
+    │         └── common
     ├── layout
+    ├── pages
+    ├── recoil
     └── style
 ```
 
