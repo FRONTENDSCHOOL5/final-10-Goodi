@@ -50,7 +50,7 @@ const LocalNavBar = styled.ul`
 
   ${(props) => props.navibar && css`
     position: absolute;
-    bottom: 227px;
+    bottom: 177px;
     right: 90px;
   `}
 `;
