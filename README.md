@@ -1,7 +1,7 @@
 <h1><img width="30px" height="30px" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/abe7692a-c3e8-4fcb-927f-4169f073947d" />Goodi<img width="30px" height="30px" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/abe7692a-c3e8-4fcb-927f-4169f073947d" /></h1>
 
 <p align="center">
-<img width="70%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/ebc03634-f201-497d-bfef-ec995af7ea51" alt="Goodi" />
+<img width=85%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/ebc03634-f201-497d-bfef-ec995af7ea51" alt="Goodi" />
 </p>
 
 ## new Ten
