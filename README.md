@@ -5,6 +5,8 @@
 </p>
 
 ## new Ten
+
+<img width="1920" alt="main_image" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/124513796/90b92e78-1a0f-473b-a62d-48752e3af489">
 > 🦁멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 10팀
 >
 > 🔗 <strong>배포 링크</strong> [https://frontendschool5.github.io/final-10-Goodi](https://frontendschool5.github.io/final-10-Goodi)  <br />
@@ -16,6 +18,7 @@
 <div align="center">
   <br />
   <img height="100px" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/a8750e4a-6020-4b40-a6f6-ff841e56d1df" alt="Goodi logo" />
+
   <h3>개인 굿즈도 이제 편리하게 판매하세요!</h3>
   <br />
 </div>
@@ -117,6 +120,7 @@
 - 간편한 상품 등록과 판매자 연결, 마케팅 지원 서비스를 제공합니다.
 
 ### [주요 기능]
+
 - 핵심 기능 : 상품 등록, 판매, 주문 관리, 마케팅 지원, 템플릿 제공
 - 부가 기능 : 판매자 랭킹, 상품 추천 기능
 - 기능별 상세 내용
@@ -167,7 +171,6 @@
 </tr>
 </table>
 
-
 ### ✏️ Commit Convention
 
 ```
@@ -183,13 +186,12 @@
 - remove: 파일 삭제
 ```
 
-
 <br />
 
 ## 📁 폴더 구조
 
 ```
-📁 goodi 
+📁 goodi
 ├── public
 ├── src
 │   ├── api
@@ -208,14 +210,14 @@
 <br />
 
 ## 프로젝트 관련 문서
+
 - ⭐️ [노션](https://cord-word-ba9.notion.site/Project-Goodi-e91a4f92cb9140b6b35a9b4f033cd11b?pvs=4)
 - 🖼️ [기능 명세서](https://cord-word-ba9.notion.site/b7ea494715bd4bb98738e24849272e2a?pvs=4)
 - ✍️ [피그마](https://www.figma.com/community/file/1255683569098683877)
 - 🎨 와이어프레임/유저 플로우
-<span align="left">
-<img width="45%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/82e5026f-76d2-430f-9806-7f6deecfa8df" alt="구디 유저 플로우" />
-</span>
-<span align="right">
-<img width="50%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/cd16e5af-f2a8-45b1-a302-f7b0d0f361c9" alt="구디 유저 플로우" />
-</span>
-
+  <span align="left">
+  <img width="45%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/82e5026f-76d2-430f-9806-7f6deecfa8df" alt="구디 유저 플로우" />
+  </span>
+  <span align="right">
+  <img width="50%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/cd16e5af-f2a8-45b1-a302-f7b0d0f361c9" alt="구디 유저 플로우" />
+  </span>
