@@ -6,7 +6,6 @@
 
 ## new Ten
 
-<img width="1920" alt="main_image" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/124513796/90b92e78-1a0f-473b-a62d-48752e3af489">
 > 🦁멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 10팀
 >
 > 🔗 <strong>배포 링크</strong> [https://frontendschool5.github.io/final-10-Goodi](https://frontendschool5.github.io/final-10-Goodi)  <br />
