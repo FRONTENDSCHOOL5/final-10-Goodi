@@ -213,7 +213,7 @@
 - ⭐️ [노션](https://cord-word-ba9.notion.site/Project-Goodi-e91a4f92cb9140b6b35a9b4f033cd11b?pvs=4)
 - 🖼️ [기능 명세서](https://cord-word-ba9.notion.site/b7ea494715bd4bb98738e24849272e2a?pvs=4)
 - ✍️ [피그마](https://www.figma.com/community/file/1255683569098683877)
-- 🎨 와이어프레임/유저 플로우
+- 🎨 초기 와이어프레임/정보 구조도
   <span align="left">
   <img width="45%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/82e5026f-76d2-430f-9806-7f6deecfa8df" alt="구디 유저 플로우" />
   </span>
