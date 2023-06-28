@@ -135,6 +135,8 @@
 </tr>
 </table>
 
+<br />
+
 ### ✏️ Commit Convention
 
 ```
