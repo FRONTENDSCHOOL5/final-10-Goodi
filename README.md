@@ -1,4 +1,4 @@
-<h1><img width="30px" height="30px" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/abe7692a-c3e8-4fcb-927f-4169f073947d" />Goodi<img width="30px" height="30px" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/abe7692a-c3e8-4fcb-927f-4169f073947d" /></h1>
+![image](https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/0f854ff6-fe24-4d04-8a8b-dd6271a4420a)<h1><img width="30px" height="30px" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/abe7692a-c3e8-4fcb-927f-4169f073947d" />Goodi<img width="30px" height="30px" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/abe7692a-c3e8-4fcb-927f-4169f073947d" /></h1>
 
 ## new Ten
 > 🦁멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 10팀
@@ -43,27 +43,30 @@
  <summary><h3>기능 미리보기</h3></summary>
     <details>
     <summary><strong>회원가입/로그인</strong></summary>
-    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/1238bf08-b41a-4f66-9fff-d820b8db2ad0" />
+      <br />
+    <img width="80%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/1238bf08-b41a-4f66-9fff-d820b8db2ad0" />
       <br />
       <br />
-      <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/dac6e147-1cb2-4302-8012-7d8135fb08a2" />
+      <img width="80%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/dac6e147-1cb2-4302-8012-7d8135fb08a2" />
   </details>
 
   <details>
     <summary><strong>메인</strong></summary>
-    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/c091eed7-af78-4548-8d7f-1e47238984d9" />
+    <br />
+    <img width="80%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/c091eed7-af78-4548-8d7f-1e47238984d9" />
     <br />
     <br />
-     <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/94f82c86-1774-4c26-8da5-b88601144ec5" />
+     <img width="80%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/94f82c86-1774-4c26-8da5-b88601144ec5" />
     <br />
     <br />
-    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/77f88606-28bf-4f6f-b338-86f1586b3fc2" />
+    <img width="80%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/77f88606-28bf-4f6f-b338-86f1586b3fc2" />
     <br />
     <br />
   </details>
    <details>
     <summary><strong>프로필</strong></summary>
-    <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/dd07e8da-d571-45cb-b58b-0c8305e8ca1a" />
+     <br />
+    <img width="80%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/dd07e8da-d571-45cb-b58b-0c8305e8ca1a" />
   </details>
 </details>
 
