@@ -7,7 +7,7 @@
 ## new Ten
 > 🦁멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 10팀
 >
-> 🔗 배포 링크 
+> 🔗 배포 링크 [https://frontendschool5.github.io/final-10-Goodi](https://frontendschool5.github.io/final-10-Goodi)
 > 
 > 프로젝트 기간 : 2023.06.01 ~ 2023.06.28
 
@@ -187,17 +187,20 @@
 ## 📁 폴더 구조
 
 ```
-goodi 
+📁 goodi 
 ├── public
-└── src
-    ├── api
-    ├── assets
-    ├── components
-    │         └── common
-    ├── layout
-    ├── pages
-    ├── recoil
-    └── style
+├── src
+│   ├── api
+│   ├── assets
+│   ├── components
+│   │         └── common
+│   ├── layout
+│   ├── pages
+│   ├── recoil
+│   └── style
+├──📄 App.js
+└──📄 index.js
+
 ```
 
 <br />
