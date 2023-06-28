@@ -69,7 +69,7 @@
   </details>
   
   <details>
-    <summary><strong>상품 상세/장바구니</strong></summary>
+    <summary><strong>상품 상세/장바구니/채팅</strong></summary>
      <br />
     <img width="100%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/a3d8614a-754d-42b2-8dc7-81a7bf44739b" />
      <figcaption> 상품 상세 </figcaption>
@@ -79,6 +79,7 @@
      <figcaption> 장바구니 </figcaption>
   </details>
 </details>
+
 
 - "Goodi" 는 <strong>개인 굿즈 판매를 위한 플랫폼</strong> 입니다.
 - 누구나 자신의 굿즈를 판매할 수 있고, 구매할 수 있습니다.
@@ -91,6 +92,8 @@
   - 상품 등록 : 상품 정보, 가격, 수량, 판매자 url 입력 후 등록
   - 마케팅 지원 : 판매자 팔로우 기능, 판매자 추천 기능, 유저 검색 기능
   - 템플릿 제공 : 디자인 템플릿 제공
+
+<br />
 
 ## 🛠️ 기술 스택
 
@@ -135,7 +138,6 @@
 </tr>
 </table>
 
-<br />
 
 ### ✏️ Commit Convention
 
