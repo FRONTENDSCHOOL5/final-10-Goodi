@@ -7,7 +7,7 @@ import PostList from "../components/common/PostList";
 import commonBanner from "../assets/common-banner.svg";
 import arrowPrimaryIcon from "../assets/icon_arrow_primary.svg";
 import pointEdge from "../assets/point-edge.svg";
-import followerProducts from "../assets/follower-products.svg";
+import popularProducts from "../assets/popular-products.svg"
 import popularAuthor from "../assets/popular-author.svg";
 
 import PopularAuthorView from "../components/PopularAuthorView";
@@ -42,7 +42,7 @@ export default function Main() {
 
           <MainRight>
             <Title>
-              <img src={followerProducts} alt="Follower Products" />
+              <img src={popularProducts} alt="popular products" />
             </Title>
             <MainRightCard />
             <ProductLink to="/postproduct">나도 굿즈 판매하기</ProductLink>
