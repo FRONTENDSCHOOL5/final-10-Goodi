@@ -214,8 +214,9 @@
 - 🖼️ [기능 명세서](https://cord-word-ba9.notion.site/b7ea494715bd4bb98738e24849272e2a?pvs=4)
 - ✍️ [피그마](https://www.figma.com/community/file/1255683569098683877)
 - 🎨 초기 와이어프레임/정보 구조도
+
   <span align="left">
-  <img width="45%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/82e5026f-76d2-430f-9806-7f6deecfa8df" alt="구디 유저 플로우" />
+  <img width="40%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/82e5026f-76d2-430f-9806-7f6deecfa8df" alt="구디 유저 플로우" />
   </span>
   <span align="right">
   <img width="50%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/cd16e5af-f2a8-45b1-a302-f7b0d0f361c9" alt="구디 유저 플로우" />
