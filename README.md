@@ -9,8 +9,8 @@
 > 🦁멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 10팀
 >
 > 🔗 <strong>배포 링크</strong> [https://frontendschool5.github.io/final-10-Goodi](https://frontendschool5.github.io/final-10-Goodi)  <br />
-> 테스트 ID: goodi@test.com  <br />
-> 테스트 password: 123123  <br />
+> 테스트 ID: gooodi@gmail.com  <br />
+> 테스트 password: 123123123  <br />
 > 
 > 프로젝트 기간 : 2023.06.01 ~ 2023.06.28
 
