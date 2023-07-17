@@ -6,6 +6,7 @@ import FollowUI from '../userProfile/FollowUI';
 export default function ProfileLeftUI({ profileData, setProfileData }) {
   return (
     <ProfileLeft>
+      <h2 className="a11y-hidden">사용자 프로필</h2>
       <IntroUI
         profileData={profileData}
       />

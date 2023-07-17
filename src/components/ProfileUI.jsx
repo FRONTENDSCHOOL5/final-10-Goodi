@@ -21,9 +21,9 @@ function ProfileUI(props) {
       card={card}
       follow={follow}
       to={`/profile/${account_name}`}
-      onClick={(e) => {
-        console.log(e.target);
-      }}
+    // onClick={(e) => {
+    //   console.log(e.target);
+    // }}
     >
       <img src={user_profile || defaultImage} alt="유저 프로필 이미지" />
       <div>

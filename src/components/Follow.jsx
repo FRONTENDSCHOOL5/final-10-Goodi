@@ -13,52 +13,59 @@ export default function Follow(props) {
   return (
     <FollowWrap>
       {activeFollow === 1 ? (
-        <h2>
-          <img src={followers} alt="" />
-        </h2>
+        <h3>
+          <img src={followers} alt="팔로워" />
+        </h3>
       ) : (
-        <h2>
-          <img src={following} alt="" />
-        </h2>
+        <h3>
+          <img src={following} alt="팔로잉" />
+        </h3>
       )}
 
       {activeFollow === 1 && followerData && followerData?.length > 0 ? (
-        followerData.map((follow) => (
-          <BtnWrap key={follow._id}>
-            <ProfileUI
-              user_profile={checkImageUrl(follow.image, 'profile')}
-              user_name={follow.username}
-              user_email={follow.accountname}
-              // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
-              account_name={follow.accountname}
-              follow="true"
-            />
-            <ButtonFollow
-              isFollow={follow.isfollow}
-              accountName={follow.accountname}
-            />
-          </BtnWrap>
-        ))
+        <ul>
+          {followerData.map((follow) => (
+
+            <FollowLi key={follow._id}>
+              <ProfileUI
+                user_profile={checkImageUrl(follow.image, 'profile')}
+                user_name={follow.username}
+                user_email={follow.accountname}
+                // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
+                account_name={follow.accountname}
+                follow="true"
+              />
+              <ButtonFollow
+                isFollow={follow.isfollow}
+                accountName={follow.accountname}
+              />
+            </FollowLi>
+
+
+          ))}
+        </ul>
       ) : activeFollow === 2 && followingData && followingData?.length > 0 ? (
-        followingData.map((follow) => (
-          <BtnWrap key={follow._id}>
-            <ProfileUI
-              user_profile={checkImageUrl(follow.image, 'profile')}
-              user_name={follow.username}
-              user_email={follow.accountname}
-              // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
-              account_name={follow.accountname}
-              follow="true"
-            ></ProfileUI>
-            <ButtonFollow
-              isFollow={follow.isfollow}
-              accountName={follow.accountname}
-            />
-          </BtnWrap>
-        ))
+        <ul>
+          {followingData.map((follow) => (
+            <FollowLi key={follow._id}>
+              <ProfileUI
+                user_profile={checkImageUrl(follow.image, 'profile')}
+                user_name={follow.username}
+                user_email={follow.accountname}
+                // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
+                account_name={follow.accountname}
+                follow={true}
+              />
+              <ButtonFollow
+                isFollow={follow.isfollow}
+                accountName={follow.accountname}
+              />
+            </FollowLi>
+          ))}
+        </ul>
       ) : (
         <FollowNull>
-          <img src={followSymbol} alt="" />
+          <img src={followSymbol} alt="구디 기본 이미지" />
           아직 유저가 존재하지 않습니다.
         </FollowNull>
       )}
@@ -69,7 +76,7 @@ export default function Follow(props) {
 const FollowWrap = styled.article`
   width: 100%;
 
-  h2 {
+  h3 {
     height: 33px;
     margin-bottom: 30px;
 
@@ -79,7 +86,7 @@ const FollowWrap = styled.article`
   }
 `;
 
-const BtnWrap = styled.div`
+const FollowLi = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;

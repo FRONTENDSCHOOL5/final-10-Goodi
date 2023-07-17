@@ -25,6 +25,7 @@ export default function ProfileLeftUI({
     <>
       {isEditing ? (
         <ProfileLeft edit="true">
+          <h2 className="a11y-hidden">사용자 프로필 수정</h2>
           <UpdateProfile
             profileData={profileData}
             setIsEditing={setIsEditing}
@@ -33,6 +34,7 @@ export default function ProfileLeftUI({
         </ProfileLeft>
       ) : (
         <ProfileLeft>
+          <h2 className="a11y-hidden">사용자 프로필</h2>
           <IntroUI profileData={profileData} setIsEditing={setIsEditing} />
           <FollowUI
             profileData={profileData}

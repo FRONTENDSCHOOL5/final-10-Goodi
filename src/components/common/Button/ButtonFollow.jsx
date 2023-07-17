@@ -90,6 +90,7 @@ const FollowDelete = styled.button`
   border: 1px solid var(--gray300-color);
   border-radius: 50px;
   cursor: pointer;
+  font-family: var(--font--Medium);
   text-align: center;
   white-space: nowrap;
 
