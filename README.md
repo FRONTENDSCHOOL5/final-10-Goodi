@@ -9,8 +9,8 @@
 > 🦁멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 10팀
 >
 > 🔗 <strong>배포 링크</strong> [https://frontendschool5.github.io/final-10-Goodi](https://frontendschool5.github.io/final-10-Goodi)  <br />
-> 테스트 ID: goodi@test.com  <br />
-> 테스트 password: 123123  <br />
+> 테스트 ID: gooodi@gmail.com  <br />
+> 테스트 password: 123123123  <br />
 > 
 > 프로젝트 기간 : 2023.06.01 ~ 2023.06.28
 
@@ -120,12 +120,12 @@
 
 ### [주요 기능]
 
-- 핵심 기능 : 상품 등록, 판매, 주문 관리, 마케팅 지원, 템플릿 제공
-- 부가 기능 : 판매자 랭킹, 상품 추천 기능
+- 핵심 기능 : 상품 등록, 판매, 주문 관리, 마케팅 지원
+- 부가 기능 : 상품 추천 기능, 유저 검색 기능, 팔로잉/팔로워 기능
 - 기능별 상세 내용
-  - 상품 등록 : 상품 정보, 가격, 수량, 판매자 url 입력 후 등록
-  - 마케팅 지원 : 판매자 팔로우 기능, 판매자 추천 기능, 유저 검색 기능
-  - 템플릿 제공 : 디자인 템플릿 제공
+  - 상품 등록 : 상품명, 가격, 상품 소개 입력 후 등록
+  - 마케팅 지원 : 판매자 팔로우 기능, 판매자 추천 기능, 유저 검색 기능, 게시물 등록을 통한 SNS 기능
+  - 채팅 기능 지원 : 작가와 팬이 직접 소통 가능
 
 <br />
 
@@ -213,9 +213,10 @@
 - ⭐️ [노션](https://cord-word-ba9.notion.site/Project-Goodi-e91a4f92cb9140b6b35a9b4f033cd11b?pvs=4)
 - 🖼️ [기능 명세서](https://cord-word-ba9.notion.site/b7ea494715bd4bb98738e24849272e2a?pvs=4)
 - ✍️ [피그마](https://www.figma.com/community/file/1255683569098683877)
-- 🎨 와이어프레임/유저 플로우
+- 🎨 초기 와이어프레임/정보 구조도
+
   <span align="left">
-  <img width="45%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/82e5026f-76d2-430f-9806-7f6deecfa8df" alt="구디 유저 플로우" />
+  <img width="40%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/82e5026f-76d2-430f-9806-7f6deecfa8df" alt="구디 유저 플로우" />
   </span>
   <span align="right">
   <img width="50%" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/98699927/cd16e5af-f2a8-45b1-a302-f7b0d0f361c9" alt="구디 유저 플로우" />
