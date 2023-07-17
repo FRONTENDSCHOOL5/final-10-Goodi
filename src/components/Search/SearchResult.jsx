@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 // 컴포넌트
-import ProfileUI from "./ProfileUI";
-import ButtonFollow from "./ButtonFollow";
+import ProfileUI from "../ProfileUI";
+import ButtonFollow from "../common/Button/ButtonFollow";
 
 // 이미지
 import followSymbol from "../../assets/follow_symbol.svg";
 import DefProfileImg from "../../assets/profile_img_def.svg";
-import checkImageUrl from "./checkImageUrl";
+import checkImageUrl from "../common/checkImageUrl";
 
 export default function SearchResult({ searchResult, isFollowing }) {
   return (

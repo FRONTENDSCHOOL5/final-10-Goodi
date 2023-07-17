@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import LikeBtn from "./LikeBtn";
-import ProfileUI from "./ProfileUI";
+import LikeBtn from "../common/Button/ButtonLike";
+import ProfileUI from "../ProfileUI";
 import { Link, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import accountname from "../../recoil/accountname";
 import postMenu from "../../assets/post_menu.svg";
-import LocalNav from "./LocalNav";
+import LocalNav from "../common/LocalNav";
 import { useState } from "react";
-import Modal from "./Modal";
+import Modal from "../common/Modal";
 
-export default function Card({
+export default function ProductCard({
   profile,
   name,
   email,

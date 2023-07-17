@@ -7,8 +7,8 @@ import userAPI from "../api/user";
 import UploadImage from "../api/UploadImage";
 
 import { InputBox } from "../components/common/Input";
-import Button from "../components/common/Button";
 import { LeftDiv } from "../components/Carousel";
+import Button from "../components/common/Button/Button";
 
 import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";

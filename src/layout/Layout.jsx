@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Navigation from "../components/Navigation";
+import Header from "./Header";
+import Footer from "./Footer";
+import Navigation from "./Navigation";
 
 export default function Layout({ reduceTop, children }) {
   return (

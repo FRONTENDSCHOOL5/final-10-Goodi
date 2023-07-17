@@ -3,16 +3,16 @@ import styled from "styled-components";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 // 컴포넌트
-import Toast from "./Toast";
+import Toast from "../Toast";
 
 // API
-import followAPI from "../../api/follow";
-import unfollowAPI from "../../api/unfollow";
+import followAPI from "../../../api/follow";
+import unfollowAPI from "../../../api/unfollow";
 
 // Recoil
-import loginToken from "../../recoil/loginToken";
-import accountname from "../../recoil/accountname";
-import { checkFollow } from "../../recoil/checkChange";
+import loginToken from "../../../recoil/loginToken";
+import accountname from "../../../recoil/accountname";
+import { checkFollow } from "../../../recoil/checkChange";
 
 export default function ButtonFollow({ isFollow, accountName, padding }) {
   const token = useRecoilValue(loginToken);

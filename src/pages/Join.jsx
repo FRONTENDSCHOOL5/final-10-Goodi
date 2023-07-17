@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { InputBox } from "../components/common/Input";
-import Button from "../components/common/Button";
+import Button from "../components/common/Button/Button";
 import { LeftDiv } from "../components/Carousel";
 
 import JoinTo from "../assets/Join to.svg";
@@ -98,8 +98,8 @@ export default function Join() {
             {userErrorMessage.includes(
               "비밀번호를 6자리 이상 입력해주세요"
             ) && (
-              <ErrorMassage>비밀번호를 6자리 이상 입력해주세요</ErrorMassage>
-            )}
+                <ErrorMassage>비밀번호를 6자리 이상 입력해주세요</ErrorMassage>
+              )}
           </InputDiv>
           <ButtonDiv>
             <Button

@@ -12,9 +12,9 @@ import PostIcon from "../assets/icon_post_active.svg";
 import HomeIcon from "../assets/icon_home_active.svg";
 
 // 컴포넌트
-import LocalNav from "./common/LocalNav";
-import Modal from "./common/Modal";
-import Search from "./common/Search";
+import LocalNav from "../components/common/LocalNav";
+import Modal from "../components/common/Modal";
+import Search from './../components/Search/Search';
 import { useRecoilValue } from "recoil";
 import { cartItemsState } from "../recoil/cartItemState";
 

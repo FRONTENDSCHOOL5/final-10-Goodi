@@ -6,7 +6,7 @@ import loginToken from "../../recoil/loginToken";
 import PostImageAPI from "../../api/UploadImage";
 import updateProfile from "./../../api/updateProfile";
 import { InputBox } from "../../components/common/Input";
-import Button from "../../components/common/Button";
+import Button from "../../components/common/Button/Button";
 import profileAPI from "../../api/profile";
 import { useRecoilState } from "recoil";
 import { checkProfile } from "../../recoil/checkChange";

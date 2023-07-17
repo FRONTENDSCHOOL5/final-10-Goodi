@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "./Card";
+import ProductCard from "./ProductCard";
 import styled from "styled-components";
 
 import accountname from "../../recoil/accountname";
@@ -10,9 +10,9 @@ import { useParams } from "react-router-dom";
 import NoPostsUI from "../NoPostsUI";
 import { checkProfile } from "../../recoil/checkChange";
 import { checkDeletePost } from "../../recoil/checkChange";
-import checkImageUrl from "./checkImageUrl";
+import checkImageUrl from "../common/checkImageUrl";
 
-export default function CardProduct({ profile }) {
+export default function ProductCardList({ profile }) {
   const token = useRecoilValue(loginToken);
   const myaccount_name = useRecoilValue(accountname);
   const checkProfileChange = useRecoilValue(checkProfile);
@@ -46,7 +46,7 @@ export default function CardProduct({ profile }) {
         <CardList profile={profile}>
           {productGetData.product.map((productInfo) => {
             return (
-              <Card
+              <ProductCard
                 key={productInfo.id}
                 id={productInfo.id}
                 profile={checkImageUrl(productInfo.author.image, "profile")}

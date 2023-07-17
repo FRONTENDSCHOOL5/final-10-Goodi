@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ButtonLineIcon from "../../components/common/ButtonLineIcon";
+import ButtonLineIcon from "../../components/common/Button/ButtonLineIcon";
 import checkImageUrl from "../../components/common/checkImageUrl";
 
 export default function IntroUI({ profileData, setIsEditing }) {

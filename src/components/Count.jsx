@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useState } from "react";
 
 //image
-import PlusIcon from "../../assets/icon_plus_black.svg";
-import MinusIcon from "../../assets/icon_minus_black.svg";
+import PlusIcon from "../assets/icon_plus_black.svg";
+import MinusIcon from "../assets/icon_minus_black.svg";
 
 export default function Count({ count, setCount, getPrice, price, productPrice, stock }) {
 

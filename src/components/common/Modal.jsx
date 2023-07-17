@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Button from "./Button";
+import Button from "./Button/Button";
 import CloseButton from "../../assets/close-button.svg";
 import { useState, useEffect } from "react";
-import LogoutHandler from "./Logout";
+import LogoutHandler from "../Logout";
 import { useRecoilState } from "recoil";
 import { loginCheck } from "../../recoil/loginCheck";
 import { useRecoilValue } from "recoil";

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import pointEdgeProfile from "../../assets/point-edge-profile.svg";
 import authorProducts from "../../assets/Author-Products.svg";
-import CardProduct from '../../components/common/CardProduct';
-import PostList from '../../components/common/PostList';
+import ProductCardList from '../../components/Product/ProductCardList';
+import PostCardList from './../../components/Post/PostCardList';
 
 export default function ProfileRightUI() {
   // 상품 목록, 게시글 목록 탭
@@ -33,10 +33,10 @@ export default function ProfileRightUI() {
         </TabBtn>
       </TabMenu>
       {activeTab === 1 && (
-        <CardProduct profile="true" />
+        <ProductCardList profile="true" />
       )}
       {activeTab === 2 && (
-        <PostList />
+        <PostCardList />
       )}
     </ProfileRight>
   )

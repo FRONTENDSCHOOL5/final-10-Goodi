@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import { InputBox } from "../components/common/Input";
-import Button from "../components/common/Button";
+import Button from "../components/common/Button/Button";
 import { LeftDiv } from "../components/Carousel";
 import Toast from "../components/common/Toast";
 

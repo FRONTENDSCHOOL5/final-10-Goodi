@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 //component
 import Layout from "../layout/Layout";
-import PostingUI from "../components/common/PostingUI";
+import PostUploadWriting from './../components/Post/PostUploadWriting';
 
 //이미지
 import PostBackground from "../assets/post_bg.svg";
@@ -20,7 +20,7 @@ import loginToken from "../recoil/loginToken";
 // 작성 완료시 업로드 할것인지 모달
 // 모든 작성 공간은 필수
 
-export default function PostPosting() {
+export default function PostUpload() {
   const navigate = useNavigate();
   // 상품 입력 데이터
   const [postProductData, setPostProductData] = useState();
@@ -47,7 +47,7 @@ export default function PostPosting() {
   return (
     <Layout reduceTop="true">
       <PostProductWrap>
-        <PostingUI
+        <PostUploadWriting
           textareaLabel="게시글 내용"
           src={postUproad}
           subtext="당신의 게시글을 업로드 해보세요!"
