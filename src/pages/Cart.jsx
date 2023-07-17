@@ -3,7 +3,7 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { cartItemsState } from "../recoil/cartItemState";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Button from "../components/common/Button";
+import Button from "../components/common/Button/Button";
 import Layout from "../layout/Layout";
 import { useNavigate } from "react-router-dom";
 

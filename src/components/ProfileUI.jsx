@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import defaultImage from "../../assets/profile_img_def.svg";
+import defaultImage from "../assets/profile_img_def.svg";
 
 function ProfileUI(props) {
   const {

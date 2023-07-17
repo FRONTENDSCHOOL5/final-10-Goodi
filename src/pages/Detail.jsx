@@ -5,11 +5,11 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 //component
 import Layout from "../layout/Layout";
-import DetailImage from "../components/common/DetailImage";
-import ProfileUI from "../components/common/ProfileUI";
-import Count from "../components/common/Count";
-import Button from "../components/common/Button";
-import LikeBtn from "../components/common/LikeBtn";
+import DetailImage from './../components/DetailImage';
+import Count from "../components/Count";
+import ProfileUI from "../components/ProfileUI";
+import Button from "../components/common/Button/Button";
+import ButtonLike from "../components/common/Button/ButtonLike";
 import Toast from "../components/common/Toast";
 
 //image
@@ -161,7 +161,7 @@ export default function Detail() {
               </ProductPrice>
 
               <ButtonWrap>
-                <LikeBtn />
+                <ButtonLike />
 
                 <Button
                   text="장바구니 담기"

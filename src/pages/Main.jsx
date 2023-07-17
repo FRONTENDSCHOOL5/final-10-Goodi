@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 
-import PostList from "../components/common/PostList";
+// import PostList from "../components/common/PostList";
 
 import commonBanner from "../assets/common-banner.svg";
 import arrowPrimaryIcon from "../assets/icon_arrow_primary.svg";
@@ -14,7 +14,7 @@ import PopularAuthorView from "../components/PopularAuthorView";
 import Layout from "../layout/Layout";
 import MainSkeleton from "../style/skeletonUI/skeletonPage/MainSkeleton";
 import CarouselMain from "../components/CarouselMain";
-import MainRightCard from "../components/common/MainRightCard";
+import MainRightCard from './../components/MainRightCard';
 
 export default function Main() {
   const [loading, setLoading] = useState(false);

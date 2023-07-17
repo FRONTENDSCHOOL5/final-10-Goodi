@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useState } from "react";
 
 //image
-import ProductBanner from "../../assets/product_banner.svg";
-import LeftArrow from "../../assets/icon_arrow_left.svg";
-import RightArrow from "../../assets/icon_arrow_right.svg";
-import checkImageUrl from "./checkImageUrl";
+import ProductBanner from "../assets/product_banner.svg";
+import LeftArrow from "../assets/icon_arrow_left.svg";
+import RightArrow from "../assets/icon_arrow_right.svg";
+import checkImageUrl from "./common/checkImageUrl";
 
 export default function DetailImage({ img }) {
   //이미지 index 관리

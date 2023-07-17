@@ -1,11 +1,11 @@
 import { useRecoilState } from "recoil";
-import accountname from "../../recoil/accountname";
-import logoutCheck from "../../recoil/logoutCheck";
-import { loginCheck } from "../../recoil/loginCheck";
-import loginToken from "../../recoil/loginToken";
+import accountname from "../recoil/accountname";
+import logoutCheck from "../recoil/logoutCheck";
+import { loginCheck } from "../recoil/loginCheck";
+import loginToken from "../recoil/loginToken";
 import { useNavigate } from "react-router-dom";
-import { recentSearch } from "../../recoil/recentSearch";
-import { cartItemsState } from "../../recoil/cartItemState";
+import { recentSearch } from "../recoil/recentSearch";
+import { cartItemsState } from "../recoil/cartItemState";
 
 export default function LogoutHandler() {
   const navigate = useNavigate();

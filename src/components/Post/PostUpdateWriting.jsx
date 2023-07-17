@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 //component
-import Textarea from "./Textarea";
-import Button from "./Button";
+import Textarea from "../common/Textarea";
+import Button from "../common/Button/Button";
 
 // 이미지
 import AddIcon from "../../assets/add_button_gray.svg";
@@ -11,7 +11,7 @@ import AddIcon from "../../assets/add_button_gray.svg";
 // API
 import UploadImage from "../../api/UploadImage";
 
-export default function UpdatePostingUI({
+export default function PostUpdateWriting({
   src,
   subtext,
   buttonText,

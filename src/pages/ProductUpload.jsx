@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 //component
 import Layout from "../layout/Layout";
-import PostUI from "../components/common/PostUI";
+import ProductUploadWriting from "../components/Product/ProductUploadWriting";
 
 //이미지
 import PostBackground from "../assets/post_bg.svg";
-import ProductUpload from "../assets/Prodcut_upload.svg";
+import Product_upload from "../assets/Prodcut_upload.svg";
 
 //API
 import UploadProductAPI from "../api/UploadProductAPI";
@@ -21,7 +21,7 @@ import loginToken from "../recoil/loginToken";
 // 작성 완료시 업로드 할것인지 모달
 // 모든 작성 공간은 필수
 
-export default function PostProduct() {
+export default function ProductUpload() {
   const navigate = useNavigate();
   // 상품 입력 데이터
   const [postProductData, setPostProductData] = useState();
@@ -51,8 +51,8 @@ export default function PostProduct() {
   return (
     <Layout reduceTop="true">
       <PostProductWrap>
-        <PostUI
-          src={ProductUpload}
+        <ProductUploadWriting
+          src={Product_upload}
           subtext="당신의 굿즈상품을 업로드하여 판매해보세요!"
           buttonText="상품 업로드 하기"
           showInput={true}

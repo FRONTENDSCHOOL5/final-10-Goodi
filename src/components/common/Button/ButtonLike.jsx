@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import nonLikeIcon from "../../assets/non-like-btn.svg";
-import likeIcon from "../../assets/like-btn.svg";
-import Toast from "./Toast";
+import nonLikeIcon from "../../../assets/non-like-btn.svg";
+import likeIcon from "../../../assets/like-btn.svg";
+import Toast from "../Toast";
 
 // 기능 구현된거 없어요!!
-function LikeBtn() {
+function ButtonLike() {
   const [liked, setLiked] = useState(false);
   const [toast, setToast] = useState(false);
 
@@ -25,7 +25,7 @@ function LikeBtn() {
   );
 }
 
-export default LikeBtn;
+export default ButtonLike;
 
 const Button = styled.button`
   width: 48px;

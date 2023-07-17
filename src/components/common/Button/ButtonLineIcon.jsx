@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import PlusIcon from "../../assets/icon_plus_primary.svg";
+import PlusIcon from "../../../assets/icon_plus_primary.svg";
 
 export default function ButtonLineIcon({ text, ...props }) {
   return <ButtonLineIconUI {...props}>{text}</ButtonLineIconUI>;

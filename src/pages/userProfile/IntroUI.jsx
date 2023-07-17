@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import ButtonLineIcon from "../../components/common/ButtonLineIcon";
-import ButtonFollow from "../../components/common/ButtonFollow";
+import ButtonLineIcon from "../../components/common/Button/ButtonLineIcon";
+import ButtonFollow from "../../components/common/Button/ButtonFollow";
 import checkImageUrl from "../../components/common/checkImageUrl";
 
 export default function IntroUI({ profileData }) {

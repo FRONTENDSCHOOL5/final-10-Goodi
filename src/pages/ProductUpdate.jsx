@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Layout from "../layout/Layout";
 import { InputBox } from "../components/common/Input";
 import Textarea from "../components/common/Textarea";
-import Button from "../components/common/Button";
+import Button from "../components/common/Button/Button";
 
 // 이미지
 import PlusIcon from "../assets/icon_plus_gray.svg";
@@ -21,7 +21,7 @@ import loginToken from "../recoil/loginToken";
 import productPut from "../api/productPut";
 import PostImageAPI from "../api/UploadImage";
 
-export default function UpdateProductUI() {
+export default function ProductUpdate() {
   const token = useRecoilValue(loginToken);
   const { product_id } = useParams();
   const navigate = useNavigate();

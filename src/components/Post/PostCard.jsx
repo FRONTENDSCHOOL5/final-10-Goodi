@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import ProfileUI from "./ProfileUI";
-import PostLikeBtn from "./PostLikeBtn";
+import ProfileUI from "../ProfileUI";
+import ButtonPostLike from "../common/Button/ButtonPostLike";
 
 import postMenu from "../../assets/post_menu.svg";
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
 import accountname from "../../recoil/accountname";
-import LocalNav from "./LocalNav";
-import Modal from "./Modal";
-import checkImageUrl from "./checkImageUrl";
+import LocalNav from "../common/LocalNav";
+import Modal from "../common/Modal";
+import checkImageUrl from "../common/checkImageUrl";
 
 const getElapsedTime = (createdAt) => {
   const currentTime = new Date();
@@ -41,7 +41,7 @@ const getElapsedTime = (createdAt) => {
   return elapsedTimeString;
 };
 
-export default function Post({
+export default function PostCard({
   username,
   profileImage,
   email,
@@ -141,7 +141,7 @@ export default function Post({
           <span>{elapsedTimeString}</span>
           <div className="like_wrap">
             <span>{heartValue}</span>
-            <PostLikeBtn
+            <ButtonPostLike
               postId={postId}
               getHeartData={getHeartData}
               cancleHeartData={cancleHeartData}

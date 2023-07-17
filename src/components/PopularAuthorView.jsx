@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import postAPI from "../api/post";
 import unfollowAPI from "../api/unfollow";
-import ProfileUI from "./common/ProfileUI";
+import ProfileUI from "./ProfileUI";
 
 import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
@@ -13,7 +13,7 @@ import PostListSkeleton from "../style/skeletonUI/SkeletonItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { checkDeletePost } from "../recoil/checkChange";
 import { checkProfile } from "../recoil/checkChange";
-import ButtonFollow from "./common/ButtonFollow";
+import ButtonFollow from "./common/Button/ButtonFollow";
 import followAPI from "../api/follow";
 import iconHeartWhite from "../assets/icon_heart_line_white.svg";
 
@@ -30,8 +30,8 @@ export default function PopularAuthorview({ account, heartCount }) {
   const account_name = account
     ? account
     : temp.account_name
-    ? temp.account_name
-    : myaccount_name;
+      ? temp.account_name
+      : myaccount_name;
 
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const [isFollowing, setIsFollowing] = useState(false);

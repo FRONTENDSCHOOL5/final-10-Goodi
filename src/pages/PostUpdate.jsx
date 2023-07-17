@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 // component
 import Layout from "../layout/Layout";
-import UpdatePostingUI from "../components/common/UpdatePostingUI";
 
 // image
 import PostBackground from "../assets/post_bg.svg";
@@ -18,8 +17,9 @@ import putPostingAPI from "../api/putPosting";
 
 // Recoil
 import loginToken from "../recoil/loginToken";
+import PostUpdateWriting from "../components/Post/PostUpdateWriting";
 
-export default function UpdatePosting() {
+export default function PostUpdate() {
   const navigate = useNavigate();
   const { posting_id } = useParams();
   const token = useRecoilValue(loginToken);
@@ -70,7 +70,7 @@ export default function UpdatePosting() {
         <div>로딩중</div>
       ) : (
         <PostPostingLayout>
-          <UpdatePostingUI
+          <PostUpdateWriting
             joinData={joinData}
             setGetContent={setGetContent}
             getContent={getContent}

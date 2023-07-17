@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 //component
-import { InputBox } from "../../components/common/Input";
-import Textarea from "./Textarea";
-import Button from "./Button";
+import { InputBox } from "../common/Input";
+import Textarea from "../common/Textarea";
+import Button from "../common/Button/Button";
 
 // 이미지
 import PlusIcon from "../../assets/icon_plus_gray.svg";
@@ -13,7 +13,7 @@ import AddIcon from "../../assets/add_button_gray.svg";
 // API
 import UploadImage from "../../api/UploadImage";
 
-export default function PostingUI({
+export default function PostUploadWriting({
   src,
   subtext,
   buttonText,
@@ -143,10 +143,10 @@ export default function PostingUI({
             {userErrorMessage.includes(
               "게시글 이미지를 한개 이상 업로드 해주세요"
             ) && (
-              <ErrorMassage>
-                게시글 이미지를 한개 이상 업로드 해주세요
-              </ErrorMassage>
-            )}
+                <ErrorMassage>
+                  게시글 이미지를 한개 이상 업로드 해주세요
+                </ErrorMassage>
+              )}
           </ThumbnailWrap>
 
           <ProductImages>

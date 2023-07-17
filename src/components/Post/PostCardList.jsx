@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Post from "./Post";
+import PostCard from "./PostCard";
 import styled from "styled-components";
 import postAPI from "../../api/post";
 import loginToken from "../../recoil/loginToken";
@@ -10,9 +10,9 @@ import PostListSkeleton from "../../style/skeletonUI/skeletonPage/PostListSkelet
 import { useParams } from "react-router-dom";
 import { checkDeletePost } from "../../recoil/checkChange";
 import { checkProfile } from "../../recoil/checkChange";
-import checkImageUrl from "./checkImageUrl";
+import checkImageUrl from "../common/checkImageUrl";
 
-export default function PostList({ account }) {
+export default function PostCardList({ account }) {
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = useRecoilValue(loginToken);
@@ -26,8 +26,8 @@ export default function PostList({ account }) {
   const account_name = account
     ? account
     : temp.account_name
-    ? temp.account_name
-    : myaccount_name;
+      ? temp.account_name
+      : myaccount_name;
 
   const updateHeartCount = (postId, count) => {
     setUserPostList((prevPosts) =>
@@ -69,7 +69,7 @@ export default function PostList({ account }) {
       ) : (
         <PostListWrap hasPosts={userPostList.length > 0}>
           {userPostList.map((post) => (
-            <Post
+            <PostCard
               postId={post.id}
               username={post.author.username}
               profileImage={post.author.image}

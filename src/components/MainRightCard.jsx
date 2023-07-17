@@ -1,14 +1,14 @@
 import React from "react";
-import Card from "./Card";
 import styled from "styled-components";
+import ProductCard from "./Product/ProductCard";
 
-import checkImageUrl from "./checkImageUrl";
+import checkImageUrl from "../components/common/checkImageUrl";
 
 export default function MainRightCard({ profile }) {
   return (
     <>
       <CardList profile={profile}>
-        <Card
+        <ProductCard
           id={"64994f98b2cb205663cab8ea"}
           profile={checkImageUrl("1687768831791.jpeg", "profile")}
           name={"꾸깃꾸깃"}
@@ -23,7 +23,7 @@ export default function MainRightCard({ profile }) {
           description={"나만의 커스텀 케이스를 만들어보세요. 선명한 색감과 벗겨지지 않는 최고의 퀄리티 보장합니다. 기종은 문의주시면 최대한 빨리 채팅 드리겠습니다."}
           price={19900}
         />
-        <Card
+        <ProductCard
           id={"64994e6fb2cb205663c9de9c"}
           profile={checkImageUrl("1687744257255.jpg", "profile")}
           name={"Goodi_official"}
@@ -39,7 +39,7 @@ export default function MainRightCard({ profile }) {
           price={21000}
         />
 
-        <Card
+        <ProductCard
           id={"64995068b2cb205663cb5ca7"}
           profile={checkImageUrl("1687769232469.jpeg", "profile")}
           name={"커나"}
@@ -54,7 +54,7 @@ export default function MainRightCard({ profile }) {
           description={"개성넘치는 파우치로 보관마저도 힙하게!"}
           price={16000}
         />
-        <Card
+        <ProductCard
           id={"64994ca4b2cb205663c8a1d1"}
           profile={checkImageUrl("1687767998170.jpeg", "profile")}
           name={"헤일리"}
@@ -70,7 +70,7 @@ export default function MainRightCard({ profile }) {
           price={58000}
         />
 
-        <Card
+        <ProductCard
           id={"6499c448b2cb205663e3245a"}
           profile={checkImageUrl("http://146.56.183.55:5050/Ellipse.png", "profile")}
           name={"꽉오"}
@@ -84,7 +84,7 @@ export default function MainRightCard({ profile }) {
           price={32000}
         />
 
-        <Card
+        <ProductCard
           id={"6499c636b2cb205663e32eba"}
           profile={checkImageUrl("1687799232646.jpeg", "profile")}
           name={"신데렐라"}

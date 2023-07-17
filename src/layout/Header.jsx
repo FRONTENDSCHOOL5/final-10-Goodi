@@ -8,7 +8,7 @@ import followingAPI from "../api/following";
 import { useRecoilState } from "recoil";
 import { checkFollow } from "../recoil/checkChange";
 import { useRecoilValue } from "recoil";
-import checkImageUrl from "./common/checkImageUrl";
+import checkImageUrl from "../components/common/checkImageUrl.js";
 
 export default function Header() {
   const [token, setToken] = useRecoilState(loginToken);
