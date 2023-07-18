@@ -56,8 +56,8 @@ export default function ProductCard({
   };
 
   return (
-    <Article>
-      <ArticleTop>
+    <CardWrap>
+      <CardTop>
         <ProfileUI
           user_profile={profile}
           user_name={name}
@@ -67,7 +67,7 @@ export default function ProductCard({
         />
         {account_name === myaccount_name && (
           <button onClick={handleLocalNav}>
-            <img src={postMenu} alt="" ref={handleClick} />
+            <img src={postMenu} alt="메뉴 아이콘" ref={handleClick} />
           </button>
         )}
         <LocalNavWrap>
@@ -86,11 +86,11 @@ export default function ProductCard({
             false
           )}
         </LocalNavWrap>
-      </ArticleTop>
+      </CardTop>
       <CardLink to={`/products/${id}`}>
         <CardContent>
-          <img alt="card" src={img} />
-          <h2>{title}</h2>
+          <img alt="상품 이미지" src={img} />
+          <h3>{title}</h3>
           <p>{description}</p>
           <strong>
             {price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
@@ -111,14 +111,43 @@ export default function ProductCard({
           showCloseButton={false}
         />
       )}
-    </Article>
+    </CardWrap>
   );
 }
 
-const CardLink = styled(Link)`
-  color: var(--black-color);
-  text-decoration: none;
+const CardWrap = styled.section`
+  position: relative;
+
+  & > button {
+    position: absolute;
+    right: 16px;
+    bottom: 172px;
+  }
 `;
+const CardTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  & > button {
+    height: 40px;
+    cursor: pointer;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+  }
+  strong {
+    font-size: 16px;
+  }
+`;
+
+const LocalNavWrap = styled.div`
+  position: absolute;
+  top: 43px;
+  right: 0;
+`;
+
+const CardLink = styled(Link)``;
 
 const CardContent = styled.div`
   transition: all 0.3s;
@@ -134,7 +163,7 @@ const CardContent = styled.div`
     transform: scale(1.03);
   }
 
-  h2 {
+  h3 {
     font-size: 20px;
     font-family: var(--font--semibold);
     padding: 16px 0;
@@ -161,35 +190,4 @@ const CardContent = styled.div`
     font-family: var(--font--Bold);
     margin-right: 8px;
   }
-`;
-
-const Article = styled.article`
-  position: relative;
-
-  & > button {
-    position: absolute;
-    right: 16px;
-    bottom: 172px;
-  }
-`;
-const ArticleTop = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  & > button {
-    height: 40px;
-    cursor: pointer;
-  }
-  img {
-    width: 40px;
-    height: 40px;
-  }
-  strong {
-    font-size: 16px;
-  }
-`;
-const LocalNavWrap = styled.div`
-  position: absolute;
-  top: 43px;
-  right: 0;
 `;
