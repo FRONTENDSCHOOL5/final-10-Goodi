@@ -155,10 +155,10 @@ export default function ProductUploadWriting({
             {userErrorMessage.includes(
               "상품이미지를 한개 이상 업로드 해주세요"
             ) && (
-                <ErrorMassage>
-                  상품이미지를 한개 이상 업로드 해주세요
-                </ErrorMassage>
-              )}
+              <ErrorMassage>
+                상품이미지를 한개 이상 업로드 해주세요
+              </ErrorMassage>
+            )}
           </ThumbnailWrap>
 
           <ProductImages>
@@ -213,7 +213,7 @@ export default function ProductUploadWriting({
         <ContentUploadWrap>
           {showInput && (
             <>
-              <InputDiv>
+              <InputWrap>
                 <Label>상품명</Label>
                 <InputBox
                   width="100%"
@@ -228,9 +228,9 @@ export default function ProductUploadWriting({
                 {userErrorMessage.includes("상품명을 입력해주세요") && (
                   <ErrorMassage>상품명을 입력해주세요</ErrorMassage>
                 )}
-              </InputDiv>
+              </InputWrap>
 
-              <InputDiv>
+              <InputWrap>
                 <Label>상품가격</Label>
                 <InputBox
                   width="100%"
@@ -247,11 +247,11 @@ export default function ProductUploadWriting({
                 {userErrorMessage.includes("상품가격을 입력해주세요") && (
                   <ErrorMassage>상품가격을 입력해주세요</ErrorMassage>
                 )}
-              </InputDiv>
+              </InputWrap>
             </>
           )}
 
-          <InputDiv>
+          <InputWrap>
             <Label>상품 설명</Label>
             <Textarea
               width="100%"
@@ -266,7 +266,7 @@ export default function ProductUploadWriting({
             {userErrorMessage.includes("상품소개글을 입력해주세요") && (
               <ErrorMassage>상품소개글을 입력해주세요</ErrorMassage>
             )}
-          </InputDiv>
+          </InputWrap>
 
           <Button
             type="submit"
@@ -306,14 +306,14 @@ const UploadWrap = styled.form`
   justify-content: space-between;
 `;
 
-const ImagUploadWrap = styled.div`
+const ImagUploadWrap = styled.section`
   flex-grow: 1;
   flex-basis: 400px;
   display: flex;
   gap: 5%;
 `;
 
-const ContentUploadWrap = styled.div`
+const ContentUploadWrap = styled.section`
   flex-grow: 1;
   button {
     margin-top: 48px;
@@ -416,7 +416,7 @@ const ProductImage = styled.label`
   }
 `;
 
-const InputDiv = styled.div`
+const InputWrap = styled.section`
   display: flex;
   flex-direction: column;
 
