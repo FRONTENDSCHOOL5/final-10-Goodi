@@ -63,6 +63,10 @@ const ProfileLeft = styled.section`
   align-items: center;
   gap: 35px;
 
+  & > button {
+    margin: 0 auto;
+  }
+
   & > p {
     text-align: center;
     color: var(--gray500-color);
