@@ -8,8 +8,6 @@ import Button from "../common/Button/Button";
 import addIcon from "../../assets/add_button_gray.svg";
 import thumnailBanner from "../../assets/thumnail_banner.svg"
 
-
-
 export default function PostUpdateWriting({
   src,
   subtext,
@@ -178,7 +176,7 @@ const UploadWrap = styled.form`
   justify-content: space-between;
 `;
 
-const ImagUploadWrap = styled.div`
+const ImagUploadWrap = styled.fieldset`
   flex-grow: 1;
   flex-basis: 400px;
   display: flex;
@@ -260,7 +258,7 @@ const Line = styled.span`
   margin: 0 40px;
 `;
 
-const ContentUploadWrap = styled.div`
+const ContentUploadWrap = styled.fieldset`
   flex-grow: 1;
   button {
     margin-top: 48px;

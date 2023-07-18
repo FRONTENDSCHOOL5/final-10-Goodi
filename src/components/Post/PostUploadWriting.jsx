@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import UploadImage from "../../api/UploadImage";
 
-//component
-import { InputBox } from "../common/Input";
 import Textarea from "../common/Textarea";
 import Button from "../common/Button/Button";
 
-// 이미지
 import PlusIcon from "../../assets/icon_plus_gray.svg";
-import AddIcon from "../../assets/add_button_gray.svg";
-
-// API
-import UploadImage from "../../api/UploadImage";
+import addIcon from "../../assets/add_button_gray.svg";
+import thumnailBanner from "../../assets/thumnail_banner.svg"
 
 export default function PostUploadWriting({
   src,
   subtext,
   buttonText,
-  textareaHeight,
   getPostPostingData,
 }) {
   const [description, setDescription] = useState("");
@@ -125,9 +120,6 @@ export default function PostUploadWriting({
                   : null
               }
             >
-              <ThumbnailLabel>
-                <p>대표 이미지</p>
-              </ThumbnailLabel>
               {loading ? (
                 <LoadingImage>
                   <span className="circle1"></span>
@@ -165,7 +157,7 @@ export default function PostUploadWriting({
                 </LoadingImage>
               ) : (
                 <img
-                  src={imageWrap[1] ? BASE_URL + imageWrap[1] : AddIcon}
+                  src={imageWrap[1] ? BASE_URL + imageWrap[1] : addIcon}
                   style={imageWrap[1] ? null : { width: "32px" }}
                 />
               )}
@@ -178,7 +170,7 @@ export default function PostUploadWriting({
                 </LoadingImage>
               ) : (
                 <img
-                  src={imageWrap[2] ? BASE_URL + imageWrap[2] : AddIcon}
+                  src={imageWrap[2] ? BASE_URL + imageWrap[2] : addIcon}
                   style={imageWrap[2] ? null : { width: "32px" }}
                 />
               )}
@@ -224,7 +216,7 @@ export default function PostUploadWriting({
   );
 }
 
-const PostUiWrap = styled.article`
+const PostUiWrap = styled.section`
   width: 80%;
   padding: 40px 60px 60px 60px;
   box-sizing: border-box;
@@ -249,14 +241,14 @@ const UploadWrap = styled.form`
   justify-content: space-between;
 `;
 
-const ImagUploadWrap = styled.div`
+const ImagUploadWrap = styled.fieldset`
   flex-grow: 1;
   flex-basis: 400px;
   display: flex;
   gap: 5%;
 `;
 
-const ContentUploadWrap = styled.div`
+const ContentUploadWrap = styled.fieldset`
   flex-grow: 1;
   button {
     margin-top: 48px;
@@ -301,32 +293,12 @@ const Thumbnail = styled.label`
     aspect-ratio: 1/ 1;
     object-fit: cover;
   }
-`;
-
-const ThumbnailLabel = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 8px 12px;
-  background-color: var(--black-color);
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 
   &::before {
-    content: "";
-    display: block;
-    width: 8px;
-    height: 8px;
-    border-radius: 30px;
-    background-color: var(--main-color);
-  }
-
-  p {
-    color: white;
-    font-size: 14px;
-    margin: 0;
+    content: url(${thumnailBanner});
+    position: absolute;
+    top: 20px;
+    left: 20px;
   }
 `;
 
