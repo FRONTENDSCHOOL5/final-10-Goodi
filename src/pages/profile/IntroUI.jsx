@@ -20,13 +20,11 @@ export default function IntroUI({ profileData, setIsEditing }) {
         <p>{profileData.user.accountname}</p>
       </IntroWrap>
 
-      <BtnWrap>
-        <ButtonLineIcon
-          text="프로필 수정하기"
-          onClick={handleEditClick}
-          basic="true"
-        />
-      </BtnWrap>
+      <ButtonLineIcon
+        text="프로필 수정하기"
+        onClick={handleEditClick}
+        basic="true"
+      />
 
       <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
     </>
@@ -58,11 +56,4 @@ const IntroWrap = styled.div`
     font-size: 18px;
     color: var(--gray400-color);
   }
-`;
-
-const BtnWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
 `;

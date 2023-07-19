@@ -90,7 +90,7 @@ export default function ProductCard({
       <CardLink to={`/products/${id}`}>
         <CardContent>
           <img alt="card" src={img} />
-          <h2>{title}</h2>
+          <h3>{title}</h3>
           <p>{description}</p>
           <strong>
             {price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
@@ -134,7 +134,7 @@ const CardContent = styled.div`
     transform: scale(1.03);
   }
 
-  h2 {
+  h3 {
     font-size: 20px;
     font-family: var(--font--semibold);
     padding: 16px 0;
