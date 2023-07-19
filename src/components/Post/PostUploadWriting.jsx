@@ -189,7 +189,7 @@ export default function PostUploadWriting({
         <Line />
 
         <ContentUploadWrap>
-          <InputDiv>
+          <InputWrap>
             <Label>게시글 내용</Label>
             <Textarea
               width="100%"
@@ -201,7 +201,7 @@ export default function PostUploadWriting({
               name="content"
               count="50"
             />
-          </InputDiv>
+          </InputWrap>
 
           <Button
             type="submit"
@@ -331,7 +331,7 @@ const ProductImage = styled.label`
   }
 `;
 
-const InputDiv = styled.div`
+const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
 

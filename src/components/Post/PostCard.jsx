@@ -191,15 +191,16 @@ const PostTop = styled.div`
 const PostContent = styled.div`
   width: 100%;
   & > div {
-
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
+
   .like_wrap {
     display: flex;
     align-items: center;
   }
+
   img {
     width: 100%;
     aspect-ratio: 1/1;
@@ -212,11 +213,13 @@ const PostContent = styled.div`
     margin-right: 5px;
     font-size: 1rem;
   }
+
   .p_box {
     height: 85px;
     display: flex;
     align-items: flex-start;
   }
+
   p {
     font-family: var(--font-Regular);
     color: var(--gray500-color);
@@ -225,6 +228,7 @@ const PostContent = styled.div`
     display: inline;
   }
 `;
+
 const LocalNavWrap = styled.div`
   position: absolute;
   top: 43px;

@@ -130,7 +130,7 @@ export default function PostUpdateWriting({
         <Line />
 
         <ContentUploadWrap>
-          <InputDiv>
+          <InputWrap>
             <Label>상품 설명</Label>
             <Textarea
               width="100%"
@@ -144,7 +144,7 @@ export default function PostUpdateWriting({
             />
 
             <Button type="submit" height="56px" text={buttonText} br="4px" />
-          </InputDiv>
+          </InputWrap>
         </ContentUploadWrap>
       </UploadWrap>
     </PostingUiLayout>
@@ -163,6 +163,7 @@ const PostingUiLayout = styled.section`
   & > img {
     height: 58px;
   }
+
   & > p {
     color: var(--gray400-color);
     font-size: 16px;
@@ -211,9 +212,10 @@ const Thumbnail = styled.label`
 
   img {
     width: 100%;
-    aspect-ratio: 1/ 1;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
   }
+
   &::before {
     content: url(${thumnailBanner});
     position: absolute;
@@ -265,7 +267,7 @@ const ContentUploadWrap = styled.fieldset`
   }
 `;
 
-const InputDiv = styled.div`
+const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
 
