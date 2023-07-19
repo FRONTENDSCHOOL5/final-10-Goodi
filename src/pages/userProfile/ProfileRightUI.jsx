@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import pointEdgeProfile from "../../assets/point-edge-profile.svg";
 import authorProducts from "../../assets/Author-Products.svg";
+import authorPosts from "../../assets/Author-Posts.svg";
 import ProductCardList from '../../components/Product/ProductCardList';
 import PostCardList from './../../components/Post/PostCardList';
 
@@ -14,9 +15,16 @@ export default function ProfileRightUI() {
   };
   return (
     <ProfileRight>
-      <h2>
-        <img src={authorProducts} alt="Follower Products" />
-      </h2>
+      {activeTab === 1 && (
+        <h2>
+          <img src={authorProducts} alt="사용자 상품 목록" />
+        </h2>
+      )}
+      {activeTab === 2 && (
+        <h2>
+          <img src={authorPosts} alt="사용자 게시글 목록" />
+        </h2>
+      )}
 
       <TabMenu>
         <TabBtn

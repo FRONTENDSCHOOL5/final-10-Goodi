@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import PostCard from "./PostCard";
-import styled from "styled-components";
-import postAPI from "../../api/post";
-import loginToken from "../../recoil/loginToken";
-import accountname from "../../recoil/accountname";
 import { useRecoilValue } from "recoil";
-import NoPostsUI from "../NoPostsUI";
-import PostListSkeleton from "../../style/skeletonUI/skeletonPage/PostListSkeleton";
+import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { checkDeletePost } from "../../recoil/checkChange";
 import { checkProfile } from "../../recoil/checkChange";
+import loginToken from "../../recoil/loginToken";
+import accountname from "../../recoil/accountname";
+import postAPI from "../../api/post";
+
+import PostCard from "./PostCard";
+import NoPostsUI from "../NoPostsUI";
+
 import checkImageUrl from "../common/checkImageUrl";
 
 export default function PostCardList({ account }) {
@@ -19,8 +20,6 @@ export default function PostCardList({ account }) {
   const myaccount_name = useRecoilValue(accountname);
   const checkDelete = useRecoilValue(checkDeletePost);
   const checkProfileChange = useRecoilValue(checkProfile);
-
-  console.log(userPostList);
 
   const temp = useParams();
   const account_name = account
@@ -51,15 +50,11 @@ export default function PostCardList({ account }) {
 
         setLoading(false);
       } catch (error) {
-        // 오류 처리
         console.log(error);
-        setLoading(false); // 오류 발생 시 로딩 상태 변경
+        setLoading(false);
       }
     };
-
-    fetchPostData(); // fetchPostData 함수 호출
-
-    // 의존성 배열에 account_name을 추가하여 account_name이 변경될 때마다 useEffect를 호출하도록 설정
+    fetchPostData();
   }, [account_name, checkDelete, checkProfileChange]);
 
   return (
