@@ -306,14 +306,14 @@ const UploadWrap = styled.form`
   justify-content: space-between;
 `;
 
-const ImagUploadWrap = styled.section`
+const ImagUploadWrap = styled.div`
   flex-grow: 1;
   flex-basis: 400px;
   display: flex;
   gap: 5%;
 `;
 
-const ContentUploadWrap = styled.section`
+const ContentUploadWrap = styled.div`
   flex-grow: 1;
   button {
     margin-top: 48px;
