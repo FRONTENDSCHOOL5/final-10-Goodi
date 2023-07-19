@@ -1,16 +1,17 @@
 import React from "react";
 import { useRecoilState, useResetRecoilState } from "recoil";
-import { cartItemsState } from "../recoil/cartItemState";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { cartItemsState } from "../recoil/cartItemState";
+import checkImageUrl from "../components/common/checkImageUrl";
+
 import Button from "../components/common/Button/Button";
 import Layout from "../layout/Layout";
-import { useNavigate } from "react-router-dom";
 
 import cartNullIcon from "../assets/cart_null_icon.svg";
-import defaultImage from "../assets/profile_img_def.svg";
 import iconClose from "../assets/icon_close.svg";
-import checkImageUrl from "../components/common/checkImageUrl";
+
 
 export default function Cart() {
   const [cartItem, setCartItem] = useRecoilState(cartItemsState);
@@ -46,7 +47,6 @@ export default function Cart() {
     cartRest();
   };
 
-  // 숫자 세자리 수마다 컴마 찍어주는 함수
   const priceDivide = (price) => {
     return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   };
@@ -69,7 +69,7 @@ export default function Cart() {
                   <CartUserInfo>
                     <img
                       src={checkImageUrl(item.userImage, "profile")}
-                      alt="유저 이미지"
+                      alt="판매자 프로필 이미지"
                     />
                     <strong>{item.userName}</strong>
                     <button onClick={() => removeItem(item.id)}>
@@ -144,7 +144,7 @@ export default function Cart() {
   );
 }
 
-const CartWrap = styled.div`
+const CartWrap = styled.section`
   display: flex;
   justify-content: space-between;
   gap: 64px;
