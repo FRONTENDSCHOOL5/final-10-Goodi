@@ -6,9 +6,14 @@ import { useState } from "react";
 import PlusIcon from "../assets/icon_plus_black.svg";
 import MinusIcon from "../assets/icon_minus_black.svg";
 
-export default function Count({ count, setCount, getPrice, price, productPrice, stock }) {
-
-
+export default function Count({
+  count,
+  setCount,
+  getPrice,
+  price,
+  productPrice,
+  stock,
+}) {
   // 카운트 증가 함수
   const increaseHandler = () => {
     setCount(count + 1);
@@ -62,6 +67,10 @@ const Countwrap = styled.section`
     cursor: pointer;
     text-align: center;
     border-radius: 3px;
+  }
+
+  & button:focus {
+    outline: 1px solid #ff1515;
   }
 
   & button img {

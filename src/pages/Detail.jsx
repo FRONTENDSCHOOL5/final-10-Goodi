@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 //component
 import Layout from "../layout/Layout";
-import DetailImage from './../components/DetailImage';
+import DetailImage from "./../components/DetailImage";
 import Count from "../components/Count";
 import ProfileUI from "../components/ProfileUI";
 import Button from "../components/common/Button/Button";
@@ -52,26 +52,29 @@ export default function Detail() {
       productPrice: productData.price,
       productImage: productData.itemImage.split(",")[0],
       productCount: count,
-    }
+    };
 
     setToast(true);
 
-    const existingItem = cartItem.find((cartItem) => cartItem.id === newItem.id);
+    const existingItem = cartItem.find(
+      (cartItem) => cartItem.id === newItem.id
+    );
 
     if (existingItem) {
       // 이미 장바구니에 있는 상품인 경우
       const updatedItems = cartItem.map((cartItem) =>
-        cartItem.id === newItem.id ? { ...cartItem, productCount: cartItem.productCount + count } : cartItem
+        cartItem.id === newItem.id
+          ? { ...cartItem, productCount: cartItem.productCount + count }
+          : cartItem
       );
       setCartItem(updatedItems);
     } else {
       // 장바구니에 없는 상품인 경우
       setCartItem([...cartItem, newItem]);
     }
-  }
+  };
 
   const myaccount_name = useRecoilValue(accountname);
-  // const temp = useParams();
   const account_name = id.account_name ? id.account_name : myaccount_name;
 
   // product 정보 API에서 받아오기
@@ -116,7 +119,10 @@ export default function Detail() {
               <div className="product_detail_top">
                 <ProfileUI
                   key={productData.author._id}
-                  user_profile={checkImageUrl(productData.author.image, 'profile')}
+                  user_profile={checkImageUrl(
+                    productData.author.image,
+                    "profile"
+                  )}
                   user_name={productData.author.username}
                   user_email={productData.author.accountname}
                   account_name={account_name}
@@ -128,15 +134,15 @@ export default function Detail() {
               <DeliveryDescription>
                 <div className="delivery_date">
                   <img src={DeliveryIcon} alt="박스 아이콘" />
-                  <h4 className="delivery_price_subtitle">배송 기간</h4>
+                  <h3 className="delivery_price_subtitle">배송 기간</h3>
                   <p className="delivery_price_text">
-                    지금 주문하면 <strong>3일 이내</strong> 출고 예정 (주말, 공휴일
-                    제외)
+                    지금 주문하면 <strong>3일 이내</strong> 출고 예정 (주말,
+                    공휴일 제외)
                   </p>
                 </div>
                 <div className="delivery_price">
                   <img src={MoneyIcon} alt="동전 아이콘" />
-                  <h4 className="delivery_price_subtitle">배송비</h4>
+                  <h3 className="delivery_price_subtitle">배송비</h3>
                   <p className="delivery_price_text">
                     구디 제품 80,000원 이상 구매시 무료배송
                     <br />
@@ -144,7 +150,7 @@ export default function Detail() {
                   </p>
                 </div>
               </DeliveryDescription>
-              <h4 className="product_count_subtitle">수량</h4>
+              <h3 className="product_count_subtitle">수량</h3>
               <Count
                 count={count}
                 setCount={setCount}
@@ -154,7 +160,7 @@ export default function Detail() {
               />
               <hr />
               <ProductPrice>
-                <h4 className="product_price_subtitle">총 결제 금액</h4>
+                <h3 className="product_price_subtitle">총 결제 금액</h3>
                 <p className="product_price">
                   <strong>{priceDivide(price)}</strong>원
                 </p>
@@ -178,7 +184,7 @@ export default function Detail() {
                   type="button"
                   bg="black"
                   br="none"
-                  onClick={() => navigate('/chat')}
+                  onClick={() => navigate("/chat")}
                 />
               </ButtonWrap>
             </ProductDetail>
@@ -189,13 +195,13 @@ export default function Detail() {
   );
 }
 
-const DetailWrap = styled.div`
+const DetailWrap = styled.section`
   margin: 0 60px 120px 80px;
   display: flex;
   gap: 5%;
 `;
 
-const ProductDetail = styled.section`
+const ProductDetail = styled.div`
   width: 55%;
 
   .product_detail_top {
@@ -243,7 +249,7 @@ const DeliveryDescription = styled.section`
     margin-top: -7px;
   }
 
-  & div h4 {
+  & div h3 {
     width: 15%;
     font-size: 16px;
     font-family: var(--font--Bold);
