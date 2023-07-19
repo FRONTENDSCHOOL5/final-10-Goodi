@@ -99,4 +99,8 @@ const FollowingIcon = styled.button`
     object-fit: cover;
     cursor: pointer;
   }
+
+  &:focus {
+    outline: 1px solid #ff1515;
+  }
 `;

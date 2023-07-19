@@ -14,7 +14,7 @@ import HomeIcon from "../assets/icon_home_active.svg";
 // 컴포넌트
 import LocalNav from "../components/common/LocalNav";
 import Modal from "../components/common/Modal";
-import Search from './../components/Search/Search';
+import Search from "./../components/Search/Search";
 import { useRecoilValue } from "recoil";
 import { cartItemsState } from "../recoil/cartItemState";
 
@@ -164,6 +164,10 @@ const NavList = styled.button`
     background-color: #f0ffed;
     color: var(--dark-sub-color);
     margin-bottom: 0;
+  }
+
+  &:focus {
+    outline: 1px solid #ff1515;
   }
 
   &:hover {
