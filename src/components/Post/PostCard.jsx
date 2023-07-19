@@ -135,7 +135,7 @@ export default function PostCard({
         <div className="p_box">
           <p>{content}</p>
         </div>
-        <img src={image} alt="" />
+        <img src={image} alt="게시글 이미지" />
         <div>
           <span>{elapsedTimeString}</span>
           <div className="like_wrap">
