@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
+import accountname from "../../recoil/accountname";
+import checkImageUrl from "../common/checkImageUrl";
+
+import LocalNav from "../common/LocalNav";
+import Modal from "../common/Modal";
 import ProfileUI from "../ProfileUI";
 import ButtonPostLike from "../common/Button/ButtonPostLike";
 
 import postMenu from "../../assets/post_menu.svg";
-import { useRecoilValue } from "recoil";
-import loginToken from "../../recoil/loginToken";
-import accountname from "../../recoil/accountname";
-import LocalNav from "../common/LocalNav";
-import Modal from "../common/Modal";
-import checkImageUrl from "../common/checkImageUrl";
 
 const getElapsedTime = (createdAt) => {
   const currentTime = new Date();
@@ -51,7 +51,6 @@ export default function PostCard({
   postId,
   hearted,
   heartCount,
-  updateHeartCount,
 }) {
   const handleClick = useRef();
   const elapsedTimeString = getElapsedTime(createdAt);
@@ -136,7 +135,7 @@ export default function PostCard({
         <div className="p_box">
           <p>{content}</p>
         </div>
-        <img src={image} alt="" />
+        <img src={image} alt="게시글 이미지" />
         <div>
           <span>{elapsedTimeString}</span>
           <div className="like_wrap">
@@ -171,7 +170,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-const PostOuter = styled.div`
+const PostOuter = styled.article`
   width: 100%;
 `;
 const PostTop = styled.div`
@@ -191,17 +190,17 @@ const PostTop = styled.div`
 `;
 const PostContent = styled.div`
   width: 100%;
-  /* margin-bottom: 16px; */
   & > div {
-    /* padding: 10px 0; */
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
+
   .like_wrap {
     display: flex;
     align-items: center;
   }
+
   img {
     width: 100%;
     aspect-ratio: 1/1;
@@ -214,11 +213,13 @@ const PostContent = styled.div`
     margin-right: 5px;
     font-size: 1rem;
   }
+
   .p_box {
     height: 85px;
     display: flex;
     align-items: flex-start;
   }
+
   p {
     font-family: var(--font-Regular);
     color: var(--gray500-color);
@@ -227,6 +228,7 @@ const PostContent = styled.div`
     display: inline;
   }
 `;
+
 const LocalNavWrap = styled.div`
   position: absolute;
   top: 43px;
