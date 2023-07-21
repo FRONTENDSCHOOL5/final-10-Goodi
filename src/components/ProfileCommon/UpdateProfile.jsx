@@ -4,13 +4,13 @@ import PlusBtnImg from "../../assets/add_button.svg";
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
 import PostImageAPI from "../../api/UploadImage";
-import updateProfile from "./../../api/updateProfile";
-import { InputBox } from "../../components/common/Input";
-import Button from "../../components/common/Button/Button";
-import profileAPI from "../../api/profile";
+import updateProfile from "../../api/updateProfile";
+import { InputBox } from "../common/Input";
+import Button from "../common/Button/Button";
+import { profileAPI } from "../../api/profile";
 import { useRecoilState } from "recoil";
 import { checkProfile } from "../../recoil/checkChange";
-import checkImageUrl from "../../components/common/checkImageUrl";
+import checkImageUrl from "../common/checkImageUrl";
 
 export default function UpdateProfile({
   profileData,

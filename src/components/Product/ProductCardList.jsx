@@ -12,15 +12,15 @@ import { checkProfile } from "../../recoil/checkChange";
 import { checkDeletePost } from "../../recoil/checkChange";
 import checkImageUrl from "../common/checkImageUrl";
 
-export default function ProductCardList({ profile }) {
+export default function ProductCardList({ accountname, profile }) {
   const token = useRecoilValue(loginToken);
-  const myaccount_name = useRecoilValue(accountname);
+  // const myaccount_name = useRecoilValue(accountname);
   const checkProfileChange = useRecoilValue(checkProfile);
   const checkDelete = useRecoilValue(checkDeletePost);
 
-  const temp = useParams();
+  // const temp = useParams();
 
-  const account_name = temp.account_name ? temp.account_name : myaccount_name;
+  // const account_name = temp.account_name ? temp.account_name : myaccount_name;
 
   const [productGetData, setproductGetData] = useState(null);
 
@@ -29,14 +29,14 @@ export default function ProductCardList({ profile }) {
   useEffect(() => {
     const productGet = async () => {
       try {
-        const response = await productGetAPI(account_name, token);
+        const response = await productGetAPI(accountname, token);
         setproductGetData(response);
       } catch (error) {
         console.error("Account API 에러가 발생했습니다", error);
       }
     };
     productGet();
-  }, [account_name, checkProfileChange, checkDelete]);
+  }, [accountname, checkProfileChange, checkDelete]);
 
   return (
     <>

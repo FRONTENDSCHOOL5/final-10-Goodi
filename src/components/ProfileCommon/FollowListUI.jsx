@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
-import accountname from "../../recoil/accountname";
+// import accountname from "../../recoil/accountname";
 import followingAPI from "../../api/following";
 import followerAPI from "../../api/follower";
-import Follow from "../../components/Follow";
+import Follow from "./Follow";
 import { checkFollow } from "../../recoil/checkChange";
 
-export default function FollowUI({ profileData }) {
+export default function FollowListUI({ profileData }) {
+  // const { account_name } = useParams(); 유저 팔로우
+
   // 리코일 값 불러오기
   const token = useRecoilValue(loginToken);
-  const account_name = useRecoilValue(accountname);
+  // const account_name = useRecoilValue(accountname);
   const checkFollowChange = useRecoilValue(checkFollow);
 
   // 팔로워, 팔로잉 탭
@@ -31,11 +33,18 @@ export default function FollowUI({ profileData }) {
   useEffect(() => {
     fetchFollowingData();
     fetchFollowerData();
-  }, [activeFollow, checkFollowChange]);
+  }, [activeFollow, checkFollowChange, profileData]);
+
+  // 유저 API 
+  //  // 팔로워, 팔로잉 API 연동
+  //  useEffect(() => {
+  //   fetchFollowingData();
+  //   fetchFollowerData();
+  // }, [account_name, activeFollow]);
 
   const fetchFollowingData = async () => {
     try {
-      const response = await followingAPI(account_name, token);
+      const response = await followingAPI(profileData.profile.accountname, token);
       setFollowingData(response);
     } catch (error) {
       console.error("Account API 에러가 발생했습니다", error);
@@ -44,7 +53,7 @@ export default function FollowUI({ profileData }) {
 
   const fetchFollowerData = async () => {
     try {
-      const response = await followerAPI(account_name, token);
+      const response = await followerAPI(profileData.profile.accountname, token);
       setFollowerData(response);
     } catch (error) {
       console.error("Account API 에러가 발생했습니다", error);
@@ -58,14 +67,14 @@ export default function FollowUI({ profileData }) {
           className={activeFollow === 1 ? "followActive" : ""}
           onClick={() => handleFollowClick(1)}
         >
-          <strong>{profileData.user.followerCount}</strong>
+          <strong>{profileData.profile.followerCount}</strong>
           <p>팔로워</p>
         </FollowDiv>
         <FollowDiv
           className={activeFollow === 2 ? "followActive" : ""}
           onClick={() => handleFollowClick(2)}
         >
-          <strong>{profileData.user.followingCount}</strong>
+          <strong>{profileData.profile.followingCount}</strong>
           <p>팔로잉</p>
         </FollowDiv>
       </FollowWrap>

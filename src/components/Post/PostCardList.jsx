@@ -13,20 +13,20 @@ import NoPostsUI from "../NoPostsUI";
 
 import checkImageUrl from "../common/checkImageUrl";
 
-export default function PostCardList({ account }) {
+export default function PostCardList({ accountname }) {
   const [userPostList, setUserPostList] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = useRecoilValue(loginToken);
-  const myaccount_name = useRecoilValue(accountname);
+  // const myaccount_name = useRecoilValue(accountname);
   const checkDelete = useRecoilValue(checkDeletePost);
   const checkProfileChange = useRecoilValue(checkProfile);
 
-  const temp = useParams();
-  const account_name = account
-    ? account
-    : temp.account_name
-      ? temp.account_name
-      : myaccount_name;
+  // const temp = useParams();
+  // const account_name = account
+  //   ? account
+  //   : temp.account_name
+  //     ? temp.account_name
+  //     : myaccount_name;
 
   const updateHeartCount = (postId, count) => {
     setUserPostList((prevPosts) =>
@@ -41,7 +41,7 @@ export default function PostCardList({ account }) {
       try {
         const response = await postAPI({
           token,
-          accountname: account_name,
+          accountname: accountname,
         });
 
         if (response.post) {
@@ -55,7 +55,7 @@ export default function PostCardList({ account }) {
       }
     };
     fetchPostData();
-  }, [account_name, checkDelete, checkProfileChange]);
+  }, [accountname, checkDelete, checkProfileChange]);
 
   return (
     <>

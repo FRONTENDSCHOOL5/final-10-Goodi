@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import ProfileUI from "./ProfileUI";
-import followers from "../assets/Followers.svg";
-import following from "../assets/Following.svg";
-import followSymbol from "../assets/follow_symbol.svg";
-import ButtonFollow from "./common/Button/ButtonFollow";
-import checkImageUrl from "./common/checkImageUrl";
+import ProfileUI from "../ProfileUI";
+import followers from "../../assets/Followers.svg";
+import following from "../../assets/Following.svg";
+import followSymbol from "../../assets/follow_symbol.svg";
+import ButtonFollow from "../common/Button/ButtonFollow";
+import checkImageUrl from "../common/checkImageUrl";
 
 export default function Follow(props) {
   const { followerData, followingData, activeFollow } = props;

@@ -17,14 +17,19 @@ import Modal from "../components/common/Modal";
 import Search from "./../components/Search/Search";
 import { useRecoilValue } from "recoil";
 import { cartItemsState } from "../recoil/cartItemState";
+import accountname from "../recoil/accountname";
 
 export default function Navigation() {
   const cartItem = useRecoilValue(cartItemsState);
   const navigate = useNavigate();
+  const account_name = useRecoilValue(accountname)
+  console.log(account_name);
+  const myProfile = `/profile/${account_name}`
+
   const icons = [
     { name: "Search", image: SearchIcon, nav: "" },
     { name: "Home", image: HomeIcon, nav: "/main" },
-    { name: "My page", image: MypageIcon, nav: "/profile" },
+    { name: "My page", image: MypageIcon, nav: myProfile },
     { name: "Cart", image: CartIcon, nav: "/cart" },
     { name: "Chat", image: ChatIcon, nav: "/chat" },
     { name: "Post", image: PostIcon, nav: "" },

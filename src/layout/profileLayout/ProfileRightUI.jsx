@@ -5,9 +5,9 @@ import pointEdgeProfile from "../../assets/point-edge-profile.svg";
 import authorProducts from "../../assets/Author-Products.svg";
 import authorPosts from "../../assets/Author-Posts.svg";
 import ProductCardList from '../../components/Product/ProductCardList';
-import PostCardList from './../../components/Post/PostCardList';
+import PostCardList from '../../components/Post/PostCardList';
 
-export default function ProfileRightUI() {
+export default function ProfileRightUI({ accountname }) {
   // 상품 목록, 게시글 목록 탭
   const [activeTab, setActiveTab] = useState(1);
   const handleTabClick = (tabNumber) => {
@@ -41,10 +41,10 @@ export default function ProfileRightUI() {
         </TabBtn>
       </TabMenu>
       {activeTab === 1 && (
-        <ProductCardList profile="true" />
+        <ProductCardList profile="true" accountname={accountname} />
       )}
       {activeTab === 2 && (
-        <PostCardList />
+        <PostCardList accountname={accountname} />
       )}
     </ProfileRight>
   )

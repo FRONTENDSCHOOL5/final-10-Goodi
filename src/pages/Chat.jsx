@@ -15,7 +15,7 @@ import ChatSkeleton from "../style/skeletonUI/skeletonPage/ChatSkeleton";
 import Toast from "../components/common/Toast";
 
 // API
-import profileAPI from "../api/profile";
+import { profileAPI } from "../api/profile";
 import followingAPI from "../api/following";
 
 // Recoil
