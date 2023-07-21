@@ -22,8 +22,7 @@ import accountname from "../recoil/accountname";
 export default function Navigation() {
   const cartItem = useRecoilValue(cartItemsState);
   const navigate = useNavigate();
-  const account_name = useRecoilValue(accountname)
-  console.log(account_name);
+  const account_name = useRecoilValue(accountname);
   const myProfile = `/profile/${account_name}`
 
   const icons = [

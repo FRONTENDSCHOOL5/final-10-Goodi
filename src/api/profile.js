@@ -28,7 +28,6 @@ export const accountProfileAPI = async (accountname, token) => {
     })
 
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error('Account API 에러가 발생했습니다', error);
