@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
+// 리코일
 import { useRecoilValue } from "recoil";
+import { checkFollow } from "../../recoil/checkChange";
 import loginToken from "../../recoil/loginToken";
-// import accountname from "../../recoil/accountname";
+
+// api
 import followingAPI from "../../api/following";
 import followerAPI from "../../api/follower";
+
+// 컴포넌트
 import Follow from "./Follow";
-import { checkFollow } from "../../recoil/checkChange";
 
 export default function FollowListUI({ profileData }) {
-  // const { account_name } = useParams(); 유저 팔로우
-
   // 리코일 값 불러오기
   const token = useRecoilValue(loginToken);
-  // const account_name = useRecoilValue(accountname);
   const checkFollowChange = useRecoilValue(checkFollow);
 
   // 팔로워, 팔로잉 탭
@@ -26,7 +28,6 @@ export default function FollowListUI({ profileData }) {
   // 팔로워, 팔로잉 활성화
   const handleFollowClick = (followNumber) => {
     setActiveFollow(followNumber);
-    // followNumber === 1 ? fetchFollowerData() : fetchFollowingData();
   };
 
   // 팔로워, 팔로잉 API 연동
@@ -34,13 +35,6 @@ export default function FollowListUI({ profileData }) {
     fetchFollowingData();
     fetchFollowerData();
   }, [activeFollow, checkFollowChange, profileData]);
-
-  // 유저 API 
-  //  // 팔로워, 팔로잉 API 연동
-  //  useEffect(() => {
-  //   fetchFollowingData();
-  //   fetchFollowerData();
-  // }, [account_name, activeFollow]);
 
   const fetchFollowingData = async () => {
     try {

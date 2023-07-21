@@ -1,19 +1,16 @@
 import React from "react";
-import styled from "styled-components";
-import ButtonLineIcon from "../common/Button/ButtonLineIcon";
-import checkImageUrl from "../common/checkImageUrl";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+// 컴포넌트
+import ButtonLineIcon from "../common/Button/ButtonLineIcon";
 import ButtonFollow from "../common/Button/ButtonFollow";
 
-export default function IntroUI({ profileData, setIsEditing, myProfile }) {
-  // 유저 인트로 UI
-  const navigate = useNavigate();
-  console.log(profileData);
+// 이미지 검사
+import checkImageUrl from "../common/checkImageUrl";
 
-  // 프로필 수정 버튼 이벤트
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
+export default function IntroUI({ profileData, myProfile, handleEditClick }) {
+  const navigate = useNavigate();
 
   return (
     <>
@@ -48,37 +45,11 @@ export default function IntroUI({ profileData, setIsEditing, myProfile }) {
             padding="true"
           />
         </BtnWrap >
-      )
-      }
-
+      )}
 
       <p>{profileData.profile.intro || "아직 소개글이 없어요!"}</p>
     </>
   );
-
-
-
-
-  // return (
-  //   <>
-  //     <IntroWrap>
-  //       <img
-  //         src={checkImageUrl(profileData.user.image, 'profile')}
-  //         alt="유저 프로필 이미지"
-  //       />
-  //       <strong>{profileData.user.username}</strong>
-  //       <p>{profileData.user.accountname}</p>
-  //     </IntroWrap>
-
-  //     <ButtonLineIcon
-  //       text="프로필 수정하기"
-  //       onClick={handleEditClick}
-  //       basic="true"
-  //     />
-
-  //     <p>{profileData.user.intro || "아직 소개글이 없어요!"}</p>
-  //   </>
-  // );
 }
 
 const IntroWrap = styled.div`

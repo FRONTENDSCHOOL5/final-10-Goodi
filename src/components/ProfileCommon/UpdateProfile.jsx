@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import PlusBtnImg from "../../assets/add_button.svg";
+
+// 리코일
 import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import loginToken from "../../recoil/loginToken";
+import { checkProfile } from "../../recoil/checkChange";
+
+// api
+import { profileAPI } from "../../api/profile";
 import PostImageAPI from "../../api/UploadImage";
 import updateProfile from "../../api/updateProfile";
+
+// 컴포넌트
 import { InputBox } from "../common/Input";
 import Button from "../common/Button/Button";
-import { profileAPI } from "../../api/profile";
-import { useRecoilState } from "recoil";
-import { checkProfile } from "../../recoil/checkChange";
+
+// 이미지
+import PlusBtnImg from "../../assets/add_button.svg";
+// 이미지 검사
 import checkImageUrl from "../common/checkImageUrl";
 
 export default function UpdateProfile({
@@ -21,10 +30,10 @@ export default function UpdateProfile({
   const token = useRecoilValue(loginToken);
   console.log("업데이트", profileData);
   // 프로필 이미지 업로드
-  const [changeImageURL, setChangeImageURL] = useState(profileData.user.image);
+  const [changeImageURL, setChangeImageURL] = useState(profileData.profile.image);
   const [isImageUpload, setIsImageUpload] = useState(false);
-  const [userName, setUserName] = useState(profileData.user.username);
-  const [intro, setIntro] = useState(profileData.user.intro);
+  const [userName, setUserName] = useState(profileData.profile.username);
+  const [intro, setIntro] = useState(profileData.profile.intro);
   const [checkProfileChange, setCheckProfileChange] =
     useRecoilState(checkProfile);
   const [postChangeImg, setPostChangeImg] = useState({
@@ -34,7 +43,6 @@ export default function UpdateProfile({
   });
 
   // 이미지 fetch
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
   const handleImageChange = async (e) => {
     setIsImageUpload(true);
     const file = e.target.files[0];
@@ -62,7 +70,6 @@ export default function UpdateProfile({
     updateProfile(updatedProfileData, token);
     setIsEditing(false);
     setCheckProfileChange((prev) => !prev);
-    // window.location.reload();
   };
 
   // 프로필 수정 취소 이벤트

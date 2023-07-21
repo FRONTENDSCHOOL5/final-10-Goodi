@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+
+// 컴포넌트
 import ProfileUI from "../ProfileUI";
+import ButtonFollow from "../common/Button/ButtonFollow";
+
+// 이미지
 import followers from "../../assets/Followers.svg";
 import following from "../../assets/Following.svg";
 import followSymbol from "../../assets/follow_symbol.svg";
-import ButtonFollow from "../common/Button/ButtonFollow";
+// 이미지 검사
 import checkImageUrl from "../common/checkImageUrl";
 
 export default function Follow(props) {
@@ -25,13 +30,11 @@ export default function Follow(props) {
       {activeFollow === 1 && followerData && followerData?.length > 0 ? (
         <ul>
           {followerData.map((follow) => (
-
             <FollowLi key={follow._id}>
               <ProfileUI
                 user_profile={checkImageUrl(follow.image, 'profile')}
                 user_name={follow.username}
                 user_email={follow.accountname}
-                // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
                 account_name={follow.accountname}
                 follow="true"
               />
@@ -40,8 +43,6 @@ export default function Follow(props) {
                 accountName={follow.accountname}
               />
             </FollowLi>
-
-
           ))}
         </ul>
       ) : activeFollow === 2 && followingData && followingData?.length > 0 ? (
@@ -52,7 +53,6 @@ export default function Follow(props) {
                 user_profile={checkImageUrl(follow.image, 'profile')}
                 user_name={follow.username}
                 user_email={follow.accountname}
-                // followerData 에는 email이 없어서 accountname으로 대체하여 삽입
                 account_name={follow.accountname}
                 follow={true}
               />

@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { useRecoilValue } from "recoil";
-import { checkFollow } from "../../recoil/checkChange";
-import UpdateProfile from '../../components/ProfileCommon/UpdateProfile';
 import IntroUI from '../../components/ProfileCommon/IntroUI';
 import FollowListUI from "../../components/ProfileCommon/FollowListUI";
-import myAccountAtom from '../../recoil/accountname';
-import { accountProfileAPI } from "../../api/profile";
-import loginToken from "../../recoil/loginToken";
-// import accountProfileAPI from "../../api/accountProfile";
+import { useRecoilValue } from "recoil";
+import { checkFollow } from "../../recoil/checkChange";
+import UpdateProfile from "../../components/ProfileCommon/UpdateProfile";
 
-export default function ProfileLeftUI({ profileData, setProfileData, myProfile }) {
-  // // 프로필 정보 수정
-  // const [isEditing, setIsEditing] = useState(false);
+export default function ProfileLeftUI({ profileData, setProfileData, myProfile, setFetchProfile }) {
+  // 프로필 정보 수정
+  const [isEditing, setIsEditing] = useState(false);
   // const checkFollowChange = useRecoilValue(checkFollow);
-
-
 
   // useEffect(() => {
   //   if (!isEditing) {
@@ -24,35 +18,38 @@ export default function ProfileLeftUI({ profileData, setProfileData, myProfile }
   //   }
   // }, [isEditing, setFetchProfile, checkFollowChange]);
 
-  return (
-    // <>
-    //     {isEditing ? (
-    //       <ProfileLeft edit="true">
-    //         <h2 className="a11y-hidden">사용자 프로필 수정</h2>
-    //         <UpdateProfile
-    //           profileData={profileData}
-    //           setIsEditing={setIsEditing}
-    //           setProfileData={setProfileData}
-    //         />
-    //       </ProfileLeft>
-    //     ) : (
-    <ProfileLeft>
-      <h2 className="a11y-hidden">사용자 프로필</h2>
-      <IntroUI
-        profileData={profileData}
-        myProfile={myProfile}
-      // setIsEditing={setIsEditing} 
-      />
-      <FollowListUI
-        profileData={profileData}
-        // setIsEditing={setIsEditing}
-        setProfileData={setProfileData}
-      />
-    </ProfileLeft>
-    //     )}
-    // </>
-  );
+  // 프로필 수정 버튼 이벤트
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
 
+  return (
+    <>
+      {isEditing ? (
+        <ProfileLeft edit="true">
+          <h2 className="a11y-hidden">사용자 프로필 수정</h2>
+          {/* <UpdateProfile
+            profileData={profileData}
+            setIsEditing={setIsEditing}
+            setProfileData={setProfileData}
+          /> */}
+        </ProfileLeft>
+      ) : (
+        <ProfileLeft>
+          <h2 className="a11y-hidden">사용자 프로필</h2>
+          <IntroUI
+            profileData={profileData}
+            myProfile={myProfile}
+            handleEditClick={handleEditClick}
+          />
+          <FollowListUI
+            profileData={profileData}
+            setProfileData={setProfileData}
+          />
+        </ProfileLeft>
+      )}
+    </>
+  );
 }
 
 const ProfileLeft = styled.section`
