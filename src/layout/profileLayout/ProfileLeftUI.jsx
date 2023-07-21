@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import IntroUI from '../../components/ProfileCommon/IntroUI';
-import FollowListUI from "../../components/ProfileCommon/FollowListUI";
+// 리코일 
 import { useRecoilValue } from "recoil";
 import { checkFollow } from "../../recoil/checkChange";
+
+// 컴포넌트
+import IntroUI from '../../components/ProfileCommon/IntroUI';
+import FollowListUI from "../../components/ProfileCommon/FollowListUI";
 import UpdateProfile from "../../components/ProfileCommon/UpdateProfile";
 
 export default function ProfileLeftUI({ profileData, setProfileData, myProfile, setFetchProfile }) {
