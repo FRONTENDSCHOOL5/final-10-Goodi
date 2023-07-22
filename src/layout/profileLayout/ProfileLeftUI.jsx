@@ -13,13 +13,13 @@ import UpdateProfile from "../../components/ProfileCommon/UpdateProfile";
 export default function ProfileLeftUI({ profileData, setProfileData, myProfile, setFetchProfile }) {
   // 프로필 정보 수정
   const [isEditing, setIsEditing] = useState(false);
-  // const checkFollowChange = useRecoilValue(checkFollow);
+  const checkFollowChange = useRecoilValue(checkFollow);
 
-  // useEffect(() => {
-  //   if (!isEditing) {
-  //     setFetchProfile(true);
-  //   }
-  // }, [isEditing, setFetchProfile, checkFollowChange]);
+  useEffect(() => {
+    if (!isEditing) {
+      setFetchProfile(true);
+    }
+  }, [isEditing, setFetchProfile, checkFollowChange]);
 
   // 프로필 수정 버튼 이벤트
   const handleEditClick = () => {
@@ -31,11 +31,11 @@ export default function ProfileLeftUI({ profileData, setProfileData, myProfile, 
       {isEditing ? (
         <ProfileLeft edit="true">
           <h2 className="a11y-hidden">사용자 프로필 수정</h2>
-          {/* <UpdateProfile
+          <UpdateProfile
             profileData={profileData}
             setIsEditing={setIsEditing}
             setProfileData={setProfileData}
-          /> */}
+          />
         </ProfileLeft>
       ) : (
         <ProfileLeft>

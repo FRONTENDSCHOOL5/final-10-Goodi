@@ -25,7 +25,7 @@ export default function Profile() {
   // const [profileUpdate, setProfileUpdate] = useState(false);
   const token = useRecoilValue(loginToken);
   const myAccount = useRecoilValue(account_name);
-  // const [fetchProfile, setFetchProfile] = useState(true);
+  const [fetchProfile, setFetchProfile] = useState(true);
 
   useEffect(() => {
     setMyProfile(myAccount === accountname);
@@ -33,13 +33,10 @@ export default function Profile() {
       const res = await accountProfileAPI(accountname, token);
       setProfileData(res);
       setLoading(false);
-      // setFetchProfile(false);
+      setFetchProfile(false);
     }
-    // if (fetchProfile) {
-    // setFetchProfile(false);
     getProfileData();
-    // }
-  }, [accountname])
+  }, [accountname, fetchProfile])
 
   console.log(profileData);
 
@@ -52,7 +49,7 @@ export default function Profile() {
           <>
             <ProfileLeftUI
               setProfileData={setProfileData}
-              // setFetchProfile={setFetchProfile}
+              setFetchProfile={setFetchProfile}
               myProfile={myProfile}
               accountname={accountname}
               profileData={profileData}
