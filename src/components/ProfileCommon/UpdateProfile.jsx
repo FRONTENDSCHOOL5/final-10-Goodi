@@ -26,10 +26,10 @@ export default function UpdateProfile({
   setIsEditing,
   setProfileData,
 }) {
-  // 리코일 값 불러오기
+  // 리코일
   const token = useRecoilValue(loginToken);
-  console.log("업데이트", profileData);
-  // 프로필 이미지 업로드
+
+  // 수정 관련 state
   const [changeImageURL, setChangeImageURL] = useState(profileData.profile.image);
   const [isImageUpload, setIsImageUpload] = useState(false);
   const [userName, setUserName] = useState(profileData.profile.username);
@@ -96,8 +96,6 @@ export default function UpdateProfile({
       postImage(postChangeImg, token);
     }
   }, [postChangeImg]);
-
-  console.log("ddd", checkProfileChange);
 
   return (
     <>

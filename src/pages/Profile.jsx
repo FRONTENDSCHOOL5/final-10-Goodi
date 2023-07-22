@@ -38,8 +38,6 @@ export default function Profile() {
     getProfileData();
   }, [accountname, fetchProfile])
 
-  console.log(profileData);
-
   return (
     <Layout reduceTop="true">
       <ProfileWrap>
