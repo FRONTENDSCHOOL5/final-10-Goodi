@@ -16,13 +16,11 @@ import ProfileLeftUI from "../layout/profileLayout/ProfileLeftUI";
 import ProfileRightUI from "../layout/profileLayout/ProfileRightUI";
 import ProfileSkeleton from './../style/skeletonUI/skeletonPage/ProfileSkeleton';
 
-
 export default function Profile() {
   const { accountname } = useParams();
   const [loading, setLoading] = useState(true);
   const [myProfile, setMyProfile] = useState(false);
   const [profileData, setProfileData] = useState(null);
-  // const [profileUpdate, setProfileUpdate] = useState(false);
   const token = useRecoilValue(loginToken);
   const myAccount = useRecoilValue(account_name);
   const [fetchProfile, setFetchProfile] = useState(true);
