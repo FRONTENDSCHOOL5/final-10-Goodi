@@ -33,6 +33,7 @@ export default function DetailImage({ img }) {
 
   return (
     <ProductDetailImg>
+      <h3 className="a11y-hidden">제품 상세이미지</h3>
       <div className="top_img_wrap">
         <img
           className="common_banner"
@@ -41,7 +42,7 @@ export default function DetailImage({ img }) {
         />
         <img
           className="top_detail_img"
-          src={checkImageUrl(img[currentIndex], 'post')}
+          src={checkImageUrl(img[currentIndex], "post")}
           alt="상세 이미지"
         />
 
@@ -57,7 +58,7 @@ export default function DetailImage({ img }) {
               key={index}
               className={`detail_img ${index === currentIndex ? "active" : ""}`}
               onClick={() => handleSlide(index)}
-              src={checkImageUrl(el, 'post')}
+              src={checkImageUrl(el, "post")}
               alt="상세 이미지"
             />
           );
@@ -67,7 +68,7 @@ export default function DetailImage({ img }) {
   );
 }
 
-const ProductDetailImg = styled.section`
+const ProductDetailImg = styled.div`
   width: 40%;
 
   .top_img_wrap {
@@ -93,6 +94,10 @@ const ProductDetailImg = styled.section`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  & button:focus {
+    outline: 1px solid #ff1515;
   }
 
   .bottom_img_wrap {
