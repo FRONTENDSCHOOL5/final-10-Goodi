@@ -1,11 +1,15 @@
 import React from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import ButtonLineIcon from "../../components/common/Button/ButtonLineIcon";
-import ButtonFollow from "../../components/common/Button/ButtonFollow";
-import checkImageUrl from "../../components/common/checkImageUrl";
+import styled from "styled-components";
 
-export default function IntroUI({ profileData }) {
+// 컴포넌트
+import ButtonLineIcon from "../common/Button/ButtonLineIcon";
+import ButtonFollow from "../common/Button/ButtonFollow";
+
+// 이미지 검사
+import checkImageUrl from "../common/checkImageUrl";
+
+export default function IntroUI({ profileData, myProfile, handleEditClick }) {
   const navigate = useNavigate();
 
   return (
@@ -19,21 +23,29 @@ export default function IntroUI({ profileData }) {
         <p>{profileData.profile.accountname}</p>
       </IntroWrap>
 
-      <BtnWrap>
+      {myProfile ? (
         <ButtonLineIcon
-          text="작가랑 채팅하기"
+          text="프로필 수정하기"
+          onClick={handleEditClick}
           basic="true"
-          bg="black"
-          color="white"
-          br="none"
-          onClick={() => navigate("/chat")}
         />
-        <ButtonFollow
-          isFollow={profileData.profile.isfollow}
-          accountName={profileData.profile.accountname}
-          padding="true"
-        />
-      </BtnWrap>
+      ) : (
+        <BtnWrap>
+          <ButtonLineIcon
+            text="작가랑 채팅하기"
+            basic="true"
+            bg="black"
+            color="white"
+            br="none"
+            onClick={() => navigate("/chat")}
+          />
+          <ButtonFollow
+            isFollow={profileData.profile.isfollow}
+            accountName={profileData.profile.accountname}
+            padding="true"
+          />
+        </BtnWrap >
+      )}
 
       <p>{profileData.profile.intro || "아직 소개글이 없어요!"}</p>
     </>

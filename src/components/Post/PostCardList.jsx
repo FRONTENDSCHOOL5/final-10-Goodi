@@ -1,61 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+
+// 리코일
+import { useRecoilValue } from "recoil";
 import { checkDeletePost } from "../../recoil/checkChange";
 import { checkProfile } from "../../recoil/checkChange";
 import loginToken from "../../recoil/loginToken";
-import accountname from "../../recoil/accountname";
+
+// api
 import postAPI from "../../api/post";
 
+// 컴포넌트
 import PostCard from "./PostCard";
 import NoPostsUI from "../NoPostsUI";
 
+// 이미지 검사
 import checkImageUrl from "../common/checkImageUrl";
 
-export default function PostCardList({ account }) {
+export default function PostCardList({ accountname }) {
   const [userPostList, setUserPostList] = useState(null);
-  const [loading, setLoading] = useState(true);
   const token = useRecoilValue(loginToken);
-  const myaccount_name = useRecoilValue(accountname);
   const checkDelete = useRecoilValue(checkDeletePost);
   const checkProfileChange = useRecoilValue(checkProfile);
-
-  const temp = useParams();
-  const account_name = account
-    ? account
-    : temp.account_name
-      ? temp.account_name
-      : myaccount_name;
-
-  const updateHeartCount = (postId, count) => {
-    setUserPostList((prevPosts) =>
-      prevPosts.map((post) =>
-        post.id === postId ? { ...post, heartCount: count } : post
-      )
-    );
-  };
 
   useEffect(() => {
     const fetchPostData = async () => {
       try {
         const response = await postAPI({
           token,
-          accountname: account_name,
+          accountname: accountname,
         });
 
         if (response.post) {
           setUserPostList(response.post);
         }
-
-        setLoading(false);
       } catch (error) {
         console.log(error);
-        setLoading(false);
       }
     };
     fetchPostData();
-  }, [account_name, checkDelete, checkProfileChange]);
+  }, [accountname, checkDelete, checkProfileChange]);
 
   return (
     <>

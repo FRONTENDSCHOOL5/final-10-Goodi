@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
 import styled from "styled-components";
 
-import accountname from "../../recoil/accountname";
+// 리코일
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
-import productGetAPI from "../../api/productGet";
-import { useParams } from "react-router-dom";
-import NoPostsUI from "../NoPostsUI";
 import { checkProfile } from "../../recoil/checkChange";
 import { checkDeletePost } from "../../recoil/checkChange";
+
+// api
+import productGetAPI from "../../api/productGet";
+
+// 컴포넌트
+import ProductCard from "./ProductCard";
+import NoPostsUI from "../NoPostsUI";
+
+// 이미지 검사
 import checkImageUrl from "../common/checkImageUrl";
 
-export default function ProductCardList({ profile }) {
+export default function ProductCardList({ accountname, profile }) {
   const token = useRecoilValue(loginToken);
-  const myaccount_name = useRecoilValue(accountname);
   const checkProfileChange = useRecoilValue(checkProfile);
   const checkDelete = useRecoilValue(checkDeletePost);
-
-  const temp = useParams();
-
-  const account_name = temp.account_name ? temp.account_name : myaccount_name;
 
   const [productGetData, setproductGetData] = useState(null);
 
@@ -29,14 +29,14 @@ export default function ProductCardList({ profile }) {
   useEffect(() => {
     const productGet = async () => {
       try {
-        const response = await productGetAPI(account_name, token);
+        const response = await productGetAPI(accountname, token);
         setproductGetData(response);
       } catch (error) {
         console.error("Account API 에러가 발생했습니다", error);
       }
     };
     productGet();
-  }, [account_name, checkProfileChange, checkDelete]);
+  }, [accountname, checkProfileChange, checkDelete]);
 
   return (
     <>

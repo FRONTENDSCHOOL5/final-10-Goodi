@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import UpdateProfile from "./UpdateProfile";
-import IntroUI from "./IntroUI";
-import FollowUI from "./FollowUI";
+
+// 리코일 
 import { useRecoilValue } from "recoil";
 import { checkFollow } from "../../recoil/checkChange";
 
-export default function ProfileLeftUI({
-  profileData,
-  setProfileData,
-  setFetchProfile,
-}) {
+// 컴포넌트
+import IntroUI from '../../components/ProfileCommon/IntroUI';
+import FollowListUI from "../../components/ProfileCommon/FollowListUI";
+import UpdateProfile from "../../components/ProfileCommon/UpdateProfile";
+
+export default function ProfileLeftUI({ profileData, setProfileData, myProfile, setFetchProfile }) {
   // 프로필 정보 수정
   const [isEditing, setIsEditing] = useState(false);
   const checkFollowChange = useRecoilValue(checkFollow);
@@ -20,6 +20,11 @@ export default function ProfileLeftUI({
       setFetchProfile(true);
     }
   }, [isEditing, setFetchProfile, checkFollowChange]);
+
+  // 프로필 수정 버튼 이벤트
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
 
   return (
     <>
@@ -35,10 +40,13 @@ export default function ProfileLeftUI({
       ) : (
         <ProfileLeft>
           <h2 className="a11y-hidden">사용자 프로필</h2>
-          <IntroUI profileData={profileData} setIsEditing={setIsEditing} />
-          <FollowUI
+          <IntroUI
             profileData={profileData}
-            setIsEditing={setIsEditing}
+            myProfile={myProfile}
+            handleEditClick={handleEditClick}
+          />
+          <FollowListUI
+            profileData={profileData}
             setProfileData={setProfileData}
           />
         </ProfileLeft>
