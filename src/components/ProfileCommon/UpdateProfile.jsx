@@ -30,7 +30,9 @@ export default function UpdateProfile({
   const token = useRecoilValue(loginToken);
 
   // 수정 관련 state
-  const [changeImageURL, setChangeImageURL] = useState(profileData.profile.image);
+  const [changeImageURL, setChangeImageURL] = useState(
+    profileData.profile.image
+  );
   const [isImageUpload, setIsImageUpload] = useState(false);
   const [userName, setUserName] = useState(profileData.profile.username);
   const [intro, setIntro] = useState(profileData.profile.intro);
@@ -109,10 +111,7 @@ export default function UpdateProfile({
         />
         <label htmlFor="fileInput">
           <ProfileImgWrap>
-            <img
-              src={checkImageUrl(changeImageURL, 'profile')}
-              alt="Upload"
-            />
+            <img src={checkImageUrl(changeImageURL, "profile")} alt="Upload" />
           </ProfileImgWrap>
           <img
             className="add_button_img"

@@ -37,7 +37,7 @@ export default function ProductUploadWriting({
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   // 상품설명 글자수 제한
-  const handleTextCount = async (e) => {
+  const handleTextCount = (e) => {
     const textSlice = e.target.value;
     setDescription(textSlice.slice(0, 100));
   };
