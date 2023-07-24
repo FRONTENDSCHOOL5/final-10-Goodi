@@ -22,7 +22,7 @@ export default function Navigation() {
   const icons = [
     { name: "Search", nav: "" },
     { name: "Home", nav: "/main" },
-    { name: "MyPage", nav: "/profile" },
+    { name: "MyPage", nav: myProfile },
     { name: "Cart", nav: "/cart" },
     { name: "Chat", nav: "/chat" },
     { name: "Post", nav: "" },
