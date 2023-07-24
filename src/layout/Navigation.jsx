@@ -3,13 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
 // 이미지 파일
-import SearchIcon from "../assets/icon_search_black.svg";
-import MypageIcon from "../assets/icon_mypage_active.svg";
-import CartIcon from "../assets/icon_cart_active.svg";
-import ChatIcon from "../assets/icon_chat_active.svg";
-import LogoutIcon from "../assets/icon_logout_active.svg";
-import PostIcon from "../assets/icon_post_active.svg";
-import HomeIcon from "../assets/icon_home_active.svg";
+import cssSprites from "../assets/css_sprites.png";
 
 // 컴포넌트
 import LocalNav from "../components/common/LocalNav";
@@ -22,13 +16,13 @@ export default function Navigation() {
   const cartItem = useRecoilValue(cartItemsState);
   const navigate = useNavigate();
   const icons = [
-    { name: "Search", image: SearchIcon, nav: "" },
-    { name: "Home", image: HomeIcon, nav: "/main" },
-    { name: "My page", image: MypageIcon, nav: "/profile" },
-    { name: "Cart", image: CartIcon, nav: "/cart" },
-    { name: "Chat", image: ChatIcon, nav: "/chat" },
-    { name: "Post", image: PostIcon, nav: "" },
-    { name: "Logout", image: LogoutIcon, nav: "" },
+    { name: "Search", nav: "" },
+    { name: "Home", nav: "/main" },
+    { name: "MyPage", nav: "/profile" },
+    { name: "Cart", nav: "/cart" },
+    { name: "Chat", nav: "/chat" },
+    { name: "Post", nav: "" },
+    { name: "Logout", nav: "" },
   ];
 
   const [isHidden, setIsHidden] = useState(false);
@@ -74,7 +68,7 @@ export default function Navigation() {
               else navigate(el.nav);
             }}
           >
-            <img src={el.image} alt={el.name} />
+            <IconImage className={el.name} />
             <p className={i === 0 ? "a11y-hidden" : ""}>{el.name}</p>
             {el.name === "Post" && isHidden && <ActiveBar />}
             {el.name === "Cart" && (
@@ -140,7 +134,6 @@ const NavigationLayout = styled.article`
 
 const NavList = styled.button`
   width: 100%;
-  /* max-height: 66px; */
   padding: 10px 0 10px 0;
   box-sizing: border-box;
   text-align: center;
@@ -151,14 +144,8 @@ const NavList = styled.button`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  /* position: relative; */
   z-index: 100;
   cursor: pointer;
-
-  img {
-    width: 28px;
-    display: block;
-  }
 
   &.active {
     background-color: #f0ffed;
@@ -194,6 +181,40 @@ const NavList = styled.button`
     font-size: 12px;
     border-radius: 50%;
   }
+
+  .Search {
+    background: url(${cssSprites}) -10px -10px;
+  }
+
+  .Home {
+    background: url(${cssSprites}) -10px -114px;
+  }
+
+  .MyPage {
+    background: url(${cssSprites}) -62px -10px;
+  }
+
+  .Cart {
+    background: url(${cssSprites}) -10px -62px;
+  }
+
+  .Chat {
+    background: url(${cssSprites}) -62px -62px;
+  }
+
+  .Post {
+    background: url(${cssSprites}) -114px -62px;
+  }
+
+  .Logout {
+    background: url(${cssSprites}) -114px -10px;
+  }
+`;
+
+const IconImage = styled.div`
+  width: 32px;
+  height: 32px;
+  background-color: red;
 `;
 
 const ActiveBar = styled.div`

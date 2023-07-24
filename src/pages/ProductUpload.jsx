@@ -8,7 +8,7 @@ import Layout from "../layout/Layout";
 import ProductUploadWriting from "../components/Product/ProductUploadWriting";
 
 //이미지
-import PostBackground from "../assets/post_bg.svg";
+import PostBackground from "../assets/post_bg.jpg";
 import Product_upload from "../assets/Prodcut_upload.svg";
 
 //API

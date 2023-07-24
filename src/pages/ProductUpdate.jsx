@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import imageCompression from "browser-image-compression";
 
 //component
 import Layout from "../layout/Layout";
@@ -10,7 +11,7 @@ import Button from "../components/common/Button/Button";
 // 이미지
 import PlusIcon from "../assets/icon_plus_gray.svg";
 import AddIcon from "../assets/add_button_gray.svg";
-import PostBackground from "../assets/post_bg.svg";
+import PostBackground from "../assets/post_bg.jpg";
 import ProductUpload from "../assets/Prodcut_upload.svg";
 
 // API
@@ -19,7 +20,7 @@ import productAPI from "../api/product";
 import { useRecoilValue } from "recoil";
 import loginToken from "../recoil/loginToken";
 import productPut from "../api/productPut";
-import PostImageAPI from "../api/UploadImage";
+import UploadImage from "../api/UploadImage";
 
 export default function ProductUpdate() {
   const token = useRecoilValue(loginToken);
@@ -65,22 +66,47 @@ export default function ProductUpdate() {
     setFormData({ ...formData, itemImage: imageWrap.join(",") });
   }, [imageWrap]);
 
+  const handleDataForm = async (dataURI, name) => {
+    const byteString = atob(dataURI.split(",")[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ia], {
+      type: "image/jpeg",
+    });
+    const file = new File([blob], "image.jpg");
+    console.log("after: ", file);
+    const imgSrc = await UploadImage(file);
+    setImageWrap((prevArray) => {
+      const newArray = [...prevArray];
+      newArray[parseInt(name)] = imgSrc;
+      return newArray;
+    });
+    setLoading(false);
+  };
+
   const handleChangeImage = async (e) => {
     const { name } = e.target;
     const file = e.target.files[0];
-    const imgSrc = await PostImageAPI(file);
+    const options = {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 490,
+      useWebWorker: true,
+    };
 
     try {
       setLoading(true);
-      setImageWrap((prevArray) => {
-        const newArray = [...prevArray];
-        newArray[parseInt(name)] = imgSrc;
-        return newArray;
-      });
-      setLoading(false);
+      const resizingBlob = await imageCompression(file, options);
+      const reader = new FileReader();
+      reader.readAsDataURL(resizingBlob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        handleDataForm(base64data, name);
+      };
     } catch (error) {
-      setLoading(false);
-      console.error(error);
+      console.log(error);
     }
   };
 

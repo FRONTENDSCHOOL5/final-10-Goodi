@@ -87,6 +87,7 @@ const LogoLink = styled(Link)`
 
   img {
     width: 160px;
+    height: 48px;
     vertical-align: middle;
   }
 `;

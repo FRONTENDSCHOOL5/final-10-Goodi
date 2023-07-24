@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import imageCompression from "browser-image-compression";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -17,7 +18,6 @@ export default function Setprofile() {
   const [profileSelectedImage, setProfileSelectedImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
-
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,27 +64,60 @@ export default function Setprofile() {
     }
     setUserErrorMessage(errors);
   };
-  console.log(signUpData)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     handleError();
     await handleLogin(signUpData);
   };
 
+  const handleDataForm = async (dataURI) => {
+    const byteString = atob(dataURI.split(",")[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ia], {
+      type: "image/jpeg",
+    });
+    const file = new File([blob], "image.jpg");
+    console.log("after: ", file);
+    const imgSrc = await UploadImage(file);
+    const newImage = imgSrc;
+    setProfileSelectedImage(newImage);
+    setSignUpData((prevState) => ({
+      ...prevState,
+      user: {
+        ...prevState.user,
+        image: newImage,
+      },
+    }));
+  };
+
   const handleImageChange = async (e) => {
     const { name, value } = e.target;
     if ("file") {
       const file = e.target.files[0];
-      const imgSrc = await UploadImage(file);
-      const newImage = imgSrc;
-      setProfileSelectedImage(newImage);
-      setSignUpData((prevState) => ({
-        ...prevState,
-        user: {
-          ...prevState.user,
-          image: newImage,
-        },
-      }));
+      // console.log(file);
+
+      const options = {
+        maxSizeMB: 0.2,
+        maxWidthOrHeight: 490,
+        useWebWorker: true,
+      };
+
+      try {
+        const resizingBlob = await imageCompression(file, options);
+        const reader = new FileReader();
+        reader.readAsDataURL(resizingBlob);
+        reader.onloadend = () => {
+          const base64data = reader.result;
+          handleDataForm(base64data);
+        };
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

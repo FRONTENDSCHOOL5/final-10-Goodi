@@ -7,14 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 import commonBanner from "../assets/common-banner.svg";
 import arrowPrimaryIcon from "../assets/icon_arrow_primary.svg";
 import pointEdge from "../assets/point-edge.svg";
-import popularProducts from "../assets/popular-products.svg"
+import popularProducts from "../assets/popular-products.svg";
 import popularAuthor from "../assets/popular-author.svg";
 
 import PopularAuthorView from "../components/PopularAuthorView";
 import Layout from "../layout/Layout";
 import MainSkeleton from "../style/skeletonUI/skeletonPage/MainSkeleton";
 import CarouselMain from "../components/CarouselMain";
-import MainRightCard from './../components/MainRightCard';
+import MainRightCard from "./../components/MainRightCard";
 
 export default function Main() {
   const [loading, setLoading] = useState(false);

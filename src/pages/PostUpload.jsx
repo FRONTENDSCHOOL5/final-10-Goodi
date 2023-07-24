@@ -4,10 +4,10 @@ import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 //component
 import Layout from "../layout/Layout";
-import PostUploadWriting from './../components/Post/PostUploadWriting';
+import PostUploadWriting from "./../components/Post/PostUploadWriting";
 
 //이미지
-import PostBackground from "../assets/post_bg.svg";
+import PostBackground from "../assets/post_bg.jpg";
 import postUproad from "../assets/post_upload.svg";
 
 //API
