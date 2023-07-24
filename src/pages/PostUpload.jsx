@@ -15,6 +15,7 @@ import postingAPI from "../api/posting";
 
 //recoil
 import loginToken from "../recoil/loginToken";
+import accountname from "../recoil/accountname";
 
 // 작성중 다른곳으로 나가려고 할때 모달
 // 작성 완료시 업로드 할것인지 모달
@@ -22,6 +23,10 @@ import loginToken from "../recoil/loginToken";
 
 export default function PostUpload() {
   const navigate = useNavigate();
+
+  const account_name = useRecoilValue(accountname);
+  const myProfile = `/profile/${account_name}`
+
   // 상품 입력 데이터
   const [postProductData, setPostProductData] = useState();
 
@@ -41,7 +46,7 @@ export default function PostUpload() {
   const handlePost = async (ProductData, token) => {
     const response = await postingAPI(ProductData, token);
 
-    if (response.hasOwnProperty("post")) navigate(`/profile/`);
+    if (response.hasOwnProperty("post")) navigate(`${myProfile}`);
   };
 
   return (

@@ -6,8 +6,7 @@ import Login from './pages/Login';
 import Join from './pages/Join'
 import Detail from './pages/Detail';
 import Setprofile from './pages/Setprofile';
-import Profile from './pages/profile/Profile';
-import UserProfile from './pages/userProfile/UserProfile';
+import Profile from './pages/Profile';
 import Chat from './pages/Chat';
 import ProductUpload from './pages/ProductUpload';
 import PostUpload from './pages/PostUpload';
@@ -34,8 +33,7 @@ function App() {
         } >
           <Route path="/main" element={<Main />} />
           <Route path="/products/:id" element={<Detail />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/:account_name" element={<UserProfile />} />
+          <Route path="/profile/:accountname" element={<Profile />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/postproduct" element={<ProductUpload />} />
           <Route path="/postposting" element={<PostUpload />} />

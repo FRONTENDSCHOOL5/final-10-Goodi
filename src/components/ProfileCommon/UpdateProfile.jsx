@@ -1,28 +1,101 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
-import Button from './common/Button';
-import { InputBox } from './common/Input';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-import PlusBtnImg from "../assets/add_button.svg";
+// 리코일
+import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
+import loginToken from "../../recoil/loginToken";
+import { checkProfile } from "../../recoil/checkChange";
 
-import PostImageAPI from "../api/UploadImage";
+// api
+import { profileAPI } from "../../api/profile";
+import PostImageAPI from "../../api/UploadImage";
+import updateProfile from "../../api/updateProfile";
 
-export default function UpdateProfile({ handleSaveClick, profileData, handleInputChange, handleCancelClick, setProfileData, setIsImageEdit }) {
-  const [profileSelectedImage, setProfileSelectedImage] = useState(null);
+// 컴포넌트
+import { InputBox } from "../common/Input";
+import Button from "../common/Button/Button";
 
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
-  const updateImageUrl = BASE_URL + profileSelectedImage;
+// 이미지
+import PlusBtnImg from "../../assets/add_button.svg";
+// 이미지 검사
+import checkImageUrl from "../common/checkImageUrl";
+
+export default function UpdateProfile({
+  profileData,
+  setIsEditing,
+  setProfileData,
+}) {
+  // 리코일
+  const token = useRecoilValue(loginToken);
+
+  // 수정 관련 state
+  const [changeImageURL, setChangeImageURL] = useState(profileData.profile.image);
+  const [isImageUpload, setIsImageUpload] = useState(false);
+  const [userName, setUserName] = useState(profileData.profile.username);
+  const [intro, setIntro] = useState(profileData.profile.intro);
+  const [checkProfileChange, setCheckProfileChange] =
+    useRecoilState(checkProfile);
+  const [postChangeImg, setPostChangeImg] = useState({
+    user: {
+      image: changeImageURL,
+    },
+  });
+
+  // 이미지 fetch
   const handleImageChange = async (e) => {
-    const { name, value } = e.target;
+    setIsImageUpload(true);
     const file = e.target.files[0];
     const imgSrc = await PostImageAPI(file);
 
-    setIsImageEdit(BASE_URL + imgSrc);
-
+    setChangeImageURL(imgSrc);
+    setIsImageUpload(false);
   };
+
+  // 저장 버튼 클릭 시 수정된 API에 데이터 전달
+  const handleSaveClick = (e) => {
+    e.preventDefault();
+
+    const updatedProfileData = {
+      ...profileData,
+      user: {
+        ...profileData.user,
+        image: changeImageURL,
+        username: userName,
+        intro: intro,
+      },
+    };
+
+    setProfileData(updatedProfileData);
+    updateProfile(updatedProfileData, token);
+    setIsEditing(false);
+    setCheckProfileChange((prev) => !prev);
+  };
+
+  // 프로필 수정 취소 이벤트
+  const handleCancelClick = () => {
+    setIsEditing(false);
+  };
+
+  // input 값 올바르게 받기
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "username") {
+      setUserName(value);
+    } else {
+      setIntro(value);
+    }
+  };
+
   useEffect(() => {
-    setIsImageEdit(updateImageUrl);
-  }, [updateImageUrl, setIsImageEdit]);
+    const postImage = async (token) => {
+      const response = await profileAPI(token);
+    };
+
+    if (postChangeImg) {
+      postImage(postChangeImg, token);
+    }
+  }, [postChangeImg]);
 
   return (
     <>
@@ -37,16 +110,12 @@ export default function UpdateProfile({ handleSaveClick, profileData, handleInpu
         <label htmlFor="fileInput">
           <ProfileImgWrap>
             <img
-              src={
-                profileSelectedImage
-                  ? updateImageUrl
-                  : profileData.user.image
-              }
+              src={checkImageUrl(changeImageURL, 'profile')}
               alt="Upload"
-              style={profileSelectedImage ? { width: "110px" } : null}
             />
           </ProfileImgWrap>
-          <img className="add_button_img"
+          <img
+            className="add_button_img"
             src={PlusBtnImg}
             alt="Upload"
             style={{ cursor: "pointer" }}
@@ -57,11 +126,12 @@ export default function UpdateProfile({ handleSaveClick, profileData, handleInpu
         <div>
           <Label>닉네임</Label>
           <InputBox
+            required
             width="100%"
             height="48px"
             padding="15px"
             name="username"
-            value={profileData.user.username}
+            value={userName}
             onChange={handleInputChange}
             placeholder="변경할 닉네임을 입력해주세요"
           />
@@ -71,7 +141,7 @@ export default function UpdateProfile({ handleSaveClick, profileData, handleInpu
           <textarea
             placeholder="소개 글을 입력해주세요"
             name="intro"
-            value={profileData.user.intro}
+            value={intro}
             onChange={handleInputChange}
           ></textarea>
         </div>
@@ -93,10 +163,11 @@ export default function UpdateProfile({ handleSaveClick, profileData, handleInpu
           padding="14px 0"
           fontSize="16px"
           br="none"
+          disabled={isImageUpload}
         />
       </Form>
     </>
-  )
+  );
 }
 
 const ProfileImgWrap = styled.div`
@@ -104,7 +175,7 @@ const ProfileImgWrap = styled.div`
   width: 100%;
   aspect-ratio: 1 / 1;
   & > img {
-    width: 100%;
+    width: 110px;
     aspect-ratio: 1/ 1;
     object-fit: cover;
     cursor: pointer;
@@ -128,8 +199,8 @@ const Form = styled.form`
 
   & > div:first-child {
     margin-bottom: 32px;
-  } 
-  
+  }
+
   textarea {
     resize: none;
     border: 1px solid var(--gray300-color);
@@ -155,7 +226,7 @@ const Form = styled.form`
       margin-top: 15px;
     }
   }
-`
+`;
 
 const Label = styled.label`
   display: block;
