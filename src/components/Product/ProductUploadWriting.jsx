@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import imageCompression from "browser-image-compression";
 
 //component
 import { InputBox } from "../common/Input";
@@ -41,28 +42,50 @@ export default function ProductUploadWriting({
     setDescription(textSlice.slice(0, 100));
   };
 
-  //! 해결해야하는 오류(이미지 교체하면 해당 인덱스로 교체, 해당 타겟 이미지 교체)
-  //* 각 input에 name 값을 줘서 해당 인덱스 값이 넘어오게 하려고 하는데 잘 안됨
+  const handleDataForm = async (dataURI, name) => {
+    const byteString = atob(dataURI.split(",")[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ia], {
+      type: "image/jpeg",
+    });
+    const file = new File([blob], "image.jpg");
+    console.log("after: ", file);
+    const imgSrc = await UploadImage(file);
+    setImageWrap((prevArray) => {
+      const newArray = [...prevArray];
+      newArray[parseInt(name)] = imgSrc;
+      return newArray;
+    });
+    setLoading(false);
+  };
+
   const handleInputChange = async (e) => {
     const { name, value } = e.target;
     if (e.target.type === "file") {
       const file = e.target.files[0];
 
+      const options = {
+        maxSizeMB: 0.2,
+        maxWidthOrHeight: 490,
+        useWebWorker: true,
+      };
+
       try {
         setLoading(true);
-        const imgSrc = await UploadImage(file);
-        setImageWrap((prevArray) => {
-          const newArray = [...prevArray];
-          newArray[parseInt(name)] = imgSrc;
-          return newArray;
-        });
-        setLoading(false);
+        const resizingBlob = await imageCompression(file, options);
+        const reader = new FileReader();
+        reader.readAsDataURL(resizingBlob);
+        reader.onloadend = () => {
+          const base64data = reader.result;
+          handleDataForm(base64data, name);
+        };
       } catch (error) {
-        setLoading(false);
-        console.error(error);
+        console.log(error);
       }
-
-      // 대신 맨마지막에 이미지 수정하면 바뀐 이미지는 반영 안됨
     } else {
       setProductData((prevState) => ({
         ...prevState,

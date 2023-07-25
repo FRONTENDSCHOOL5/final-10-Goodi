@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../layout/Layout";
 
 // image
-import PostBackground from "../assets/post_bg.svg";
+import PostBackground from "../assets/post_bg.jpg";
 import PostingUpload from "../assets/post_uproad.svg";
 
 // API

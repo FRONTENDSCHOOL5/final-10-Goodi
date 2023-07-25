@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import imageCompression from "browser-image-compression";
 import styled from "styled-components";
 import UploadImage from "../../api/UploadImage";
 
@@ -6,7 +7,7 @@ import Textarea from "../common/Textarea";
 import Button from "../common/Button/Button";
 
 import addIcon from "../../assets/add_button_gray.svg";
-import thumnailBanner from "../../assets/thumnail_banner.svg"
+import thumnailBanner from "../../assets/thumnail_banner.svg";
 
 export default function PostUpdateWriting({
   src,
@@ -27,22 +28,49 @@ export default function PostUpdateWriting({
     setGetContent(textSlice.slice(0, 50));
   };
 
+  const handleDataForm = async (dataURI, name) => {
+    const byteString = atob(dataURI.split(",")[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ia], {
+      type: "image/jpeg",
+    });
+    const file = new File([blob], "image.jpg");
+    console.log("after: ", file);
+    const imgSrc = await UploadImage(file);
+    setGetImage((prevArray) => {
+      const newArray = [...prevArray];
+      newArray[parseInt(name)] = imgSrc;
+      return newArray;
+    });
+    setImgLoading(false);
+  };
+
   // 이미지 업로드
   const handleInputChange = async (e) => {
     const { name } = e.target;
     const file = e.target.files[0];
 
+    const options = {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 490,
+      useWebWorker: true,
+    };
+
     try {
       setImgLoading(true);
-      const imgSrc = await UploadImage(file);
-      setGetImage((prevArray) => {
-        const newArray = [...prevArray];
-        newArray[parseInt(name)] = imgSrc;
-        setImgLoading(false);
-        return newArray;
-      });
+      const resizingBlob = await imageCompression(file, options);
+      const reader = new FileReader();
+      reader.readAsDataURL(resizingBlob);
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        handleDataForm(base64data, name);
+      };
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 

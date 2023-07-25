@@ -9,7 +9,7 @@ export default function Footer() {
   const navigate = useNavigate();
   return (
     <FooterLayout>
-      <img src={FooterLogo} alt="footer 로고" />
+      <FooterLogoImg src={FooterLogo} alt="footer 로고" />
       <p className="footer_text">
         <strong>상업적 목적이 없는 포트폴리오용 사이트입니다</strong>
         <br />
@@ -44,17 +44,19 @@ const FooterLayout = styled.footer`
   }
 
   .footer_text strong {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
   }
+`;
 
-  img {
-    width: 165px;
-  }
+const FooterLogoImg = styled.img`
+  width: 165px;
+  height: 56px;
 `;
 
 const GithubButton = styled(Link)`
   img {
     width: 112px;
+    height: 44px;
   }
 `;
