@@ -18,6 +18,7 @@ import putPostingAPI from "../api/putPosting";
 // Recoil
 import loginToken from "../recoil/loginToken";
 import PostUpdateWriting from "../components/Post/PostUpdateWriting";
+import accountname from "../recoil/accountname";
 
 export default function PostUpdate() {
   const navigate = useNavigate();
@@ -26,6 +27,9 @@ export default function PostUpdate() {
   const [getImage, setGetImage] = useState(null);
   const [getContent, setGetContent] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const account_name = useRecoilValue(accountname);
+  const myProfile = `/profile/${account_name}`
 
   useEffect(() => {
     const fetchPostingData = async () => {
@@ -61,7 +65,7 @@ export default function PostUpdate() {
   const putPosting = async (token, id, putData) => {
     const response = await putPostingAPI(token, id, putData);
     console.log(response);
-    navigate("/profile");
+    navigate(myProfile);
   };
 
   return (

@@ -16,6 +16,7 @@ import postingAPI from "../api/posting";
 //recoil
 import loginToken from "../recoil/loginToken";
 import accountname from "../recoil/accountname";
+import WritingUI from "../components/PostProductTest/WritingUI";
 
 // 작성중 다른곳으로 나가려고 할때 모달
 // 작성 완료시 업로드 할것인지 모달
@@ -27,39 +28,81 @@ export default function PostUpload() {
   const account_name = useRecoilValue(accountname);
   const myProfile = `/profile/${account_name}`
 
-  // 상품 입력 데이터
-  const [postProductData, setPostProductData] = useState();
+  const [imageWrap, setImageWrap] = useState([]);
+  const [userErrorMessage, setUserErrorMessage] = useState([]);
+
+  // 입력 데이터
+  const [postData, setPostData] = useState();
 
   // 유저 토큰
   const token = useRecoilValue(loginToken);
 
+  const [data, setData] = useState({
+    post: {
+      content: "",
+      image: "",
+    },
+  });
+
   const getPostData = (data) => {
-    setPostProductData(data);
+    setPostData(data);
   };
 
   useEffect(() => {
-    if (postProductData) {
-      handlePost(postProductData, token);
+    if (postData) {
+      handlePost(postData, token);
     }
-  }, [postProductData]);
+  }, [postData]);
 
-  const handlePost = async (ProductData, token) => {
-    const response = await postingAPI(ProductData, token);
+  const handlePost = async (PostData, token) => {
+    const response = await postingAPI(PostData, token);
 
-    if (response.hasOwnProperty("post")) navigate(`${myProfile}`);
+    if (response.hasOwnProperty("post")) navigate(myProfile);
   };
+
+  const handleError = (e) => {
+    setData((prevState) => ({
+      ...prevState,
+      post: {
+        ...prevState.post,
+        image: imageWrap.join(),
+      },
+    }));
+    const errors = [];
+    if (data.post.image === "") {
+      errors.push("게시글 이미지를 한개 이상 업로드 해주세요");
+    } else {
+      errors.push("");
+    }
+    setUserErrorMessage(errors);
+
+    console.log("클릭");
+  };
+
+  console.log(data);
 
   return (
     <Layout reduceTop="true">
       <PostProductWrap>
-        <PostUploadWriting
+        {/* <PostUploadWriting
           textareaLabel="게시글 내용"
           src={postUproad}
           subtext="당신의 게시글을 업로드 해보세요!"
           buttonText="게시글 업로드 하기"
           showInput={false}
           textareaHeight="300px"
-          getPostPostingData={getPostData}
+          getPostData={getPostData}
+        /> */}
+        <WritingUI
+          src={postUproad}
+          subtext="당신의 게시글을 업로드 해보세요!"
+          getData={getPostData}
+          data={data}
+          setData={setData}
+          handleError={handleError}
+          setImageWrap={setImageWrap}
+          imageWrap={imageWrap}
+          userErrorMessage={userErrorMessage}
         />
       </PostProductWrap>
     </Layout>

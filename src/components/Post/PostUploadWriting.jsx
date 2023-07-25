@@ -14,229 +14,231 @@ export default function PostUploadWriting({
   src,
   subtext,
   buttonText,
-  getPostPostingData,
+  getPostData,
 }) {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageWrap, setImageWrap] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
-  const [postingData, setPostingData] = useState({
-    post: {
-      content: "",
-      image: "",
-    },
-  });
-  const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+  //
+  // const [postingData, setPostingData] = useState({
+  //   post: {
+  //     content: "",
+  //     image: "",
+  //   },
+  // });
+  // 얘네를 page로 빼 (의존성 줄이기!!!!!!!!!!!!)
+  // const BASE_URL = "https://api.mandarin.weniv.co.kr/";
 
   // 게시글내용 글자수 제한
-  const handleTextCount = (e) => {
-    const textSlice = e.target.value;
-    setDescription(textSlice.slice(0, 50));
-  };
+  // const handleTextCount = (e) => {
+  //   const textSlice = e.target.value;
+  //   setDescription(textSlice.slice(0, 50));
+  // };
 
-  const handleDataForm = async (dataURI, name) => {
-    const byteString = atob(dataURI.split(",")[1]);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([ia], {
-      type: "image/jpeg",
-    });
-    const file = new File([blob], "image.jpg");
-    console.log("after: ", file);
-    const imgSrc = await UploadImage(file);
-    setImageWrap((prevArray) => {
-      const newArray = [...prevArray];
-      newArray[parseInt(name)] = imgSrc;
-      return newArray;
-    });
-    setLoading(false);
-  };
+  // const handleDataForm = async (dataURI, name) => {
+  //   const byteString = atob(dataURI.split(",")[1]);
+  //   const ab = new ArrayBuffer(byteString.length);
+  //   const ia = new Uint8Array(ab);
+  //   for (let i = 0; i < byteString.length; i++) {
+  //     ia[i] = byteString.charCodeAt(i);
+  //   }
+  //   const blob = new Blob([ia], {
+  //     type: "image/jpeg",
+  //   });
+  //   const file = new File([blob], "image.jpg");
+  //   console.log("after: ", file);
+  //   const imgSrc = await UploadImage(file);
+  //   setImageWrap((prevArray) => {
+  //     const newArray = [...prevArray];
+  //     newArray[parseInt(name)] = imgSrc;
+  //     return newArray;
+  //   });
+  //   setLoading(false);
+  // };
 
-  const handleInputChange = async (e) => {
-    const { name, value } = e.target;
-    if (e.target.type === "file") {
-      const file = e.target.files[0];
+  // const handleInputChange = async (e) => {
+  //   const { name, value } = e.target;
+  //   if (e.target.type === "file") {
+  //     const file = e.target.files[0];
 
-      const options = {
-        maxSizeMB: 0.2,
-        maxWidthOrHeight: 490,
-        useWebWorker: true,
-      };
+  //     const options = {
+  //       maxSizeMB: 0.2,
+  //       maxWidthOrHeight: 490,
+  //       useWebWorker: true,
+  //     };
 
-      try {
-        setLoading(true);
-        const resizingBlob = await imageCompression(file, options);
-        const reader = new FileReader();
-        reader.readAsDataURL(resizingBlob);
-        reader.onloadend = () => {
-          const base64data = reader.result;
-          handleDataForm(base64data, name);
-        };
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      setDescription(value);
-      setPostingData((prevState) => ({
-        ...prevState,
-        post: {
-          ...prevState.post,
-          image: imageWrap.join(),
-          [name]: name === "price" ? parseInt(value) : value,
-        },
-      }));
-    }
+  //     try {
+  //       setLoading(true);
+  //       const resizingBlob = await imageCompression(file, options);
+  //       const reader = new FileReader();
+  //       reader.readAsDataURL(resizingBlob);
+  //       reader.onloadend = () => {
+  //         const base64data = reader.result;
+  //         handleDataForm(base64data, name);
+  //       };
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   } else {
+  //     setDescription(value);
+  //     setPostingData((prevState) => ({
+  //       ...prevState,
+  //       post: {
+  //         ...prevState.post,
+  //         image: imageWrap.join(),
+  //         [name]: name === "price" ? parseInt(value) : value,
+  //       },
+  //     }));
+  //   }
 
-    if (name === "content") {
-      handleTextCount(e);
-    }
-  };
+  //   if (name === "content") {
+  //     handleTextCount(e);
+  //   }
+  // };
 
-  const joinData = (e) => {
-    e.preventDefault();
-    getPostPostingData(postingData);
-  };
+  // const joinData = (e) => {
+  //   e.preventDefault();
+  //   getPostData(postingData);
+  // };
 
-  const handleError = (e) => {
-    setPostingData((prevState) => ({
-      ...prevState,
-      post: {
-        ...prevState.post,
-        image: imageWrap.join(),
-      },
-    }));
-    const errors = [];
-    if (postingData.post.image === "") {
-      errors.push("게시글 이미지를 한개 이상 업로드 해주세요");
-    } else {
-      errors.push("");
-    }
-    setUserErrorMessage(errors);
-  };
+  // const handleError = (e) => {
+  //   setPostingData((prevState) => ({
+  //     ...prevState,
+  //     post: {
+  //       ...prevState.post,
+  //       image: imageWrap.join(),
+  //     },
+  //   }));
+  //   const errors = [];
+  //   if (postingData.post.image === "") {
+  //     errors.push("게시글 이미지를 한개 이상 업로드 해주세요");
+  //   } else {
+  //     errors.push("");
+  //   }
+  //   setUserErrorMessage(errors);
+  // };
 
-  return (
-    <PostUiWrap>
-      <h2 className="a11y-hidden">상품 업로드 페이지</h2>
-      <img src={src} alt="product Upload" />
-      <p>{subtext}</p>
+  // return (
+  //   <PostUiWrap>
+  //     <h2 className="a11y-hidden">상품 업로드 페이지</h2>
+  //     <img src={src} alt="product Upload" />
+  //     <p>{subtext}</p>
 
-      <UploadWrap onSubmit={joinData}>
-        <ImagUploadWrap>
-          <ThumbnailWrap>
-            <input
-              id="thumbnail"
-              type="file"
-              name="0"
-              style={{ display: "none" }}
-              onChange={handleInputChange}
-            />
-            <Thumbnail
-              htmlFor="thumbnail"
-              style={
-                userErrorMessage.includes(
-                  "게시글 이미지를 한개 이상 업로드 해주세요"
-                )
-                  ? { border: "1px solid red" }
-                  : null
-              }
-            >
-              {loading ? (
-                <LoadingImage>
-                  <span className="circle1"></span>
-                  <span className="circle2"></span>
-                </LoadingImage>
-              ) : (
-                <img
-                  src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
-                  style={imageWrap[0] ? null : { width: "90px" }}
-                />
-              )}
-            </Thumbnail>
-            {userErrorMessage.includes(
-              "게시글 이미지를 한개 이상 업로드 해주세요"
-            ) && (
-              <ErrorMassage>
-                게시글 이미지를 한개 이상 업로드 해주세요
-              </ErrorMassage>
-            )}
-          </ThumbnailWrap>
+  //     <UploadWrap onSubmit={joinData}>
+  //       <ImagUploadWrap>
+  //         <ThumbnailWrap>
+  //           <input
+  //             id="thumbnail"
+  //             type="file"
+  //             name="0"
+  //             style={{ display: "none" }}
+  //             onChange={handleInputChange}
+  //           />
+  //           <Thumbnail
+  //             htmlFor="thumbnail"
+  //             style={
+  //               userErrorMessage.includes(
+  //                 "게시글 이미지를 한개 이상 업로드 해주세요"
+  //               )
+  //                 ? { border: "1px solid red" }
+  //                 : null
+  //             }
+  //           >
+  //             {loading ? (
+  //               <LoadingImage>
+  //                 <span className="circle1"></span>
+  //                 <span className="circle2"></span>
+  //               </LoadingImage>
+  //             ) : (
+  //               <img
+  //                 src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
+  //                 style={imageWrap[0] ? null : { width: "90px" }}
+  //               />
+  //             )}
+  //           </Thumbnail>
+  //           {userErrorMessage.includes(
+  //             "게시글 이미지를 한개 이상 업로드 해주세요"
+  //           ) && (
+  //               <ErrorMassage>
+  //                 게시글 이미지를 한개 이상 업로드 해주세요
+  //               </ErrorMassage>
+  //             )}
+  //         </ThumbnailWrap>
 
-          <ProductImages>
-            <input
-              id="productImageOne"
-              type="file"
-              name="1"
-              style={{ display: "none" }}
-              onChange={handleInputChange}
-            />
-            <ProductImage htmlFor="productImageOne">
-              {loading ? (
-                <LoadingImage>
-                  <span className="circle1"></span>
-                  <span className="circle2"></span>
-                </LoadingImage>
-              ) : (
-                <img
-                  src={imageWrap[1] ? BASE_URL + imageWrap[1] : addIcon}
-                  style={imageWrap[1] ? null : { width: "32px" }}
-                />
-              )}
-            </ProductImage>
-            <ProductImage htmlFor="productImageTwo">
-              {loading ? (
-                <LoadingImage>
-                  <span className="circle1"></span>
-                  <span className="circle2"></span>
-                </LoadingImage>
-              ) : (
-                <img
-                  src={imageWrap[2] ? BASE_URL + imageWrap[2] : addIcon}
-                  style={imageWrap[2] ? null : { width: "32px" }}
-                />
-              )}
-            </ProductImage>
+  //         <ProductImages>
+  //           <input
+  //             id="productImageOne"
+  //             type="file"
+  //             name="1"
+  //             style={{ display: "none" }}
+  //             onChange={handleInputChange}
+  //           />
+  //           <ProductImage htmlFor="productImageOne">
+  //             {loading ? (
+  //               <LoadingImage>
+  //                 <span className="circle1"></span>
+  //                 <span className="circle2"></span>
+  //               </LoadingImage>
+  //             ) : (
+  //               <img
+  //                 src={imageWrap[1] ? BASE_URL + imageWrap[1] : addIcon}
+  //                 style={imageWrap[1] ? null : { width: "32px" }}
+  //               />
+  //             )}
+  //           </ProductImage>
+  //           <ProductImage htmlFor="productImageTwo">
+  //             {loading ? (
+  //               <LoadingImage>
+  //                 <span className="circle1"></span>
+  //                 <span className="circle2"></span>
+  //               </LoadingImage>
+  //             ) : (
+  //               <img
+  //                 src={imageWrap[2] ? BASE_URL + imageWrap[2] : addIcon}
+  //                 style={imageWrap[2] ? null : { width: "32px" }}
+  //               />
+  //             )}
+  //           </ProductImage>
 
-            <input
-              id="productImageTwo"
-              type="file"
-              name="2"
-              style={{ display: "none" }}
-              onChange={handleInputChange}
-            />
-          </ProductImages>
-        </ImagUploadWrap>
+  //           <input
+  //             id="productImageTwo"
+  //             type="file"
+  //             name="2"
+  //             style={{ display: "none" }}
+  //             onChange={handleInputChange}
+  //           />
+  //         </ProductImages>
+  //       </ImagUploadWrap>
 
-        <Line />
+  //       <Line />
 
-        <ContentUploadWrap>
-          <InputWrap>
-            <Label>게시글 내용</Label>
-            <Textarea
-              width="100%"
-              height="300px"
-              placeholder="게시글 내용을 입력해주세요"
-              textCount={description}
-              value={description}
-              onChange={handleInputChange}
-              name="content"
-              count="50"
-            />
-          </InputWrap>
+  //       <ContentUploadWrap>
+  //         <InputWrap>
+  //           <Label>게시글 내용</Label>
+  //           <Textarea
+  //             width="100%"
+  //             height="300px"
+  //             placeholder="게시글 내용을 입력해주세요"
+  //             textCount={description}
+  //             value={description}
+  //             onChange={handleInputChange}
+  //             name="content"
+  //             count="50"
+  //           />
+  //         </InputWrap>
 
-          <Button
-            type="submit"
-            height="56px"
-            text={buttonText}
-            br="4px"
-            onClick={handleError}
-          />
-        </ContentUploadWrap>
-      </UploadWrap>
-    </PostUiWrap>
-  );
+  //         <Button
+  //           type="submit"
+  //           height="56px"
+  //           text={buttonText}
+  //           br="4px"
+  //         // onClick={handleError}
+  //         />
+  //       </ContentUploadWrap>
+  //     </UploadWrap>
+  //   </PostUiWrap>
+  // );
 }
 
 const PostUiWrap = styled.section`
