@@ -59,4 +59,4 @@ const GithubButton = styled(Link)`
     width: 112px;
     height: 44px;
   }
-`;
+`
