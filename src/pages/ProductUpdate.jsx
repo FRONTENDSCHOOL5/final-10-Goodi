@@ -21,6 +21,7 @@ import { useRecoilValue } from "recoil";
 import loginToken from "../recoil/loginToken";
 import productPut from "../api/productPut";
 import UploadImage from "../api/UploadImage";
+import { handleDataForm } from "../components/common/imageOptimization";
 
 export default function ProductUpdate() {
   const token = useRecoilValue(loginToken);
@@ -66,27 +67,6 @@ export default function ProductUpdate() {
     setFormData({ ...formData, itemImage: imageWrap.join(",") });
   }, [imageWrap]);
 
-  const handleDataForm = async (dataURI, name) => {
-    const byteString = atob(dataURI.split(",")[1]);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([ia], {
-      type: "image/jpeg",
-    });
-    const file = new File([blob], "image.jpg");
-    console.log("after: ", file);
-    const imgSrc = await UploadImage(file);
-    setImageWrap((prevArray) => {
-      const newArray = [...prevArray];
-      newArray[parseInt(name)] = imgSrc;
-      return newArray;
-    });
-    setLoading(false);
-  };
-
   const handleChangeImage = async (e) => {
     const { name } = e.target;
     const file = e.target.files[0];
@@ -103,7 +83,7 @@ export default function ProductUpdate() {
       reader.readAsDataURL(resizingBlob);
       reader.onloadend = () => {
         const base64data = reader.result;
-        handleDataForm(base64data, name);
+        handleDataForm(base64data, name, setImageWrap, setLoading);
       };
     } catch (error) {
       console.log(error);
