@@ -1,7 +1,4 @@
 import styled from "styled-components";
-
-import PlusIcon from "../../assets/icon_plus_gray.svg";
-import addIcon from "../../assets/add_button_gray.svg";
 import thumnailBanner from "../../assets/thumnail_banner.svg";
 
 export const PostUiWrap = styled.section`

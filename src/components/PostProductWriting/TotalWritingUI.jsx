@@ -1,59 +1,34 @@
 import React, { useState } from 'react'
-import styled from 'styled-components';
+import * as T from "./writingUI.styled";
 import imageCompression from "browser-image-compression";
+import { useLocation } from 'react-router';
 
-import * as T from "./commonCss.styled";
+// 컴포넌트
+import PostWriting from './PostWriting';
+import ProductWriting from './ProductWriting';
+import ImageSection from './ImageSection';
 
-import UploadImage from "../../api/UploadImage";
+// 이미지 최적화
+import { handleDataForm } from '../common/imageOptimization';
 
-import thumnailBanner from "../../assets/thumnail_banner.svg";
-import PlusIcon from "../../assets/icon_plus_gray.svg";
-import addIcon from "../../assets/add_button_gray.svg";
-import { useLocation, useParams } from 'react-router';
-import Button from '../common/Button/Button';
-import Textarea from '../common/Textarea';
-import { InputBox } from '../common/Input';
-import Posting from './Posting';
-import ProductPosting from './ProductPosting';
-import ImageUp from './ImageUp';
-// import { handleDataForm } from './handleImage';
+export default function TotalWritingUI(props) {
+  const { src, subtext, getData, data, setData, setImageWrap, imageWrap, userErrorMessage, handleError } = props;
 
-export default function WritingUI({ src, subtext, getData, data, setData, setImageWrap, imageWrap, userErrorMessage, handleError }) {
+  const location = useLocation();
 
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState("");
 
-  const location = useLocation();
-
-  const handleDataForm = async (dataURI, name) => {
-    const byteString = atob(dataURI.split(",")[1]);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([ia], {
-      type: "image/jpeg",
-    });
-    const file = new File([blob], "image.jpg");
-    console.log("after: ", file);
-    const imgSrc = await UploadImage(file);
-    setImageWrap((prevArray) => {
-      const newArray = [...prevArray];
-      newArray[parseInt(name)] = imgSrc;
-      return newArray;
-    });
-    setLoading(false);
-  };
-
-
+  // 글자수 카운트
   const handleTextCount = (e) => {
     const textSlice = e.target.value;
     setDescription(textSlice.slice(0, 50));
   };
 
+  // API 처리
   const handleInputChange = async (e) => {
     const { name, value } = e.target;
+
     if (e.target.type === "file") {
       const file = e.target.files[0];
 
@@ -63,20 +38,17 @@ export default function WritingUI({ src, subtext, getData, data, setData, setIma
         useWebWorker: true,
       };
 
-      // try {
       setLoading(true);
       const resizingBlob = await imageCompression(file, options);
       const reader = new FileReader();
       reader.readAsDataURL(resizingBlob);
       reader.onloadend = () => {
         const base64data = reader.result;
-        handleDataForm(base64data, name);
+        handleDataForm(base64data, name, setImageWrap, setLoading);
       };
-      // } catch (error) {
-      //   console.log(error);
-      // }
     } else {
       setDescription(value);
+
       if (data.hasOwnProperty('post')) {
         setData((prevState) => ({
           ...prevState,
@@ -87,6 +59,7 @@ export default function WritingUI({ src, subtext, getData, data, setData, setIma
           },
         }));
       }
+
       if (data.hasOwnProperty('product')) {
         setData((prevState) => ({
           ...prevState,
@@ -97,7 +70,6 @@ export default function WritingUI({ src, subtext, getData, data, setData, setIma
           },
         }));
       }
-
 
       if (name === "content") {
         handleTextCount(e);
@@ -114,17 +86,14 @@ export default function WritingUI({ src, subtext, getData, data, setData, setIma
     getData(data);
   };
 
-
-  console.log(data);
-
   return (
     <T.PostUiWrap>
       <h2 className="a11y-hidden">업로드 페이지</h2>
-      <img src={src} alt="product Upload" />
+      <img src={src} alt={src} />
       <p>{subtext}</p>
 
       <T.UploadWrap onSubmit={joinData}>
-        <ImageUp
+        <ImageSection
           handleInputChange={handleInputChange}
           loading={loading}
           imageWrap={imageWrap}
@@ -134,7 +103,7 @@ export default function WritingUI({ src, subtext, getData, data, setData, setIma
         <T.Line />
 
         {location.pathname === '/postposting' && (
-          <Posting
+          <PostWriting
             handleInputChange={handleInputChange}
             description={description}
             handleError={handleError}
@@ -142,15 +111,14 @@ export default function WritingUI({ src, subtext, getData, data, setData, setIma
         )}
 
         {location.pathname === '/postproduct' && (
-          <ProductPosting
+          <ProductWriting
+            data={data}
             handleInputChange={handleInputChange}
             userErrorMessage={userErrorMessage}
             handleError={handleError}
-            data={data}
           />
         )}
       </T.UploadWrap>
     </T.PostUiWrap>
   )
-
 }

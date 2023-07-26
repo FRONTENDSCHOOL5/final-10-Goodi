@@ -1,12 +1,12 @@
 import React from 'react'
+import * as T from "./writingUI.styled";
 
 import PlusIcon from "../../assets/icon_plus_gray.svg";
 import addIcon from "../../assets/add_button_gray.svg";
 
-import * as T from "./commonCss.styled";
-
-export default function ImageUp({ handleInputChange, loading, imageWrap, userErrorMessage }) {
+export default function ImageSection({ handleInputChange, loading, imageWrap, userErrorMessage }) {
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
+
   return (
     <T.ImagUploadWrap>
       <T.ThumbnailWrap>

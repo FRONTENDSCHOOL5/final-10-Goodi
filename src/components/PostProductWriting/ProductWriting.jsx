@@ -1,13 +1,11 @@
 import React from 'react'
 
-import * as T from "./commonCss.styled";
+import * as T from "./writingUI.styled";
 import { InputBox } from '../common/Input';
 import Textarea from '../common/Textarea';
 import Button from '../common/Button/Button';
 
-export default function ProductPosting({ handleInputChange, data, description, userErrorMessage, handleError }) {
-  console.log(data);
-
+export default function ProductWriting({ handleInputChange, data, description, userErrorMessage, handleError }) {
   return (
     <T.ContentUploadWrap>
       <T.InputWrap>
@@ -67,7 +65,7 @@ export default function ProductPosting({ handleInputChange, data, description, u
       <Button
         type="submit"
         height="56px"
-        text={"업로드 하기"}
+        text={"상품 업로드 하기"}
         br="4px"
         onClick={handleError}
       />
