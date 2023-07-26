@@ -50,6 +50,7 @@ export default function PostUpload() {
 
   const handlePost = async (PostData, token) => {
     const response = await postingAPI(PostData, token);
+    // 이미지 업로드 X -> error
     if (response.hasOwnProperty("post")) navigate(myProfile);
   };
 

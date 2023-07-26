@@ -71,11 +71,7 @@ export default function TotalWritingUI(props) {
         }));
       }
 
-      if (name === "content") {
-        handleTextCount(e);
-      }
-
-      if (name === "link") {
+      if (name === "content" || name === "link") {
         handleTextCount(e);
       }
     };

@@ -84,6 +84,17 @@ export default function PostUpdate() {
             subtext="게시물을 수정해주세요"
             buttonText="게시물 수정하기"
           />
+          {/* <TotalWritingUI
+          src={productUpload}
+          subtext="게시물을 수정해주세요"
+          // getData={getProductData}
+          data={formData}
+          setData={setFormData}
+          handleError={handleSubmit}
+          setImageWrap={setImageWrap}
+          imageWrap={imageWrap}
+          userErrorMessage={userErrorMessage}
+        /> */}
         </PostPostingLayout>
       )}
     </Layout>
