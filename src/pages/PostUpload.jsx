@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 //component
 import Layout from "../layout/Layout";
-import TotalWritingUI from "../components/PostProductWriting/TotalWritingUI";
+import UpdateTotalUI from "../components/PostProductWriting/UploadTotalUI";
 
 //이미지
-import PostBackground from "../assets/post_bg.jpg";
 import postUproad from "../assets/post_upload.svg";
 
 //API
@@ -30,7 +28,6 @@ export default function PostUpload() {
 
   // 게시글 입력 데이터
   const [postData, setPostData] = useState();
-
   const [data, setData] = useState({
     post: {
       content: "",
@@ -50,7 +47,7 @@ export default function PostUpload() {
 
   const handlePost = async (PostData, token) => {
     const response = await postingAPI(PostData, token);
-    // 이미지 업로드 X -> error
+
     if (response.hasOwnProperty("post")) navigate(myProfile);
   };
 
@@ -73,25 +70,17 @@ export default function PostUpload() {
 
   return (
     <Layout reduceTop="true">
-      <PostProductWrap>
-        <TotalWritingUI
-          src={postUproad}
-          subtext="당신의 게시글을 업로드 해보세요!"
-          getData={getPostData}
-          data={data}
-          setData={setData}
-          handleError={handleError}
-          setImageWrap={setImageWrap}
-          imageWrap={imageWrap}
-          userErrorMessage={userErrorMessage}
-        />
-      </PostProductWrap>
+      <UpdateTotalUI
+        src={postUproad}
+        subtext="당신의 게시글을 업로드 해보세요!"
+        getData={getPostData}
+        data={data}
+        setData={setData}
+        handleError={handleError}
+        setImageWrap={setImageWrap}
+        imageWrap={imageWrap}
+        userErrorMessage={userErrorMessage}
+      />
     </Layout>
   );
 }
-
-const PostProductWrap = styled.div`
-  padding-top: 100px;
-  background: url(${PostBackground}) no-repeat #fafafa;
-  padding-bottom: 40px;
-`;

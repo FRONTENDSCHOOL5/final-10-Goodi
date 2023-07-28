@@ -1,5 +1,12 @@
 import styled from "styled-components";
 import thumnailBanner from "../../assets/thumnail_banner.svg";
+import PostBackground from "../../assets/post_bg.jpg";
+
+export const PostingWrap = styled.div`
+  padding-top: 100px;
+  background: url(${PostBackground}) no-repeat #fafafa;
+  padding-bottom: 40px;
+`;
 
 export const PostUiWrap = styled.section`
   width: 80%;

@@ -4,14 +4,14 @@ import imageCompression from "browser-image-compression";
 import { useLocation } from 'react-router';
 
 // 컴포넌트
-import PostWriting from './PostWriting';
-import ProductWriting from './ProductWriting';
-import ImageSection from './ImageSection';
+import ImageSection from './UIcomponents/ImageSection';
+import PostWriting from './UIcomponents/PostWriting';
+import ProductWriting from './UIcomponents/ProductWriting';
 
 // 이미지 최적화
 import { handleDataForm } from '../common/imageOptimization';
 
-export default function TotalWritingUI(props) {
+export default function UpdateTotalUI(props) {
   const { src, subtext, getData, data, setData, setImageWrap, imageWrap, userErrorMessage, handleError } = props;
 
   const location = useLocation();
@@ -83,38 +83,40 @@ export default function TotalWritingUI(props) {
   };
 
   return (
-    <T.PostUiWrap>
-      <h2 className="a11y-hidden">업로드 페이지</h2>
-      <img src={src} alt={src} />
-      <p>{subtext}</p>
+    <T.PostingWrap>
+      <T.PostUiWrap>
+        <h2 className="a11y-hidden">업로드 페이지</h2>
+        <img src={src} alt={src} />
+        <p>{subtext}</p>
 
-      <T.UploadWrap onSubmit={joinData}>
-        <ImageSection
-          handleInputChange={handleInputChange}
-          loading={loading}
-          imageWrap={imageWrap}
-          userErrorMessage={userErrorMessage}
-        />
-
-        <T.Line />
-
-        {location.pathname === '/postposting' && (
-          <PostWriting
+        <T.UploadWrap onSubmit={joinData}>
+          <ImageSection
             handleInputChange={handleInputChange}
-            description={description}
-            handleError={handleError}
-          />
-        )}
-
-        {location.pathname === '/postproduct' && (
-          <ProductWriting
-            data={data}
-            handleInputChange={handleInputChange}
+            loading={loading}
+            imageWrap={imageWrap}
             userErrorMessage={userErrorMessage}
-            handleError={handleError}
           />
-        )}
-      </T.UploadWrap>
-    </T.PostUiWrap>
+
+          <T.Line />
+
+          {location.pathname === '/postposting' && (
+            <PostWriting
+              handleInputChange={handleInputChange}
+              description={description}
+              handleError={handleError}
+            />
+          )}
+
+          {location.pathname === '/postproduct' && (
+            <ProductWriting
+              data={data}
+              handleInputChange={handleInputChange}
+              userErrorMessage={userErrorMessage}
+              handleError={handleError}
+            />
+          )}
+        </T.UploadWrap>
+      </T.PostUiWrap>
+    </T.PostingWrap>
   )
 }

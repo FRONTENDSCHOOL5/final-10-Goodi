@@ -1,8 +1,8 @@
 import React from 'react'
-import * as T from "./writingUI.styled";
+import * as T from "../writingUI.styled";
 
-import PlusIcon from "../../assets/icon_plus_gray.svg";
-import addIcon from "../../assets/add_button_gray.svg";
+import PlusIcon from "../../../assets/icon_plus_gray.svg";
+import addIcon from "../../../assets/add_button_gray.svg";
 
 export default function ImageSection({ handleInputChange, loading, imageWrap, userErrorMessage }) {
   const BASE_URL = "https://api.mandarin.weniv.co.kr/";
@@ -20,9 +20,10 @@ export default function ImageSection({ handleInputChange, loading, imageWrap, us
         <T.Thumbnail
           htmlFor="thumbnail"
           style={
-            userErrorMessage.includes(
-              "게시글 이미지를 한개 이상 업로드 해주세요"
-            )
+            userErrorMessage &&
+              userErrorMessage.includes(
+                "게시글 이미지를 한개 이상 업로드 해주세요"
+              )
               ? { border: "1px solid red" }
               : null
           }
@@ -36,7 +37,7 @@ export default function ImageSection({ handleInputChange, loading, imageWrap, us
             <img
               src={imageWrap[0] ? BASE_URL + imageWrap[0] : PlusIcon}
               style={imageWrap[0] ? null : { width: "90px" }}
-              alt=''
+              alt="첫번째 이미지"
             />
           )}
         </T.Thumbnail>
@@ -67,7 +68,7 @@ export default function ImageSection({ handleInputChange, loading, imageWrap, us
             <img
               src={imageWrap[1] ? BASE_URL + imageWrap[1] : addIcon}
               style={imageWrap[1] ? null : { width: "32px" }}
-              alt=''
+              alt="두번째 이미지"
             />
           )}
         </T.ProductImage>
@@ -81,7 +82,7 @@ export default function ImageSection({ handleInputChange, loading, imageWrap, us
             <img
               src={imageWrap[2] ? BASE_URL + imageWrap[2] : addIcon}
               style={imageWrap[2] ? null : { width: "32px" }}
-              alt=''
+              alt="세번째 이미지"
             />
           )}
         </T.ProductImage>

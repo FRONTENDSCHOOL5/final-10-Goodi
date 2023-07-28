@@ -1,8 +1,9 @@
 import React from 'react'
-import * as T from "./writingUI.styled";
+import * as T from "../writingUI.styled";
 
-import Textarea from '../common/Textarea';
-import Button from '../common/Button/Button';
+import Textarea from './../../common/Textarea';
+import Button from '../../common/Button/Button';
+
 
 export default function PostWriting({ handleInputChange, description, handleError }) {
   return (

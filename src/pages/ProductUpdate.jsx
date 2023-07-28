@@ -1,38 +1,32 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import imageCompression from "browser-image-compression";
+
+// 리코일
+import { useRecoilValue } from "recoil";
+import loginToken from "../recoil/loginToken";
 
 //component
 import Layout from "../layout/Layout";
-import { InputBox } from "../components/common/Input";
-import Textarea from "../components/common/Textarea";
-import Button from "../components/common/Button/Button";
+import UpdateTotalUI from "../components/PostProductWriting/UpdateTotalUI";
 
 // 이미지
-import PostBackground from "../assets/post_bg.jpg";
-import productUpload from "../assets/Prodcut_upload.svg";
+import ProductUpload from "../assets/Prodcut_upload.svg";
 
 // API
 import { useNavigate, useParams } from "react-router-dom";
 import productAPI from "../api/product";
-import { useRecoilValue } from "recoil";
-import loginToken from "../recoil/loginToken";
 import productPut from "../api/productPut";
-import UploadImage from "../api/UploadImage";
-import { handleDataForm } from "../components/common/imageOptimization";
-import TotalWritingUI from "../components/PostProductWriting/TotalWritingUI";
 
 export default function ProductUpdate() {
-  const navigate = useNavigate();
-  const { product_id } = useParams();
   const token = useRecoilValue(loginToken);
+  const { product_id } = useParams();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
 
   const [imageWrap, setImageWrap] = useState([]);
   const [product, setProduct] = useState(null);
-  const [formData, setFormData] = useState({
+  const [data, setData] = useState({
     id: "",
     itemName: "",
     price: 0,
@@ -45,7 +39,7 @@ export default function ProductUpdate() {
       try {
         const response = await productAPI(token, product_id);
         setProduct(response.product);
-        setFormData({
+        setData({
           id: response.product.id,
           itemName: response.product.itemName,
           price: response.product.price,
@@ -61,50 +55,20 @@ export default function ProductUpdate() {
   }, []);
 
   useEffect(() => {
-    setFormData({ ...formData, itemImage: imageWrap.join(",") });
+    setData({ ...data, itemImage: imageWrap.join(",") });
   }, [imageWrap]);
 
-  const handleChangeImage = async (e) => {
-    const { name } = e.target;
-    const file = e.target.files[0];
-    const options = {
-      maxSizeMB: 0.2,
-      maxWidthOrHeight: 490,
-      useWebWorker: true,
-    };
-
-    try {
-      setLoading(true);
-      const resizingBlob = await imageCompression(file, options);
-      const reader = new FileReader();
-      reader.readAsDataURL(resizingBlob);
-      reader.onloadend = () => {
-        const base64data = reader.result;
-        handleDataForm(base64data, name, setImageWrap, setLoading);
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
+  const joinData = async (e) => {
     e.preventDefault();
 
     const errors = [];
-    if (formData.itemName === "" || !formData.itemName) {
+    if (data.itemName === "" || !data.itemName) {
       errors.push("상품명을 입력해주세요");
     }
-    if (formData.price === "" || !formData.price) {
+    if (data.price === "" || !data.price) {
       errors.push("상품가격을 입력해주세요");
     }
-    if (formData.link === "" || !formData.link) {
+    if (data.link === "" || !data.link) {
       errors.push("상품소개글을 입력해주세요");
     }
     setUserErrorMessage(errors);
@@ -116,11 +80,11 @@ export default function ProductUpdate() {
 
     const updatedProductData = {
       product: {
-        id: formData.id,
-        itemName: formData.itemName,
-        price: formData.price,
-        link: formData.link,
-        itemImage: formData.itemImage,
+        id: data.id,
+        itemName: data.itemName,
+        price: data.price,
+        link: data.link,
+        itemImage: data.itemImage,
       },
     };
 
@@ -131,25 +95,18 @@ export default function ProductUpdate() {
 
   return (
     <Layout reduceTop="true">
-      <PostProductWrap>
-        <TotalWritingUI
-          src={productUpload}
-          subtext="당신의 상품을 업로드 해보세요!"
-          // getData={getProductData}
-          data={formData}
-          setData={setFormData}
-          handleError={handleSubmit}
-          setImageWrap={setImageWrap}
-          imageWrap={imageWrap}
-          userErrorMessage={userErrorMessage}
-        />
-      </PostProductWrap>
+      <UpdateTotalUI
+        src={ProductUpload}
+        subtext="상품을 수정해주세요"
+        data={data}
+        imageWrap={imageWrap}
+        userErrorMessage={userErrorMessage}
+        joinData={joinData}
+        description={data.link}
+        setLoading={setLoading}
+        setImageWrap={setImageWrap}
+        setData={setData}
+      />
     </Layout>
   );
 }
-
-const PostProductWrap = styled.div`
-  padding-top: 100px;
-  background: url(${PostBackground}) no-repeat #fafafa;
-  padding-bottom: 40px;
-`;

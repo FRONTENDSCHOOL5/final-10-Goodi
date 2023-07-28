@@ -1,11 +1,12 @@
 import React from 'react'
+import * as T from "../writingUI.styled";
 
-import * as T from "./writingUI.styled";
-import { InputBox } from '../common/Input';
-import Textarea from '../common/Textarea';
-import Button from '../common/Button/Button';
+import { InputBox } from './../../common/Input';
+import Textarea from './../../common/Textarea';
+import Button from '../../common/Button/Button';
 
 export default function ProductWriting({ handleInputChange, data, description, userErrorMessage, handleError }) {
+
   return (
     <T.ContentUploadWrap>
       <T.InputWrap>
@@ -17,7 +18,7 @@ export default function ProductWriting({ handleInputChange, data, description, u
           placeholder="상품명을 입력해주세요"
           type="text"
           onChange={handleInputChange}
-          value={data.product.itemName}
+          value={data.itemName}
           hasError={userErrorMessage.includes("상품명을 입력해주세요")}
         />
         {userErrorMessage.includes("상품명을 입력해주세요") && (
@@ -33,7 +34,7 @@ export default function ProductWriting({ handleInputChange, data, description, u
           type="number"
           placeholder="상품가격을 입력해주세요"
           name="price"
-          value={data.product.price}
+          value={data.price}
           onChange={handleInputChange}
           hasError={userErrorMessage.includes(
             "상품가격을 입력해주세요"
@@ -43,7 +44,6 @@ export default function ProductWriting({ handleInputChange, data, description, u
           <T.ErrorMassage>상품가격을 입력해주세요</T.ErrorMassage>
         )}
       </T.InputWrap>
-
 
       <T.InputWrap>
         <T.Label>상품 설명</T.Label>
