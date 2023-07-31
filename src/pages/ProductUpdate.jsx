@@ -64,11 +64,9 @@ export default function ProductUpdate() {
     const errors = [];
     if (data.itemName === "" || !data.itemName) {
       errors.push("상품명을 입력해주세요");
-    }
-    if (data.price === "" || !data.price) {
+    } else if (data.price === "" || !data.price) {
       errors.push("상품가격을 입력해주세요");
-    }
-    if (data.link === "" || !data.link) {
+    } else if (data.link === "" || !data.link) {
       errors.push("상품소개글을 입력해주세요");
     }
     setUserErrorMessage(errors);

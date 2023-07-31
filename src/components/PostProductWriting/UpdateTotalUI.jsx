@@ -1,16 +1,28 @@
-import React from 'react'
+import React from "react";
 import * as T from "./writingUI.styled";
-import { useLocation, useParams } from 'react-router';
-import imageCompression from 'browser-image-compression';
+import { useLocation, useParams } from "react-router";
+import imageCompression from "browser-image-compression";
 
-import ImageSection from './UIcomponents/ImageSection';
-import PostWriting from './UIcomponents/PostWriting';
-import ProductWriting from './UIcomponents/ProductWriting';
+import ImageSection from "./UIcomponents/ImageSection";
+import PostWriting from "./UIcomponents/PostWriting";
+import ProductWriting from "./UIcomponents/ProductWriting";
 
-import { handlePostUpdateForm } from '../common/imageOptimization';
+import { handlePostUpdateForm } from "../common/imageOptimization";
 
 export default function UpdateTotalUI(props) {
-  const { src, subtext, data, imageWrap, userErrorMessage, joinData, loading, description, setLoading, setImageWrap, setData } = props;
+  const {
+    src,
+    subtext,
+    data,
+    imageWrap,
+    userErrorMessage,
+    joinData,
+    loading,
+    description,
+    setLoading,
+    setImageWrap,
+    setData,
+  } = props;
 
   const location = useLocation();
   const locationID = useParams();
@@ -39,7 +51,7 @@ export default function UpdateTotalUI(props) {
       ...data,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
   return (
     <T.PostingWrap>
@@ -61,6 +73,7 @@ export default function UpdateTotalUI(props) {
           {location.pathname === `/uploadPosting/${locationID.posting_id}` && (
             <PostWriting
               handleInputChange={handleInputChange}
+              userErrorMessage={userErrorMessage}
               description={description}
             />
           )}
@@ -76,5 +89,5 @@ export default function UpdateTotalUI(props) {
         </T.UploadWrap>
       </T.PostUiWrap>
     </T.PostingWrap>
-  )
+  );
 }
