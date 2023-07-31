@@ -16,4 +16,4 @@ export const cancelLikeAPI = async (token, id) => {
   } catch (error) {
     throw error;
   }
-}
+};
