@@ -1,4 +1,5 @@
 import { unauthInstance } from "./instance";
+import { authInstance } from "./instance";
 
 export const singUpAPI = async (signUpData) => {
   try {
@@ -17,6 +18,16 @@ export const loginAPI = async (loginData) => {
     throw error;
   }
 }; 
+
+export const searchAPI = async (token, keyword) => {
+  const SEARCH_URL = `https://api.mandarin.weniv.co.kr/user/searchuser/?keyword=${keyword}`;
+  try {
+    const response = await authInstance.get(`/user/searchuser/?keyword=${keyword}`)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 
 
