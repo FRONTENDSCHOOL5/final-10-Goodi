@@ -34,6 +34,11 @@ export default function Login() {
   const { state } = useLocation();
   const [errorMSG, setErrorMSG] = useState("");
 
+
+  useEffect(() => {
+    console.log("리코일토큰", token);
+  }, [token]); //리코일에 토큰이 잘 들어가고 있는지 확인하는 용도
+
   useEffect(() => {
     if (isloginCheck) {
       navigate("/main");
@@ -73,9 +78,11 @@ export default function Login() {
 
     if (response && response.hasOwnProperty("user")) {
       const newToken = response.user.token;
+      // console.log(newToken)
       const newAccountname = response.user.accountname;
       setIsLoginCheck(true);
       setToken(newToken);
+      localStorage.setItem("userToken", newToken);
       setIsAccountname(newAccountname);
 
       navigate("/main");

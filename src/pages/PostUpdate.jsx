@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 // component
 import Layout from "../layout/Layout";
+import UpdateTotalUI from "../components/PostProductWriting/UpdateTotalUI";
 
 // image
-import PostBackground from "../assets/post_bg.jpg";
 import PostingUpload from "../assets/post_uproad.svg";
 
 // API
@@ -17,77 +16,91 @@ import putPostingAPI from "../api/putPosting";
 
 // Recoil
 import loginToken from "../recoil/loginToken";
-import PostUpdateWriting from "../components/Post/PostUpdateWriting";
+import accountname from "../recoil/accountname";
 
 export default function PostUpdate() {
-  const navigate = useNavigate();
-  const { posting_id } = useParams();
   const token = useRecoilValue(loginToken);
-  const [getImage, setGetImage] = useState(null);
-  const [getContent, setGetContent] = useState("");
+  const { posting_id } = useParams();
+  const navigate = useNavigate();
+
+  const account_name = useRecoilValue(accountname);
+  const myProfile = `/profile/${account_name}`
+
   const [loading, setLoading] = useState(false);
+  const [userErrorMessage, setUserErrorMessage] = useState([]);
+
+  const [imageWrap, setImageWrap] = useState([]);
+  const [post, setPost] = useState(null);
+  const [data, setData] = useState({
+    id: "",
+    content: "",
+    image: ""
+  });
 
   useEffect(() => {
     const fetchPostingData = async () => {
       try {
-        setLoading(true);
         const response = await postingAPI(token, posting_id);
-        const data = response.post;
-        // console.log(response);
-        setGetImage(data.image.split(","));
-        setGetContent(data.content);
-        setLoading(false);
+        setPost(response.post);
+        setData({
+          id: response.post.id,
+          content: response.post.content,
+          image: response.post.image
+        })
+        setImageWrap(response.post.image.split(","));
       } catch (error) {
-        console.error("Account API 에러가 발생했습니다", error);
+        console.error("게시글 정보 호출 실패", error);
       }
     };
     fetchPostingData();
   }, []);
 
-  // 데이터 합치기
-  const joinData = (e) => {
+  useEffect(() => {
+    setData({ ...data, image: imageWrap.join(",") });
+  }, [imageWrap]);
+
+  const joinData = async (e) => {
     e.preventDefault();
+
+    const errors = [];
+    if (data.content === "" || !data.content) {
+      errors.push("게시글을 입력해주세요");
+    }
+    setUserErrorMessage(errors);
+
+    if (errors.length > 0) {
+      setUserErrorMessage(errors);
+      return;
+    }
+
     const putData = {
       post: {
-        content: getContent,
-        image: getImage.join(),
+        id: data.id,
+        content: data.content,
+        image: data.image,
       },
     };
 
-    putPosting(token, posting_id, putData);
-  };
+    await putPostingAPI(token, posting_id, putData);
 
-  // 수정된 파일 전송
-  const putPosting = async (token, id, putData) => {
-    const response = await putPostingAPI(token, id, putData);
-    console.log(response);
-    navigate("/profile");
+    navigate(myProfile);
   };
 
   return (
     <Layout reduceTop="true">
-      {loading ? (
-        <div>로딩중</div>
-      ) : (
-        <PostPostingLayout>
-          <PostUpdateWriting
-            joinData={joinData}
-            setGetContent={setGetContent}
-            getContent={getContent}
-            getImage={getImage}
-            setGetImage={setGetImage}
-            src={PostingUpload}
-            subtext="게시물을 수정해주세요"
-            buttonText="게시물 수정하기"
-          />
-        </PostPostingLayout>
-      )}
+      <UpdateTotalUI
+        src={PostingUpload}
+        subtext="게시물을 수정해주세요"
+        imageWrap={imageWrap}
+        description={data.content}
+        userErrorMessage={userErrorMessage}
+        joinData={joinData}
+        loading={loading}
+        setLoading={setLoading}
+        setImageWrap={setImageWrap}
+        setData={setData}
+        data={data}
+      />
     </Layout>
   );
 }
-
-const PostPostingLayout = styled.div`
-  padding-top: 100px;
-  background: url(${PostBackground}) no-repeat #fafafa;
-  padding-bottom: 40px;
-`;

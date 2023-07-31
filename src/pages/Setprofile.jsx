@@ -14,6 +14,8 @@ import Button from "../components/common/Button/Button";
 import ProfileImgDef from "../assets/profile_img_def.svg";
 import PlusBtnImg from "../assets/add_button.svg";
 
+import { handleDataForm } from "../components/common/imageOptimization";
+
 export default function Setprofile() {
   const [profileSelectedImage, setProfileSelectedImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState([]);
@@ -71,35 +73,10 @@ export default function Setprofile() {
     await handleLogin(signUpData);
   };
 
-  const handleDataForm = async (dataURI) => {
-    const byteString = atob(dataURI.split(",")[1]);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([ia], {
-      type: "image/jpeg",
-    });
-    const file = new File([blob], "image.jpg");
-    console.log("after: ", file);
-    const imgSrc = await UploadImage(file);
-    const newImage = imgSrc;
-    setProfileSelectedImage(newImage);
-    setSignUpData((prevState) => ({
-      ...prevState,
-      user: {
-        ...prevState.user,
-        image: newImage,
-      },
-    }));
-  };
-
   const handleImageChange = async (e) => {
     const { name, value } = e.target;
     if ("file") {
       const file = e.target.files[0];
-      // console.log(file);
 
       const options = {
         maxSizeMB: 0.2,
@@ -113,7 +90,7 @@ export default function Setprofile() {
         reader.readAsDataURL(resizingBlob);
         reader.onloadend = () => {
           const base64data = reader.result;
-          handleDataForm(base64data);
+          handleDataForm(base64data, setProfileSelectedImage, setSignUpData);
         };
       } catch (error) {
         console.log(error);

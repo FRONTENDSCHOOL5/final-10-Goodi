@@ -39,6 +39,7 @@ export default function PostCardList({ accountname }) {
       }
     };
     fetchPostData();
+
   }, [accountname, checkDelete, checkProfileChange]);
 
   return (

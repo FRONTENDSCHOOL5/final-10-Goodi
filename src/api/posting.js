@@ -1,28 +1,49 @@
-const POSTING_URL = "https://api.mandarin.weniv.co.kr/post";
+// const POSTING_URL = "https://api.mandarin.weniv.co.kr/post";
+
+// const postingAPI = async (productData, token) => {
+//   try {
+//     const response = await fetch(POSTING_URL, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//       body: JSON.stringify(productData),
+//     });
+
+//     const postPosting = await response.json();
+
+//     if (response.ok) {
+//       return postPosting;
+//     }
+//   } catch (error) {
+//     console.log("Posting API 에러가 발생했습니다", error);
+//   }
+// };
+
+// export default postingAPI;
+
+import axios from 'axios';
+
+const POSTING_URL = 'https://api.mandarin.weniv.co.kr/post';
 
 const postingAPI = async (productData, token) => {
   try {
-    const response = await fetch(POSTING_URL, {
-      method: "POST",
+    const response = await axios.post(POSTING_URL, productData, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(productData),
     });
 
-    const postPosting = await response.json();
-
-    if (response.ok) {
-      return postPosting;
-    }
+    return response.data;
   } catch (error) {
-    console.log("Posting API 에러가 발생했습니다", error);
+    console.log('Posting API 에러가 발생했습니다', error);
+    throw error;
   }
 };
 
 export default postingAPI;
-
 
 
 
