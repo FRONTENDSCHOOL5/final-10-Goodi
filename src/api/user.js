@@ -1,15 +1,23 @@
 import { unauthInstance } from "./instance";
 
-const joinAPI = async (joinData) => {
+export const singUpAPI = async (signUpData) => {
   try {
-    const response = await unauthInstance.post("/user", joinData);
+    const response = await unauthInstance.post("/user", signUpData);
     return response.data;
-    console.log("회원가입 성공")
   } catch (error) {
-    console.log("회원가입 실패")
     throw error;
   }
 };
 
-export default joinAPI;
+export const loginAPI = async (loginData) => {
+  try {
+    const response = await unauthInstance.post("/user/login", loginData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}; 
+
+
+
 
