@@ -44,7 +44,7 @@ export default function UpdateTotalUI(props) {
   return (
     <T.PostingWrap>
       <T.PostUiWrap>
-        <h2 className="a11y-hidden">업로드 페이지</h2>
+        <h2 className="a11y-hidden">수정 페이지</h2>
         <img src={src} alt={src} />
         <p>{subtext}</p>
 

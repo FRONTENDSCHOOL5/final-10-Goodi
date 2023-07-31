@@ -1,12 +1,11 @@
-import React from 'react'
+import React from "react";
 import * as T from "../writingUI.styled";
 
-import { InputBox } from './../../common/Input';
-import Textarea from './../../common/Textarea';
-import Button from '../../common/Button/Button';
+import { InputBox } from "./../../common/Input";
+import Textarea from "./../../common/Textarea";
+import Button from "../../common/Button/Button";
 
 export default function ProductWriting({ handleInputChange, data, description, userErrorMessage, handleError }) {
-
   return (
     <T.ContentUploadWrap>
       <T.InputWrap>
@@ -21,9 +20,7 @@ export default function ProductWriting({ handleInputChange, data, description, u
           value={data.itemName}
           hasError={userErrorMessage.includes("상품명을 입력해주세요")}
         />
-        {userErrorMessage.includes("상품명을 입력해주세요") && (
-          <T.ErrorMassage>상품명을 입력해주세요</T.ErrorMassage>
-        )}
+        {userErrorMessage.includes("상품명을 입력해주세요") && <T.ErrorMassage>상품명을 입력해주세요</T.ErrorMassage>}
       </T.InputWrap>
 
       <T.InputWrap>
@@ -36,9 +33,7 @@ export default function ProductWriting({ handleInputChange, data, description, u
           name="price"
           value={data.price}
           onChange={handleInputChange}
-          hasError={userErrorMessage.includes(
-            "상품가격을 입력해주세요"
-          )}
+          hasError={userErrorMessage.includes("상품가격을 입력해주세요")}
         />
         {userErrorMessage.includes("상품가격을 입력해주세요") && (
           <T.ErrorMassage>상품가격을 입력해주세요</T.ErrorMassage>
@@ -62,13 +57,7 @@ export default function ProductWriting({ handleInputChange, data, description, u
         )}
       </T.InputWrap>
 
-      <Button
-        type="submit"
-        height="56px"
-        text={"상품 업로드 하기"}
-        br="4px"
-        onClick={handleError}
-      />
+      <Button type="submit" height="56px" text={"상품 업로드 하기"} br="4px" onClick={handleError} />
     </T.ContentUploadWrap>
-  )
+  );
 }
