@@ -20,6 +20,7 @@
 
 // export default deletePostAPI;
 
+//게시글 삭제
 import axios from 'axios';
 
 const deletePostAPI = async (id, token) => {

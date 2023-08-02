@@ -8,7 +8,7 @@ import { checkProfile } from "../../recoil/checkChange";
 import loginToken from "../../recoil/loginToken";
 
 // api
-import postAPI from "../../api/post";
+import { postAPI } from "../../api/post";
 
 // 컴포넌트
 import PostCard from "./PostCard";

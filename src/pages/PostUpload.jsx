@@ -10,7 +10,8 @@ import UpdateTotalUI from "../components/PostProductWriting/UploadTotalUI";
 import postUproad from "../assets/post_upload.svg";
 
 //API
-import postingAPI from "../api/posting";
+// import postingAPI from "../api/posting";
+import { postWriteAPI } from "../api/post"
 
 //recoil
 import loginToken from "../recoil/loginToken";
@@ -42,12 +43,12 @@ export default function PostUpload() {
   useEffect(() => {
     if (postData) {
       handlePost(postData, token);
+      console.log("포스트 정보",postData)
     }
   }, [postData]);
 
   const handlePost = async (PostData, token) => {
-    const response = await postingAPI(PostData, token);
-
+    const response = await postWriteAPI(PostData, token);
     if (response.hasOwnProperty("post")) navigate(myProfile);
   };
 

@@ -1,66 +1,53 @@
-// const POST_URL = (accountname) =>
-//   `https://api.mandarin.weniv.co.kr/post/${accountname}/userpost`;
+import { authInstance } from './instance';
 
-// const postAPI = async ({ token, accountname }) => {
-//   try {
-//     const response = await fetch(POST_URL(accountname), {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//         "Authorization" : `Bearer ${token}`,
-//       },
-//     });
-
-//     const postList = await response.json();
-
-//     if (response.ok) {
-//       return postList;
-//     }
-//   } catch (error) {
-//     console.log("Post API 에러가 발생했습니다", error);
-//   }
-// };
-
-// export default postAPI;
-
-import axios from 'axios';
-
-const POST_URL = (accountname) =>
-  `https://api.mandarin.weniv.co.kr/post/${accountname}/userpost`;
-
-const postAPI = async ({ token, accountname }) => {
+//게시글 작성
+export const postWriteAPI = async (postData) => {
   try {
-    const response = await axios.get(POST_URL(accountname), {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
+    const response = await authInstance.post('/post', postData)
     return response.data;
   } catch (error) {
-    console.log('Post API 에러가 발생했습니다', error);
+    console.log(error)
     throw error;
   }
 };
 
-export default postAPI;
+//나의 게시글 목록
+export const postAPI = async ({ accountname }) => {
+  try {
+    const response = await authInstance.get(`/post/${accountname}/userpost`)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
-// import { authInstance } from "./instance";
+//게시글 수정
+export const postPutAPI = async (token, id, putData) => {
+  try {
+    const response = await authInstance.put(`/post/${id}`, putData)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
-// const POST_URL = (accountname) =>
-//   `https://api.mandarin.weniv.co.kr/post/${accountname}/userpost`;
+//게시글 수정 시에 불러오기
+export const postGetUpdateAPI = async (token, id) => {
+  try {
+    const reponse = await authInstance.get(`/post/${id}`)
+    return reponse.data;
+  } catch (error) {
+    throw error;
+  }
+}
 
-// const postAPI = async ({ accountname }) => {
-//   try {
-//     const response = await authInstance.get(POST_URL(accountname));
-//     return response.data;
-//   } catch (error) {
-//     console.log('Post API 에러가 발생했습니다');
-//     throw error;
-//   }
-// };
-
-// export default postAPI;
-
+//게시글 삭제
+export const postDeleteAPI = async (id, token) => {
+  try {
+    const response = await authInstance.delete(`/post/${id}`, token)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 

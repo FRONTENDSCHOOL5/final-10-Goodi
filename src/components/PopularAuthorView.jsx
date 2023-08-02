@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import postAPI from "../api/post";
+import { postAPI } from "../api/post";
 import ProfileUI from "./ProfileUI";
 
 import loginToken from "../recoil/loginToken";

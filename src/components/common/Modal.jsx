@@ -8,7 +8,7 @@ import { loginCheck } from "../../recoil/loginCheck";
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
 import productDeleteAPI from "../../api/productDelete";
-import deletePostAPI from "../../api/deletePost";
+import { postDeleteAPI } from "../../api/post";
 import { checkDeletePost } from "../../recoil/checkChange";
 
 export default function Modal({
@@ -29,7 +29,7 @@ export default function Modal({
 
   const handleClick = async (e) => {
     if (e.target.innerText === "삭제하겠습니다") {
-      const response = await deletePostAPI(postId, token);
+      const response = await postDeleteAPI(postId, token);
       setCheckDelete((prev) => !prev);
       return response;
     } else if (e.target.innerText === "상품을 삭제하겠습니다") {
