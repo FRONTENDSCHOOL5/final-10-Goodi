@@ -9,8 +9,8 @@ import { checkProfile } from "../../recoil/checkChange";
 
 // api
 import { profileAPI } from "../../api/profile";
-import PostImageAPI from "../../api/UploadImage";
-import updateProfile from "../../api/updateProfile";
+import { PostImageAPI } from "../../api/UploadImage";
+import { updateProfile } from "../../api/profile";
 
 // 컴포넌트
 import { InputBox } from "../common/Input";
