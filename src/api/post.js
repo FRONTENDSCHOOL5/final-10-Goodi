@@ -1,7 +1,7 @@
 import { authInstance } from './instance';
 
 //게시글 작성
-export const postWriteAPI = async (postData) => {
+export const postUploadAPI = async (postData) => {
   try {
     const response = await authInstance.post('/post', postData)
     return response.data;
@@ -11,8 +11,8 @@ export const postWriteAPI = async (postData) => {
   }
 };
 
-//나의 게시글 목록
-export const postAPI = async ({ accountname }) => {
+//게시글 목록
+export const postListAPI = async ({ accountname }) => {
   try {
     const response = await authInstance.get(`/post/${accountname}/userpost`)
     return response.data;

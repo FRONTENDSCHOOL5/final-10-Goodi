@@ -4,10 +4,9 @@ import CloseButton from "../../assets/close-button.svg";
 import { useState, useEffect } from "react";
 import LogoutHandler from "../Logout";
 import { useRecoilState } from "recoil";
-import { loginCheck } from "../../recoil/loginCheck";
 import { useRecoilValue } from "recoil";
 import loginToken from "../../recoil/loginToken";
-import productDeleteAPI from "../../api/productDelete";
+import { productDeleteAPI } from "../../api/product";
 import { postDeleteAPI } from "../../api/post";
 import { checkDeletePost } from "../../recoil/checkChange";
 

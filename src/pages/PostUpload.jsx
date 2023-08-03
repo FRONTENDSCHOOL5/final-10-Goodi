@@ -10,8 +10,7 @@ import UpdateTotalUI from "../components/PostProductWriting/UploadTotalUI";
 import postUproad from "../assets/post_upload.svg";
 
 //API
-// import postingAPI from "../api/posting";
-import { postWriteAPI } from "../api/post"
+import { postUploadAPI } from "../api/post"
 
 //recoil
 import loginToken from "../recoil/loginToken";
@@ -48,7 +47,7 @@ export default function PostUpload() {
   }, [postData]);
 
   const handlePost = async (PostData, token) => {
-    const response = await postWriteAPI(PostData, token);
+    const response = await postUploadAPI(PostData, token);
     if (response.hasOwnProperty("post")) navigate(myProfile);
   };
 

@@ -8,7 +8,7 @@ import { checkProfile } from "../../recoil/checkChange";
 import { checkDeletePost } from "../../recoil/checkChange";
 
 // api
-import productGetAPI from "../../api/productGet";
+import { productListAPI } from "../../api/product";
 
 // 컴포넌트
 import ProductCard from "./ProductCard";
@@ -29,7 +29,7 @@ export default function ProductCardList({ accountname, profile }) {
   useEffect(() => {
     const productGet = async () => {
       try {
-        const response = await productGetAPI(accountname, token);
+        const response = await productListAPI(accountname, token);
         setproductGetData(response);
       } catch (error) {
         console.error("Account API 에러가 발생했습니다", error);

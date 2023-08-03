@@ -8,7 +8,7 @@ import { checkProfile } from "../../recoil/checkChange";
 import loginToken from "../../recoil/loginToken";
 
 // api
-import { postAPI } from "../../api/post";
+import { postListAPI } from "../../api/post";
 
 // 컴포넌트
 import PostCard from "./PostCard";
@@ -26,7 +26,7 @@ export default function PostCardList({ accountname }) {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await postAPI({
+        const response = await postListAPI({
           token,
           accountname: accountname,
         });
