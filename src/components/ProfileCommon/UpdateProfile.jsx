@@ -9,7 +9,7 @@ import { checkProfile } from "../../recoil/checkChange";
 
 // api
 import { profileAPI } from "../../api/profile";
-import { PostImageAPI } from "../../api/UploadImage";
+import { PostImageAPI } from "../../api/uploadImage";
 import { updateProfile } from "../../api/profile";
 
 // 컴포넌트

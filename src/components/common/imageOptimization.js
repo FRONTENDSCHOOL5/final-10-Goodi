@@ -1,6 +1,6 @@
 // 코드 정리 필요!
 
-import { PostImageAPI } from "../../api/UploadImage";
+import { PostImageAPI } from "../../api/uploadImage";
 
 export const handleDataForm = async (dataURI, name, setImageWrap, setLoading) => {
   const byteString = atob(dataURI.split(",")[1]);

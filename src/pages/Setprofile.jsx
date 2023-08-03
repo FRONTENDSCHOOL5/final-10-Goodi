@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { singUpAPI } from "../api/user";
-import UploadImage from "../api/UploadImage";
+import UploadImage from "../api/uploadImage";
 
 import { InputBox } from "../components/common/Input";
 import { LeftDiv } from "../components/Carousel";
