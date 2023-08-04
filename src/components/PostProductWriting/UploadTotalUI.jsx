@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import * as T from "./writingUI.styled";
 import imageCompression from "browser-image-compression";
-import { useLocation } from 'react-router';
+import { useLocation } from "react-router";
 
 // 컴포넌트
-import ImageSection from './UIcomponents/ImageSection';
-import PostWriting from './UIcomponents/PostWriting';
-import ProductWriting from './UIcomponents/ProductWriting';
+import ImageSection from "./UIcomponents/ImageSection";
+import PostWriting from "./UIcomponents/PostWriting";
+import ProductWriting from "./UIcomponents/ProductWriting";
 
 // 이미지 최적화
-import { handleDataForm } from '../common/imageOptimization';
+import { handleDataForm } from "../common/imageOptimization";
 
-export default function UpdateTotalUI(props) {
+export default function UploadTotalUI(props) {
   const { src, subtext, getData, data, setData, setImageWrap, imageWrap, userErrorMessage, handleError } = props;
 
   const location = useLocation();
@@ -49,7 +49,7 @@ export default function UpdateTotalUI(props) {
     } else {
       setDescription(value);
 
-      if (data.hasOwnProperty('post')) {
+      if (data.hasOwnProperty("post")) {
         setData((prevState) => ({
           ...prevState,
           post: {
@@ -60,7 +60,7 @@ export default function UpdateTotalUI(props) {
         }));
       }
 
-      if (data.hasOwnProperty('product')) {
+      if (data.hasOwnProperty("product")) {
         setData((prevState) => ({
           ...prevState,
           product: {
@@ -74,12 +74,15 @@ export default function UpdateTotalUI(props) {
       if (name === "content" || name === "link") {
         handleTextCount(e);
       }
-    };
-  }
+    }
+  };
 
   const joinData = (e) => {
     e.preventDefault();
-    getData(data);
+    handleError();
+    if (userErrorMessage.length === 0) {
+      getData(data);
+    }
   };
 
   return (
@@ -99,15 +102,16 @@ export default function UpdateTotalUI(props) {
 
           <T.Line />
 
-          {location.pathname === '/postposting' && (
+          {location.pathname === "/postposting" && (
             <PostWriting
               handleInputChange={handleInputChange}
               description={description}
+              userErrorMessage={userErrorMessage}
               handleError={handleError}
             />
           )}
 
-          {location.pathname === '/postproduct' && (
+          {location.pathname === "/postproduct" && (
             <ProductWriting
               data={data}
               handleInputChange={handleInputChange}
@@ -118,5 +122,5 @@ export default function UpdateTotalUI(props) {
         </T.UploadWrap>
       </T.PostUiWrap>
     </T.PostingWrap>
-  )
+  );
 }

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 //component
 import Layout from "../layout/Layout";
-import UpdateTotalUI from "../components/PostProductWriting/UploadTotalUI";
+import UploadTotalUI from "../components/PostProductWriting/UploadTotalUI";
 
 //이미지
 import productUpload from "../assets/Prodcut_upload.svg";
@@ -48,39 +48,36 @@ export default function ProductUpload() {
   const handlePost = async (ProductData, token) => {
     const response = await UploadProductAPI(ProductData, token);
 
-    if (response.hasOwnProperty("product"))
-      navigate(`/products/${response.product.id}`);
+    if (response.hasOwnProperty("product")) navigate(`/products/${response.product.id}`);
   };
 
-  const handleError = (e) => {
-    setData((prevState) => ({
-      ...prevState,
+  const handleError = () => {
+    setData((prevData) => ({
+      ...prevData,
       product: {
-        ...prevState.product,
+        ...prevData.product,
         itemImage: imageWrap.join(),
       },
     }));
+
     const errors = [];
-    if (data.product.itemImage === "") {
-      errors.push("상품이미지를 한개 이상 업로드 해주세요");
-    } else if (
-      data.product.itemName === "" ||
-      !data.product.itemName
-    ) {
+    if (data.product.itemImage === "" && imageWrap.length === 0) {
+      errors.push("이미지를 한개 이상 업로드 해주세요");
+    }
+
+    if (data.product.itemName === "" || !data.product.itemName) {
       errors.push("상품명을 입력해주세요");
     } else if (data.product.price === "" || !data.product.price) {
       errors.push("상품가격을 입력해주세요");
     } else if (data.product.link === "" || !data.product.link) {
       errors.push("상품소개글을 입력해주세요");
-    } else {
-      errors.push("");
     }
     setUserErrorMessage(errors);
   };
 
   return (
     <Layout reduceTop="true">
-      <UpdateTotalUI
+      <UploadTotalUI
         src={productUpload}
         subtext="당신의 상품을 업로드 해보세요!"
         getData={getProductData}

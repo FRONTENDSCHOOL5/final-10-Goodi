@@ -22,7 +22,7 @@ export default function ImageSection({ handleInputChange, loading, imageWrap, us
           style={
             userErrorMessage &&
               userErrorMessage.includes(
-                "게시글 이미지를 한개 이상 업로드 해주세요"
+                "이미지를 한개 이상 업로드 해주세요"
               )
               ? { border: "1px solid red" }
               : null
@@ -42,10 +42,10 @@ export default function ImageSection({ handleInputChange, loading, imageWrap, us
           )}
         </T.Thumbnail>
         {userErrorMessage.includes(
-          "게시글 이미지를 한개 이상 업로드 해주세요"
+          "이미지를 한개 이상 업로드 해주세요"
         ) && (
             <T.ErrorMassage>
-              게시글 이미지를 한개 이상 업로드 해주세요
+              이미지를 한개 이상 업로드 해주세요
             </T.ErrorMassage>
           )}
       </T.ThumbnailWrap>
