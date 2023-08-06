@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 //component
 import Layout from "../layout/Layout";
-import UpdateTotalUI from "../components/PostProductWriting/UploadTotalUI";
+import UploadTotalUI from "../components/PostProductWriting/UploadTotalUI";
 
 //이미지
 import postUproad from "../assets/post_upload.svg";
@@ -21,7 +21,7 @@ export default function PostUpload() {
 
   const token = useRecoilValue(loginToken);
   const account_name = useRecoilValue(accountname);
-  const myProfile = `/profile/${account_name}`
+  const myProfile = `/profile/${account_name}`;
 
   const [imageWrap, setImageWrap] = useState([]);
   const [userErrorMessage, setUserErrorMessage] = useState([]);
@@ -47,11 +47,13 @@ export default function PostUpload() {
   }, [postData]);
 
   const handlePost = async (PostData, token) => {
-    const response = await postUploadAPI(PostData, token);
-    if (response.hasOwnProperty("post")) navigate(myProfile);
+
+    const response = await postingAPI(PostData, token);
+
+    if (response && response.hasOwnProperty("post")) navigate(myProfile);
   };
 
-  const handleError = (e) => {
+  const handleError = () => {
     setData((prevState) => ({
       ...prevState,
       post: {
@@ -59,18 +61,21 @@ export default function PostUpload() {
         image: imageWrap.join(),
       },
     }));
+
     const errors = [];
-    if (data.post.image === "") {
-      errors.push("게시글 이미지를 한개 이상 업로드 해주세요");
-    } else {
-      errors.push("");
+    if (data.post.image === "" && imageWrap.length === 0) {
+      errors.push("이미지를 한개 이상 업로드 해주세요");
+    }
+
+    if (data.post.content === "" || !data.post.content) {
+      errors.push("게시글을 입력해주세요");
     }
     setUserErrorMessage(errors);
   };
 
   return (
     <Layout reduceTop="true">
-      <UpdateTotalUI
+      <UploadTotalUI
         src={postUproad}
         subtext="당신의 게시글을 업로드 해보세요!"
         getData={getPostData}

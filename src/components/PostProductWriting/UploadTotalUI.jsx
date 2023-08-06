@@ -11,18 +11,8 @@ import ProductWriting from "./UIcomponents/ProductWriting";
 // 이미지 최적화
 import { handleDataForm } from "../common/imageOptimization";
 
-export default function UpdateTotalUI(props) {
-  const {
-    src,
-    subtext,
-    getData,
-    data,
-    setData,
-    setImageWrap,
-    imageWrap,
-    userErrorMessage,
-    handleError,
-  } = props;
+export default function UploadTotalUI(props) {
+  const { src, subtext, getData, data, setData, setImageWrap, imageWrap, userErrorMessage, handleError } = props;
 
   const location = useLocation();
 
@@ -89,7 +79,10 @@ export default function UpdateTotalUI(props) {
 
   const joinData = (e) => {
     e.preventDefault();
-    getData(data);
+    handleError();
+    if (userErrorMessage.length === 0) {
+      getData(data);
+    }
   };
 
   return (
@@ -113,6 +106,7 @@ export default function UpdateTotalUI(props) {
             <PostWriting
               handleInputChange={handleInputChange}
               description={description}
+              userErrorMessage={userErrorMessage}
               handleError={handleError}
             />
           )}
