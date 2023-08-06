@@ -1,25 +1,33 @@
-const JOIN_URL = "https://api.mandarin.weniv.co.kr/user"
+import { unauthInstance } from "./instance";
+import { authInstance } from "./instance";
 
-const joinAPI = async (joinData) => {
+export const singUpAPI = async (signUpData) => {
   try {
-    const response = await fetch(JOIN_URL, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...joinData }),
-    })
-
-    const accountData = await response.json();
-
-    if (response.ok) {
-      return accountData;
-    }
-
+    const response = await unauthInstance.post("/user", signUpData);
+    return response.data;
   } catch (error) {
-    console.log('Account API 에러가 발생했습니다', error);
+    throw error;
   }
 };
 
-export default joinAPI;
-// test 계정 정보 : suritest@test.com / suritest
+export const loginAPI = async (loginData) => {
+  try {
+    const response = await unauthInstance.post("/user/login", loginData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}; 
+
+export const searchAPI = async (token, keyword) => {
+  try {
+    const response = await authInstance.get(`/user/searchuser/?keyword=${keyword}`)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+

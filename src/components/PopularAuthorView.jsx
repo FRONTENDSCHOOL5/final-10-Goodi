@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import postAPI from "../api/post";
-import unfollowAPI from "../api/unfollow";
+import { postListAPI } from "../api/post";
 import ProfileUI from "./ProfileUI";
 
 import loginToken from "../recoil/loginToken";
@@ -13,8 +12,6 @@ import PostListSkeleton from "../style/skeletonUI/SkeletonItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { checkDeletePost } from "../recoil/checkChange";
 import { checkProfile } from "../recoil/checkChange";
-import ButtonFollow from "./common/Button/ButtonFollow";
-import followAPI from "../api/follow";
 import iconHeartWhite from "../assets/icon_heart_line_white.svg";
 
 export default function PopularAuthorview({ account, heartCount }) {
@@ -44,7 +41,7 @@ export default function PopularAuthorview({ account, heartCount }) {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await postAPI({
+        const response = await postListAPI({
           token,
           accountname: account_name,
         });
@@ -67,7 +64,7 @@ export default function PopularAuthorview({ account, heartCount }) {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await postAPI({
+        const response = await postListAPI({
           token,
           accountname: account_name,
         });

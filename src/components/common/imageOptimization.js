@@ -1,6 +1,6 @@
 // 코드 정리 필요!
 
-import UploadImage from "../../api/UploadImage";
+import { PostImageAPI } from "../../api/uploadImage";
 
 export const handleDataForm = async (dataURI, name, setImageWrap, setLoading) => {
   const byteString = atob(dataURI.split(",")[1]);
@@ -14,7 +14,7 @@ export const handleDataForm = async (dataURI, name, setImageWrap, setLoading) =>
   });
   const file = new File([blob], "image.jpg");
   console.log("after: ", file);
-  const imgSrc = await UploadImage(file);
+  const imgSrc = await PostImageAPI(file);
   setImageWrap((prevArray) => {
     const newArray = [...prevArray];
     newArray[parseInt(name)] = imgSrc;
@@ -35,7 +35,7 @@ export const handleProfileDataForm = async (dataURI, setProfileSelectedImage, se
   });
   const file = new File([blob], "image.jpg");
   console.log("after: ", file);
-  const imgSrc = await UploadImage(file);
+  const imgSrc = await PostImageAPI(file);
   const newImage = imgSrc;
   setProfileSelectedImage(newImage);
   setSignUpData((prevState) => ({
@@ -59,7 +59,7 @@ export const handlePostUpdateForm = async (dataURI, name, setGetImage, setImgLoa
   });
   const file = new File([blob], "image.jpg");
   console.log("after: ", file);
-  const imgSrc = await UploadImage(file);
+  const imgSrc = await PostImageAPI(file);
   setGetImage((prevArray) => {
     const newArray = [...prevArray];
     newArray[parseInt(name)] = imgSrc;

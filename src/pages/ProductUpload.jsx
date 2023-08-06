@@ -10,7 +10,7 @@ import UploadTotalUI from "../components/PostProductWriting/UploadTotalUI";
 import productUpload from "../assets/Prodcut_upload.svg";
 
 //API
-import UploadProductAPI from "../api/UploadProductAPI";
+import { productUploadAPI } from "../api/product";
 
 //recoil
 import loginToken from "../recoil/loginToken";
@@ -46,7 +46,7 @@ export default function ProductUpload() {
   }, [productData]);
 
   const handlePost = async (ProductData, token) => {
-    const response = await UploadProductAPI(ProductData, token);
+    const response = await productUploadAPI(ProductData, token);
 
     if (response.hasOwnProperty("product")) navigate(`/products/${response.product.id}`);
   };

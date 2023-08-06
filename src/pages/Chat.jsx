@@ -16,7 +16,7 @@ import Toast from "../components/common/Toast";
 
 // API
 import { profileAPI } from "../api/profile";
-import followingAPI from "../api/following";
+import { followingAPI } from "../api/follow";
 
 // Recoil
 import loginToken from "../recoil/loginToken";

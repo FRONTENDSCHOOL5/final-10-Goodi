@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Logo from "../assets/logo_black.svg";
 import accountname from "../recoil/accountname";
 import loginToken from "../recoil/loginToken";
-import followingAPI from "../api/following";
+import { followingAPI } from "../api/follow";
 import { useRecoilState } from "recoil";
 import { checkFollow } from "../recoil/checkChange";
 import { useRecoilValue } from "recoil";

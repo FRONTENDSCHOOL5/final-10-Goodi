@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { likedState } from '../../../recoil/like';
-import likeAPI from "../../../api/likeBtn";
-import cancleLikeAPI from "../../../api/cancleLikeBtn"
-import postingAPI from "../../../api/posting";
+import { likeAPI } from "../../../api/like";
+import { cancelLikeAPI } from "../../../api/like"
 import loginToken from "../../../recoil/loginToken";
 
 import nonLikeIcon from "../../../assets/empty_likeBtn.svg";
@@ -29,13 +27,14 @@ function ButtonPostLike({ postId, getHeartData, cancleHeartData, liked }) {
 
       if (IsLiked) {
         // 이미 하트를 누른 경우, 좋아요 취소
-        const response = await cancleLikeAPI(token, postId);
+        const response = await cancelLikeAPI(token, postId);
         if (response) {
           setIsLiked(false);
           setHeartCount(response.post.heartCount);
           sethearted(response.post.hearted);
           cancleHeartData();
           localStorage.removeItem(`hearted_${postId}`);
+
         }
       } else {
         // 하트를 누르지 않은 경우, 좋아요
@@ -46,6 +45,7 @@ function ButtonPostLike({ postId, getHeartData, cancleHeartData, liked }) {
           sethearted(response.post.hearted);
           localStorage.setItem(`hearted_${postId}`, response.post.hearted);
           getHeartData();
+
         }
       }
     } catch (error) {

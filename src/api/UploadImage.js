@@ -1,22 +1,13 @@
-const IMAGE_URL = "https://api.mandarin.weniv.co.kr/image/uploadfile"
+import axios from 'axios';
 
-const PostImageAPI = async (file) => {
-
+const IMAGE_URL = "https://api.mandarin.weniv.co.kr/image/uploadfile";
+export const PostImageAPI = async (file) => {
+  try {
     const formData = new FormData();
-    formData.append("image", file); // 파일을 FormData에 추가
-    try {
-        const response = await fetch(IMAGE_URL, {
-            method: "POST",
-            body: formData,
-        })
-
-        const data = await response.json();
-
-        return data.filename;
-
-    } catch (error) {
-        console.log("이미지 업로드 오류", error)
-    }
-}
-
-export default PostImageAPI;
+    formData.append("image", file);
+    const response = await axios.post(IMAGE_URL, formData);
+    return response.data.filename;
+  } catch (error) {
+    throw error;
+  }
+};

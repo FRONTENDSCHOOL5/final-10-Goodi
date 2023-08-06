@@ -11,8 +11,8 @@ import UpdateTotalUI from "../components/PostProductWriting/UpdateTotalUI";
 import PostingUpload from "../assets/post_uproad.svg";
 
 // API
-import postingAPI from "../api/postingAPI";
-import putPostingAPI from "../api/putPosting";
+import { postGetUpdateAPI } from "../api/post";
+import { postPutAPI } from "../api/post";
 
 // Recoil
 import loginToken from "../recoil/loginToken";
@@ -40,7 +40,7 @@ export default function PostUpdate() {
   useEffect(() => {
     const fetchPostingData = async () => {
       try {
-        const response = await postingAPI(token, posting_id);
+        const response = await postGetUpdateAPI(token, posting_id);
         setPost(response.post);
         setData({
           id: response.post.id,
@@ -81,7 +81,7 @@ export default function PostUpdate() {
       },
     };
 
-    await putPostingAPI(token, posting_id, putData);
+    await postPutAPI(token, posting_id, putData);
 
     navigate(myProfile);
   };

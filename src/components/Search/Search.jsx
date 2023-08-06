@@ -12,8 +12,7 @@ import SearchResult from "./SearchResult";
 import SearchSkeleton from "../../style/skeletonUI/skeletonPage/SearchSkeleton";
 
 // API
-import searchAPI from "../../api/Search";
-import followingAPI from "../../api/following";
+import { searchAPI } from "../../api/user";
 
 // Recoil
 import loginToken from "../../recoil/loginToken";

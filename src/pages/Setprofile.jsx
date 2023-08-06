@@ -4,8 +4,8 @@ import imageCompression from "browser-image-compression";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import userAPI from "../api/user";
-import UploadImage from "../api/UploadImage";
+import { singUpAPI } from "../api/user";
+import UploadImage from "../api/uploadImage";
 
 import { InputBox } from "../components/common/Input";
 import { LeftDiv } from "../components/Carousel";
@@ -47,7 +47,7 @@ export default function Setprofile() {
   };
 
   const handleLogin = async (signUpData) => {
-    const response = await userAPI(signUpData);
+    const response = await singUpAPI(signUpData);
 
     if (response && response.hasOwnProperty("user")) navigate("/");
     else {

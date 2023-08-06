@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 // 리코일
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { checkFollow } from "../../recoil/checkChange";
 import loginToken from "../../recoil/loginToken";
 
 // api
-import followingAPI from "../../api/following";
-import followerAPI from "../../api/follower";
+  import { followingAPI } from "../../api/follow";
+import { followerAPI } from "../../api/follow";
 
 // 컴포넌트
 import Follow from "./Follow";
+
 
 export default function FollowListUI({ profileData }) {
   // 리코일 값 불러오기

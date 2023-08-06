@@ -17,7 +17,7 @@ import MoneyIcon from "../assets/icon_money_black.svg";
 import DeliveryIcon from "../assets/icon_delivery_dark.svg";
 
 //API
-import productAPI from "../api/product";
+import { productGetUpdateAPI } from "../api/product";
 
 //recoil
 import loginToken from "../recoil/loginToken";
@@ -81,7 +81,7 @@ export default function Detail() {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await productAPI(token, id);
+        const response = await productGetUpdateAPI(token, id);
         setProductData(response.product);
         setPrice(response.product.price);
         setLoading(false);

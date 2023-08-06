@@ -13,8 +13,8 @@ import ProductUpload from "../assets/Prodcut_upload.svg";
 
 // API
 import { useNavigate, useParams } from "react-router-dom";
-import productAPI from "../api/product";
-import productPut from "../api/productPut";
+import { productGetUpdateAPI } from "../api/product";
+import { productPutAPI } from "../api/product";
 
 export default function ProductUpdate() {
   const token = useRecoilValue(loginToken);
@@ -37,7 +37,7 @@ export default function ProductUpdate() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await productAPI(token, product_id);
+        const response = await productGetUpdateAPI(token, product_id);
         setProduct(response.product);
         setData({
           id: response.product.id,
@@ -86,7 +86,7 @@ export default function ProductUpdate() {
       },
     };
 
-    await productPut(product_id, token, updatedProductData);
+    await productPutAPI(product_id, token, updatedProductData);
 
     navigate(`/products/${product_id}`);
   };

@@ -6,8 +6,8 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import Toast from "../Toast";
 
 // API
-import followAPI from "../../../api/follow";
-import unfollowAPI from "../../../api/unfollow";
+import { followAPI } from "../../../api/follow";
+import { unfollowAPI } from "../../../api/follow";
 
 // Recoil
 import loginToken from "../../../recoil/loginToken";
