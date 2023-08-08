@@ -29,15 +29,17 @@
 | <img width="180" alt="taehee_profile_img" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/4d471a45-8f6e-47f8-a3b5-4c11be1ce14b"> | <img width="180"  alt="nkEllaaa_profile_img" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/97887376/6d878e7b-091a-4ac6-a8a6-6bf71dcc2b20"> | <img width="180" alt="oxxun21_profile_img" src="https://github.com/FRONTENDSCHOOL5/Goodi/assets/98699927/961eeff8-86df-4c7c-aba5-20fb9c33c140"> |
 | [taehee.rho](https://github.com/dananote) | [nkEllaaa](https://github.com/nkEllaaa) | [oxxun21](https://github.com/oxxun21) |
 | 팀장 | 팀원 | 팀원 |
-  
+
  </div>
+ <img width="1202" alt="스크린샷 2023-08-08 오후 3 17 25" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/124513796/5735c26f-e5ba-4125-aabb-d47d03dbd121">
  
  <br/>
 
 ## ⭐️ 프로젝트 설명
+  <img width="1198" alt="스크린샷 2023-08-08 오후 3 17 37" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/124513796/f04f4d4a-41ea-4502-bca8-6a9a23f5ca0a">
 
 <details>
- <summary><h3>기능 미리보기</h3></summary>
+ <summary><h3>🕹️기능 미리보기</h3></summary>
     <details>
     <summary><strong>회원가입/로그인</strong></summary>
       <br />
@@ -130,6 +132,7 @@
 <br />
 
 ## 🛠️ 기술 스택
+<img width="1218" alt="스크린샷 2023-08-08 오후 3 17 31" src="https://github.com/FRONTENDSCHOOL5/final-10-Goodi/assets/124513796/45feed91-8ce7-44c1-befc-84fc12a2ab4a">
 
 <table>
 <tr>
